@@ -1,0 +1,28 @@
+<div>
+  <div>
+    <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="navigateToHome()">
+  </div>  
+    <div class="cadastro-container">
+      <div class="cadastro-rectangle">
+          <div style="margin-top: 0px; padding-top: 5%;" class="cadastro-label">Cadastro de Usuário:</div>
+          <div style="margin-top: 5px;" class="line"></div>
+          <input placeholder="Digite o seu Nome" style="margin-top: 20px" type="text" id="nome" name="nome" class="cadastro-input"   #nomeInput required>
+          <div style="margin-top: 5px;" class="line"></div>          
+          <input placeholder="Digite o seu Emal" style="margin-top: 20px;" type="email" id="email" name="email"  class="cadastro-input"  #emailInput required>
+          <div style="margin-top: 5px;" class="line"></div>          
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input placeholder="Digite a sua Senha" style="margin-top: 20px;" type="password" id="senha" name="senha"  class="cadastro-input"   #senhaInput required>
+          <div style="margin-top: 5px;" class="line"></div>          
+          <input placeholder="Digite a sua Senha nomavente" style="margin-top: 20px;" type="password" id="senha2" name="senha2"  class="cadastro-input"   #senha2Input required>
+          <div style="margin-top: 5px;" class="line"></div>
+          <button class="cadastro-submit" (click)="cadastrarUsuario()">Cadastrar</button>          
+        <div style="padding-top: 3%;" class="cadastro-create-account" (click)="navigateToHome()" >Já tem uma conta? Faça login.</div>
+      </div>
+    </div>
+  </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <img src="../../assets/Aguarde2.gif" alt="Pop-up Image">
+    </div>
+  </div>
+  

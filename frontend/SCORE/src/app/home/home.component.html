@@ -1,0 +1,33 @@
+<div>
+    <img src="../../assets/Logo.png" alt="Logo" class="logo">
+    <div class="main-container">
+      <div class="rectangle">
+        <div class="login-text">Fazer login com</div>
+        <button class="login-button2 google" id="google-button">
+        </button>
+        <button class="login-button3 facebook">
+            <img src="../../assets/Index/Face.png" alt="Facebook" class="button-icon2">
+            Fazer login com o Facebook
+        </button>
+        <div class="or">Ou</div>
+        <div class="line"></div>
+        <div class="login">
+            <img src="../../assets/Index/Login.png" alt="Google" class="login-imagem">
+            <div class="login-label"><input placeholder="E-mail" style="margin-top: 20px" type="text" id="login" name="login" class="home-input" #usernameInput required></div>
+        </div>
+        <div class="line"></div>
+        <div class="password">
+            <img src="../../assets/Index/Senha.png" alt="Google" class="password-imagem">
+            <div class="password-label"><input placeholder="Senha" style="margin-top: 20px" type="password" id="senha" name="senha" class="home-input" #passwordInput required></div>
+        </div>
+        <div class="line"></div>
+        <div class="remember-me">
+            <input type="checkbox" id="rememberCheckbox" (change)="toggleRememberMe()" [checked]="rememberMe">
+            <div class="remember-me2"><label for="rememberCheckbox">Me lembrar</label></div>
+            <span class="forgot-password" (click)="navigateToEsqueci()">Esqueceu senha?</span>
+        </div>
+        <button class="login-button main" (click)="Login()">Login</button>
+        <div class="create-account" (click)="navigateToCadastro()">Criar nova conta</div>
+      </div>
+    </div>
+  </div>  

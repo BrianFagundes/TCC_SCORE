@@ -1,0 +1,21 @@
+<div>
+    <div>
+        <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="navigateToLogin()">
+      </div>  
+    <div class="forgot-password-container">
+      <div class="forgot-password-rectangle">
+          <div style="margin-top: 0px; padding-top: 5%;" class="forgot-password-label">Esqueci a Senha:</div>
+          <div style="margin-top: 5px;" class="line"></div>
+          <input placeholder="Digite o seu Email" style="margin-top: 20px" type="email" id="email" name="email" class="forgot-password-input" #emailInput required>
+          <div style="margin-top: 5px;" class="line"></div>
+          <button class="forgot-password-submit" (click)="enviarRecuperacaoSenha()">Enviar Recuperação</button>
+        <div style="padding-top: 3%;" class="forgot-password-back" (click)="navigateToLogin()">Voltar para Login</div>
+      </div>
+    </div>
+  </div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <img src="../../assets/Aguarde2.gif" alt="Pop-up Image">
+    </div>
+  </div>
+  
