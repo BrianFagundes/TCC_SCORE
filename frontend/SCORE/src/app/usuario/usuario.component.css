@@ -1,0 +1,400 @@
+.cadastro-NovaSenha {
+  width: 385px;
+  height: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #201f26;
+  border-color: #201f26;
+  border: none;
+  outline: none;
+  color :white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Times New Roman, Times New Roman";
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.modal-content {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between; /* Espaço entre o input e o botão */
+  align-items: center; /* Alinha verticalmente o input e o botão */
+  width: 100%; /* Ajuste conforme necessário */  
+  margin-top: 20px;
+}
+
+.modal-input {
+  display: block;
+  width: 200px;
+  height: 40px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  border: none;
+  outline: none;
+  color :white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Times New Roman, Times New Roman";
+}
+
+.modal-actions {
+  text-align: right;
+}
+
+
+.editButton { 
+    margin-top: 30px;   
+    width: 200px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+  } 
+
+  .modalCancelaButton  
+  {
+    margin-top: 30px;   
+    width: 100px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+}
+
+  .modalalteraButton{
+    margin-top: 30px;   
+    width: 100px;    
+    margin-left: 100px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    color: green;
+  }
+
+  
+  .mostrarsenha2 { 
+    margin-top: 30px;   
+    width: 200px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #d9d9d900;
+    background-color: #d9d9d900;
+  } 
+
+  .alterarsenha { 
+    margin-top: 30px;  
+    margin-left: 60px; 
+    width: 200px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+  } 
+
+  .deleteAccountButton { 
+    margin-top: 30px;   
+    width: 200px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    margin-left: 40px;
+  } 
+
+  
+  .cancelButton { 
+    margin-top: 30px;   
+    width: 200px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    color: red;
+  } 
+
+  .saveButton { 
+    margin-top: 30px;   
+    width: 200px;
+    height: 25px;    
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;    
+    position: relative;    
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    margin-left: 40px;
+    color: green;
+  } 
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 305px;
+    height: 305px;
+    background-color: rgba(0, 0, 0, 0.5); /* Cinza transparente */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 150px;
+    margin-top: 248px;
+  }
+
+
+.editar {
+    font-size: 18px;
+    font: "Times New Roman";
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .cadastro-container {
+    flex: 1; /* Permite que a div cresça conforme necessário, mas sem sobrepor outra */
+}
+
+
+  .cadastro-rectangle {
+    width: 700px;
+    height: 400px;
+    background-color: #201f26;
+    margin-left: -50px;
+  }
+
+.cadastro-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-left: 20px;
+    color: #ffffff;
+    font: "Times New Roman";
+  }
+
+  .cadastro-input {
+    width: 440px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    border: none;
+    outline: none;
+    color :white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Times New Roman, Times New Roman";
+  }
+
+  .cadastro-input2 {
+    width: 150px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    border: none;
+    outline: none;
+    color :white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Times New Roman, Times New Roman";
+  }
+
+  .line {    
+    display: flex;
+    align-items: center;
+    width: 440px;
+    height: 1px;
+    background-color: #ffffff;
+    margin-bottom: 5px;
+    margin-top: -45px;
+    margin-left: 130px;
+  }
+
+  
+ 
+.user-image{
+    max-width: 80px; 
+    max-height: 80px;
+}
+
+
+
+.container {
+    display: flex; /* Torna este um flex container */
+    flex-direction: row; /* Organiza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    justify-content: center; /* Para centralização horizontal, se necessário */
+    gap: 20px; /* Espaçamento entre os itens */
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */
+}
+
+.image-container, .user-details-and-logout {
+    display: flex;
+    flex-direction: column; /* Organiza os itens internos verticalmente */
+    align-items: center; /* Centraliza os itens internos verticalmente */
+}
+
+.user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+    width: 200px;
+}
+
+  
+.rectangle {
+    display: flex; /* Utiliza Flexbox */
+    justify-content: space-around; /* Distribui o espaço entre os itens */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    width: 1500px;
+    height: 530px;   
+    background-color: #201f26;
+    border-radius: 10px;
+    margin: 0 auto; /* Centralizar na tela */
+    margin-top: 20px;
+}
+
+  .user-image-right {
+    width: 300px;
+    height: 300px;
+    margin-left: 150px; /* Ajuste o espaçamento conforme necessário */
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */
+}
+
+.Botoes_usuario {
+    width: 100px;
+    height: 100px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+}
+
+.user-image-right {
+    display: block;
+    width: 300px;
+    height: 300px;
+  }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", sans-serif;
+    background-color: #201f26;
+    color: white;
+}
+
+.welcome-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    left: 57px;
+    width: 276px;
+    height: 65px;
+  }
+
+.welcome-message {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: -50px;
+}
+
+.welcome-message h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.welcome-message ul {
+    list-style: none;
+    padding: 0;
+}
+
+.welcome-message li {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .welcome-message {
+        padding: 0 20px;
+    }
+}

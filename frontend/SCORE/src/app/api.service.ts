@@ -2,10 +2,19 @@
 
 import { Injectable } from '@angular/core';
 
+interface Usuario {
+  nome: string;
+  email: string;
+  senha: string;
+  identificador: string;
+  foto: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  
   private apiUrl = 'http://localhost:8080'; // Substitua pela URL da sua API
 
   constructor() {}
@@ -129,5 +138,134 @@ export class ApiService {
       });
   }
 
+  obterUsuarioPorId(id: string): Promise<Usuario> {
+    const url = `${this.apiUrl}/usuarios/${id}`; 
+  
+    return fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json(); 
+        } else {
+          throw new Error('Erro ao obter usuário');
+        }
+      })
+      .then(data => {        
+        return data as Usuario;
+      })
+      .catch(error => {
+        console.error('Erro ao obter usuário:', error);
+        throw error; 
+      });
+  }  
+
+  LevantaImagemUsuario(id: string): Promise<string> {
+    const url = `${this.apiUrl}/usuarios/Foto/Levanta/${id}`;
+
+    return fetch(url)
+      .then(response => {
+        if (response.ok) {          
+          return response.text(); // Se a resposta estiver OK, retorna o texto diretamente
+        } else {
+          throw new Error('Erro ao validar usuário');
+        }
+      })
+      .then(data => {
+        // Se a resposta estiver OK, retorna o texto (nome do usuário)
+        return data.trim(); // Remove espaços em branco do início e do final do texto
+      })
+      .catch(error => {
+        console.error('Erro ao validar usuário:', error);
+        return ''; // Retorna uma string vazia em caso de erro
+      });
+  }
+
+  atualizarUsuario(id: string, pNome: string, pEmail: string, pFoto : string, pSenha : string): Promise<Usuario> {
+
+    const dadosUsuario = {
+      nome: pNome,
+      email: pEmail,
+      senha: pSenha,
+      identificador: "",
+      foto: pFoto
+    };
+
+
+    const url = `${this.apiUrl}/usuarios/${id}`;
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dadosUsuario),
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        // Se a resposta não estiver ok, lança um erro que pode ser pego pelo .catch()
+        throw new Error('Erro ao atualizar usuário');
+      }
+    })
+    .then(usuarioAtualizado => {
+      return usuarioAtualizado as Usuario;
+    })
+    .catch(error => {
+      console.error('Erro ao atualizar usuário:', error);
+      // Pode optar por retornar um valor padrão ou propagar o erro
+      throw error;
+    });
+  }
+
+  deletarUsuario(id: string): Promise<void> {
+    
+    const url = `${this.apiUrl}/usuarios/${id}`;
+
+    return fetch(url, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (!response.ok) {
+        // Se a resposta não estiver ok, lança um erro que pode ser pego pelo .catch()
+        throw new Error('Erro ao deletar usuário');
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao deletar usuário:', error);
+      // Pode optar por retornar um valor padrão ou propagar o erro
+      throw error;
+    });
+  }
+
+  atualizarSenha(id: string, novaSenha: string): Promise<Usuario> {
+    const url = `${this.apiUrl}/usuarios/AlterarSenha/${id}`;
+    
+    const dadosUsuario = {
+      nome: "",
+      email: "",
+      senha: novaSenha,
+      identificador: "",
+      foto: ""
+    };
+  
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dadosUsuario),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao atualizar senha do usuário');
+      }
+      return response.json();
+    })
+    .catch(error => {
+      console.error('Erro ao atualizar senha do usuário:', error);
+      throw error;
+    });
+  }
   
 }
+
+

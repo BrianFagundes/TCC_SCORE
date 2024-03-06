@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ApiService } from '../api.service'; // Substitua pelo caminho real do seu serviço
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';  // Importe a classe FormsModule
 
 
 @Component({
@@ -14,6 +13,8 @@ export class CadastroPessoaComponent {
   @ViewChild('emailInput') emailInput: ElementRef | undefined;
   @ViewChild('senhaInput') senhaInput: ElementRef | undefined;
   @ViewChild('senha2Input') senha2Input: ElementRef | undefined;
+  mostrarSenha: boolean = false;
+  mostrarConfSenha: boolean = false;
 
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -70,7 +71,7 @@ export class CadastroPessoaComponent {
       email: email,
       senha: senha,
       identificador: "",
-      foto: ""
+      foto: "../../assets/avatar 1.png"
     };
 
     const isValid = await this.apiService.cadastrarUsuario(dadosUsuario);     
@@ -113,7 +114,17 @@ export class CadastroPessoaComponent {
     }
   }
   
+  toggleSenha()
+  {
+    this.mostrarSenha = !this.mostrarSenha; 
+  }
 
+  toggleConfSenha()
+  {
+    this.mostrarConfSenha = !this.mostrarConfSenha; 
+  }
+
+  
   
   navigateToHome(): void {
     this.router.navigate(['/home']);

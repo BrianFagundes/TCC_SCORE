@@ -60,6 +60,17 @@ public class UsuarioController {
         
     }
     
+    @PostMapping("/Imagem")
+    public Long uploadImagem(@RequestBody String imagem, @RequestBody Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if (usuario != null) {
+            usuario.setfoto(imagem); // Presumindo que setFoto é o método para definir a imagem em base64
+            usuarioRepository.save(usuario);
+            return id;
+        }
+        return null; // Ou outra forma de erro
+    }
+    
     
     
     @GetMapping("/Nome/Levanta/{id}")
@@ -69,6 +80,16 @@ public class UsuarioController {
 		
     	return usuario.getNome();
     }
+    
+    @GetMapping("/Foto/Levanta/{id}")
+    public String obterFotoUsuario(@PathVariable Long id) {
+    	
+    	Usuario usuario = usuarioRepository.findById(id).orElse(null);        	
+		
+    	return usuario.getfoto();
+    }
+    
+    
     
     
     @GetMapping("/{id}")
@@ -103,9 +124,28 @@ public class UsuarioController {
             // Atualize os campos necessários
             usuarioExistente.setNome(usuarioAtualizado.getNome());
             usuarioExistente.setEmail(usuarioAtualizado.getEmail());
-            usuarioExistente.setsenha(usuarioAtualizado.getsenha());
+            usuarioExistente.setfoto(usuarioAtualizado.getfoto());
+            if(!usuarioExistente.getsenha().equals("")) {
+        		// Atualize os campos necessários
+                usuarioExistente.setsenha(usuarioAtualizado.getsenha());
+        	}      
             // ...
 
+            return usuarioRepository.save(usuarioExistente);
+        }
+
+        return null;
+    }
+    
+    @PutMapping("AlterarSenha/{id}")
+    public Usuario atualizarSenha(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
+        Usuario usuarioExistente = usuarioRepository.findById(id).orElse(null);
+        
+        if (usuarioExistente != null) {
+        	if(!usuarioExistente.getsenha().equals("")) {
+        		// Atualize os campos necessários
+                usuarioExistente.setsenha(usuarioAtualizado.getsenha());
+        	}           
             return usuarioRepository.save(usuarioExistente);
         }
 

@@ -16,13 +16,32 @@ export class HomeComponent {
   @ViewChild('usernameInput') usernameInput: ElementRef | undefined;
   @ViewChild('passwordInput') passwordInput: ElementRef | undefined;
   rememberMe: boolean = false;
+  mostrarSenha: boolean = false;
   
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     const remember = localStorage.getItem('relembrar');
     this.rememberMe = remember === 'S';
+  
+    // Configura os campos de entrada somente se "relembrar" estiver definido como verdadeiro
+    if (this.rememberMe) {
+      setTimeout(() => {
+        this.usernameInput!.nativeElement.value = localStorage.getItem('Email') || '';
+        this.passwordInput!.nativeElement.value = localStorage.getItem('Senha') || '';
+      });
+    }
+  
+    // Carregar o script do Google Identity Services de forma assíncrona
+    this.loadGoogleSignInScript();
+  }
+  
+  toggleSenha()
+  {
+    this.mostrarSenha = !this.mostrarSenha; 
+  }
 
+  loadGoogleSignInScript() {
     // Carregar o script do Google Identity Services
     const script = document.createElement('script');
     script.src = 'https://accounts.google.com/gsi/client';
@@ -48,7 +67,9 @@ export class HomeComponent {
         }
       );
     };
+    
   }
+  
 
   handleCredentialResponse = async (response: any) => {    
     if (response.credential) {
@@ -68,9 +89,14 @@ export class HomeComponent {
         if (this.apiService) {
           const pIdentificador = await this.apiService.cadastrarUsuario2(dadosUsuario);
           if(pIdentificador !== 0) {
+            
+           
             localStorage.setItem('Usuario', dadosUsuario.nome);
             localStorage.setItem('ID', pIdentificador.toString());   
-  
+            localStorage.setItem('Email', "");
+            localStorage.setItem('Senha', "");
+            localStorage.setItem('relembrar', 'N');
+            
             // Redirecionar para a tela inicial
             this.router.navigate(['/inicio']).then(() => {
               window.location.reload(); // Forçar atualização da página para garantir que os dados sejam exibidos corretamente
@@ -105,20 +131,20 @@ export class HomeComponent {
       
       const isValid = await this.apiService.validarUsuario(nome, senha);
       
-      if (isValid > 0) {
-        const isValid2 = await this.apiService.LevantaNomeUsuario(isValid.toString());
+      if (isValid > 0) {      
         
         if (this.rememberMe) {
-          localStorage.setItem('Usuario', isValid2.toString());
+          localStorage.setItem('Email', nome);
           localStorage.setItem('Senha', senha);
           localStorage.setItem('relembrar', 'S');
         }
         else
         {
-          localStorage.setItem('Usuario', isValid2.toString());
+          localStorage.setItem('Email', nome);
           localStorage.setItem('relembrar', 'N');
         }
         localStorage.setItem('ID', isValid.toString());
+        
         this.router.navigate(['/inicio']);
         // Faça algo quando o usuário estiver autenticado, por exemplo, redirecionar para outra página
       } else {
@@ -129,7 +155,7 @@ export class HomeComponent {
       console.error('Erro ao fazer login:', error);
       // Faça algo em caso de erro
     }
-  }
+  }  
 
   toggleRememberMe() {
     this.rememberMe = !this.rememberMe;

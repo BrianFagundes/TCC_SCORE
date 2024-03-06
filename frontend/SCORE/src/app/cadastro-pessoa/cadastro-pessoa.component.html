@@ -8,12 +8,18 @@
           <div style="margin-top: 5px;" class="line"></div>
           <input placeholder="Digite o seu Nome" style="margin-top: 20px" type="text" id="nome" name="nome" class="cadastro-input"   #nomeInput required>
           <div style="margin-top: 5px;" class="line"></div>          
-          <input placeholder="Digite o seu Emal" style="margin-top: 20px;" type="email" id="email" name="email"  class="cadastro-input"  #emailInput required>
+          <input placeholder="Digite o seu E-mail" style="margin-top: 20px;" type="email" id="email" name="email"  class="cadastro-input"  #emailInput required>
           <div style="margin-top: 5px;" class="line"></div>          
           <span class="input-group-text"><i class="fas fa-lock"></i></span>
-          <input placeholder="Digite a sua Senha" style="margin-top: 20px;" type="password" id="senha" name="senha"  class="cadastro-input"   #senhaInput required>
+          <input placeholder="Digite a sua Senha" style="margin-top: 20px; margin-left: -30px; width: 390px;" [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha"  class="cadastro-input"   #senhaInput required>
+          <button style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);" id="mostrarsenha2" (click)="toggleSenha()" class="mostrarsenha">
+            <img style="width: 40px; height: 20px;" class="mostrarsenha" [src]="mostrarSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'" alt="Mostrar/Ocultar Senha">
+          </button>
           <div style="margin-top: 5px;" class="line"></div>          
-          <input placeholder="Digite a sua Senha nomavente" style="margin-top: 20px;" type="password" id="senha2" name="senha2"  class="cadastro-input"   #senha2Input required>
+          <input placeholder="Digite a sua Senha novamente" style="margin-top: 20px; margin-left: -30px; width: 390px;" [type]="mostrarConfSenha ? 'text' : 'password'" id="senha2" name="senha2"  class="cadastro-input"   #senha2Input required>
+          <button style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);" id="mostrarsenha2" (click)="toggleConfSenha()" class="mostrarsenha">
+            <img style="width: 40px; height: 20px;" class="mostrarsenha" [src]="mostrarConfSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'" alt="Mostrar/Ocultar Senha">
+          </button>
           <div style="margin-top: 5px;" class="line"></div>
           <button class="cadastro-submit" (click)="cadastrarUsuario()">Cadastrar</button>          
         <div style="padding-top: 3%;" class="cadastro-create-account" (click)="navigateToHome()" >Já tem uma conta? Faça login.</div>

@@ -1,13 +1,31 @@
 <div>
-    <img src="../../assets/Logo.png" alt="Logo" class="logo">
-    <div class="welcome-container">        
-        <div class="welcome-message">
-            <h1>Bem-vindo!</h1>
-            <p>Seus dados de login:</p>
-            <ul>
-                <li><strong>ID:</strong> {{ IdUsuario }}</li>
-                <li><strong>Nome:</strong> {{ nomeUsuario }}</li>
-            </ul>
+    <div class="welcome-container">
+        <div class="user-info">
+            <div class="container">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo">
+                <div class="image-container">
+                    <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image" class="Botoes_usuario" (click)="usuario()">
+                </div>                
+                <div class="user-details">
+                    <ul>
+                        <li><strong>ID:</strong> {{ IdUsuario }}</li>
+                        <li><strong>Nome:</strong> {{ (nomeUsuario? nomeUsuario.length : 0) > 30 ? (nomeUsuario | slice:0:30) + '...' : nomeUsuario }}</li>
+                    </ul>
+                </div>
+                <div class="logout-button" (click)="logout()">
+                    <img style="margin-top: 4px;" src="../../assets/Logout.png" alt="Logout" class="Botoes_usuario"/>
+                </div>                
+            </div>                    
+        </div>
+        <div class="rectangle">            
+            <div class="welcome-message">
+                <h1>Bem-vindo!</h1>
+                <p>Seus dados de login:</p>
+                <ul>
+                    <li><strong>ID:</strong> {{ IdUsuario }}</li>
+                    <li><strong>Nome:</strong> {{ nomeUsuario }}</li>    
+                </ul>
+            </div>
         </div>
     </div>
 </div>

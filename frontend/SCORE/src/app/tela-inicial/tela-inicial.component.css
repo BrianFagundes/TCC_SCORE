@@ -1,3 +1,74 @@
+
+.container {
+    display: flex; /* Torna este um flex container */
+    flex-direction: row; /* Organiza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    justify-content: center; /* Para centralização horizontal, se necessário */
+    gap: 20px; /* Espaçamento entre os itens */
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */
+}
+
+
+.user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+    width: 200px;
+}
+
+.Botoes_usuario {
+    width: 100px;
+    height: 100px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+}
+
+.logo {
+    position: absolute;
+    left: 57px;
+    width: 276px;
+    height: 65px;
+  }
+
+  .image-container, .user-details-and-logout {
+    display: flex;
+    flex-direction: column; /* Organiza os itens internos verticalmente */
+    align-items: center; /* Centraliza os itens internos verticalmente */
+}
+
+.user-image{
+    max-width: 80px; 
+    max-height: 80px;
+}
+
+.user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+}
+
+
+
+.rectangle {
+    display: flex; /* Utiliza Flexbox */
+    justify-content: space-around; /* Distribui o espaço entre os itens */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    width: 1500px;
+    height: 530px;   
+    background-color: #201f26;
+    border-radius: 10px;
+    margin: 0 auto; /* Centralizar na tela */
+    margin-top: 20px;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -13,15 +84,6 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
 }
-
-.logo {
-    position: absolute;
-    top: 10px; /* Ajuste conforme necessário */
-    top: 45px;
-    left: 57px;
-    width: 276px;
-    height: 65px;
-  }
 
 .welcome-message {
     max-width: 600px;

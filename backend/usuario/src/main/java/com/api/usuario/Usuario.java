@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Usuario {
@@ -16,7 +17,8 @@ public class Usuario {
     private String email;
     private String senha;
     private String identificador;
-    private String foto;
+    @Lob
+    private String foto; // Modificado para usar @Lob
     // ...
     
     public Long getId()
