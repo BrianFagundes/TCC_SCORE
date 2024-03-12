@@ -15,15 +15,13 @@ import javax.persistence.Convert;
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
-
-    @GetMapping
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
-    }
+    @Autowired
+    private CriptografiaAES criptografiaAES;
 
     @PostMapping
     public int criarUsuario(@RequestBody Usuario usuario) {
-    	List<Usuario> usuarios = usuarioRepository.findByEmail(usuario.getEmail());      
+    	List<Usuario> usuarios = usuarioRepository.findByEmail(usuario.getEmail());  
+    	usuario.setsenha(criptografiaAES.criptografar(usuario.getsenha()));
     	if (usuarios != null && !usuarios.isEmpty()) {
     		return 1;
     	}
@@ -45,6 +43,7 @@ public class UsuarioController {
     	}
         if(valida==0)	
 		{
+        	
 			usuarioRepository.save(usuario);
 			usuarios = usuarioRepository.findByEmail(usuario.getEmail());
 		} 	        
@@ -71,13 +70,34 @@ public class UsuarioController {
         return null; // Ou outra forma de erro
     }
     
+    @PostMapping("/Validacao")
+    public Long obterUsuario(@RequestBody Usuario usuario1) {
+    	System.out.println("obterUsuario");
+    	System.out.println(usuario1.getEmail());
+    	System.out.println(usuario1.getsenha());
+    	int intValue = 0;
+    	Long Saida = (long) intValue;    	 
+    	
+    	List<Usuario> usuarios = usuarioRepository.findByEmail(usuario1.getEmail());
+    	
+    	if (usuarios != null) {
+    		for (Usuario usuario : usuarios) { 
+    			usuario.setsenha(criptografiaAES.descriptografar(usuario.getsenha()));
+				if (usuario.getsenha().equals(usuario1.getsenha()))
+					Saida = usuario.getId();
+			}
+    	}
+    	
+        return Saida;
+    }
+    
     
     
     @GetMapping("/Nome/Levanta/{id}")
     public String obterNomeUsuario(@PathVariable Long id) {
     	
     	Usuario usuario = usuarioRepository.findById(id).orElse(null);        	
-		
+    	
     	return usuario.getNome();
     }
     
@@ -94,32 +114,19 @@ public class UsuarioController {
     
     @GetMapping("/{id}")
     public Usuario obterUsuario(@PathVariable Long id) {
-        return usuarioRepository.findById(id).orElse(null);
-    }
-    
-    
-    @GetMapping("/{email}/{senha}")
-    public Long obterUsuario(@PathVariable String email, @PathVariable String senha) {
     	
-    	int intValue = 0;
-    	Long Saida = (long) intValue;    	 
+    	Usuario usuario = usuarioRepository.findById(id).orElse(null);  
     	
-    	List<Usuario> usuarios = usuarioRepository.findByEmail(email);
+    	usuario.setsenha(criptografiaAES.descriptografar(usuario.getsenha()));
     	
-    	if (usuarios != null) {
-    		for (Usuario usuario : usuarios) {    			
-				if (usuario.getsenha().equals(senha))
-					Saida = usuario.getId();
-			}
-    	}
     	
-        return Saida;
+        return usuario;
     }
 
     @PutMapping("/{id}")
     public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
         Usuario usuarioExistente = usuarioRepository.findById(id).orElse(null);
-        
+        usuarioExistente.setsenha(criptografiaAES.descriptografar(usuarioExistente.getsenha()));
         if (usuarioExistente != null) {
             // Atualize os campos necessários
             usuarioExistente.setNome(usuarioAtualizado.getNome());
@@ -127,7 +134,7 @@ public class UsuarioController {
             usuarioExistente.setfoto(usuarioAtualizado.getfoto());
             if(!usuarioExistente.getsenha().equals("")) {
         		// Atualize os campos necessários
-                usuarioExistente.setsenha(usuarioAtualizado.getsenha());
+                usuarioExistente.setsenha(criptografiaAES.criptografar(usuarioAtualizado.getsenha()));
         	}      
             // ...
 
@@ -140,11 +147,11 @@ public class UsuarioController {
     @PutMapping("AlterarSenha/{id}")
     public Usuario atualizarSenha(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
         Usuario usuarioExistente = usuarioRepository.findById(id).orElse(null);
-        
+        usuarioExistente.setsenha(criptografiaAES.descriptografar(usuarioExistente.getsenha()));
         if (usuarioExistente != null) {
         	if(!usuarioExistente.getsenha().equals("")) {
         		// Atualize os campos necessários
-                usuarioExistente.setsenha(usuarioAtualizado.getsenha());
+                usuarioExistente.setsenha(criptografiaAES.criptografar(usuarioExistente.getsenha()));
         	}           
             return usuarioRepository.save(usuarioExistente);
         }
@@ -159,9 +166,11 @@ public class UsuarioController {
     
     public String RetornoSenha(String email)
     {
-    	List<Usuario> usuarios = usuarioRepository.findByEmail(email);      
-        if (usuarios != null) {
-            for (Usuario usuario : usuarios) {                
+    	List<Usuario> usuarios = usuarioRepository.findByEmail(email);    
+    	
+        if (usuarios != null) {        	
+            for (Usuario usuario : usuarios) { 
+            	usuario.setsenha(criptografiaAES.descriptografar(usuario.getsenha()));
             	return usuario.getsenha();                    
             }
         }

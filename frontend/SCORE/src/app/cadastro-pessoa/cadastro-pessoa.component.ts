@@ -73,6 +73,8 @@ export class CadastroPessoaComponent {
       identificador: "",
       foto: "../../assets/avatar 1.png"
     };
+    
+    this.apiService.autenticarUsuario();
 
     const isValid = await this.apiService.cadastrarUsuario(dadosUsuario);     
     

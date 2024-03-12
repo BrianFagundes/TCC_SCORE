@@ -44,12 +44,11 @@ export class UsuarioComponent {
   carregarDadosUsuario() {
     const Usuario = localStorage.getItem('Usuario');
     const ID = localStorage.getItem('ID');
-    const Imagem = localStorage.getItem('imagem');
-         
+    const Imagem = localStorage.getItem('imagem');       
     this.nomeUsuario = Usuario ? Usuario.toString() : '';
     this.IdUsuario = ID ? ID.toString() : '';
     this.imagePath = Imagem? Imagem.toString() : '../../assets/avatar 1.png';  
-    localStorage.setItem('userImage', this.imagePath);  
+   
   }
 
   getBotaoEstilos()
@@ -57,7 +56,7 @@ export class UsuarioComponent {
     if(this.usuariogoogle)
     {
       return {
-        'width': '270px',
+        'width': '440px',
         // outros estilos conforme necessário
       };
     }
@@ -121,10 +120,7 @@ export class UsuarioComponent {
             this.usuariogoogle = true;
           }          
           else
-          {
             this.senhaInput!.nativeElement.value = usuario.senha;
-            localStorage.setItem('AltSenha',  usuario.senha);
-          }
           this.emailInput!.nativeElement.value = usuario.email;
           // Você pode acessar outras propriedades do objeto usuário da mesma forma
         })
@@ -232,10 +228,7 @@ export class UsuarioComponent {
             this.usuariogoogle = true;
           }          
           else
-          {
             this.senhaInput!.nativeElement.value = usuario.senha;
-            localStorage.setItem('AltSenha',  usuario.senha)
-          }
           this.emailInput!.nativeElement.value = usuario.email;
           // Você pode acessar outras propriedades do objeto usuário da mesma forma
         })

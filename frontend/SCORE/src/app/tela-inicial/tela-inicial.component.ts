@@ -26,6 +26,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.carregarDadosUsuario();
   }
 

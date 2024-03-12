@@ -21,6 +21,7 @@ export class HomeComponent {
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
+    localStorage.setItem('jwtToken', "");
     const remember = localStorage.getItem('relembrar');
     this.rememberMe = remember === 'S';
   
@@ -47,7 +48,7 @@ export class HomeComponent {
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
     document.head.appendChild(script);   
-
+    this.apiService.autenticarUsuario();
     script.onload = () => {
       // Configurar o botão de login do Google
       window.google.accounts.id.initialize({
@@ -71,7 +72,8 @@ export class HomeComponent {
   }
   
 
-  handleCredentialResponse = async (response: any) => {    
+  handleCredentialResponse = async (response: any) => {   
+    
     if (response.credential) {
       try {
         const tokenParts = response.credential.split('.');
@@ -87,8 +89,11 @@ export class HomeComponent {
   
         // Verificando se apiService está definido antes de fazer a chamada
         if (this.apiService) {
-          const pIdentificador = await this.apiService.cadastrarUsuario2(dadosUsuario);
-          if(pIdentificador !== 0) {
+          
+          
+          const pIdentificador = await this.apiService.cadastrarUsuario2(dadosUsuario);          
+          
+          if(pIdentificador > 0) {
             
            
             localStorage.setItem('Usuario', dadosUsuario.nome);
@@ -102,10 +107,14 @@ export class HomeComponent {
               window.location.reload(); // Forçar atualização da página para garantir que os dados sejam exibidos corretamente
             });
           } 
-          else
+          else if( pIdentificador === 0)
           {
             alert("Usuário não cadastrado pelo sistema do Google/Facebook!")
           } 
+          else
+          {
+            throw new Error("Sistema indisponível.");
+          }
         } else {
           throw new Error("apiService.cadastrarUsuarioAutomatico não está definido.");
         }          
@@ -127,8 +136,8 @@ export class HomeComponent {
   async Login() {
     try {
       const nome = this.usernameInput?.nativeElement.value;
-      const senha = this.passwordInput?.nativeElement.value;
-      
+      const senha = this.passwordInput?.nativeElement.value;      
+      this.apiService.autenticarUsuario();
       const isValid = await this.apiService.validarUsuario(nome, senha);
       
       if (isValid > 0) {      

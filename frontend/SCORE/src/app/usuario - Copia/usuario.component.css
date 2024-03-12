@@ -27,7 +27,6 @@ body {
   gap: 20px;
   border: 2px solid gray;
   border-radius: 10px;
-  margin-top: 50px;
 }
 .logo {
   position: absolute;
@@ -128,7 +127,7 @@ body {
   align-items: center;
   cursor: pointer;
   margin-left: 150px;
-  margin-top: 335px;
+  margin-top: 286px;
 }
 .image2 {
   display: none;
@@ -552,7 +551,7 @@ body {
     gap: 20px;
     border: 2px solid gray;
     border-radius: 10px;
-    margin-top: 250px;
+    margin-top: 50px;
   }
 
   .rectangle {
@@ -659,7 +658,7 @@ body {
     align-items: center;
     cursor: pointer;
     margin-left: 200px;
-    margin-top: 424px;
+    margin-top: 224px;
   }
   .image2 {
     display: none;
@@ -1086,7 +1085,7 @@ body {
       margin-left: 0px;
       width: 310px;
       height: 140px;
-      margin-top: 380px;
+      margin-top: 180px;
       flex-direction: row;
       align-items: center;
       justify-content: center;
@@ -1204,7 +1203,7 @@ body {
       align-items: center;
       cursor: pointer;
       margin-left: 55px;
-      margin-top: 696px;
+      margin-top: 499px;
     }
     .image2 {
       display: none;
