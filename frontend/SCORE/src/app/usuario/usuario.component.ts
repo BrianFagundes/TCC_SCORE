@@ -29,7 +29,7 @@ export class UsuarioComponent {
   mostrarSenhaModal: boolean=false;
   mostrarconfSenhaModal: boolean=false;
 
-  constructor(private router: Router, private apiService: ApiService) {  
+  constructor(private router: Router, private apiService: ApiService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.carregarDadosUsuario();
@@ -37,7 +37,7 @@ export class UsuarioComponent {
     });
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.carregarDadosUsuario();
   }
 
@@ -45,11 +45,11 @@ export class UsuarioComponent {
     const Usuario = localStorage.getItem('Usuario');
     const ID = localStorage.getItem('ID');
     const Imagem = localStorage.getItem('imagem');
-         
+
     this.nomeUsuario = Usuario ? Usuario.toString() : '';
     this.IdUsuario = ID ? ID.toString() : '';
-    this.imagePath = Imagem? Imagem.toString() : '../../assets/avatar 1.png';  
-    localStorage.setItem('userImage', this.imagePath);  
+    this.imagePath = Imagem? Imagem.toString() : '../../assets/avatar 1.png';
+    localStorage.setItem('userImage', this.imagePath);
   }
 
   getBotaoEstilos()
@@ -108,7 +108,7 @@ export class UsuarioComponent {
 
   ngAfterViewInit() {
     const ID = localStorage.getItem('ID');
-    
+
     if (ID) {
       this.apiService.obterUsuarioPorId(ID.toString())
         .then(usuario => {
@@ -119,7 +119,7 @@ export class UsuarioComponent {
             this.mostrarSenha = true;
             this.senhaInput!.nativeElement.value = "Usuário Criado pelo Google!"
             this.usuariogoogle = true;
-          }          
+          }
           else
           {
             this.senhaInput!.nativeElement.value = usuario.senha;
@@ -145,15 +145,15 @@ export class UsuarioComponent {
           // Armazena na localStorage
           localStorage.setItem('userImage', e.target.result);
           localStorage.setItem('imageName', file.name);
-          
+
           // Atualiza as imagens exibidas
           const selectedImage = document.getElementById('selectedImage') as HTMLImageElement;
           const selectedImage2 = document.getElementById('selectedImage2') as HTMLImageElement;
           const selectedImage3 = document.getElementById('selectedImage3') as HTMLImageElement;
-          
+
           if (selectedImage) {
             selectedImage.src = e.target.result;
-          } 
+          }
           if (selectedImage2) {
             selectedImage2.src = e.target.result;
           }
@@ -165,29 +165,29 @@ export class UsuarioComponent {
         event.target.value = '';
       }
     }
-  } 
+  }
 
   toggleSenha()
   {
-    this.mostrarSenha = !this.mostrarSenha; 
+    this.mostrarSenha = !this.mostrarSenha;
   }
 
   toggleSenhaModal()
   {
-    this.mostrarSenhaModal = !this.mostrarSenhaModal; 
+    this.mostrarSenhaModal = !this.mostrarSenhaModal;
   }
 
   toggleconfSenhaModal()
   {
-    this.mostrarconfSenhaModal = !this.mostrarconfSenhaModal; 
+    this.mostrarconfSenhaModal = !this.mostrarconfSenhaModal;
   }
 
   toggleEdit() {
-    
+
     this.editMode = !this.editMode;
     if(!this.usuariogoogle)
     {
-      if(this.editMode === true)   
+      if(this.editMode === true)
         this.mostrarSenha = false;
     }
   }
@@ -197,10 +197,10 @@ export class UsuarioComponent {
     this.carregarDadosUsuario(); // Recarrega os dados originais do usuário
     this.toggleEdit(); // Sai do modo de edição
     const selectedImage = document.getElementById('selectedImage') as HTMLImageElement;
-    const selectedImage2 = document.getElementById('selectedImage2') as HTMLImageElement;    
+    const selectedImage2 = document.getElementById('selectedImage2') as HTMLImageElement;
     const selectedImage3 = document.getElementById('selectedImage3') as HTMLImageElement;
     const imagemSrc = localStorage.getItem('imagem');
-    
+
     if(!this.usuariogoogle)
     {
       this.mostraNovaSenha = false;
@@ -219,7 +219,7 @@ export class UsuarioComponent {
       selectedImage3.src = imagemSrc;
     }
     const ID = localStorage.getItem('ID');
-    
+
     if (ID) {
       this.apiService.obterUsuarioPorId(ID.toString())
         .then(usuario => {
@@ -230,7 +230,7 @@ export class UsuarioComponent {
             this.mostrarSenha = true;
             this.senhaInput!.nativeElement.value = "Usuário Criado pelo Google!"
             this.usuariogoogle = true;
-          }          
+          }
           else
           {
             this.senhaInput!.nativeElement.value = usuario.senha;
@@ -262,7 +262,7 @@ export class UsuarioComponent {
       this.mostraNovaSenha = false;
       this.mostrarSenha = false;
     }
-
+    localStorage.setItem('imagem', foto == null ? '../../assets/avatar 1.png' : foto);
     localStorage.setItem('Usuario', nome);
     this.nomeUsuario = nome;
     alert('Gravado com sucesso');
@@ -274,19 +274,19 @@ export class UsuarioComponent {
     if(confirmation) {
       this.apiService.deletarUsuario(ID? ID.toString(): "")
       .then(() => {
-        alert('Usuário deletado com sucesso!');    
+        alert('Usuário deletado com sucesso!');
           localStorage.setItem('imagem', "");
           localStorage.setItem('Usuario', "");
           localStorage.setItem('ID', "");
           this.router.navigate(['/home']); // Redireciona para a tela de login
-        
+
       })
       .catch(error => {
         console.error('Erro ao deletar o usuário:', error);
         // Trate o erro conforme necessário
       });
     }
-    
+
   }
 
   logout() {
@@ -319,14 +319,14 @@ export class UsuarioComponent {
   }
 
   alterarSenha() {
-     
+
     const novaSenha = this.novaSenha?.nativeElement.value;
     const confirmacaoSenha = this.confirmacaoSenha?.nativeElement.value;
     if (novaSenha !== confirmacaoSenha) {
       alert('As senhas não correspondem.');
       return;
-    } 
-    
+    }
+
     if (novaSenha.length < 8) {
       alert('A senha possui menos de 8 caracteres.');
       return;
