@@ -2,6 +2,8 @@ package com.api.usuario;
 
 import com.api.usuario.Usuario;
 import com.api.usuario.UsuarioRepository;
+import com.api.usuario.equipe.participante.ParticipanteRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,9 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
-    private CriptografiaAES criptografiaAES;
+    private CriptografiaAES criptografiaAES;    
+    @Autowired
+    private ParticipanteRepository participanteRepository;
 
     @PostMapping
     public int criarUsuario(@RequestBody Usuario usuario) {
@@ -109,7 +113,32 @@ public class UsuarioController {
     	return usuario.getfoto();
     }
     
-    
+    @GetMapping("/obter/id/email/{id}/{email}")
+    public Usuario obterUsuarioIdEmail(@PathVariable Long id, @PathVariable String email) {
+    	
+    	Usuario usuario = usuarioRepository.findById(id).orElse(null); 
+    	
+    	if(usuario == null) {
+    		List<Usuario> usuario2 = usuarioRepository.findByEmail(email);  
+    		if(usuario2 != null && !usuario2.isEmpty())
+                usuario = usuario2.get(0);
+    	}
+    		
+    	if(usuario != null)
+    	{
+    		usuario.setsenha("");
+    	}    		
+    	else
+    	{
+    		usuario = new Usuario();
+    		usuario.setEmail("Inexistente");
+    		
+    	}
+    		
+    	
+    	
+        return usuario;
+    }
     
     
     @GetMapping("/{id}")
@@ -157,11 +186,14 @@ public class UsuarioController {
         }
 
         return null;
-    }
-
+    }   
+    
+    
     @DeleteMapping("/{id}")
     public void deletarUsuario(@PathVariable Long id) {
         usuarioRepository.deleteById(id);
+        participanteRepository.deleteByUsuario(id);
+        
     }
     
     public String RetornoSenha(String email)

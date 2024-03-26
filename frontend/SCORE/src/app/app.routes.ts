@@ -7,6 +7,8 @@ import { CadastroPessoaComponent } from './cadastro-pessoa/cadastro-pessoa.compo
 import { EsqueciSenhaComponent } from './esqueci-senha/esqueci-senha.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { CriarequipeComponent } from './criarequipe/criarequipe.component';
+import { DetalhesComponent } from './detalhes/detalhes.component';
 import { AuthGuard } from './auth.guard';
 
 
@@ -16,7 +18,9 @@ export const routes: Routes = [
   { path: 'cadastropessoa', component: CadastroPessoaComponent  },
   { path: 'Esqueci', component:  EsqueciSenhaComponent},
   { path: 'inicio', component:  TelaInicialComponent, canActivate: [AuthGuard] },
-  { path: 'usuario', component:  UsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'usuario', component:  UsuarioComponent, canActivate: [AuthGuard] },  
+  { path: 'criarequipes', component:  CriarequipeComponent, canActivate: [AuthGuard] },  
+  { path: 'detalhes', component:  DetalhesComponent, canActivate: [AuthGuard] },
   // Adicione outras rotas conforme necessário
 ];
 

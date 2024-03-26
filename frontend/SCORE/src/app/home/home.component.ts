@@ -21,10 +21,11 @@ export class HomeComponent {
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
+    localStorage.setItem('ID', "");
     localStorage.setItem('jwtToken', "");
     const remember = localStorage.getItem('relembrar');
     this.rememberMe = remember === 'S';
-  
+    
     // Configura os campos de entrada somente se "relembrar" estiver definido como verdadeiro
     if (this.rememberMe) {
       setTimeout(() => {
@@ -89,7 +90,6 @@ export class HomeComponent {
   
         // Verificando se apiService está definido antes de fazer a chamada
         if (this.apiService) {
-          
           
           const pIdentificador = await this.apiService.cadastrarUsuario2(dadosUsuario);          
           

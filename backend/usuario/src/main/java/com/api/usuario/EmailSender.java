@@ -3,14 +3,7 @@ package com.api.usuario;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 import java.util.Properties;
-
-import com.api.usuario.Usuario;
-import com.api.usuario.UsuarioRepository;
 
 public class EmailSender {
 

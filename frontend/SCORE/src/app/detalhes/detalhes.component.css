@@ -1,0 +1,475 @@
+.welcome-message .linha {
+  margin-bottom: 20px;
+}
+
+.welcome-message .linha .coluna {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.welcome-message .linha .esquerda {
+  width: 20%;
+}
+
+.welcome-message .linha .direita {
+  width: 78%;
+}
+
+.welcome-message .linha .direita .sublinha {
+  margin-bottom: 10px;
+}
+
+
+input[type="number"] {
+
+  margin-top: 10px;
+  width: 350px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-right: 10px;
+  padding: 5px;
+}
+
+input[type="checkbox"] {
+  margin-top: 15px;
+  width: 20px;
+  height: 20px;
+  margin-left: 40px;
+}
+
+input[type="text"] {
+
+  margin-top: 10px;
+  width: 350px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-right: 10px;
+  padding: 5px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+input[type="time"] {  
+  margin-top: 10px;
+  width: 350px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-right: 10px;
+  padding: 5px;
+}
+
+label{
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+}
+
+legend{
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+}
+
+textarea{
+  margin-top: 10px;
+  width: 350px;
+  height: 170px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-right: 10px;
+  padding: 5px;
+}
+
+button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  margin-top: 30px;
+  width: 300px;
+  height:35px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+
+
+}
+
+.linha1{
+  background-color: rgba(128, 128, 128, 0.2);
+  width: 1460px;
+  height: 350px;
+  margin-left: -430px;
+}
+
+.linha2{
+  background-color: rgba(128, 128, 128, 0.2);
+  width: 1460px;
+  height: 90px;
+  margin-left: -430px;
+}
+
+.linha3{
+  background-color: rgba(128, 128, 128, 0.2);
+  width: 1460px;
+  height: 80px;
+  margin-left: -430px;
+}
+
+
+
+.container {
+    display: flex; /* Torna este um flex container */
+    flex-direction: row; /* Organiza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    justify-content: center; /* Para centralização horizontal, se necessário */
+    gap: 20px; /* Espaçamento entre os itens */
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */
+    margin-top: 50px;
+  }
+  
+  
+  .user-details-Ul {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: 'Times New Roman';
+    font-size: 20px;
+    width: 200px;
+    list-style: none;
+  }
+  .user-details-Ul-li1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .user-details-Ul-li2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: -15px;
+  }
+  
+  .Botoes_usuario {
+    width: 100px;
+    height: 100px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 57px;
+    width: 276px;
+    height: 65px;
+  }
+  
+  .image-container, .user-details-and-logout {
+    display: flex;
+    flex-direction: column; /* Organiza os itens internos verticalmente */
+    align-items: center; /* Centraliza os itens internos verticalmente */
+  }
+  
+  .user-image{
+    max-width: 80px; 
+    max-height: 80px;
+  }
+  
+  .user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+  }
+  
+  
+  
+  .rectangle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 1500px;
+    height: 600px;
+    background-color: #201f26;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", sans-serif;
+    background-color: #201f26;
+    color: white;
+  }
+  
+  .welcome-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .welcome-message {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .welcome-message h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-message ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .welcome-message li {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o modal */
+  }
+  .modal-content {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 5px;
+    width: 700px;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o conteúdo do modal */
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .cadastro-label2 {
+    padding-top: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-left: 0px;
+    color: #ffffff;
+    font-family: 'Times New Roman';
+    /* Adicione aqui quaisquer estilos adicionais necessários para o segundo rótulo de cadastro */
+  }
+
+  .modalCampo {
+    display: block;
+      width: 270px;
+      height: 40px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      padding-left: 10px;
+      background-color: #201f26;
+      border-color: #201f26;
+      outline: none;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      font-family: 'Times New Roman', Times New Roman;
+      /* Adicione aqui quaisquer estilos adicionais necessários para o input do modal */
+  }
+  
+  .modalCancelaButton {
+    margin-top: 30px;
+    width: 130px;
+    height: 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de cancelamento do modal */
+  }  
+
+  .dropdownModelos {
+    width: 485px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  .notacao-dropdown {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  .importancia-dropdown {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  .modalAplicarButton {
+    width: 160px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de cancelamento do modal */
+  }
+  .modalcriarButton {
+    margin-top: 30px;
+    width: 130px;
+    margin-left: 20px;
+    height: 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    color: green;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de alteração do modal */
+  }
+
+  .parametros-container {
+    max-height: 300px; /* Defina a altura máxima desejada */
+    overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando o conteúdo ultrapassa a altura máxima */
+  }
+  
+  .linha-parametros {
+    display: flex; /* Define os elementos internos para ficarem lado a lado */
+    align-items: center; /* Alinha os itens verticalmente */
+    margin-bottom: 10px; /* Adiciona margem inferior entre as linhas */
+  }
+  
+  .parametro-input,
+  .importancia-fieldset,
+  .notacao-fieldset {
+    margin-right: 10px; /* Adiciona margem direita entre os elementos */
+    
+  }
+  
+  .parametro-input {
+    width: 100px;
+    
+  }
+  
+  .importancia-fieldset,
+  .notacao-fieldset {
+    flex: 0 0 auto; /* Mantém o tamanho fixo para os fieldsets */
+  }
+  
+
+  
+  @media screen and (max-width: 600px) {
+    .welcome-message {
+        padding: 0 20px;
+    }
+  }
+  

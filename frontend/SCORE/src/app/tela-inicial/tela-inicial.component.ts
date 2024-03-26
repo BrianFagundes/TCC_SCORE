@@ -76,4 +76,8 @@ export class TelaInicialComponent implements OnInit {
       this.router.navigate(['/home']); // Redireciona para a tela de login
     }
   }
+
+  CriarEquipe(){
+    this.router.navigate(['/criarequipes']);
+  }
 }

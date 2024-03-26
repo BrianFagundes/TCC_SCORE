@@ -25,21 +25,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-## Como rodar o projeto:
-## alterar o arquivo "application.properties" inserindo as informações do seu banco de dados, o arquivo fica em backend\usuario\src\main\resources\application.properties
-!!! Não esqueça de inicar o banco de dados
-
-### Para iniciar o front.
-
-## acessar a pasta "score" usando:
-cd frontend/score
-# e rodar script para iniciar o angular:
-npm start
-
-
-### Para inicar o backend:
-## acessar a pasta "usuario" usando:
-cd backend/usuario
-# e rodar script para iniciar o spring:
-mvn spring-boot:run
