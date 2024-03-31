@@ -1,139 +1,171 @@
-
 .container {
-    display: flex; /* Torna este um flex container */
-    flex-direction: row; /* Organiza os itens horizontalmente */
-    align-items: center; /* Centraliza os itens verticalmente */
-    justify-content: center; /* Para centralização horizontal, se necessário */
-    gap: 20px; /* Espaçamento entre os itens */
-    border: 2px solid gray; /* Adiciona uma borda cinza */
-    border-radius: 10px; /* Adiciona cantos arredondados */
-    margin-top: 50px;
+  display: flex;
+  /* Torna este um flex container */
+  flex-direction: row;
+  /* Organiza os itens horizontalmente */
+  align-items: center;
+  /* Centraliza os itens verticalmente */
+  justify-content: center;
+  /* Para centralização horizontal, se necessário */
+  gap: 20px;
+  /* Espaçamento entre os itens */
+  border: 2px solid gray;
+  /* Adiciona uma borda cinza */
+  border-radius: 10px;
+  /* Adiciona cantos arredondados */
+  margin-top: 50px;
 }
 
 
 .CriarEquipeButton {
-    margin-top: 30px;
-    width: 400px;
-    height: 100px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 30px;
-    font-weight: bold;
-    position: relative;
-    border: 2px solid #D9D9D9;
-    background-color: #D9D9D9;
-    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
-  }
+  margin-top: 30px;
+  width: 400px;
+  height: 100px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
+}
+
+.CriarEventoButton {
+  margin-top: 30px;
+  width: 400px;
+  height: 100px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
+}
 
 .user-details-Ul {
-    text-align: left;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    font-family: 'Times New Roman';
-    font-size: 20px;
-    width: 200px;
-    list-style: none;
-  }
-  .user-details-Ul-li1 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
-  .user-details-Ul-li2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    margin-top: -15px;
-  }
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  font-family: 'Times New Roman';
+  font-size: 20px;
+  width: 200px;
+  list-style: none;
+}
+
+.user-details-Ul-li1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.user-details-Ul-li2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: -15px;
+}
 
 .Botoes_usuario {
-    width: 100px;
-    height: 100px;
-    border: 2px solid gray; /* Adiciona uma borda cinza */
-    border-radius: 10px; /* Adiciona cantos arredondados */    
-    cursor: pointer;
+  width: 100px;
+  height: 100px;
+  border: 2px solid gray;
+  /* Adiciona uma borda cinza */
+  border-radius: 10px;
+  /* Adiciona cantos arredondados */
+  cursor: pointer;
 }
 
 .logo {
-    position: absolute;
-    left: 57px;
-    width: 276px;
-    height: 65px;
-  }
-
-  .image-container, .user-details-and-logout {
-    display: flex;
-    flex-direction: column; /* Organiza os itens internos verticalmente */
-    align-items: center; /* Centraliza os itens internos verticalmente */
+  position: absolute;
+  left: 57px;
+  width: 276px;
+  height: 65px;
 }
 
-.user-image{
-    max-width: 80px; 
-    max-height: 80px;
+.image-container,
+.user-details-and-logout {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens internos verticalmente */
+  align-items: center;
+  /* Centraliza os itens internos verticalmente */
+}
+
+.user-image {
+  max-width: 80px;
+  max-height: 80px;
 }
 
 .user-details ul {
-    text-align: left; /* Alinha o texto à direita */
-    padding: 0; /* Remove o preenchimento */
-    margin: 0; /* Remove a margem */
-    list-style-type: none; /* Remove os marcadores de lista */
-    font-family: "Times New Roman";
-    font-size: 20px;
+  text-align: left;
+  /* Alinha o texto à direita */
+  padding: 0;
+  /* Remove o preenchimento */
+  margin: 0;
+  /* Remove a margem */
+  list-style-type: none;
+  /* Remove os marcadores de lista */
+  font-family: "Times New Roman";
+  font-size: 20px;
 }
 
 
 
 .rectangle {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 1500px;
-    height: 600px;
-    background-color: #201f26;
-    border-radius: 10px;
-    margin: 0 auto;
-    margin-top: 20px;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 1500px;
+  height: 600px;
+  background-color: #201f26;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Times New Roman", sans-serif;
-    background-color: #201f26;
-    color: white;
+  margin: 0;
+  padding: 0;
+  font-family: "Times New Roman", sans-serif;
+  background-color: #201f26;
+  color: white;
 }
 
 .welcome-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
 
 .welcome-message {
-    max-width: 600px;
-    margin: 0 auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .welcome-message h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .welcome-message ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .welcome-message li {
-    font-size: 20px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 600px) {
-    .welcome-message {
-        padding: 0 20px;
-    }
+  .welcome-message {
+    padding: 0 20px;
+  }
 }

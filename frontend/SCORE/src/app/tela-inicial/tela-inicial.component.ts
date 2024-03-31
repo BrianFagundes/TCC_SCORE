@@ -80,4 +80,8 @@ export class TelaInicialComponent implements OnInit {
   CriarEquipe(){
     this.router.navigate(['/criarequipes']);
   }
+  
+  CriarEvento(){
+    this.router.navigate(['/criarevento']);
+  }
 }

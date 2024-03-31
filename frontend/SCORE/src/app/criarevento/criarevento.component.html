@@ -1,0 +1,231 @@
+<div>
+    <div class="welcome-container">
+        <div class="user-info">
+            <div class="container">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="TelaInicial()">
+                <div class="image-container">
+                    <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image"
+                        class="Botoes_usuario" (click)="usuario()">
+                </div>
+                <div class="user-details">
+                    <ul class="user-details-Ul">
+                        <li class="user-details-Ul-li1"><strong>ID:</strong> </li>
+                        <li class="user-details-Ul-li2"> {{IdUsuario }} </li>
+                        <li class="user-details-Ul-li2"><strong>Nome:</strong></li>
+                        <li class="user-details-Ul-li2"> {{ (nomeUsuario? nomeUsuario.length : 0) > 9 ? (nomeUsuario |
+                            slice:0:9) + '...' : nomeUsuario }} </li>
+                    </ul>
+                </div>
+                <div class="logout-button" (click)="logout()">
+                    <img style="margin-top: 4px;" src="../../assets/Logout.png" alt="Logout" class="Botoes_usuario" />
+                </div>
+            </div>
+        </div>
+        <div class="rectangle">
+            <div class="welcome-message">
+                <div class="rectangle2">
+                    <div>
+                        <input *ngIf="!equipeevento" style="width: 860px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
+                            class="input" name="procura" placeholder="id ou Nome do Evento" maxlength="25" #procura
+                            required>
+                        <input *ngIf="equipeevento" style="width: 860px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
+                            class="input" name="procura" placeholder="id ou Nome da Equipe" maxlength="25" #procura
+                            required>
+                        <select class="EquipeEvento" id="EquipeEvento" (change)="SetaEvento()">
+                            <option value="1-10">Evento</option>
+                            <option value="1-5">Equipe</option>
+                        </select>
+                        <button style="width: 180px; margin-left: 10px;" class="Evento-btn"
+                            (click)="botaopesquisarlistaEventos()">Pesquisar</button>
+                        <button style="width: 180px; margin-left: 10px; margin-bottom: 10px;"
+                            (click)="LimpapesquisarlistaEventos()" class="Evento-btn">Limpa
+                            filtro</button>
+                    </div>
+                    <div *ngIf="!filtrou">
+                        <div *ngFor="let Evento of EventosNaPaginaAtual; let i = index" class="Evento-container">
+                            <div class="equipe-containerdiv">
+                                <img style="margin-left: 1040px" id="selectedImage" [src]="Evento.ImagemEquipe" alt="User Image"
+                                    class="Botoes_usuario">
+                            </div>                            
+                            <span style="margin-bottom: 100px;" class="nomeEvento">Nome da Equipe: {{ Evento.nomeequipe }}</span>
+                            <span style="margin-bottom: 100px;" class="nomeEvento">Número da Evento: {{ Evento.id }}</span> 
+                            <span class="nomeEvento">Nome da Evento: {{ Evento.nome }}</span>                                                       
+                            <div class="Evento-containerdiv2">
+                                <button class="Evento-btn" (click)="excluirEvento(Evento.id, Evento.nome)">Excluir
+                                    Evento</button>
+                                <button class="Evento-btn" (click)="Teladetalhes(Evento.id.toString(), 'D')">Detalhes
+                                    Adicionais</button>
+                                <button class="Evento-btn2"
+                                    (click)="Teladetalhes(Evento.id.toString(), 'A')">Administrar
+                                    Detalhes</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filtrou && existe">
+                        <div *ngFor="let Evento of EventosNaPaginaAtual2; let i = index" class="Evento-container">
+                            <div class="equipe-containerdiv">
+                                <img style="margin-left: 1040px" id="selectedImage" [src]="Evento.ImagemEquipe" alt="User Image"
+                                    class="Botoes_usuario">
+                            </div>                            
+                            <span style="margin-bottom: 100px;" class="nomeEvento">Nome da Equipe: {{ Evento.nomeequipe }}</span>
+                            <span style="margin-bottom: 100px;" class="nomeEvento">Número da Evento: {{ Evento.id }}</span> 
+                            <span class="nomeEvento">Nome da Evento: {{ Evento.nome }}</span>                                                       
+                            <div class="Evento-containerdiv2">
+                                <button class="Evento-btn" (click)="excluirEvento(Evento.id, Evento.nome)">Excluir
+                                    Evento</button>
+                                <button class="Evento-btn" (click)="Teladetalhes(Evento.id.toString(), 'D')">Detalhes
+                                    Adicionais</button>
+                                <button class="Evento-btn2"
+                                    (click)="Teladetalhes(Evento.id.toString(), 'A')">Administrar
+                                    Detalhes</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filtrou && !existe">
+                        <div class="Evento-container">
+                            <p
+                                style="color: black; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-bottom: 5px;">
+                                <strong>Não existem Eventos nas condições passadas!</strong>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <span *ngIf="!filtrou" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas }}</span>
+                    <span *ngIf="filtrou && existe" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas2
+                        }}</span>
+                    <span *ngIf="filtrou && !existe" class="pagina-info">Página 1/1</span>
+                    <button class="btn-left2" style="margin-bottom: 10px;" (click)="mudarPagina(-1)"
+                        [disabled]="paginaAtual === 1">Anterior</button>
+                    <button *ngIf="!filtrou" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                        [disabled]="paginaAtual >= (Eventos.length / EventosPorPagina)">Próximo</button>
+                    <button *ngIf="filtrou" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                        [disabled]="paginaAtual >= (Eventos2.length / EventosPorPagina)">Próximo</button>
+                </div>
+                <div class="footer">
+                    <button class="btn-left" (click)="TelaInicial()">Voltar</button>
+                    <button class="btn-right" (click)="criarNovaEvento()">(+) Criar novo Evento?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para criar nova Evento -->
+<div class="modal" *ngIf="exibirModal">
+    <div class="modal-content">
+        <span class="close" (click)="fecharModal()">&times;</span>
+        <p class="cadastro-label2">Indique o nome do novo Evento</p>
+        <input class="modalCampo" type="text" #nomeEvento placeholder="Nome da Evento" required>
+        
+        <fieldset style="margin-top: 10px; width: 550px;">
+            <legend>Equipes Existentes</legend>
+            <div>
+                <input style="width: 190px;" type="text" name="procura" placeholder="id ou nome da equipe"
+                    maxlength="25" #procura2 required>
+                <button style="width: 160px;" class="modalpesquisarButton"
+                    (click)="botaopesquisarlistaEquipes()">Pesquisar</button>
+                <button style="width: 160px;" class="modalpesquisarButton" (click)="LimpapesquisarlistaEquipes()">Limpa
+                    filtro</button>
+            </div>
+            <div *ngIf="!filtrou2" class="parametros-container" style="margin-top: 20px;">
+                <div *ngFor="let equipe of equipes; let i = index"
+                    style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <fieldset style="width: 370px; height: 70px; display: flex;">
+                        <legend>Dados da Equipe</legend>
+                        <img [src]="equipe.foto" style="width: 50px; height: 50px;">
+                        <div style="margin-left: 20px;">
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                                <strong>Id: {{ equipe.id }}</strong>
+                            </p>
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                                <strong>Nome: {{ equipe.nome }}</strong>
+                            </p>
+                        </div>
+                    </fieldset>
+                    <div>
+                        <fieldset class="importancia-fieldset" style="height: 70px;">
+                            <legend style="text-align: center;">Ação</legend>
+                            <button id="buttonescolher" class="buttonescolher" (click)="escolhersemfiltro(i)">
+                                Escolher
+                            </button>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="filtrou2 && existenalistaequipes2" class="parametros-container" style="margin-top: 20px;">
+                <div *ngFor="let equipe of equipes2; let i = index"
+                    style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <fieldset style="width: 370px; height: 70px; display: flex;">
+                        <legend>Dados da Equipe</legend>
+                        <img [src]="equipe.foto" style="width: 50px; height: 50px;">
+                        <div style="margin-left: 20px;">
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                                <strong>Id: {{ equipe.id }}</strong>
+                            </p>
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                                <strong>Nome: {{ equipe.nome }}</strong>
+                            </p>
+                        </div>
+                    </fieldset>
+                    <div>
+                        <fieldset class="importancia-fieldset" style="height: 70px;">
+                            <legend style="text-align: center;">Ação</legend>
+                            <button id="buttonescolher" class="buttonescolher" (click)="escolhercomfiltro(i)">
+                                Escolher
+                            </button>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="filtrou2 && !existenalistaequipes2" class="resultado-pesquisa"
+                style="display: flex; align-items: center; margin-top: 20px;">
+                <p style="color: white; font-size: 25px;font-family: 'Times New Roman', 'Times New Roman';">Não existem
+                    dados para a pesquisa!</p>
+            </div>
+        </fieldset>
+        <fieldset style="margin-top: 10px; width: 550px;">
+            <div *ngIf="selecionada" class="parametros-container" style="margin-top: 20px;">
+                <div
+                    style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <fieldset style="width: 370px; height: 70px; display: flex;">
+                        <legend>Dados da Equipe</legend>
+                        <img [src]="imagempesquisalistaequipeselecionado" style="width: 50px; height: 50px;">
+                        <div style="margin-left: 20px;">
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                                <strong>Id: {{ idpesquisalistaequipeselecionado }}</strong>
+                            </p>
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                                <strong>Nome: {{ nomepesquisalistaequipeselecionado }}</strong>
+                            </p>
+                        </div>
+                    </fieldset>
+                    <div>
+                        <fieldset class="importancia-fieldset" style="height: 70px;">
+                            <legend style="text-align: center;">Ação</legend>
+                            <button id="buttonescolher" class="buttonescolher" (click)="LimparEquipeSelecionada()">
+                                Limpar
+                            </button>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!selecionada" class="resultado-pesquisa"
+                style="display: flex; align-items: center; margin-top: 20px;">
+                <p style="color: white; font-size: 25px;font-family: 'Times New Roman', 'Times New Roman';">Não existem
+                    dados para a pesquisa!</p>
+            </div>
+        </fieldset>
+
+        <div class="modal-actions">
+            <button class="modalCancelaButton" (click)="confirmarCancelar()">Cancelar</button>
+            <button class="modalcriarButton" (click)="confirmarCriacao()">Criar</button>
+        </div>
+    </div>
+</div>
+

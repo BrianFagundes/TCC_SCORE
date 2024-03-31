@@ -53,11 +53,6 @@
   align-items: center; /* Centraliza os itens internos verticalmente */
 }
 
-.user-image{
-  max-width: 80px; 
-  max-height: 80px;
-}
-
 .user-details ul {
   text-align: left; /* Alinha o texto à direita */
   padding: 0; /* Remove o preenchimento */
@@ -102,23 +97,4 @@ body {
   margin: 0 auto;
 }
 
-.welcome-message h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
 
-.welcome-message ul {
-  list-style: none;
-  padding: 0;
-}
-
-.welcome-message li {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-@media screen and (max-width: 600px) {
-  .welcome-message {
-      padding: 0 20px;
-  }
-}

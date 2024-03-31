@@ -503,6 +503,7 @@ export class DetalhesComponent {
       equipe: "1",
       usuario: "1",
       moderador: false,
+      pagou: false,
     };
 
     const IDTELA = localStorage.getItem('idtela');
@@ -869,6 +870,10 @@ export class DetalhesComponent {
       }
     }
 
+  }
+
+  TelaInicial() {
+    this.router.navigate(['/inicio']);
   }
 
 }

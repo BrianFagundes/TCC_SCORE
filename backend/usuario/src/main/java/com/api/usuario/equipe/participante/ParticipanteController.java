@@ -39,7 +39,7 @@ public class ParticipanteController {
 	@GetMapping("/obter/{id}")
     public List<Participante> obterParticipantes(@PathVariable Long id) {
 		List<Participante> participantes = participanterepository.findByEquipe(id); 
-		System.out.println(participantes.getFirst().getModerador());
+		System.out.println(participantes.get(0).getModerador());
         return participantes;
     }
 	

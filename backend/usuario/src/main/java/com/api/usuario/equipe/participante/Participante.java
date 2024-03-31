@@ -17,6 +17,7 @@ public class Participante {
 	private Long usuario;
 	
 	private boolean moderador;
+	
 
 	public Long getEquipe() {
 		return equipe;

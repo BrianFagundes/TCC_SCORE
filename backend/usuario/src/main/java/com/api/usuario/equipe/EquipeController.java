@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.usuario.equipe.participante.Participante;
 import com.api.usuario.equipe.participante.ParticipanteRepository;
+import com.api.usuario.equipe.evento.Evento;
+import com.api.usuario.equipe.evento.EventoController;
 
 
 
@@ -31,6 +33,9 @@ public class EquipeController {
 	
 	@Autowired
     private ParticipanteRepository participanteRepository;
+	
+	@Autowired
+    private EventoController eventoController;
 	
 	@PostMapping("/criar")
     public int criarUsuario(@RequestBody Equipe equipe) {	
@@ -52,6 +57,12 @@ public class EquipeController {
     public void deletarUsuario(@PathVariable Long id) {
 		equipeRepository.deleteById(id);
 		participanteRepository.deleteByEquipe(id);
+		List<Evento> eventos =  eventoController.obterEventoporEquipe(id);
+		
+		for (Evento evento : eventos) { 
+			eventoController.deletarUsuario(evento.getid());
+        }
+		
     }
 	
 	@GetMapping("/obter/{id}")

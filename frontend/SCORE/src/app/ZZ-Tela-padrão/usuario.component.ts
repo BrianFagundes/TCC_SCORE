@@ -3,7 +3,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../api.service';
 
-
 @Component({
   selector: 'app-usuario',
   standalone: true,
@@ -13,21 +12,10 @@ import { ApiService } from '../api.service';
 })
 export class UsuarioComponent {
   @ViewChild('nomeInput') nomeInput: ElementRef | undefined;
-  @ViewChild('emailInput') emailInput: ElementRef | undefined;
-  @ViewChild('senhaInput') senhaInput: ElementRef | undefined;
-  @ViewChild('novaSenha') novaSenha: ElementRef | undefined;
-  @ViewChild('confirmacaoSenha') confirmacaoSenha: ElementRef | undefined;
-
-
-  mostrarSenha : boolean = false;
-  editMode: boolean = false;
+  
   imagePath: string = '';
-  nomeUsuario: string = ''; // Variável para armazenar o nome do usuário
-  IdUsuario: string = ''; // Variável para armazenar o email do usuário
-  mostraNovaSenha: boolean =false;
-  usuariogoogle: boolean=false;
-  mostrarSenhaModal: boolean=false;
-  mostrarconfSenhaModal: boolean=false;
+  IdUsuario: string = '';
+  nomeUsuario: string = '';
 
   constructor(private router: Router, private apiService: ApiService) {  
     this.router.events.subscribe(event => {
@@ -64,6 +52,10 @@ export class UsuarioComponent {
       localStorage.setItem('ID', "");
       this.router.navigate(['/home']); // Redireciona para a tela de login
     }
+  }
+
+  TelaInicial() {
+    this.router.navigate(['/inicio']);
   }
 
   

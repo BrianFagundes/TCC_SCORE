@@ -3,6 +3,20 @@
 import { Injectable } from '@angular/core';
 //import { Observable } from 'rxjs';
 
+
+interface Custo {
+  evento: number;
+  usuario: number;
+  custo: boolean;
+} 
+
+interface Time {
+  evento: number;
+  numerotime: number;
+  usuario: number;
+}
+
+
 interface Modelo {
   esporte: string;
   parametro: string;
@@ -51,6 +65,17 @@ interface Participante {
   equipe: string;
   usuario: string;
   moderador: boolean;
+}
+
+interface Evento{
+  id: number,
+  equipe: number,
+  nome: string,
+  local: string,
+  peridiocidade: string,
+  dia: string,
+  hora: string,
+  quantidade_time: number
 }
 
 
@@ -331,8 +356,57 @@ export class ApiService {
     
   } 
 
+  async CriarEvento(dadosEquipe: any) {
+    const url = `${this.apiUrl}/usuarios/equipe/evento/criar`;
+    const token = localStorage.getItem('jwtToken');
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(dadosEquipe),
+        });   
+        if (response.ok) {        
+          const responseData = await response.json();
+          return responseData; 
+        } else {
+           return -1;
+        }
+      } catch (error) {
+        return -1; 
+      }
+    
+  } 
+
   async obterTodasEquipes(id: string): Promise<Equipe[]> {
     const url = `${this.apiUrl}/usuarios/Equipe/obter/${id}`;    
+    const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+    
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+            },
+        });
+
+        if (response.ok) {
+          return response.json(); 
+        } else {
+          throw new Error('Erro ao obter listagem de Equipes');
+        }
+
+    } catch (error) {
+        console.error('Erro ao obter listagem de Equipes:', error);
+        throw error;
+    }
+
+  }  
+
+  async obterTodosEventos(id: string): Promise<Evento[]> {
+    const url = `${this.apiUrl}/usuarios/equipe/evento/obter/Evento/Equipe/${id}`;    
     const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
     
     try {
@@ -603,6 +677,179 @@ async obterEquipesPorParticipanteComUmModerador(id: string): Promise<string[]> {
       throw error;
   }  
 
+} 
+
+deletarEvento(id: string): Promise<void> {
+  const token = localStorage.getItem('jwtToken');
+  
+  const url = `${this.apiUrl}/usuarios/equipe/evento/deletar/${id}`;
+
+  return fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+  })
+  .then(response => {
+    if (!response.ok) {
+      // Se a resposta não estiver ok, lança um erro que pode ser pego pelo .catch()
+      throw new Error('Erro ao deletar usuário');
+    }
+  })
+  .catch(error => {
+    console.error('Erro ao deletar usuário:', error);
+    // Pode optar por retornar um valor padrão ou propagar o erro
+    throw error;
+  });
+} 
+
+async obterUmEvento(id: string): Promise<Evento> {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/obter/Evento/${id}`;    
+  const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+  
+  try {
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+          },
+      });
+
+      if (response.ok) {        
+        return response.json(); 
+      } else {
+        throw new Error('Erro ao obter listagem de Equipes');
+      }
+
+  } catch (error) {
+      console.error('Erro ao obter listagem de Equipes:', error);
+      throw error;
+  }
+
+} 
+
+async AlterarEvento(dadosEvento: any) {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/Alterar`;
+  const token = localStorage.getItem('jwtToken');
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dadosEvento),
+      });   
+      if (response.ok) {        
+        const responseData = await response.json();
+        return responseData; // O código de sucesso retornado pela API
+      } else {
+        //console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
+        return -1;
+      }
+    } catch (error) {
+      return -1; // Erro durante a chamada à API
+    }
+  
+} 
+
+async CriarTime(dadosTime: any, numero: number) {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/time/criar/${numero}`;
+  const token = localStorage.getItem('jwtToken');
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dadosTime),
+      });   
+      if (response.ok) {        
+        const responseData = await response.json();
+        return responseData; 
+      } else {
+         return -1;
+      }
+    } catch (error) {
+      return -1; 
+    }
+  
+} 
+
+async obterTodosTimesEvento(id: string): Promise<Time[]> {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/time/obter/times/${id}`;    
+  const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+  
+  try {
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+          },
+      });
+
+      if (response.ok) {
+        return response.json(); 
+      } else {
+        throw new Error('Erro ao obter listagem de Equipes');
+      }
+
+  } catch (error) {
+      console.error('Erro ao obter listagem de Equipes:', error);
+      throw error;
+  }  
+
+}  
+
+async obterTodosPagantesporevento(id: string): Promise<Custo[]> {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/custo/obter/custos/${id}`;    
+  const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+  
+  try {
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+          },
+      });
+
+      if (response.ok) {
+        return response.json(); 
+      } else {
+        throw new Error('Erro ao obter listagem de Pagantes');
+      }
+
+  } catch (error) {
+      console.error('Erro ao obter listagem de Pagantes:', error);
+      throw error;
+  }  
+
+} 
+
+async CriarCustoParticipante(dadosParticipante: any, i :number) {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/custo/criar/${i}`;
+  const token = localStorage.getItem('jwtToken');
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dadosParticipante),
+      });   
+      if (response.ok) {        
+        const responseData = await response.json();
+        return responseData; // O código de sucesso retornado pela API
+      } else {        
+        return -1;
+      }
+    } catch (error) {
+      return -1; // Erro durante a chamada à API
+    }
+  
 } 
 
 }
