@@ -632,7 +632,7 @@ export class DetalhesComponent {
         dropdown.appendChild(option);
       });
 
-    } 
+    }
   }
 
 
@@ -757,7 +757,7 @@ export class DetalhesComponent {
         email: this.email,
         moderador: false
       });
-      alert("Participante " + this.email + "Adicionado com sucesso!");
+      alert("Participante " + this.email + " Adicionado com sucesso!");
       this.existe = false;
       this.procura!.nativeElement.value = "";
     }
@@ -865,8 +865,8 @@ export class DetalhesComponent {
 
         reader.readAsDataURL(file);
         event.target.value = '';
-        
-        
+
+
       }
     }
 
