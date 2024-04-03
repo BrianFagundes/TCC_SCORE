@@ -757,7 +757,7 @@ export class DetalhesComponent {
         email: this.email,
         moderador: false
       });
-      alert("Participante " + this.email + " Adicionado com sucesso!");
+      alert("Participante " + this.email + " adicionado com sucesso!");
       this.existe = false;
       this.procura!.nativeElement.value = "";
     }
