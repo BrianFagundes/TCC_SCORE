@@ -90,8 +90,9 @@
                         [disabled]="paginaAtual >= (equipes2.length / equipesPorPagina)">Próximo</button>
                 </div>
                 <div class="footer">
-                    <button class="btn-left" (click)="TelaInicial()">Voltar</button>
-                    <button class="btn-right" (click)="criarNovaEquipe()">(+) Criar nova equipe?</button>
+                    <button class="btn-left" (click)="TelaInicial()">Tela Inicial</button>                    
+                    <button class="btn-right3" (click)="criarNovaEquipe()">(+) Criar nova equipe?</button>
+                    <button class="btn-right" (click)="CriarEvento()" [disabled]="habilitaevento">Gerenciar Eventos</button>
                 </div>
             </div>
         </div>

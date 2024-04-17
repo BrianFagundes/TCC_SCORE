@@ -21,6 +21,7 @@ export class HomeComponent {
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
+    localStorage.setItem('Teladecadastro', "false");
     localStorage.setItem('ID', "");
     localStorage.setItem('jwtToken', "");
     const remember = localStorage.getItem('relembrar');
@@ -85,7 +86,7 @@ export class HomeComponent {
           email: payload.email,
           senha: "",
           identificador: payload.sub,
-          foto: payload.picture
+          foto: "../../assets/avatar 1.png"
         };          
   
         // Verificando se apiService está definido antes de fazer a chamada

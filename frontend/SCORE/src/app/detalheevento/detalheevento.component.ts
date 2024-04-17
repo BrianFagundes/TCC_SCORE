@@ -49,6 +49,8 @@ export class DetalheeventoComponent {
   @ViewChild('domingo') domingo: ElementRef | undefined;
   @ViewChild('procura2') procura2: ElementRef | undefined;
   @ViewChild('quantidade') quantidade: ElementRef | undefined;
+  @ViewChild('chavepix') chavepix: ElementRef | undefined;
+  
 
 
 
@@ -74,6 +76,7 @@ export class DetalheeventoComponent {
   Sab: boolean = false;
   Dom: boolean = false;
   dia: string = "";
+  origem: string = "";
 
   exibircustos: boolean = false;
   filtrou: boolean = false;
@@ -85,6 +88,7 @@ export class DetalheeventoComponent {
   imagempesquisalistaparticipante: string = "";
   nomepesquisalistaparticipante: string = "";
   emailpesquisalistaparticipante: string = "";
+  ChavePix: string = "930043164";
 
   idpesquisalistaparticipante: number = 0;
   qtdTime: number = 0;
@@ -114,6 +118,7 @@ export class DetalheeventoComponent {
 
 
   async ngOnInit() {
+    localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
     setTimeout(() => {
       this.CarregarDadosTela();
@@ -254,7 +259,8 @@ export class DetalheeventoComponent {
     this.nomeUsuario = Usuario ? Usuario.toString() : '';
     this.IdUsuario = ID ? ID.toString() : '';
     this.imagePath = Imagem ? Imagem.toString() : '../../assets/avatar 1.png';
-
+    const origem = localStorage.getItem('origem');
+    this.origem = origem ? origem.toString() : '';
   }
 
   usuario() {
@@ -276,7 +282,10 @@ export class DetalheeventoComponent {
   }
 
   TelaCriacaoevento() {
-    this.router.navigate(['/criarevento']);
+    if(this.origem == 'criacao')
+      this.router.navigate(['/criarevento']);
+    else
+      this.router.navigate(['/inicio']);
   }
 
   SetaFrequenciaEvento() {
@@ -308,10 +317,15 @@ export class DetalheeventoComponent {
     this.imagePath2 = equipe.foto;
     this.nomeEquipe!.nativeElement.value = "Equipe: " + equipe.nome;
     
+    
 
     const IDEvento = localStorage.getItem('idtela');
+    
     const evento = await this.apiService.obterUmEvento(IDEvento?.toString() ? IDEvento?.toString() : "");
-
+    
+    if(evento.chavepix)
+      this.ChavePix = evento.chavepix;
+    
     this.IdEvento!.nativeElement.value = "Id Evento: " + evento.id;
     this.nomeevento!.nativeElement.value = "Nome Evento: " + evento.nome;
     if (evento.local.length > 0)
@@ -515,6 +529,7 @@ export class DetalheeventoComponent {
     }
     else {
       const confirmation = confirm("Deseja realizar de fato a alteração no evento " + this.nomeevento?.nativeElement.value.substring(13) + "?")
+      
       if (confirmation) {
         const dadosEvento = {
           id: IdEvento,
@@ -524,7 +539,8 @@ export class DetalheeventoComponent {
           peridiocidade: peridiocidade ? "Único" : "Semanal",
           dia: dia,
           hora: hora,
-          quantidade_time: this.qtdTime
+          quantidade_time: this.qtdTime,
+          chavepix: this.ChavePix
         };
 
         const isValid = await this.apiService.AlterarEvento(dadosEvento);
@@ -588,10 +604,16 @@ export class DetalheeventoComponent {
     this.carregarParticipantes()
     if (this.filtrou)
       this.LimpapesquisarlistaparticipantesCusto();
+    
+    setTimeout(() => {
+      this.chavepix!.nativeElement.value = this.ChavePix;
+    }, 0);
+    
   }
 
   async BotaoGravarParticipantesCusto() {
     alert("Ajuste de Participantes realizada com sucesso! Para confirmar a alteração pressione confirmar na tela");
+    this.ChavePix = this.chavepix?.nativeElement.value;
     this.carregarParticipantes()
     this.fecharcustos();
   }
@@ -608,6 +630,7 @@ export class DetalheeventoComponent {
         Pagou: participante2.Pagou
       });
     }
+    
   }
 
   BotaoCancelarparticipantesCusto() {

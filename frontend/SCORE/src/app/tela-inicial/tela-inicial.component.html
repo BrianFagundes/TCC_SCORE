@@ -5,7 +5,7 @@
                 <img src="../../assets/Logo.png" alt="Logo" class="logo">
                 <div class="image-container">
                     <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image" class="Botoes_usuario" (click)="usuario()">
-                </div>                
+                </div>               
                 <div class="user-details">
                     <ul class="user-details-Ul">
                         <li class="user-details-Ul-li1"><strong>ID:</strong> </li>
@@ -19,11 +19,154 @@
                 </div>                
             </div>                    
         </div>
-        <div class="rectangle">            
+        <div class="rectangle">
             <div class="welcome-message">
-                <button id="CriarEquipeButton"  class="CriarEquipeButton"(click)="CriarEquipe()">Gerenciar Equipes</button>
-                <button id="CriarEventoButton"  class="CriarEventoButton"(click)="CriarEvento()">Gerenciar Eventos</button>
+                <div class="rectangle2" style="height: 370px;">
+                    <div class="top">
+                        <p style="color: white; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-top: 0px;">Tela Inicial - Equipes que faço parte</p>                  
+                    </div>
+                    <div>
+                        <input style="width: 1070px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
+                            class="input" name="procura" placeholder="id ou Nome da equipe" maxlength="25" #procura
+                            required>
+                        <button style="width: 180px; margin-left: 10px;" class="equipe-btn" (click)="botaopesquisarlistaEquipes()" >Pesquisar</button>
+                        <button style="width: 180px; margin-left: 10px; margin-bottom: 10px;" (click)="LimpapesquisarlistaEquipes()" class="equipe-btn">Limpa
+                            filtro</button>
+                    </div>
+                    <div *ngIf="!filtrou">
+                        <div *ngFor="let equipe of equipesNaPaginaAtual; let i = index" class="equipe-container">
+                            <div class="equipe-containerdiv">
+                                <img id="selectedImage" [src]="equipe.foto" alt="User Image"
+                                    class="Botoes_usuario2">                               
+                            </div>
+                            <div class="dados">
+                                <span class="nomeequipe">Nome da Equipe: {{ equipe.nome }}</span>
+                                <span class="nomeequipe">Número da Equipe: {{ equipe.id }}</span>
+                            </div>                            
+                            <div class="equipe-containerdiv2">                               
+                                <div class="equipe-containerdiv2">  
+                                    <button style="margin-right: 10px;" class="equipe-btn2" (click)="telausuarioequipe(equipe.id)">Meus dados/Avaliar</button>
+                                    <button style="margin-right: 10px;" class="equipe-btn2" (click)="exibirevento(equipe.id, equipe.foto)">Dados do(s) Evento(s)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filtrou && existe">
+                        <div *ngFor="let equipe of equipesNaPaginaAtual2; let i = index" class="equipe-container">
+                            <div class="equipe-containerdiv">
+                                <img id="selectedImage" [src]="equipe.foto" alt="User Image"
+                                    class="Botoes_usuario2">                               
+                            </div>
+                            <div class="dados">
+                                <span class="nomeequipe">Nome da Equipe: {{ equipe.nome }}</span>
+                                <span class="nomeequipe">Número da Equipe: {{ equipe.id }}</span>
+                            </div>                            
+                            <div class="equipe-containerdiv2">                               
+                                <div class="equipe-containerdiv2">  
+                                    <button style="margin-right: 10px;" class="equipe-btn2" (click)="telausuarioequipe(equipe.id)">Meus dados/Avaliar</button>
+                                    <button style="margin-right: 10px;" class="equipe-btn2" (click)="exibirevento(equipe.id, equipe.foto)">Dados do(s) Evento(s)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filtrou && !existe">
+                        <div  class="equipe-container3">
+                            <p style="color: black; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-bottom: 5px;" ><strong>Não existem equipes nas condições passadas!</strong></p>
+                        </div>
+                    </div>
+
+
+                    <span *ngIf="!filtrou" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas }}</span>
+                    <span *ngIf="filtrou && existe" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas2 }}</span>
+                    <span *ngIf="filtrou && !existe" class="pagina-info">Página 1/1</span>
+                    <button class="btn-left2" style="margin-bottom: 10px;" (click)="mudarPagina(-1)"
+                        [disabled]="paginaAtual === 1">Anterior</button>
+                    <button *ngIf="!filtrou" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                        [disabled]="paginaAtual >= (equipes.length / equipesPorPagina)">Próximo</button>                    
+                    <button *ngIf="filtrou"  class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                        [disabled]="paginaAtual >= (equipes2.length / equipesPorPagina)">Próximo</button>
+                </div>
+                <div class="footer">
+                    <button id="CriarEquipeButton"  class="CriarEquipeButton"(click)="CriarEquipe()" >Gerenciar Equipes</button>
+                    <button id="CriarEventoButton"  class="CriarEventoButton"(click)="CriarEvento()" [disabled]="habilitaevento">Gerenciar Eventos</button>                  
+                </div>
             </div>
+        </div>        
+    </div>
+</div>
+
+<div class="modal" *ngIf="exibireventos">
+    <div class="modal-content">
+        <span class="close" (click)="fechareventos()">&times;</span>
+        <p class="cadastro-label2">Lista de Eventos</p>        
+        <fieldset style="margin-top: 10px;">
+            <legend>Eventos</legend>
+            <div>
+                <input style="width: 260px;" type="text" name="procura" placeholder="id ou nome do Evento"
+                    maxlength="25" #procura2 required>
+                <button style="width: 180px;" class="modalpesquisarButton"
+                (click)="botaopesquisarlistaeventos()"
+                    >Pesquisar</button>
+                <button style="width: 180px;" class="modalpesquisarButton"
+                (click)="Limpapesquisarlistaeventos()"    
+                    >Limpa filtro</button>
+            </div>
+            <div *ngIf="!filtrou2" class="parametros-container" style="margin-top: 20px;">
+                <div *ngFor="let participante of participantesSelecionadoseventos; let i = index"
+                    style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <fieldset style="width: 630px; height: 70px; display: flex;">
+                        <legend>Dados do participante</legend>
+                        <img [src]="participante.imagem" style="width: 50px; height: 50px;">
+                        <div style="margin-left: 20px;">
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                                <strong>{{ participante.id }}</strong>
+                            </p>
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px; width: 350px;">
+                                {{ participante.nome }}</p>
+                        </div>
+                    
+                    <div>
+                        <button class="modalpesquisarButton" style="width: 200px; margin-top: 5px;" (click)="Teladetalhes(participante.id.toString())">ir para Evento</button>
+                    </div>  
+                </fieldset>                  
+                </div>
+            </div>
+            <div *ngIf="filtrou2 && existenalistaeventos" class="parametros-container" style="margin-top: 20px;">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <fieldset style="width: 630px; height: 70px; display: flex;">
+                        <legend>Dados do participante</legend>
+                        <img [src]="imagempesquisalistaeventos" style="width: 50px; height: 50px;">
+                        <div style="margin-left: 20px;">
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                                <strong>{{ideventos}}</strong>
+                            </p>
+                            <p
+                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;width: 350px;">
+                                {{ nomeeventos }}</p>
+                        </div>
+                    
+                    <div>
+                        <div>
+                            <button class="modalpesquisarButton" style="width: 200px; margin-top: 5px;" >ir para Evento</button>
+                        </div>
+                    </div> 
+                </fieldset>                   
+                </div>
+            </div>
+            <div *ngIf="filtrou2 && !existenalistaeventos" class="resultado-pesquisa"
+                style="display: flex; align-items: center; margin-top: 20px;">
+                <p style="color: white; font-size: 25px;font-family: 'Times New Roman', 'Times New Roman';">Não existem
+                    dados para a pesquisa!</p>
+            </div>
+        </fieldset>
+        <div class="parametros-container" style="margin-top: 20px;">
         </div>
+        <div>
+            <p
+                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">                
+        </div>       
     </div>
 </div>

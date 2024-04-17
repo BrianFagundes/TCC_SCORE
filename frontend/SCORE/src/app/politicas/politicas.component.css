@@ -1,0 +1,205 @@
+/* Adapte conforme necessário para a tela de Esqueci a Senha */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe00;
+    position: absolute; /* Mudança de posição relativa para absoluta */
+    left: 50%; /* Movendo para a metade da largura da janela de visualização */
+    top: 50%; /* Movendo para a metade da altura da janela de visualização */
+    transform: translate(-25%, -50%); /* Usando transform para ajustar a posição central */
+    padding: 20px;
+    border: 1px solid #88888800;
+    width: 30%;
+  }
+  
+  
+  
+  .logo {
+      position: absolute;
+      top: 10px; /* Ajuste conforme necessário */
+      top: 45px;
+      left: 57px;
+      width: 276px;
+      height: 65px;
+    }
+  
+  .forgot-password-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    
+    .forgot-password-rectangle {
+      width: 700px;
+      height: 400px;
+      background-color: #201f26;
+      border-radius: 56px;
+      margin: 0 auto; /* Centralizar na tela */
+    }
+    
+    .forgot-password-label {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      margin-left: 20px;
+      color: #ffffff;
+      font-family: "Times New Roman";
+    }
+    
+    .forgot-password-input {
+      width: 440px;
+      height: 40px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      padding-left: 10px;
+      background-color: #201f26;
+      border-color: #201f26;
+      border: none;
+      outline: none;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      font-family: "Times New Roman, Times New Roman";
+    }
+    
+    .line {
+      display: flex;
+      align-items: center;
+      width: 440px;
+      height: 1px;
+      background-color: #ffffff;
+      margin-bottom: 5px;
+      margin-top: -45px;
+      margin-left: 130px;
+    }
+    
+    .forgot-password-submit {
+      margin-top: 30px;
+      width: 440px;
+      height: 60px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      position: relative;
+      border: 2px solid #D9D9D9;
+      background-color: #D9D9D9;
+    }
+    
+    .forgot-password-back {
+      font-size: 18px;
+      font-family: "Times New Roman";
+      color: #ffffff;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  
+    #email::placeholder {
+      color: white; 
+      font-weight: lighter;
+      font-size: 20px;
+      font: "Times New Roman";
+    }
+
+    .forgot-password-rectangle h2 {
+        color: white;
+    }
+    
+    .forgot-password-rectangle p {
+        font-size: 14px;
+        color: white;
+    }
+
+    .forgot-password-rectangle2 {
+        width: 600px;               /* Largura fixa */
+        height: 250px;              /* Altura fixa */
+        background-color: #201f26;  /* Cor de fundo */
+        overflow: auto;             /* Habilita a barra de rolagem quando necessário */
+        margin-left: 50px;
+        border: 1px solid white;    /* Bordas sólidas de 1px de espessura na cor branca */
+    }
+    
+    button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        background-color: #0084ff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    
+  
+    @media screen and (max-width: 320px) {
+      .forgot-password-container {
+          margin-left: -30px; 
+          width: 30%;
+          margin-top: 150px;
+        }
+    }
+  
+    @media screen and (max-width: 376px) {
+      .forgot-password-container {
+          width: 40%;
+          margin-left: -40px; 
+          margin-top: 150px;
+        }
+    }
+  
+    @media screen and (max-width: 426px) {
+      .forgot-password-container {
+          width: 50%;
+          margin-left: -50px; 
+          margin-top: 150px;
+        }
+    }
+  
+    @media screen and (max-width: 769px) {
+      .forgot-password-container {
+          width: 60%;  
+          margin-left: -40px; 
+          margin-top: 150px;      
+        }
+    }
+  
+    @media screen and (max-width: 875px) {
+      .forgot-password-container {         
+          margin-top: 150px; 
+        }
+    }
+  
+    @media screen and (max-width: 1025px) {
+      .forgot-password-container {
+          width: 70%;
+          margin-top: 150px;
+        }
+    }
+  
+    @media screen and (max-width: 1370px) {
+      .forgot-password-container {
+          width: 80%;        
+          margin-top: 150px;
+          padding: 0px;
+        }
+    }  

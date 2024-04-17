@@ -25,7 +25,8 @@ export class UsuarioComponent {
     });
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
   }
 

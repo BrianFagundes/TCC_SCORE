@@ -1,0 +1,368 @@
+
+.container {
+    display: flex; /* Torna este um flex container */
+    flex-direction: row; /* Organiza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    justify-content: center; /* Para centralização horizontal, se necessário */
+    gap: 20px; /* Espaçamento entre os itens */
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */
+    margin-top: 50px;
+  }
+  
+  
+  .user-details-Ul {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: 'Times New Roman';
+    font-size: 20px;
+    width: 200px;
+    list-style: none;
+  }
+  .user-details-Ul-li1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .user-details-Ul-li2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: -15px;
+  }
+  
+  .Botoes_usuario {
+    width: 100px;
+    height: 100px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 57px;
+    width: 276px;
+    height: 65px;
+  }
+  
+  .image-container, .user-details-and-logout {
+    display: flex;
+    flex-direction: column; /* Organiza os itens internos verticalmente */
+    align-items: center; /* Centraliza os itens internos verticalmente */
+  }
+  
+  .user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+  }
+  
+  
+  
+  .rectangle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 1500px;
+    height: 600px;
+    background-color: #201f26;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", sans-serif;
+    background-color: #201f26;
+    color: white;
+  }
+  
+  .welcome-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .welcome-message {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .top {
+    display: block;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    width: 1460px;
+    margin-left: -10px;    
+    margin-top: -70px;
+    border-radius: 8px;
+    height: 30px;
+  }
+  
+
+  .input {
+
+    margin-top: 10px;
+    width: 350px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  input[type="text"] {
+  
+    margin-top: 10px;
+    width: 350px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-right: 10px;
+    padding: 5px;
+  }
+
+  .equipe-btn, .equipe-btn2 {
+    width: 210px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: 'Times New Roman';
+    margin-top: 5px;
+  }
+  
+  .equipe-btn2 {    
+    margin-bottom: 10px;
+  }
+
+  .welcome-message {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .welcome-message h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-message ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .welcome-message li {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .equipe-container {
+    width: 1460px;
+    height: 100px;
+    background-color: #d9d9d96b; /* Fundo cinza */
+    display: flex;
+    justify-content: space-between; /* Distribui os botões uniformemente */
+    margin-bottom: 10px; /* Espaço entre cada equipe */      
+    border-radius: 8px;
+    align-items: center;
+  }
+
+  .equipe-containerdiv {
+    margin-top: 10px;
+  }
+
+  .Botoes_usuario2 {
+    width: 80px;
+    height: 80px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .dados{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente dentro do contêiner */
+    margin-left: 50px;
+  }
+
+  .nomeequipe{ 
+    margin-top: 0px;   
+    font-size: 20px;
+    color: white;    
+    font-weight: bold;
+    font-family: 'Times New Roman';
+  }
+  
+
+  .equipe-containerdiv2 {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente dentro do contêiner */
+  }
+
+  .equipe-btn2 {
+    width: 210px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: 'Times New Roman';
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  .equipe-container3 {
+    width: 1460px;
+    height: 120px;
+    background-color: #d9d9d96b; /* Fundo cinza */
+    display: flex;
+    flex-direction: column; /* Alinha os botões verticalmente */
+    justify-content: space-between; /* Distribui os botões uniformemente */
+    margin-bottom: 10px; /* Espaço entre cada equipe */      
+    border-radius: 8px;
+    align-items: center;
+  }
+  
+  .pagina-info {
+    position: absolute;
+    bottom: 20px; /* Ajuste conforme necessário para alinhar verticalmente */
+    font-size: 16px;
+    left : 10px;
+    font-size: 20px;
+    color: white;    
+    font-weight: bold;
+    font-family: 'Times New Roman';
+  }
+
+  .btn-left2 {
+    width: 400px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0; /* Fixa os botões na parte inferior da div */
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    font-family: 'Times New Roman';
+    right: 420px;
+  }
+
+  .btn-right2 {
+    width: 400px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0; /* Fixa os botões na parte inferior da div */
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    right: 10px;
+    font-family: 'Times New Roman';
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    bottom: 10px;
+    width: 1460px;
+    margin-left: -740px;    
+    border-radius: 8px;
+    height: 40px;
+  }
+
+  .CriarEquipeButton {
+    margin-top: 0px;
+    width: 400px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
+  }
+
+  .rectangle2 {
+    display: block;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    width: 1460px;
+    height: 330px;
+    margin-left: -740px; 
+    margin-top: -230px;   
+    border-radius: 8px;
+    padding-bottom: 70px; /* Espaço suficiente para não sobrepor os botões */
+  }
+
+  .EquipeEvento {
+    width: 350px;
+    height: 35px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-left: 10px;
+    padding: 5px;
+  }
+  
+  

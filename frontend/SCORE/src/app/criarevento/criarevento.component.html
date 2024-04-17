@@ -25,12 +25,16 @@
             <div class="welcome-message">
                 <div class="rectangle2">
                     <div>
-                        <input *ngIf="!equipeevento" style="width: 860px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
+                        <input *ngIf="!equipeevento" style="width: 650px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
                             class="input" name="procura" placeholder="id ou Nome do Evento" maxlength="25" #procura
                             required>
-                        <input *ngIf="equipeevento" style="width: 860px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
+                        <input *ngIf="equipeevento" style="width: 650px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
                             class="input" name="procura" placeholder="id ou Nome da Equipe" maxlength="25" #procura
                             required>
+                        <select class="EquipeEvento" id="EquipeEvento" (change)="SetaTipoListagem()">
+                            <option value="1-10">Eventos em aberto</option>
+                            <option value="1-5">Todos os Eventos</option>
+                        </select>
                         <select class="EquipeEvento" id="EquipeEvento" (change)="SetaEvento()">
                             <option value="1-10">Evento</option>
                             <option value="1-5">Equipe</option>
@@ -46,17 +50,25 @@
                             <div class="equipe-containerdiv">
                                 <img style="margin-left: 1040px" id="selectedImage" [src]="Evento.ImagemEquipe" alt="User Image"
                                     class="Botoes_usuario">
-                            </div>                            
-                            <span style="margin-bottom: 100px;" class="nomeEvento">Nome da Equipe: {{ Evento.nomeequipe }}</span>
-                            <span style="margin-bottom: 100px;" class="nomeEvento">Número da Evento: {{ Evento.id }}</span> 
-                            <span class="nomeEvento">Nome da Evento: {{ Evento.nome }}</span>                                                       
+                            </div>  
+                            <div class="container1">
+                                <span class="nomeEvento">Nome da Equipe: {{ Evento.nomeequipe }}</span>
+                                <span class="nomeEvento">Número da Evento: {{ Evento.id }}</span> 
+                                <span class="nomeEvento">Nome da Evento: {{ Evento.nome }}</span>
+                            </div>                                   
+                            <div *ngIf="!Evento.inicioEvento" class="Evento-containerdiv3">
+                                <button class="Evento-btn3" (click)="IniciarEvento(Evento.id, i)">Iniciar Evento</button>                                               
+                            </div>  
+                            <div *ngIf="Evento.inicioEvento" class="Evento-containerdiv3">
+                                <button class="Evento-btn4" (click)="FinalizarEvento(Evento.id, i)">Finalizar Evento</button>                                               
+                            </div>                       
                             <div class="Evento-containerdiv2">
                                 <button class="Evento-btn" (click)="excluirEvento(Evento.id, Evento.nome)">Excluir
                                     Evento</button>
                                 <button class="Evento-btn" (click)="Teladetalhes(Evento.id.toString(), 'D')">Detalhes
                                     Adicionais</button>
                                 <button class="Evento-btn2"
-                                    (click)="Teladetalhes(Evento.id.toString(), 'A')">Administrar
+                                    (click)="Teladetalhes(Evento.id.toString(), 'A')" [disabled]="Evento.inicioEvento">Administrar
                                     Detalhes</button>
                             </div>
                         </div>
@@ -66,17 +78,25 @@
                             <div class="equipe-containerdiv">
                                 <img style="margin-left: 1040px" id="selectedImage" [src]="Evento.ImagemEquipe" alt="User Image"
                                     class="Botoes_usuario">
-                            </div>                            
-                            <span style="margin-bottom: 100px;" class="nomeEvento">Nome da Equipe: {{ Evento.nomeequipe }}</span>
-                            <span style="margin-bottom: 100px;" class="nomeEvento">Número da Evento: {{ Evento.id }}</span> 
-                            <span class="nomeEvento">Nome da Evento: {{ Evento.nome }}</span>                                                       
+                            </div>  
+                            <div class="container1">
+                                <span class="nomeEvento">Nome da Equipe: {{ Evento.nomeequipe }}</span>
+                                <span class="nomeEvento">Número da Evento: {{ Evento.id }}</span> 
+                                <span class="nomeEvento">Nome da Evento: {{ Evento.nome }}</span>
+                            </div>                                   
+                            <div *ngIf="!Evento.inicioEvento" class="Evento-containerdiv3">
+                                <button class="Evento-btn3" (click)="IniciarEvento(Evento.id, i)">Iniciar Evento</button>                                               
+                            </div>  
+                            <div *ngIf="Evento.inicioEvento" class="Evento-containerdiv3">
+                                <button class="Evento-btn4" (click)="FinalizarEvento(Evento.id, i)">Finalizar Evento</button>                                               
+                            </div>                       
                             <div class="Evento-containerdiv2">
                                 <button class="Evento-btn" (click)="excluirEvento(Evento.id, Evento.nome)">Excluir
                                     Evento</button>
                                 <button class="Evento-btn" (click)="Teladetalhes(Evento.id.toString(), 'D')">Detalhes
                                     Adicionais</button>
                                 <button class="Evento-btn2"
-                                    (click)="Teladetalhes(Evento.id.toString(), 'A')">Administrar
+                                    (click)="Teladetalhes(Evento.id.toString(), 'A')" [disabled]="Evento.inicioEvento">Administrar
                                     Detalhes</button>
                             </div>
                         </div>
@@ -103,8 +123,9 @@
                         [disabled]="paginaAtual >= (Eventos2.length / EventosPorPagina)">Próximo</button>
                 </div>
                 <div class="footer">
-                    <button class="btn-left" (click)="TelaInicial()">Voltar</button>
+                    <button class="btn-left" (click)="TelaInicial()">Tela Inicial</button>
                     <button class="btn-right" (click)="criarNovaEvento()">(+) Criar novo Evento?</button>
+                    <button class="btn-right3" (click)="CriarEquipe()">Gerenciar Equipes</button>
                 </div>
             </div>
         </div>
@@ -228,4 +249,10 @@
         </div>
     </div>
 </div>
+
+<div id="myModal" class="modal2">
+    <div class="modal-content2">
+      <img src="../../assets/Aguarde2.gif" alt="Pop-up Image">
+    </div>
+  </div>
 

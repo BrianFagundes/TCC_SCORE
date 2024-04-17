@@ -44,7 +44,7 @@
                         <div class="line1"></div>
                         <input placeholder="Digite o seu Nome" type="text" id="nome" name="nome" class="cadastro-input"   #nomeInput [disabled]="!editMode" required>
                         <div class="line"></div>          
-                        <input placeholder="Digite o seu E-mail" type="email" id="email" name="email"  class="cadastro-input2"  #emailInput [disabled]="( usuariogoogle || !editMode)" required>
+                        <input placeholder="Digite o seu E-mail" type="email" id="email" name="email"  class="cadastro-input2"  #emailInput [disabled]="true" required>
                         <div class="line"></div>
                         <div  *ngIf="mostraNovaSenha" class="cadastro-NovaSenha">Nova Senha: </div>          
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>

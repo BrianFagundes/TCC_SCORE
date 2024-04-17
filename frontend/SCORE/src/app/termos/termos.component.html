@@ -1,0 +1,30 @@
+<div>
+    <div>
+        <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="navigateToLogin()">
+    </div>
+    <div class="forgot-password-container">
+        <div class="forgot-password-rectangle">.
+            <h2>Termos de Serviço</h2>
+            <div class="forgot-password-rectangle2">
+                <p>Bem-vindo ao Sistema SCORE. Ao acessar e usar nosso sistema, você concorda em cumprir os seguintes termos e condições.</p>
+                
+                <h3>Uso do Serviço</h3>
+                <p>Você concorda em usar o Sistema SCORE apenas para fins legais e de maneira que não infrinja os direitos de, restrinja ou iniba o uso e o gozo do sistema por qualquer terceiro. A conduta proibida inclui assediar ou causar angústia ou inconveniência a qualquer outro usuário, transmitir conteúdo obsceno ou ofensivo ou perturbar o fluxo normal de diálogo dentro de nosso sistema.</p>
+                
+                <h3>Privacidade de Dados</h3>
+                <p>Sua privacidade é importante para nós. Sua informação pessoal será processada e armazenada de acordo com nossa <a href="politicas">Política de Privacidade</a>.</p>
+                
+                <h3>Propriedade Intelectual</h3>
+                <p>Os conteúdos e materiais exibidos no Sistema SCORE são de propriedade intelectual do sistema ou de seus licenciantes e são protegidos por leis de direitos autorais. É proibido usar qualquer conteúdo do site sem a permissão expressa do proprietário dos direitos autorais.</p>
+                
+                <h3>Limitações de Responsabilidade</h3>
+                <p>O Sistema SCORE não será responsável por quaisquer danos diretos, indiretos, incidentais, consequentes ou exemplares que possam resultar do uso ou da incapacidade de usar nosso serviço.</p>
+                
+                <h3>Modificações dos Termos</h3>
+                <p>Reservamo-nos o direito de fazer alterações aos presentes termos de serviço a qualquer momento. Sua decisão de continuar a utilizar o site após tais mudanças constituirá sua aceitação dos novos termos de serviço.</p>
+            </div>
+            <button *ngIf="telacadastro" (click)="TelaCadastro()" style="margin-right: 10px;">Tela de Cadastro</button>
+            <button (click)="TelaPrivacidade()">Política de Privacidade</button> 
+        </div>
+    </div>
+</div>

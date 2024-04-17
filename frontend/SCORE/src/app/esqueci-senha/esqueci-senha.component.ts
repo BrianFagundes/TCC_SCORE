@@ -11,6 +11,10 @@ export class EsqueciSenhaComponent {
   
   @ViewChild('emailInput') emailInput: ElementRef | undefined;
 
+  ngOnInit(){    
+    localStorage.setItem('Teladecadastro', "false");
+  }
+
   constructor(private router: Router, private apiService: ApiService) {}
 
   async enviarRecuperacaoSenha() {

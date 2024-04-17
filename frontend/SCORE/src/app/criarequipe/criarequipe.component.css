@@ -178,7 +178,7 @@
 
   
   
-  .btn-left, .btn-right {
+  .btn-left, .btn-right, .btn-right3 {
     width: 400px;
     height: 40px;
     border: none;
@@ -190,6 +190,10 @@
     border: 2px solid #D9D9D9;
     background-color: #D9D9D9;
     font-family: 'Times New Roman';
+  }
+
+  .btn-right3{
+    color: green;
   }
 
   .btn-left2, .btn-right2 {

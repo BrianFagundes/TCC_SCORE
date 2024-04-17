@@ -92,7 +92,8 @@
                     <div class="sublinha">
                         <button class="sortear-button" (click)="abrirsorteio()">
                             <div class="botaosortear">
-                                <p style="margin-top: -15px;">Sortear Equipes</p>
+                                <p *ngIf="tipotela == 'A'" style="margin-top: -15px;">Sortear Equipes</p>
+                                <p *ngIf="tipotela == 'D'" style="margin-top: -15px;">Equipes Sorteadas</p>
                                 <img src="../../assets/dado.png" alt="Dado"
                                     style="width:50px; height:50px; margin-top: -13px;">
                             </div>
@@ -215,8 +216,11 @@
         <div class="parametros-container" style="margin-top: 20px;">
         </div>
         <div>
-            <p
-                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">                
+            <fieldset *ngIf="tipotela == 'A'" style="margin-top: 10px;">
+                <legend>Chave do Pix</legend>
+                <input style="width: 650px;" type="text" name="procura" placeholder="Chave do Pix" #chavepix required>
+            </fieldset>
+            <p  *ngIf="tipotela == 'D'" style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">Chave pix: {{ChavePix}}</p>               
         </div>
         <div class="modal-actions">
             <button *ngIf="tipotela == 'A'" style="color: green; width: 340px;" (click)="BotaoGravarParticipantesCusto()" >Guardar</button>

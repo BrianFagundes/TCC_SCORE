@@ -37,7 +37,8 @@ export class UsuarioComponent {
     });
   }
 
-  ngOnInit() {    
+  ngOnInit() {
+    localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
   }
 
@@ -251,11 +252,14 @@ export class UsuarioComponent {
     const nome = this.nomeInput?.nativeElement.value;
     const email = this.emailInput?.nativeElement.value;
     const ID = localStorage.getItem('ID');
-    const novaSenha = localStorage.getItem('AltSenha');
+    var novaSenha = localStorage.getItem('AltSenha');
     const foto = localStorage.getItem('userImage');
 
-    if(nome && email && ID && foto && novaSenha)
-      this.apiService.atualizarUsuario(ID, nome, email, foto, novaSenha);
+    if(nome && email && ID && foto && ((novaSenha) || (novaSenha == null)))
+    {
+      this.apiService.atualizarUsuario(ID, nome, email, foto, novaSenha == null? "":novaSenha);
+    }
+      
 
     if(!this.usuariogoogle)
     {
@@ -271,7 +275,7 @@ export class UsuarioComponent {
   async deleteAccount() {
     var confirmation = confirm('Deseja de fato excluir a conta?');
     const ID = localStorage.getItem('ID');
-    var alerta = "";
+    var alerta = "Exclusão cancelada!";
 
     if(confirmation){
       const listaequipesummoderador = await this.apiService.obterEquipesPorParticipanteComUmModerador(ID?.toString() ? ID?.toString() : "0");

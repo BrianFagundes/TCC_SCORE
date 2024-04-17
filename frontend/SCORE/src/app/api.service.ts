@@ -4,6 +4,40 @@ import { Injectable } from '@angular/core';
 //import { Observable } from 'rxjs';
 
 
+interface NotaId {
+  dataHoraEvento: string;
+  idEvento: number;
+  idUsuarioOrigem: number;
+  idUsuarioDestino: number;
+}
+
+interface Nota {
+  notaId: NotaId;
+  notaparam1: number;
+  notaparam2: number;
+  notaparam3: number;
+  notaparam4: number;
+  notaparam5: number;
+  notaparam6: number;
+  notaparam7: number;
+  notaparam8: number;
+  notaparam9: number;
+  notaparam10: number;
+  notaparam11: number;
+  notaparam12: number;
+  notaparam13: number;
+  notaparam14: number;
+  notaparam15: number;
+  notaparam16: number;
+  notaparam17: number;
+  notaparam18: number;
+  notaparam19: number;
+  notaparam20: number;
+  avaliado: string;
+}
+
+
+
 interface Custo {
   evento: number;
   usuario: number;
@@ -59,6 +93,7 @@ interface Equipe {
   nomeparametro19: string;
   nomeparametro20: string;
   moderador: number;
+  statuseventos: string;
 }
 
 interface Participante {
@@ -75,7 +110,10 @@ interface Evento{
   peridiocidade: string,
   dia: string,
   hora: string,
-  quantidade_time: number
+  quantidade_time: number,
+  status: string,
+  dataultimoevento: string,
+  chavepix: string
 }
 
 
@@ -149,6 +187,56 @@ export class ApiService {
     } catch (error) {
       console.error('Erro ao enviar e-mail de recuperação:', error);
       return 2; // Erro durante a chamada à API
+    }
+  }
+
+  async enviarEmailRecuperacao2(email: string, codigo: string): Promise<number> {
+    const url = `${this.apiUrl}/Email/enviar-email2`;
+    const emailData = {
+      to: email,
+      subject: "Validação de Usuário",
+      body: "O código enviado é: " + codigo
+    };
+    
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });   
+      if (response.ok) {        
+        const responseData = await response.json();
+        return responseData; // O código de sucesso retornado pela API
+      } else {
+        //console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
+        return 2; // Falha ao enviar e-mail
+      }
+    } catch (error) {
+      console.error('Erro ao enviar e-mail de recuperação:', error);
+      return 2; // Erro durante a chamada à API
+    }
+  }
+
+  enviarEmail(email: string, codigo: string): void {
+    const url = `${this.apiUrl}/Email/enviar-email`;
+    const emailData = {
+      to: email,
+      subject: "Validação de Usuário",
+      body: "O código enviado é: " + codigo
+    };
+    
+    try {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });         
+    } catch (error) {
+      console.error('Erro ao enviar e-mail de recuperação:', error);
     }
   }
 
@@ -404,6 +492,31 @@ export class ApiService {
     }
 
   }  
+
+  async obterTodasEquipes2(id: string): Promise<Equipe[]> {
+    const url = `${this.apiUrl}/usuarios/Equipe/obter2/${id}`;    
+    const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+    
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+            },
+        });
+
+        if (response.ok) {
+          return response.json(); 
+        } else {
+          throw new Error('Erro ao obter listagem de Equipes');
+        }
+
+    } catch (error) {
+        console.error('Erro ao obter listagem de Equipes:', error);
+        throw error;
+    }
+
+  } 
 
   async obterTodosEventos(id: string): Promise<Evento[]> {
     const url = `${this.apiUrl}/usuarios/equipe/evento/obter/Evento/Equipe/${id}`;    
@@ -754,6 +867,32 @@ async AlterarEvento(dadosEvento: any) {
   
 } 
 
+
+async AlterarStatusEvento(dadosEvento: any) {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/Alterar/Status`;
+  const token = localStorage.getItem('jwtToken');
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(dadosEvento),
+      });   
+      if (response.ok) {        
+        const responseData = await response.json();
+        return responseData; // O código de sucesso retornado pela API
+      } else {
+        //console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
+        return -1;
+      }
+    } catch (error) {
+      return -1; // Erro durante a chamada à API
+    }
+  
+} 
+
 async CriarTime(dadosTime: any, numero: number) {
   const url = `${this.apiUrl}/usuarios/equipe/evento/time/criar/${numero}`;
   const token = localStorage.getItem('jwtToken');
@@ -851,6 +990,138 @@ async CriarCustoParticipante(dadosParticipante: any, i :number) {
     }
   
 } 
+
+async obterNotasEventoUsuario(dados: any): Promise<Nota[]> {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listarPorEventoEUsuario/${dados.idEvento}/${dados.idUsuario}`;    
+  const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+  
+  try {
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+          },          
+      });
+
+      if (response.ok) {
+        return response.json(); 
+      } else {
+        throw new Error('Erro ao obter listagem de Equipes');
+      }
+
+  } catch (error) {
+      console.error('Erro ao obter listagem de Equipes:', error);
+      throw error;
+  }
+
+}  
+
+async obterNotasEventoUsuarioOrigem(dados: any): Promise<Nota[]> {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listarPorEventoEUsuarioOrigem/${dados.idEvento}/${dados.idUsuario}`;    
+  const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+  
+  try {
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+          },          
+      });
+
+      if (response.ok) {
+        return response.json(); 
+      } else {
+        throw new Error('Erro ao obter listagem de Equipes');
+      }
+
+  } catch (error) {
+      console.error('Erro ao obter listagem de Equipes:', error);
+      throw error;
+  }
+
+}  
+
+async obterNotasDataEventoUsuario(dados: any): Promise<Nota[]> {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listar/${dados.dataHoraEvento}/${dados.idEvento}/${dados.idUsuario}`;    
+  const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+  
+  try {
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+          },          
+      });
+
+      if (response.ok) {
+        return response.json(); 
+      } else {
+        throw new Error('Erro ao obter listagem de Equipes');
+      }
+
+  } catch (error) {
+      console.error('Erro ao obter listagem de Equipes:', error);
+      throw error;
+  }
+
+}  
+
+AlterarNota(dados:any): Promise<Usuario> {
+  const token = localStorage.getItem('jwtToken');
+
+
+  const url = `${this.apiUrl}/usuarios/equipe/evento/notas/atualizar`;
+  return fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(dados),
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      // Se a resposta não estiver ok, lança um erro que pode ser pego pelo .catch()
+      throw new Error('Erro ao atualizar Nota');
+    }
+  })
+  .then(usuarioAtualizado => {
+    return usuarioAtualizado as Usuario;
+  })
+  .catch(error => {
+    console.error('Erro ao atualizar Nota:', error);
+    // Pode optar por retornar um valor padrão ou propagar o erro
+    throw error;
+  });
+}  
+
+
+async obterNotasEventoUsuarioEvento(dados: any): Promise<Nota[]> {
+  const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listar/Destino/${dados.dataHoraEvento}/${dados.idEvento}/${dados.idUsuario}`;    
+  const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
+  
+  try {
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}` // Adiciona o token JWT ao cabeçalho Authorization
+          },          
+      });
+
+      if (response.ok) {
+        return response.json(); 
+      } else {
+        throw new Error('Erro ao obter listagem de Equipes');
+      }
+
+  } catch (error) {
+      console.error('Erro ao obter listagem de Equipes:', error);
+      throw error;
+  }
+
+}
 
 }
 

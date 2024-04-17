@@ -11,6 +11,29 @@
     /* Adicione aqui quaisquer estilos adicionais necessários para o modal */
   }
 
+  .modal2 {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content2 {
+    background-color: #fefefe00;
+    position: absolute; /* Mudança de posição relativa para absoluta */
+    left: 50%; /* Movendo para a metade da largura da janela de visualização */
+    top: 50%; /* Movendo para a metade da altura da janela de visualização */
+    transform: translate(-25%, -50%); /* Usando transform para ajustar a posição central */
+    padding: 20px;
+    border: 1px solid #88888800;
+    width: 30%;
+  }
+
   
 
   legend{
@@ -177,6 +200,13 @@
     padding: 5px;
   }
 
+  .container1{
+    display: flex;
+    flex-direction: column; /* Alinha os botões verticalmente */
+    justify-content: space-between;
+    margin-top: -110px;
+}
+
 .Evento-container {
     width: 1460px;
     height: 120px;
@@ -201,6 +231,44 @@
     justify-content: center;
     margin-top: -117px;
     margin-left: 1230px;
+  }
+
+  .Evento-containerdiv3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -37px;
+    margin-left: 800px;
+  }
+
+  .Evento-btn3 {
+    width: 210px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: 'Times New Roman';
+    margin-top: 5px;
+    color: green;
+  }
+
+  .Evento-btn4 {
+    width: 210px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: 'Times New Roman';
+    margin-top: 5px;
+    color: red;
   }
 
   .Evento-btn, .Evento-btn2 {
@@ -229,11 +297,11 @@
   }
 
   .nomeEvento{ 
-    margin-top: -115px; 
     font-size: 20px;
     color: white;    
     font-weight: bold;
     font-family: 'Times New Roman';
+    margin-top: 5px;
   }
   
   .EquipeEvento {
@@ -283,7 +351,7 @@
 
   
   
-  .btn-left, .btn-right {
+  .btn-left, .btn-right, .btn-right3 {
     width: 400px;
     height: 40px;
     border: none;
@@ -295,6 +363,10 @@
     border: 2px solid #D9D9D9;
     background-color: #D9D9D9;
     font-family: 'Times New Roman';
+  }
+
+  .btn-right{
+    color: green;
   }
 
   .btn-left2, .btn-right2 {

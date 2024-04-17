@@ -11,6 +11,15 @@ import { CriarequipeComponent } from './criarequipe/criarequipe.component';
 import { DetalhesComponent } from './detalhes/detalhes.component';
 import { CriareventoComponent } from './criarevento/criarevento.component';
 import { DetalheeventoComponent } from './detalheevento/detalheevento.component';
+import { EquipesComponent } from './equipes/equipes.component';
+import { UsuarioequipeComponent } from './usuarioequipe/usuarioequipe.component';
+import { AvaliacoespendentesComponent } from './avaliacoespendentes/avaliacoespendentes.component';
+import { AvaliacaoparticipantesComponent } from './avaliacaoparticipantes/avaliacaoparticipantes.component';
+import { NotasrecebidasComponent } from './notasrecebidas/notasrecebidas.component';
+import { NotausuarioeventoComponent } from './notausuarioevento/notausuarioevento.component';
+import { PoliticasComponent } from './politicas/politicas.component';
+import { SaibamaisComponent } from './saibamais/saibamais.component';
+import { TermosComponent } from './termos/termos.component';
 import { AuthGuard } from './auth.guard';
 
 
@@ -25,6 +34,16 @@ export const routes: Routes = [
   { path: 'detalhes', component:  DetalhesComponent, canActivate: [AuthGuard] },  
   { path: 'criarevento', component:  CriareventoComponent, canActivate: [AuthGuard] },
   { path: 'detalheevento', component:  DetalheeventoComponent, canActivate: [AuthGuard] },
+  { path: 'equipes', component:  EquipesComponent, canActivate: [AuthGuard] },
+  { path: 'usuarioequipe', component:  UsuarioequipeComponent, canActivate: [AuthGuard] },
+  { path: 'avaliacoespendentes', component:  AvaliacoespendentesComponent, canActivate: [AuthGuard] },
+  { path: 'avaliacaoparticipantes', component:  AvaliacaoparticipantesComponent, canActivate: [AuthGuard] },
+  { path: 'avaliacaorecebida', component:  NotasrecebidasComponent, canActivate: [AuthGuard] },
+  { path: 'avaliacaorecebidanotas', component:  NotausuarioeventoComponent, canActivate: [AuthGuard] },    
+  { path: 'politicas', component:  PoliticasComponent },
+  { path: 'saibamais', component:  SaibamaisComponent },
+  { path: 'termos', component:  TermosComponent },
+  
   
   // Adicione outras rotas conforme necessário
 ];

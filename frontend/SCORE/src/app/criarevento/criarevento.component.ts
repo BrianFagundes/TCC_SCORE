@@ -29,7 +29,9 @@ export class CriareventoComponent {
     quantidade_time: number,
     ImagemEquipe: string,
     nomeequipe: string,
-    idequipe: string
+    idequipe: string,
+    inicioEvento: boolean,
+    dataultimoevento: string
   }[] = [];
 
   Eventos2: {
@@ -43,7 +45,9 @@ export class CriareventoComponent {
     quantidade_time: number,
     ImagemEquipe: string,
     nomeequipe: string,
-    idequipe: string
+    idequipe: string,
+    inicioEvento: boolean,
+    dataultimoevento: string
   }[] = [];
 
   EventosPorPagina = 3;
@@ -71,6 +75,7 @@ export class CriareventoComponent {
   idpesquisalistaequipeselecionado: string = '';
   nomepesquisalistaequipeselecionado: string = '';
   equipeevento: boolean = false;
+  TipoListagem: boolean = false;
 
   equipes: {
     id: string,
@@ -141,6 +146,7 @@ export class CriareventoComponent {
   }
 
   async ngOnInit() {
+    localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
     await this.carregarEquipes();
     this.carregarEventos();
@@ -164,19 +170,23 @@ export class CriareventoComponent {
           const Eventos = await this.apiService.obterTodosEventos(element.id); // Ajuste o nome do método conforme sua implementação
 
           for (const evento of Eventos) {
-            this.Eventos.push({
-              id: evento.id,
-              equipe: evento.equipe.toString(),
-              nome: evento.nome,
-              local: evento.local,
-              peridiocidade: evento.peridiocidade,
-              dia: evento.dia,
-              hora: evento.hora,
-              quantidade_time: evento.quantidade_time,
-              ImagemEquipe: element.foto,
-              nomeequipe: element.nome, 
-              idequipe: element.id,
-            });
+            if (!(evento.peridiocidade == "Único" && (evento.status == "F" && this.TipoListagem != true))) {
+              this.Eventos.push({
+                id: evento.id,
+                equipe: evento.equipe.toString(),
+                nome: evento.nome,
+                local: evento.local,
+                peridiocidade: evento.peridiocidade,
+                dia: evento.dia,
+                hora: evento.hora,
+                quantidade_time: evento.quantidade_time,
+                ImagemEquipe: element.foto,
+                nomeequipe: element.nome,
+                idequipe: element.id,
+                inicioEvento: evento.status == 'F' || evento.status == 'C' || evento.status == null ? false : true,
+                dataultimoevento: evento.dataultimoevento
+              });
+            }
           }
         }
       }
@@ -364,12 +374,13 @@ export class CriareventoComponent {
   Teladetalhes(idtela: string, tipo: string) {
     var idequipe = "0";
     for (const element of this.Eventos) {
-      if(element.id.toString() == idtela)
+      if (element.id.toString() == idtela)
         idequipe = element.idequipe;
     }
     localStorage.setItem('idtelaEquipe', idequipe);
     localStorage.setItem('idtela', idtela);
     localStorage.setItem('tipo', tipo);
+    localStorage.setItem('origem', 'criacao');
     this.router.navigate(['/detalheevento']);
   }
 
@@ -523,5 +534,171 @@ export class CriareventoComponent {
     this.equipeevento = !this.equipeevento;
   }
 
+  SetaTipoListagem() {
+    this.TipoListagem = !this.TipoListagem;
+    this.Eventos = [];
+    this.carregarEventos();
+  }
+
+  CriarEquipe() {
+    this.router.navigate(['/criarequipes']);
+  }
+
+  async IniciarEvento(id: number, i: number) {
+    if (!this.Eventos[i].hora) {
+      alert("Evento não pode ser iniciado, Para que possa precisa ser configurado primeiro!")
+    }
+    else {
+      const confirmation = confirm('Deseja de fato inicializar o evento? Uma vez iniciado não poderá alterar mais nenhum dado do mesmo!');
+      if (confirmation) {
+        const agora = new Date();
+        var erro = 0;
+        var dia = this.Eventos[i].dia;
+
+
+        if (this.Eventos[i].peridiocidade == "Único") {
+          if (this.Eventos[i].dataultimoevento == null && this.Eventos[i].dia && this.Eventos[i].hora) {
+            const dataHoraEventoStr = `${this.Eventos[i].dia}T${this.Eventos[i].hora}`;
+            const dataHoraEvento = new Date(dataHoraEventoStr);
+            if (dataHoraEvento > agora) {
+              erro = 2;
+            }
+          } else {
+            erro = 1;
+          }
+        } else { // Para eventos periódicos
+          const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+          const diaDaSemana = diasDaSemana[agora.getDay()];
+          const dataFormatadaAgora = agora.toISOString().split('T')[0]; // Formata a data atual para 'YYYY-MM-DD'
+          const horaFormatadaAgora = agora.getHours().toString().padStart(2, '0') + ':' + agora.getMinutes().toString().padStart(2, '0'); // Formata a hora atual para 'HH:MM'
+
+          // Se dataultimoevento não for nulo, verifica se é igual à data atual
+          if (this.Eventos[i].dataultimoevento) {
+            const dataUltimoEventoObj = new Date(this.Eventos[i].dataultimoevento);
+            const dataUltimoEvento = dataUltimoEventoObj.toISOString().split('T')[0];
+
+            // Critica 4: Evento já ocorreu na data atual
+            if (dataUltimoEvento === dataFormatadaAgora) {
+              erro = 4;
+            }
+          }
+
+          if (erro == 0) {
+            // Verifica se hoje é o dia do evento configurado
+            if (this.Eventos[i].dia.includes(diaDaSemana)) {
+              const horaEvento = this.Eventos[i].hora;
+              // Critica 2: A hora do evento ainda não ocorreu
+              if (horaEvento > horaFormatadaAgora) {
+                erro = 2;
+              }
+            } else {
+              // Critica 3: Hoje não é um dia configurado para o evento
+              erro = 3;
+            }
+          }
+        }
+
+
+
+
+        if (erro == 0) {
+
+          const dadosEvento = {
+            id: id,
+            equipe: "",
+            nome: "",
+            local: "",
+            peridiocidade: "",
+            dia: "",
+            hora: "",
+            quantidade_time: "",
+            status: "I",
+            dataultimoevento: dia
+          };
+
+          const modal = document.getElementById('myModal');
+          if (modal) {
+            modal.style.display = 'block';
+          }
+
+          const isValid = await this.apiService.AlterarStatusEvento(dadosEvento);
+
+          if (modal) {
+            modal.style.display = 'none';
+          }
+
+          if (isValid !== 0) {
+            if (isValid == 1) {
+              alert("Erro ao realizar a inclusão!");
+
+            }
+            else if (isValid == -1) {
+              alert("Falha de conexão com a API!")
+            }
+          }
+          else {
+            setTimeout(() => {
+              this.Eventos = [];
+              this.carregarEventos();
+            }, 0);
+          }
+
+        }
+        else if (erro == 1) {
+          alert("Evento é Unico e já foi finalizado!");
+        }
+        else if (erro == 2) {
+          alert("Evento não pode ser iniciado, pois a data do evento é superior à data atual!");
+        }
+        else if (erro == 3) {
+          alert("Evento Periódico não pode ser iniciado, hoje não é um dia possível para evento!");
+        }
+        else if (erro == 4) {
+          alert("Evento Periódico Já foi inicializado na data atual!");
+        }
+        if (erro == 0) {
+          alert("Evento Iniciado com sucesso, divirtam-se!");
+        } 
+      }
+    }
+  }
+
+  async FinalizarEvento(id: number, i: number) {
+    const confirmation = confirm('Deseja de fato finalizar o evento? Uma vez finalizado não poderá ser reiniciado novamente!');
+    const Dataatual = Date();
+
+    if (confirmation) {
+      const dadosEvento = {
+        id: id,
+        equipe: this.Eventos[i].idequipe,
+        nome: "",
+        local: "",
+        peridiocidade: "",
+        dia: "",
+        hora: "",
+        quantidade_time: "",
+        status: "F",
+        dataultimoevento: Dataatual
+      };
+
+      const isValid = await this.apiService.AlterarStatusEvento(dadosEvento);
+
+      if (isValid !== 0) {
+        if (isValid == 1) {
+          alert("Erro ao realizar a inclusão!");
+
+        }
+        else if (isValid == -1) {
+          alert("Falha de conexão com a API!")
+        }
+      }
+      else {
+        setTimeout(() => {
+          this.Eventos = [];
+          this.carregarEventos();
+        }, 0);
+      }
+    }
+  }
 
 }

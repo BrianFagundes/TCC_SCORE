@@ -1,34 +1,68 @@
 <div>
   <div>
     <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="navigateToHome()">
-  </div>  
-    <div class="cadastro-container">
-      <div class="cadastro-rectangle">
-          <div style="margin-top: 0px; padding-top: 5%;" class="cadastro-label">Cadastro de Usuário:</div>
-          <div style="margin-top: 5px;" class="line"></div>
-          <input placeholder="Digite o seu Nome" style="margin-top: 20px" type="text" id="nome" name="nome" class="cadastro-input"   #nomeInput required>
-          <div style="margin-top: 5px;" class="line"></div>          
-          <input placeholder="Digite o seu E-mail" style="margin-top: 20px;" type="email" id="email" name="email"  class="cadastro-input"  #emailInput required>
-          <div style="margin-top: 5px;" class="line"></div>          
-          <span class="input-group-text"><i class="fas fa-lock"></i></span>
-          <input placeholder="Digite a sua Senha" style="margin-top: 20px; margin-left: -30px; width: 390px;" [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha"  class="cadastro-input"   #senhaInput required>
-          <button style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);" id="mostrarsenha2" (click)="toggleSenha()" class="mostrarsenha">
-            <img style="width: 40px; height: 20px;" class="mostrarsenha" [src]="mostrarSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'" alt="Mostrar/Ocultar Senha">
-          </button>
-          <div style="margin-top: 5px;" class="line"></div>          
-          <input placeholder="Digite a sua Senha novamente" style="margin-top: 20px; margin-left: -30px; width: 390px;" [type]="mostrarConfSenha ? 'text' : 'password'" id="senha2" name="senha2"  class="cadastro-input"   #senha2Input required>
-          <button style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);" id="mostrarsenha2" (click)="toggleConfSenha()" class="mostrarsenha">
-            <img style="width: 40px; height: 20px;" class="mostrarsenha" [src]="mostrarConfSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'" alt="Mostrar/Ocultar Senha">
-          </button>
-          <div style="margin-top: 5px;" class="line"></div>
-          <button class="cadastro-submit" (click)="cadastrarUsuario()">Cadastrar</button>          
-        <div style="padding-top: 3%;" class="cadastro-create-account" (click)="navigateToHome()" >Já tem uma conta? Faça login.</div>
+  </div>
+  <div class="cadastro-container">
+    <div class="cadastro-rectangle">
+      <div style="margin-top: 0px; padding-top: 5%;" class="cadastro-label">Cadastro de Usuário:</div>
+      <div style="margin-top: 5px;" class="line"></div>
+      <input placeholder="Digite o seu Nome" style="margin-top: 20px" type="text" id="nome" name="nome"
+        class="cadastro-input" #nomeInput required>
+      <div style="margin-top: 5px;" class="line"></div>
+      <input placeholder="Digite o seu E-mail" style="margin-top: 20px;" type="email" id="email" name="email"
+        class="cadastro-input" #emailInput required>
+      <div style="margin-top: 5px;" class="line"></div>
+      <span class="input-group-text"><i class="fas fa-lock"></i></span>
+      <input placeholder="Digite a sua Senha" style="margin-top: 20px; margin-left: -30px; width: 390px;"
+        [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha" class="cadastro-input" #senhaInput required>
+      <button
+        style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
+        id="mostrarsenha2" (click)="toggleSenha()" class="mostrarsenha">
+        <img style="width: 40px; height: 20px;" class="mostrarsenha"
+          [src]="mostrarSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'"
+          alt="Mostrar/Ocultar Senha">
+      </button>
+      <div style="margin-top: 5px;" class="line"></div>
+      <input placeholder="Digite a sua Senha novamente" style="margin-top: 20px; margin-left: -30px; width: 390px;"
+        [type]="mostrarConfSenha ? 'text' : 'password'" id="senha2" name="senha2" class="cadastro-input" #senha2Input
+        required>
+      <button
+        style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
+        id="mostrarsenha2" (click)="toggleConfSenha()" class="mostrarsenha">
+        <img style="width: 40px; height: 20px;" class="mostrarsenha"
+          [src]="mostrarConfSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'"
+          alt="Mostrar/Ocultar Senha">
+      </button>
+      <div style="margin-top: 5px;" class="line"></div>
+      <div style="display: flex; align-items: center; margin-left: 130px; margin-top: 20px;">
+        <input type="checkbox" id="termsCheckbox" style="margin-right: 5px;" [checked]="Aceito"
+          (change)="alteraraceito()">
+        <label for="termsCheckbox" style="color: white;">
+          Concordo com as <a href="politicas">políticas de privacidade</a> e os <a href="termos">termos de serviço</a>
+        </label>
       </div>
+      <button class="cadastro-submit" (click)="cadastrarUsuario()">Cadastrar</button>
+      <div style="padding-top: 2%;" class="cadastro-create-account" (click)="navigateToHome()">Já tem uma conta? Faça
+        login.</div>
     </div>
   </div>
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <img src="../../assets/Aguarde2.gif" alt="Pop-up Image">
+</div>
+
+<div class="modal2" id="myModal2"  *ngIf="confirmaremail">
+  <div class="modal-content2">
+    <span class="close" (click)="fecharModal()">&times;</span>
+    <p class="cadastro-label22">Enviamos um código para o email {{dadosUsuario.email}}, favor digitar abaixo.</p>
+    <input class="modalCampo2" type="text" #codigo placeholder="Digite o código" required>
+    <div class="modal-actions2">
+      <button style="margin-right: 10px;" class="modalcriarButton2" (click)="ConfirmarEmail()">Confirmar</button>
+      <button class="modalCancelaButton2" (click)="fecharModal()">Cancelar</button>
     </div>
   </div>
-  
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <img src="../../assets/Aguarde2.gif" alt="Pop-up Image">
+  </div>
+</div>
+

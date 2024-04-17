@@ -1,10 +1,20 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ApiService } from '../api.service'; // Substitua pelo caminho real do seu serviço
-import { Router } from '@angular/router';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ApiService } from '../api.service';
 
+interface DadosUsuario {
+  nome: string;
+  email: string;
+  senha: string;
+  identificador: string;
+  foto: string;
+}
 
 @Component({
   selector: 'app-cadastro-pessoa',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './cadastro-pessoa.component.html',
   styleUrls: ['./cadastro-pessoa.component.css']
 })
@@ -13,10 +23,29 @@ export class CadastroPessoaComponent {
   @ViewChild('emailInput') emailInput: ElementRef | undefined;
   @ViewChild('senhaInput') senhaInput: ElementRef | undefined;
   @ViewChild('senha2Input') senha2Input: ElementRef | undefined;
+  @ViewChild('codigo') codigo: ElementRef | undefined;
+  
   mostrarSenha: boolean = false;
   mostrarConfSenha: boolean = false;
+  Aceito: boolean = false;
+  confirmaremail: boolean = false;
+  dadosUsuario : DadosUsuario;
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(private router: Router, private apiService: ApiService) {
+    this.dadosUsuario = {
+            nome: '',
+            email: '',
+            senha: '',
+            identificador: '',
+            foto: '../../assets/avatar 1.png'
+        };
+  }
+
+
+  ngOnInit(){
+    localStorage.setItem('Teladecadastro', "true");
+    this.confirmaremail = false;
+  }
 
   async cadastrarUsuario(){
     
@@ -31,6 +60,14 @@ export class CadastroPessoaComponent {
     const senha= this.senhaInput?.nativeElement.value;
     const senha2= this.senha2Input?.nativeElement.value;
 
+    // Construa o objeto de dados para enviar para a API
+    this.dadosUsuario = {
+      nome: nome,
+      email: email,
+      senha: senha,
+      identificador: "",
+      foto: "../../assets/avatar 1.png"
+    };
 
     var erro = '';
 
@@ -60,23 +97,28 @@ export class CadastroPessoaComponent {
       return;
     }
 
+    if(!this.Aceito)
+    {
+      alert("O usuário deve concordar com as Políticas de Privacidade e os Termos de Serviço para conseguir cadastrar-se no sistema!");
+      return;
+    }
+    this.confirmaremail = true;
+    const codigo = this.generateRandomCode();
+    localStorage.setItem('codigo', codigo);  
+
+    this.apiService.enviarEmailRecuperacao2(this.dadosUsuario.email,codigo);     
+  }
+
+  async cadastrarDados(){
+
     const modal = document.getElementById('myModal');
     if (modal) {
       modal.style.display = 'block';
-    }
-
-    // Construa o objeto de dados para enviar para a API
-    const dadosUsuario = {
-      nome: nome,
-      email: email,
-      senha: senha,
-      identificador: "",
-      foto: "../../assets/avatar 1.png"
-    };
+    }    
     
     this.apiService.autenticarUsuario();
 
-    const isValid = await this.apiService.cadastrarUsuario(dadosUsuario);     
+    const isValid = await this.apiService.cadastrarUsuario(this.dadosUsuario);     
     
     if((this.nomeInput) && (this.emailInput) && (this.senhaInput) &&(this.senha2Input))
     {
@@ -110,11 +152,23 @@ export class CadastroPessoaComponent {
       }  
     }
 
-    
+   
     if (modal) {
       modal.style.display = 'none';
     }
+
+    this.confirmaremail = false;
   }
+
+  generateRandomCode(): string {
+    let code: string = "";
+    const digits = "0123456789";
+    for (let i = 0; i < 6; i++) {
+        const randomIndex = Math.floor(Math.random() * digits.length);
+        code += digits[randomIndex];
+    }
+    return code;
+}
   
   toggleSenha()
   {
@@ -130,5 +184,24 @@ export class CadastroPessoaComponent {
   
   navigateToHome(): void {
     this.router.navigate(['/home']);
+  }
+
+  alteraraceito(){
+    this.Aceito = !this.Aceito;    
+  }
+
+  fecharModal() {
+    this.confirmaremail = false;
+  }
+
+  ConfirmarEmail(){    
+    const validacao = localStorage.getItem('codigo');
+    if(this.codigo?.nativeElement.value == validacao)
+      this.cadastrarDados();
+    else
+    {
+      alert("Validação inválida! Cadastramento cancelado!");
+      this.confirmaremail = false;
+    }      
   }
 }

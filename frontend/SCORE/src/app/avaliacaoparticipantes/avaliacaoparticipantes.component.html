@@ -1,0 +1,157 @@
+<div>
+    <div class="welcome-container">
+        <div class="user-info">
+            <div class="container">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="TelaInicial()">
+                <div class="image-container">
+                    <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image"
+                        class="Botoes_usuario" (click)="usuario()">
+                </div>
+                <div class="user-details">
+                    <ul class="user-details-Ul">
+                        <li class="user-details-Ul-li1"><strong>ID:</strong> </li>
+                        <li class="user-details-Ul-li2"> {{IdUsuario }} </li>
+                        <li class="user-details-Ul-li2"><strong>Nome:</strong></li>
+                        <li class="user-details-Ul-li2"> {{ (nomeUsuario? nomeUsuario.length : 0) > 9 ? (nomeUsuario |
+                            slice:0:9) + '...' : nomeUsuario }} </li>
+                    </ul>
+                </div>
+                <div class="logout-button" (click)="logout()">
+                    <img style="margin-top: 4px;" src="../../assets/Logout.png" alt="Logout" class="Botoes_usuario" />
+                </div>
+            </div>
+        </div>
+        <div class="rectangle">
+            <div class="welcome-message">
+                <div class="rectangle2" style="height: 370px;">
+                    <div class="top">
+                        <p
+                            style="color: white; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-top: 0px;">
+                            Avaliação de participantes</p>
+                    </div>
+
+                    <div>
+                        <input style="width: 700px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
+                            class="input" name="procura" placeholder="Id ou Nome do participante"
+                            maxlength="25" #procura required>
+                        <select class="participanteparticipante" id="participanteparticipante" (change)="salvarSelecao()">
+                            <option value="0">Avaliações Pendentes</option>
+                            <option value="1">Avaliações Feitas</option>
+                            <option value="2">Todos os Participantes</option>
+                        </select>
+                        <button style="width: 180px; margin-left: 10px;" class="participante-btn"
+                            (click)="botaopesquisarlistaparticipantes()">Pesquisar</button>
+                        <button style="width: 180px; margin-left: 10px; margin-bottom: 10px;"
+                            (click)="Limpapesquisarlistaparticipantes()" class="participante-btn">Limpa
+                            filtro</button>
+                    </div>
+                    <div *ngIf="!filtrou">
+                        <div *ngFor="let participante of participantesNaPaginaAtual; let i = index" class="participante-container">
+                            <div class="participante-containerdiv">
+                                <img id="selectedImage" [src]="participante.foto" alt="User Image" class="Botoes_usuario2">
+                            </div>
+                            <div class="dados">
+                                <span class="nomeparticipante">Nome do participante: {{ participante.nome }} - ID: {{ participante.id }} </span>
+                                <span class="nomeparticipante">E-mail do participante: {{ participante.email }} </span>
+                                <span *ngIf="participante.statusparticipantes == 'NA'" class="nomeparticipante" style="color: rgb(123, 0, 0);">Não Avaliado</span>
+                                <span *ngIf="participante.statusparticipantes == 'A'" class="nomeparticipante" style="color: rgb(0, 85, 0);">Avaliado</span>
+                                <span *ngIf="participante.statusparticipantes == 'ANC'" class="nomeparticipante" style="color: yellow;">Avaliado e não confirmado</span>
+                            </div>
+                            <div class="participante-containerdiv2">
+                                <div class="participante-containerdiv2">
+                                    <button style="margin-right: 10px;" class="participante-btn2" (click)="abrirmodal(participante.id)">Avaliar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filtrou && existe">
+                        <div *ngFor="let participante of participantesNaPaginaAtual2; let i = index" class="participante-container">
+                            <div class="participante-containerdiv">
+                                <img id="selectedImage" [src]="participante.foto" alt="User Image" class="Botoes_usuario2">
+                            </div>
+                            <div class="dados">
+                                <span class="nomeparticipante">Nome do participante: {{ participante.nome }} - ID: {{ participante.id }} </span>
+                                <span class="nomeparticipante">E-mail do participante: {{ participante.email }} </span>
+                                <span class="nomeparticipante">Status: {{ participante.statusparticipantes }}</span>
+                            </div>
+                            <div class="participante-containerdiv2">
+                                <div class="participante-containerdiv2">
+                                    <button style="margin-right: 10px;" class="participante-btn2" (click)="abrirmodal(participante.id)">Avaliar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="filtrou && !existe">
+                        <div class="participante-container3">
+                            <p
+                                style="color: black; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-bottom: 5px;">
+                                <strong>Não existem participantes nas condições passadas!</strong></p>
+                        </div>
+                    </div>
+
+
+                    <span *ngIf="!filtrou" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas }}</span>
+                    <span *ngIf="filtrou && existe" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas2
+                        }}</span>
+                    <span *ngIf="filtrou && !existe" class="pagina-info">Página 1/1</span>
+                    <button class="btn-left2" style="margin-bottom: 10px;" (click)="mudarPagina(-1)"
+                        [disabled]="paginaAtual === 1">Anterior</button>
+                    <button *ngIf="!filtrou" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                        [disabled]="paginaAtual >= (participantes.length / participantesPorPagina)">Próximo</button>
+                    <button *ngIf="filtrou" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                        [disabled]="paginaAtual >= (participantes2.length / participantesPorPagina)">Próximo</button>
+                </div>
+
+                <div class="footer">
+                    <button id="CriarparticipanteButton" class="CriarparticipanteButton" (click)="Telaavaliacaopendente()" >Voltar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal" *ngIf="exibirModal">
+    <div class="modal-content">
+        <span class="close" (click)="fecharModal()">&times;</span>
+        <p class="cadastro-label2">Aplique as notas do participante {{participante}}</p>
+        <div class="parametros-container" style="margin-top: 20px;">
+            <ng-container *ngFor="let param of parametros; let i = index">
+                <div class="linha-parametros">                                                        
+                    <fieldset *ngIf="param.tipo == '1-10'" class="notacao-fieldset">
+                        <span class="nomeparticipante" style="right: 10px;">{{param.nome}}({{param.peso}}):</span>
+                        <select class="notacao-dropdown" [id]="'notacao-dropdown-' + (i + 1)" (change)="Alterarparametro(i)">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </fieldset>  
+                    <fieldset *ngIf="param.tipo == '1-5'" class="notacao-fieldset">
+                        <span class="nomeparticipante">{{param.nome}}({{param.peso}})</span>  
+                        <select class="notacao-dropdown" [id]="'notacao-dropdown-' + (i + 1)" (change)="Alterarparametro(i)">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>                            
+                        </select>
+                    </fieldset>                    
+                </div>
+            </ng-container>
+        </div>
+        <span class="nomeparticipante" style="margin-top: 10px;">Legenda: Nome do Parâmetro(Peso do parâmetro)</span>
+        <div>            
+            <div class="modal-actions">
+                <button class="button2" style="color: green; width: 340px;" (click)="AlterarDados()">Alterar</button>
+                <button class="button2" style="color: red; width: 340px;">Cancelar</button>
+            </div>
+        </div>
+    </div>

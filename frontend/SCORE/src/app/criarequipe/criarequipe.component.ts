@@ -89,6 +89,7 @@ export class CriarequipeComponent {
   mostrarconfSenhaModal: boolean = false;
   filtrou: boolean = false;
   existe: boolean = false;
+  habilitaevento : boolean = true;
 
 
 
@@ -101,6 +102,7 @@ export class CriarequipeComponent {
   }
 
   ngOnInit() {
+    localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
     this.carregarEquipes();
   }
@@ -149,8 +151,15 @@ export class CriarequipeComponent {
           nomeparametro19: element.nomeparametro19,
           nomeparametro20: element.nomeparametro20,
           moderador: element.moderador
-        });
-      });
+        });        
+      });    
+      
+      this.habilitaevento = true;
+      if(this.equipes.length>0)
+        if(this.equipes.find(a=> a.sigla != ""))
+          this.habilitaevento = false;
+      
+        
 
     } catch (error) {
       console.error('Erro ao carregar equipes:', error);
@@ -268,7 +277,7 @@ export class CriarequipeComponent {
       this.nomeEquipe!.nativeElement.value = ''; // Limpar o nome da equipe para futuras criações
       this.equipes = [];
       this.carregarEquipes();
-    }
+    }    
   }
 
   excluirEquipe(index: number, nome: string) {
@@ -375,7 +384,9 @@ export class CriarequipeComponent {
   }
 
 
-
+  CriarEvento(){
+    this.router.navigate(['/criarevento']);
+  }
 
 
 }

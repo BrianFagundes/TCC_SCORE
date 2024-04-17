@@ -1,0 +1,241 @@
+.container {
+  display: flex; /* Torna este um flex container */
+  flex-direction: row; /* Organiza os itens horizontalmente */
+  align-items: center; /* Centraliza os itens verticalmente */
+  justify-content: center; /* Para centralização horizontal, se necessário */
+  gap: 20px; /* Espaçamento entre os itens */
+  border: 2px solid gray; /* Adiciona uma borda cinza */
+  border-radius: 10px; /* Adiciona cantos arredondados */
+  margin-top: 50px;
+}
+
+.container2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px; /* Largura máxima do container */
+  margin: auto; /* Centraliza o container */
+  border-radius: 8px;
+}
+  
+  .user-details-Ul {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: 'Times New Roman';
+    font-size: 20px;
+    width: 200px;
+    list-style: none;
+  }
+  .user-details-Ul-li1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .user-details-Ul-li2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: -15px;
+  }
+  
+  .Botoes_usuario {
+    width: 100px;
+    height: 100px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 57px;
+    width: 276px;
+    height: 65px;
+  }
+  
+  .image-container, .user-details-and-logout {
+    display: flex;
+    flex-direction: column; /* Organiza os itens internos verticalmente */
+    align-items: center; /* Centraliza os itens internos verticalmente */
+  }
+  
+  .user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+  }
+  
+  
+  
+  .rectangle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 1500px;
+    height: 600px;
+    background-color: #201f26;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", sans-serif;
+    background-color: #201f26;
+    color: white;
+  }
+  
+  .welcome-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .welcome-message {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .rectangle2 {
+    display: block;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    width: 1460px;
+    height: 330px;
+    margin-left: -740px; 
+    margin-top: -230px;   
+    border-radius: 8px;
+    padding-bottom: 70px; /* Espaço suficiente para não sobrepor os botões */
+  }
+
+  .top {
+    display: block;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    width: 1460px;
+    margin-left: -10px;    
+    margin-top: -70px;
+    border-radius: 8px;
+    height: 30px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    bottom: 10px;
+    width: 1460px;
+    border-radius: 8px;
+    height: 40px;
+    margin-left: -10px;
+
+  }
+
+  .CriarEquipeButton {
+    margin-top: 0px;
+    width: 400px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    font-family: 'Times New Roman';
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
+  }
+
+  .user-image {
+    width: 100%; /* Faz a imagem ocupar toda a largura do container */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 8px; /* Cantos arredondados para a imagem */
+}
+
+.dado-item {
+  display: flex;
+  flex-direction: column; /* Organiza o conteúdo do item em coluna */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  padding: 10px; /* Espaçamento interno */
+  border: 1px solid #D9D9D9; /* Borda opcional para melhor visualização */
+  border-radius: 8px; /* Cantos arredondados */
+}
+
+.dado-item p {
+  color: white;
+  font-family: 'Times New Roman', serif;
+  font-size: 16px;
+  margin-top: 0;
+}
+
+.dado-item legend, .titulo {
+  color: white;
+  font-family: 'Times New Roman', serif;
+  font-size: 18px;
+}
+
+.dado-item fieldset {
+  width: 100%; /* Ocupa toda a largura do item */
+  border: none; /* Remove a borda do fieldset para um look mais limpo */
+  text-align: center; /* Centraliza o texto dentro do fieldset */
+  max-height: 50px; /* Define a altura máxima do fieldset */
+  overflow: hidden; /* Previne que o conteúdo exceda o tamanho do fieldset */
+  display: flex; /* Habilita flexbox para melhor controle do layout interno */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  padding: 5px; /* Espaçamento interno para não colar nas bordas */
+}
+
+.dado-item legend, .dado-item p {
+  margin: 0; /* Remove margens padrão */
+}
+
+.dados-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas de tamanho igual */
+  gap: 10px; /* Espaçamento entre os itens da grade */
+  padding: 20px; /* Espaçamento interno */
+  max-width: 100%; /* Ocupa a largura máxima permitida */
+  margin-left: 10%;
+}
+
+  .image-container2 {
+    margin-top: 80px;
+    width: 20%; /* Define a largura do container da imagem */
+    text-align: center; /* Centraliza a imagem horizontalmente */
+}
+  
+.btn-right, .btn-right3 {
+  width: 400px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: 'Times New Roman';
+}
+  
+  
