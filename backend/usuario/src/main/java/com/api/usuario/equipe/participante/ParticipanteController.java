@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/usuarios/Equipe/Participantes")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class ParticipanteController {
 	@Autowired
     private ParticipanteRepository participanterepository;
@@ -39,7 +39,7 @@ public class ParticipanteController {
 	@GetMapping("/obter/{id}")
     public List<Participante> obterParticipantes(@PathVariable Long id) {
 		List<Participante> participantes = participanterepository.findByEquipe(id); 
-		System.out.println(participantes.get(0).getModerador());
+		System.out.println(participantes.getFirst().getModerador());
         return participantes;
     }
 	

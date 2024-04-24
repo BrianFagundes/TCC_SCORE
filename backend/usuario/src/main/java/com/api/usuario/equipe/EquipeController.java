@@ -25,7 +25,7 @@ import com.api.usuario.equipe.evento.EventoController;
 
 @RestController
 @RequestMapping("/usuarios/Equipe")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class EquipeController {
 	
 	@Autowired
@@ -75,6 +75,20 @@ public class EquipeController {
 		 for (Participante participante : participantes) { 
 			 if(participante.getModerador())
 				 equipes.add(equipeRepository.findById(participante.getEquipe()).orElse(null));
+         }
+		 
+        return equipes;
+    }
+	
+	@GetMapping("/obter2/{id}")
+    public List<Equipe> obterEquipes2(@PathVariable Long id) {
+		
+		List<Participante> participantes =  participanteRepository.findByUsuario(id);	
+
+		 List<Equipe> equipes = new ArrayList<>();
+		 
+		 for (Participante participante : participantes) { 
+			 equipes.add(equipeRepository.findById(participante.getEquipe()).orElse(null));
          }
 		 
         return equipes;

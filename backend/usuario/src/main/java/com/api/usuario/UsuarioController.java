@@ -13,7 +13,7 @@ import javax.persistence.Convert;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;

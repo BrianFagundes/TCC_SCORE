@@ -25,6 +25,13 @@ public class Evento {
 	
 	private int quantidade_time;
 	
+	private String status;
+	
+	private String dataultimoevento;
+
+	private String chavepix;
+	
+	
 	public Long getid() {
 		return id;
 	}
@@ -83,6 +90,30 @@ public class Evento {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDataultimoevento() {
+		return dataultimoevento;
+	}
+
+	public void setDataultimoevento(String dataultimoevento) {
+		this.dataultimoevento = dataultimoevento;
+	}
+
+	public String getChavepix() {
+		return chavepix;
+	}
+
+	public void setChavepix(String chavepix) {
+		this.chavepix = chavepix;
 	}
 	
 	

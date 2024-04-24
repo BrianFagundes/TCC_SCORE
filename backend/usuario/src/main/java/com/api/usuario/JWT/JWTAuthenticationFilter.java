@@ -15,7 +15,7 @@ import java.io.IOException;
 
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final JWTUtil jwtUtil;

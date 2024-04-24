@@ -16,7 +16,7 @@ public class Custo {
 	@Id
     private Long usuario;
 	
-    private Boolean custo;
+    private Boolean custo;	
 
 	public Long getEvento() {
 		return evento;

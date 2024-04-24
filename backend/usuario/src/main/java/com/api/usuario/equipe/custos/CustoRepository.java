@@ -17,4 +17,7 @@ public interface CustoRepository extends JpaRepository<Custo, CustoId>  {
 	@Query("DELETE FROM Custo p WHERE p.evento = ?1")
 	void deleteByEvento(Long evento);
 	
+	boolean existsByEventoAndUsuarioAndCusto(Long evento, Long usuario, Boolean custo);
+
+	
 }

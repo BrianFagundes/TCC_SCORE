@@ -123,7 +123,7 @@ interface Evento{
 })
 export class ApiService {
   
-  private apiUrl = 'http://localhost:8080'; // Substitua pela URL da sua API
+  private apiUrl = 'http://54.88.227.50:8080'; // Substitua pela URL da sua API
 
   constructor() { }
 
@@ -210,7 +210,7 @@ export class ApiService {
         const responseData = await response.json();
         return responseData; // O código de sucesso retornado pela API
       } else {
-        //console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
+        console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
         return 2; // Falha ao enviar e-mail
       }
     } catch (error) {

@@ -39,6 +39,7 @@ public class Equipe {
     private String nomeparametro19;
     private String nomeparametro20;
     private Long moderador;
+    private String statuseventos;
     
     
 	
@@ -199,6 +200,12 @@ public class Equipe {
 	}
 	public void setModerador(Long moderador) {
 		this.moderador = moderador;
+	}
+	public String getStatuseventos() {
+		return statuseventos;
+	}
+	public void setStatuseventos(String statuseventos) {
+		this.statuseventos = statuseventos;
 	}
 	
 }
