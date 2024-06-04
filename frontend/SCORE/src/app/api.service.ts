@@ -1,6 +1,8 @@
 // api.service.ts
-
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router, NavigationEnd } from '@angular/router';
 //import { Observable } from 'rxjs';
 
 
@@ -113,7 +115,8 @@ interface Evento{
   quantidade_time: number,
   status: string,
   dataultimoevento: string,
-  chavepix: string
+  chavepix: string,
+  duracao: string
 }
 
 
@@ -125,17 +128,83 @@ export class ApiService {
   
   private apiUrl = 'http://54.88.227.50:8080'; // Substitua pela URL da sua API
 
-  constructor() { }
+  private jwtHelper = new JwtHelperService();
 
-  async autenticarUsuario(): Promise<void> {
+  constructor(private router: Router,private http: HttpClient) {}
+
+  getToken(): string | null {
+    return localStorage.getItem('jwtToken');
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('jwtToken', token);
+  }
+
+  async renewToken(): Promise<string> {
     
+    const token = this.getToken();
+    
+    if (!token) {
+      throw new Error('Token não encontrado');
+    }
+
+    try {
+      const response = await this.http.post<{ token: string }>(`${this.apiUrl}/api/renew-token`, {}, {
+        headers: new HttpHeaders({ 'Authorization': `Bearer ${token}` })
+      }).toPromise();
+      
+      if (response && response.token) {
+        this.setToken(response.token);
+        return response.token;
+      } else {
+        throw new Error('Resposta inválida ao renovar o token');
+      }
+    } catch (error) {
+      //alert('Erro ao renovar o token'+ error)
+      console.error('Erro ao renovar o token', error);
+      throw error;
+    }
+  }
+
+  async ensureValidToken(): Promise<void> {
+    const token = this.getToken();
+    if (token) {
+      const expirationDate = this.jwtHelper.getTokenExpirationDate(token);
+      const now = new Date().getTime();
+      const expirationTime = expirationDate?.getTime() || 0;
+      const timeLeft = expirationTime - now;
+
+      if (timeLeft <= 0) {
+        localStorage.setItem('sessaoexpirada', 'true');
+        localStorage.setItem('jwtToken', '');
+        this.router.navigate(['/']);
+        return;
+      }
+
+      const issuedAt = this.jwtHelper.decodeToken(token).iat * 1000;
+      const totalTime = expirationTime - issuedAt;
+      const tenPercentOfTime = totalTime * 0.1;
+
+      if (timeLeft <= tenPercentOfTime) {
+        await this.renewToken();
+      }
+    }
+  }
+
+  async autenticarUsuario(username2: String, password2: String): Promise<void> {
     const username = "f6546317";
     const password = "f9e29a8";
-    
+
+    username2 = username2 == "" || username2 == null ? "a1B2c3D4e5F6g7H8i9J" : username2;
+    password2 = password2 == "" || password2 == null ? "k1L2m3N4o5P6q7R8s9T" : password2;
+
+
     const url = `${this.apiUrl}/api/authenticate`;
     const userData = {
       username, // substitua conforme a chave esperada pelo seu backend
       password, // substitua conforme a chave esperada pelo seu backend
+      username2,
+      password2
     };
   
     try {
@@ -191,6 +260,7 @@ export class ApiService {
   }
 
   async enviarEmailRecuperacao2(email: string, codigo: string): Promise<number> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/Email/enviar-email2`;
     const emailData = {
       to: email,
@@ -210,7 +280,7 @@ export class ApiService {
         const responseData = await response.json();
         return responseData; // O código de sucesso retornado pela API
       } else {
-        console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
+        //console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
         return 2; // Falha ao enviar e-mail
       }
     } catch (error) {
@@ -220,6 +290,7 @@ export class ApiService {
   }
 
   enviarEmail(email: string, codigo: string): void {
+    
     const url = `${this.apiUrl}/Email/enviar-email`;
     const emailData = {
       to: email,
@@ -256,17 +327,19 @@ export class ApiService {
           const responseData = await response.json();
           return responseData; // O código de sucesso retornado pela API
         } else {
+          //alert('Erro ao cadastrar usuário!');
           //console.error('Erro ao enviar e-mail de recuperação:', response.statusText);
           return 2; // Falha ao enviar e-mail
         }
       } catch (error) {
-        console.error('Erro ao enviar e-mail de recuperação:', error);
+        //alert('Erro ao cadastrar usuário: '+ error);
         return 2; // Erro durante a chamada à API
       }
     
   }  
   
   async cadastrarUsuario2(dadosUsuario: any) {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/usuarios/Automatico`;
     const token = localStorage.getItem('jwtToken');
       try {
@@ -304,7 +377,6 @@ export class ApiService {
       foto: ""
     };
 
-
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -331,6 +403,7 @@ export class ApiService {
 
 
   async obterUsuarioPorId(id: string): Promise<Usuario> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/usuarios/${id}`;    
     const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
     
@@ -355,7 +428,8 @@ export class ApiService {
 
   }    
 
-  atualizarUsuario(id: string, pNome: string, pEmail: string, pFoto : string, pSenha : string): Promise<Usuario> {
+  async atualizarUsuario(id: string, pNome: string, pEmail: string, pFoto : string, pSenha : string): Promise<Usuario> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const token = localStorage.getItem('jwtToken');
 
     const dadosUsuario = {
@@ -394,7 +468,8 @@ export class ApiService {
     });
   }  
 
-  deletarUsuario(id: string): Promise<void> {
+  async deletarUsuario(id: string): Promise<void> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const token = localStorage.getItem('jwtToken');
     
     const url = `${this.apiUrl}/usuarios/${id}`;
@@ -420,6 +495,7 @@ export class ApiService {
   }
 
   async CriarEquipe(dadosEquipe: any) {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/usuarios/Equipe/criar`;
     const token = localStorage.getItem('jwtToken');
       try {
@@ -445,6 +521,7 @@ export class ApiService {
   } 
 
   async CriarEvento(dadosEquipe: any) {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/usuarios/equipe/evento/criar`;
     const token = localStorage.getItem('jwtToken');
       try {
@@ -469,6 +546,7 @@ export class ApiService {
   } 
 
   async obterTodasEquipes(id: string): Promise<Equipe[]> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/usuarios/Equipe/obter/${id}`;    
     const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
     
@@ -494,6 +572,7 @@ export class ApiService {
   }  
 
   async obterTodasEquipes2(id: string): Promise<Equipe[]> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/usuarios/Equipe/obter2/${id}`;    
     const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
     
@@ -519,6 +598,7 @@ export class ApiService {
   } 
 
   async obterTodosEventos(id: string): Promise<Evento[]> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const url = `${this.apiUrl}/usuarios/equipe/evento/obter/Evento/Equipe/${id}`;    
     const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
     
@@ -543,7 +623,8 @@ export class ApiService {
 
   }  
 
-  deletarEquipe(id: string): Promise<void> {
+  async deletarEquipe(id: string): Promise<void> {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const token = localStorage.getItem('jwtToken');
     
     const url = `${this.apiUrl}/usuarios/Equipe/deletar/${id}`;
@@ -569,6 +650,7 @@ export class ApiService {
   }  
 
   async carregarimagem(id: string, Foto : string) {
+    await this.ensureValidToken(); // Verifica e renova o token, se necessário
     const token = localStorage.getItem('jwtToken');
     
     try {
@@ -595,6 +677,7 @@ export class ApiService {
 }
 
 async obterUmaEquipes(id: string): Promise<Equipe> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/Equipe/obter/equipe/${id}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -620,6 +703,7 @@ async obterUmaEquipes(id: string): Promise<Equipe> {
 } 
 
 async AlterarEquipe(dadosEquipe: any) {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/Equipe/Alterar`;
   const token = localStorage.getItem('jwtToken');
     try {
@@ -644,6 +728,7 @@ async AlterarEquipe(dadosEquipe: any) {
   
 } 
 async Levantarmodelos(): Promise<Modelo[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/modelos/levantartodos`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -669,6 +754,7 @@ async Levantarmodelos(): Promise<Modelo[]> {
 }  
 
 async LevantarParticipantes(id: string, email: string): Promise<Usuario> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/obter/id/email/${id}/${email}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -694,6 +780,7 @@ async LevantarParticipantes(id: string, email: string): Promise<Usuario> {
 }  
 
 async CriarParticipante(dadosParticipante: any, i :number) {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/Equipe/Participantes/criar/${i}`;
   const token = localStorage.getItem('jwtToken');
     try {
@@ -717,7 +804,8 @@ async CriarParticipante(dadosParticipante: any, i :number) {
   
 } 
 
-deletarParticipanteEquipe(equipe: string, usuario: string): Promise<void> {
+async deletarParticipanteEquipe(equipe: string, usuario: string): Promise<void> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const token = localStorage.getItem('jwtToken');
   
   const url = `${this.apiUrl}/usuarios/Equipe/Participantes/deletar/${equipe}/${usuario}`;
@@ -743,6 +831,7 @@ deletarParticipanteEquipe(equipe: string, usuario: string): Promise<void> {
 } 
 
 async obterTodosParticipantesEquipe(id: string): Promise<Participante[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/Equipe/Participantes/obter/${id}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -768,6 +857,7 @@ async obterTodosParticipantesEquipe(id: string): Promise<Participante[]> {
 }  
 
 async obterEquipesPorParticipanteComUmModerador(id: string): Promise<string[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/Equipe/Participantes/obter/Equipes/participantes/${id}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -792,7 +882,8 @@ async obterEquipesPorParticipanteComUmModerador(id: string): Promise<string[]> {
 
 } 
 
-deletarEvento(id: string): Promise<void> {
+async deletarEvento(id: string): Promise<void> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const token = localStorage.getItem('jwtToken');
   
   const url = `${this.apiUrl}/usuarios/equipe/evento/deletar/${id}`;
@@ -818,6 +909,7 @@ deletarEvento(id: string): Promise<void> {
 } 
 
 async obterUmEvento(id: string): Promise<Evento> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/obter/Evento/${id}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -843,6 +935,7 @@ async obterUmEvento(id: string): Promise<Evento> {
 } 
 
 async AlterarEvento(dadosEvento: any) {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/Alterar`;
   const token = localStorage.getItem('jwtToken');
     try {
@@ -869,6 +962,7 @@ async AlterarEvento(dadosEvento: any) {
 
 
 async AlterarStatusEvento(dadosEvento: any) {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/Alterar/Status`;
   const token = localStorage.getItem('jwtToken');
     try {
@@ -894,6 +988,7 @@ async AlterarStatusEvento(dadosEvento: any) {
 } 
 
 async CriarTime(dadosTime: any, numero: number) {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/time/criar/${numero}`;
   const token = localStorage.getItem('jwtToken');
     try {
@@ -918,6 +1013,7 @@ async CriarTime(dadosTime: any, numero: number) {
 } 
 
 async obterTodosTimesEvento(id: string): Promise<Time[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/time/obter/times/${id}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -943,6 +1039,7 @@ async obterTodosTimesEvento(id: string): Promise<Time[]> {
 }  
 
 async obterTodosPagantesporevento(id: string): Promise<Custo[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/custo/obter/custos/${id}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -968,6 +1065,7 @@ async obterTodosPagantesporevento(id: string): Promise<Custo[]> {
 } 
 
 async CriarCustoParticipante(dadosParticipante: any, i :number) {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/custo/criar/${i}`;
   const token = localStorage.getItem('jwtToken');
     try {
@@ -992,6 +1090,7 @@ async CriarCustoParticipante(dadosParticipante: any, i :number) {
 } 
 
 async obterNotasEventoUsuario(dados: any): Promise<Nota[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listarPorEventoEUsuario/${dados.idEvento}/${dados.idUsuario}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -1017,6 +1116,7 @@ async obterNotasEventoUsuario(dados: any): Promise<Nota[]> {
 }  
 
 async obterNotasEventoUsuarioOrigem(dados: any): Promise<Nota[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listarPorEventoEUsuarioOrigem/${dados.idEvento}/${dados.idUsuario}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -1042,6 +1142,7 @@ async obterNotasEventoUsuarioOrigem(dados: any): Promise<Nota[]> {
 }  
 
 async obterNotasDataEventoUsuario(dados: any): Promise<Nota[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listar/${dados.dataHoraEvento}/${dados.idEvento}/${dados.idUsuario}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   
@@ -1066,7 +1167,8 @@ async obterNotasDataEventoUsuario(dados: any): Promise<Nota[]> {
 
 }  
 
-AlterarNota(dados:any): Promise<Usuario> {
+async AlterarNota(dados:any): Promise<Usuario> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const token = localStorage.getItem('jwtToken');
 
 
@@ -1099,6 +1201,7 @@ AlterarNota(dados:any): Promise<Usuario> {
 
 
 async obterNotasEventoUsuarioEvento(dados: any): Promise<Nota[]> {
+  await this.ensureValidToken(); // Verifica e renova o token, se necessário
   const url = `${this.apiUrl}/usuarios/equipe/evento/notas/listar/Destino/${dados.dataHoraEvento}/${dados.idEvento}/${dados.idUsuario}`;    
   const token = localStorage.getItem('jwtToken'); // Recupera o token do localStorage    
   

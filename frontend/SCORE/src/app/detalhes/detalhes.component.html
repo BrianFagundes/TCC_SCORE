@@ -2,10 +2,10 @@
     <div class="welcome-container">
         <div class="user-info">
             <div class="container">
-                <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="TelaInicial()">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo">
                 <div class="image-container">
-                    <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image"
-                        class="Botoes_usuario" (click)="usuario()">
+                    <img id="selectedImage2" [src]="imagePath" alt="User Image" class="Botoes_usuario3"
+                        (click)="usuario()">
                 </div>
                 <div class="user-details">
                     <ul class="user-details-Ul">
@@ -23,46 +23,43 @@
         </div>
         <div class="rectangle">
             <div class="welcome-message">
-                <div *ngIf="tipotela == 'D'" class="linha linha3" style="margin-top: 10px; border-radius: 10px;">
-                    <p style="color: rgba(255, 255, 255, 0);">.</p>
-                    <p style="color: white; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: -10px">Consulta de dados da Equipe</p>
+                <div *ngIf="tipotela != 'D'" class="top">
+                    <p class="textotop">Alteração de dados da Equipe</p>
                 </div>
-                <div class="linha linha1" style="margin-top: 20px; border-radius: 10px;">
+                <div *ngIf="tipotela == 'D'" class="top">
+                    <p class="textotop">Consulta de dados da Equipe</p>
+                </div>                
+                <div class="linha linha1">
                     <div class="coluna esquerda">
                         <img [src]="imagePath2" alt="Imagem"
-                            style="width: 200px; height: 200px; margin-top: 70px; border-radius: 10px; cursor: pointer;"(click)="fileInput.click()">
-                            <input type="file" accept="image/png, image/jpeg" #fileInput (change)="onImageSelected($event)" style="display:none" class="image2" [disabled]="tipotela == 'D'"> 
-                        <p *ngIf="tipotela == 'A'" style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman';">Clique na imagem para alterá-la.</p>
+                            class="imagem_inline1" (click)="fileInput.click()">
+                            <input class="input" type="file" accept="image/png, image/jpeg" #fileInput (change)="onImageSelected($event)" style="display:none" class="image2" [disabled]="tipotela == 'D'"> 
+                        <p *ngIf="tipotela == 'A'" class="click">Clique na imagem para alterá-la.</p>
                     </div>
                     <div class="coluna direita">
                         <div class="sublinha">
-                            <input style="width: 430px;" type="text" name="sigla"
+                            <input class="input_inline1" type="text" name="sigla"
                                 placeholder="Sigla* (Maximo 3 caracteres)" maxlength="3" #sigla required [disabled]="tipotela == 'D'">
-                            <input type="text" name="nomeEquipe" placeholder="Nome da Equipe*" #nomeEquipe required [disabled]="tipotela == 'D'">
+                            <input class="input_inline2" type="text" name="nomeEquipe" placeholder="Nome da Equipe*" #nomeEquipe required [disabled]="tipotela == 'D'">
                         </div>
                         <div class="sublinha">
-                            <textarea id="meuTextarea" style="width: 800px; height: 240px;" name="infoEquipe"
+                            <textarea id="meuTextarea" name="infoEquipe"
                                 placeholder="Informações da Equipe" maxlength="255"
                                 (input)="atualizarContagemCaracteres()" [disabled]="tipotela == 'D'"></textarea>
-                            <div style="color: white; font-weight: bold; font-size: 20px; font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px; margin-left: 570px;"
+                            <div class="caracteres1"
                                 id="contagemCaracteres">{{(qtdcaracteres?qtdcaracteres:'255 caracteres restantes')}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="linha linha2" style="margin-top: 10px; border-radius: 10px;">
-                    <div class="sublinha">
-                        <button (click)="abrirModal()">Parâmetros Avaliados</button>
-                        <button (click)="abrirparticipantes()">Gerir Participantes</button>
-                        <button *ngIf="tipotela == 'D'" (click)="TelaCriacaoequipe()">Voltar</button>
-                    </div>
+                <div class="linha2">                    
+                        <button class="button1" (click)="abrirModal()">Parâmetros Avaliados</button>
+                        <button class="button1" (click)="abrirparticipantes()">Gerir Participantes</button>                                           
                 </div>
-                <div *ngIf="tipotela == 'A'" class="linha linha3" style="margin-top: 10px; border-radius: 10px;">
-                    <div class="sublinha">
-                        <button *ngIf="tipotela == 'A'" style="color: green;" (click)="confirmarAlteracao()">Confirmar</button>
-                        <button *ngIf="tipotela == 'A'" (click)="BotaoCancelar()" style="color: red;">Cancelar</button>
-                        <button *ngIf="tipotela == 'A'" (click)="TelaCriacaoequipe()">Voltar</button>
-                    </div>
+                <div  class="linha3">                    
+                        <button class="button-left" *ngIf="tipotela == 'A'" style="color: green;" (click)="confirmarAlteracao()">Confirmar</button>
+                        <button class="button-center" *ngIf="tipotela == 'A'" (click)="BotaoCancelar()" style="color: red;">Cancelar</button>
+                        <button class="button-right" (click)="TelaCriacaoequipe()">Voltar</button>                    
                 </div>
             </div>
         </div>
@@ -74,77 +71,80 @@
     <div class="modal-content">
         <span class="close" (click)="fecharparticipantes()">&times;</span>
         <p class="cadastro-label2">Defina os Participantes de sua equipe</p>
-        <fieldset *ngIf="tipotela == 'A'">
+        <fieldset class="fieldset_inline4" *ngIf="tipotela == 'A'">
             <legend>Pesquise pessoas disponíveis</legend>
-            <input style="width: 430px;" type="text" name="procura" placeholder="Coloque o id ou email da pessoa"
+            <input class="input_inline4" type="text" name="procura" placeholder="Coloque o id ou email da pessoa"
                 maxlength="25" #procura required  >
-            <button style="width: 200px;" class="modalpesquisarButton"
+            <button class="button5 modalpesquisarButton"
                 (click)="BotaoPesquisarParticipantes()"  >Pesquisar</button>
         </fieldset>
-        <fieldset style="margin-top: 10px;" *ngIf="tipotela == 'A'">
-            <legend>Resultados da pesquisa</legend>
+        <fieldset class="fieldset_inline5" *ngIf="tipotela == 'A'">
+            <legend>Resultado da pesquisa</legend>
             <div *ngIf="existe" class="resultado-pesquisa" style="display: flex; align-items: center;">
-                <img [src]="imagem" style="width: 100px; height: 100px;" >
+                <img [src]="imagem" class="imagem_inline3" >
                 <div style="margin-left: 20px;">
-                    <fieldset style="width: 290px; height: 80px;">
-                        <p style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman';">
+                    <fieldset class="fieldset_inline2">
+                        <p class="nome_inline">
                             <strong>{{ nome }}</strong>
                         </p>
-                        <p style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman';">{{
+                        <p class="nome_inline2">{{
                             email }}</p>
                     </fieldset>
                 </div>
                 <div>
-                    <button style="width: 200px; margin-left: 10px; margin-top: 60px;" class="modalpesquisarButton"
-                        (click)="adicionarParticipante()">Adiciona (+)</button>
+                    <button *ngIf="screenWidth>=599" class="button8 modalpesquisarButton"
+                        (click)="adicionarParticipante()">Adicionar (+)</button>
+                    <button *ngIf="screenWidth<599" class="button8 modalpesquisarButton"
+                        (click)="adicionarParticipante()">(+)</button>
                 </div>
             </div>
             <div *ngIf="!existe" class="resultado-pesquisa"
                 style="display: flex; align-items: center; margin-top: 20px;">
-                <p style="color: white; font-size: 25px;font-family: 'Times New Roman', 'Times New Roman';">Não existem
+                <p class="Parctcipantesemdados">Não existem
                     dados para a pesquisa!</p>
             </div>
         </fieldset>
-        <fieldset style="margin-top: 10px;">
+        <fieldset class="fieldset_inline3">
             <legend>Participantes Selecionados</legend>
             <div *ngIf="tipotela == 'A'">
-                <input style="width: 260px;" type="text" name="procura" placeholder="id ou email do participante"
+                <input class="input_inline3" type="text" name="procura" placeholder="id ou email do participante"
                     maxlength="25" #procura2 required>
-                <button style="width: 180px;" class="modalpesquisarButton"
+                <button class="button6 modalpesquisarButton"
                     (click)="botaopesquisarlistaparticipantes()">Pesquisar</button>
-                <button style="width: 180px;" class="modalpesquisarButton"
-                    (click)="Limpapesquisarlistaparticipantes()">Limpa filtro</button>
+                <button class="button6 modalpesquisarButton"
+                    (click)="Limpapesquisarlistaparticipantes()">Limpar filtro</button>
             </div>
             <div *ngIf="!filtrou" class="parametros-container" style="margin-top: 20px;">
                 <div *ngFor="let participante of participantesSelecionados; let i = index"
                     style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <fieldset style="width: 380px; height: 70px; display: flex;">
+                    <fieldset class="fieldset_inline1">
                         <legend>Dados do participante</legend>
-                        <img [src]="participante.imagem" style="width: 50px; height: 50px;">
+                        <img [src]="participante.imagem" class="imagem_inline2">
                         <div style="margin-left: 20px;">
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                                class="pParticipante_inline1"
+                                >
                                 <strong>{{ participante.nome }}</strong>
                             </p>
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                                class="pParticipante_inline2"
+                                >
                                 {{ participante.email }}</p>
                         </div>
                     </fieldset>
                     <div>
-                        <fieldset class="importancia-fieldset" style="height: 70px; margin-right: 1px;">
-                            <legend>Moderador</legend>
-                            <input [disabled]="tipotela == 'D'" type="checkbox" id="rememberCheckbox" (click)="setarmoderador(i)"
+                        <fieldset class="importancia-fieldset" class="moderador_inline1">
+                            <legend *ngIf="screenWidth>599">Moderador</legend>
+                            <input class="input" [disabled]="tipotela == 'D'" type="checkbox" id="rememberCheckbox" (click)="setarmoderador(i)"
                                 [checked]="participante.moderador">
                         </fieldset>
                     </div>
                     <div>
-                        <fieldset class="importancia-fieldset" style="height: 70px;">
-                            <legend>Eliminar</legend>
+                        <fieldset class="importancia-fieldset" class="eliminar_inline">
+                            <legend *ngIf="screenWidth>599" >Eliminar</legend>
                             <button [disabled]="tipotela == 'D'"
-                                style="margin-left: 10px; margin-top: 5px; width: 60px; height: 5px; border-radius: 8px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
                                 id="mostrarsenha2" (click)="excluirparticipante(i, participante.id)"
-                                class="mostrarsenha">
+                                class="button2 mostrarsenha lixeira">
                                 🗑️
                             </button>
                         </fieldset>
@@ -153,34 +153,34 @@
             </div>
             <div *ngIf="filtrou && existenalistaparticipantes" class="parametros-container" style="margin-top: 20px;">
                 <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <fieldset style="width: 380px; height: 70px; display: flex;">
+                    <fieldset class="fieldset_inline1">
                         <legend>Dados do participante</legend>
-                        <img [src]="imagempesquisalistaparticipante" style="width: 50px; height: 50px;">
+                        <img [src]="imagempesquisalistaparticipante" class="imagem_inline2">
                         <div style="margin-left: 20px;">
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                            class="pParticipante_inline1">
                                 <strong>{{nomepesquisalistaparticipante}}</strong>
                             </p>
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                            class="pParticipante_inline2">
                                 {{ emailpesquisalistaparticipante }}</p>
                         </div>
                     </fieldset>
                     <div>
-                        <fieldset class="importancia-fieldset" style="height: 70px; margin-right: 1px;">
-                            <legend>Moderador</legend>
-                            <input type="checkbox" id="rememberCheckbox"
+                        <fieldset class="importancia-fieldset" class="moderador_inline1">
+                            <legend *ngIf="screenWidth>599">Moderador</legend>
+                            <input class="input" type="checkbox" id="rememberCheckbox"
                                 (click)="setarmoderador(idpesquisalistaparticipante)"
                                 [checked]="moderadorpesquisalistaparticipante">
                         </fieldset>
                     </div>
                     <div>
-                        <fieldset class="importancia-fieldset" style="height: 70px;">
-                            <legend>Eliminar</legend>
+                        <fieldset class="importancia-fieldset" class="eliminar_inline">
+                            <legend *ngIf="screenWidth>599">Eliminar</legend>
                             <button [disabled]="tipotela == 'D'"
-                                style="margin-left: 10px; margin-top: 5px; width: 60px; height: 5px; border-radius: 8px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
+                            
                                 id="mostrarsenha2" (click)="excluirparticipante2(idpesquisalistaparticipante)"
-                                class="mostrarsenha">
+                                class="button2 mostrarsenha lixeira">
                                 🗑️
                             </button>
                         </fieldset>
@@ -197,15 +197,31 @@
         </div>
         <div>
             <p
-                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                class="explicacao_inline">
                 *Moderadores são pessoas que tem o controle total da equipe e eventos relacionados a esta.</p>
         </div>
         <div class="modal-actions">
-            <button *ngIf="tipotela == 'A'" style="color: green; width: 340px;" (click)="BotaoGravarParticipantes()">Guardar</button>
-            <button *ngIf="tipotela == 'A'" style="color: red; width: 340px;" (click)="BotaoCancelarparticipantes()">Cancelar</button>
+            <button class="button7" *ngIf="tipotela == 'A'" style="color: green;" (click)="BotaoGravarParticipantes()">Guardar</button>
+            <button class="button7" *ngIf="tipotela == 'A'" style="color: red; " (click)="BotaoCancelarparticipantes()">Cancelar</button>
         </div>
     </div>
 </div>
+
+    <div id="overlay_alertBox" class="overlay_alertBox"></div>
+    <div id="customAlert" class="alert">
+        <p id="alertmessage_customAlert" class="message_customAlert"></p>
+        <button id="okbtn_customAlert" class="okbtn">OK</button>
+    </div>
+
+    <div id="overlay_customConfirm" class="overlay_customConfirm"></div>
+    <div id="customConfirm" class="confirm_customConfirm">
+        <p id="confirmmessage_customConfirm" class="message_customConfirm"></p>
+        <div class="button-container_customConfirm">
+            <button class="okbtn_customConfirm" (click)="handleConfirm(true)">OK</button>
+            <button class="cancelbtn_customConfirm" (click)="handleConfirm(false)">Cancelar</button>
+        </div>
+    </div>
+
 
 <!-- Modal para criar parâmetros na equipe -->
 <div class="modal" *ngIf="exibirModal">
@@ -215,24 +231,24 @@
         <fieldset *ngIf="tipotela == 'A'">
             <legend>Modelos disponíveis</legend>
             <select class="dropdownModelos" id="dropdownModelos" (change)="habilitaaplicarmetodo()"></select>
-            <button class="modalAplicarButton" (click)="aplicarModelo()" [disabled]="habilitoAplicar">Aplicar
+            <button class="button2" class="modalAplicarButton" (click)="aplicarModelo()" [disabled]="habilitoAplicar">Aplicar
                 modelo</button>
         </fieldset>
 
         <div class="parametros-container" style="margin-top: 20px;">
             <ng-container *ngFor="let param of parametros; let i = index">
                 <div class="linha-parametros">
-                    <input type="text" class="parametro-input" [id]="'parametro-input-' + (i + 1)"
+                    <input type="text" class="input parametro-input" [id]="'parametro-input-' + (i + 1)"
                         [placeholder]="'Parâmetro ' + (i + 1)" [disabled]="!parametroHabilitado[i] || tipotela == 'D'">
                     <fieldset class="importancia-fieldset">
-                        <legend>Importância</legend>
+                        <legend *ngIf="screenWidth>599">Importância</legend>
                         <select class="importancia-dropdown" [id]="'importancia-dropdown-' + (i + 1)"
                             [disabled]="!parametroHabilitado[i] || tipotela == 'D'">
                             <option *ngFor="  let opcao of [1, 2, 3, 4, 5]" [value]="opcao">{{ opcao }}</option>
                         </select>
                     </fieldset>
                     <fieldset class="notacao-fieldset">
-                        <legend>Avaliação</legend>
+                        <legend *ngIf="screenWidth>599" >Avaliação</legend>
                         <select class="notacao-dropdown" [id]="'notacao-dropdown-' + (i + 1)"
                             [disabled]="!parametroHabilitado[i] || tipotela == 'D'">
                             <option value="1-10">1-10</option>
@@ -240,17 +256,16 @@
                         </select>
                     </fieldset>
                     <fieldset class="importancia-fieldset">
-                        <legend *ngIf="criacao">Eliminar</legend>
-                        <legend *ngIf="!criacao">Visualiza</legend>
+                        <legend *ngIf="criacao && screenWidth>=600">Eliminar</legend>
+                        <legend *ngIf="!criacao && screenWidth>=600">Visualiza</legend>
                         <button *ngIf="criacao" [disabled]="tipotela == 'D'"
-                            style="margin-left: 10px; margin-top: -3px; width: 60px; height: 5px; border-radius: 8px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
-                            id="mostrarsenha2" (click)="removerParametro(i)" class="mostrarsenha">
+                        
+                            id="mostrarsenha2" (click)="removerParametro(i)" class="button2 mostrarsenha lixeira">
                             🗑️
                         </button>
 
                         <button *ngIf="!criacao"
-                            style="margin-left: 10px; margin-top: -3px; width: 60px; height: 5px; border-radius: 8px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
-                            id="mostrarsenha2" (click)="toggleParametro(i)" class="mostrarsenha"
+                            id="mostrarsenha2" (click)="toggleParametro(i)" class="button2 mostrarsenha lixeira"
                             [class.selected]="parametroHabilitado[i]">
                             <img style="width: 40px; height: 20px;" class="mostrarsenha"
                                 [src]="parametroHabilitado[i] ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'"
@@ -262,12 +277,14 @@
         </div>
         <div>
             <div *ngIf="tipotela == 'A'" class="modal-actions">
-                <button (click)="adicionarParametro()" style="width: 340px; margin-left: 350px;">Adicionar parâmetro
+                <button class="button3" (click)="adicionarParametro()">Adicionar parâmetro
                     (+)</button>
             </div>
             <div class="modal-actions">
-                <button *ngIf="tipotela == 'A'" style="color: green; width: 340px;" (click)="BotaoGuardarParametros()">Guardar</button>
-                <button *ngIf="tipotela == 'A'" style="color: red; width: 340px;" (click)="BotaoCancelarParametros()">Cancelar</button>
+                <button class="button4" *ngIf="tipotela == 'A'" style="color: green" (click)="BotaoGuardarParametros()">Guardar</button>
+                <button class="button4" *ngIf="tipotela == 'A'" style="color: red" (click)="BotaoCancelarParametros()">Cancelar</button>
             </div>
         </div>
     </div>
+
+  

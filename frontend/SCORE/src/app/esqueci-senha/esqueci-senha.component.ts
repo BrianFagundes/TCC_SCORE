@@ -37,22 +37,22 @@ export class EsqueciSenhaComponent {
         
         if (isValid === 0)
         {
-          alert('E-mail de recuperação enviado com sucesso!');
+          this.showAlert('E-mail de recuperação enviado com sucesso.');
           this.emailInput.nativeElement.value = '';         
         }
         else if (isValid === 1)
         {
-          alert('E-mail indicado não está cadastrado!');
+          this.showAlert('E-mail indicado não está cadastrado.');
           this.emailInput.nativeElement.value = '';         
         }
         else
         {
-          alert('Falha ao enviar e-mail de recuperação. Por favor, tente novamente mais tarde.');
+          this.showAlert('Falha ao enviar e-mail de recuperação. Por favor, tente novamente mais tarde.');
         }  
       }
       else
       {
-        alert('Campo de e-mail tem que ser preenchido!');
+        this.showAlert('O campo de e-mail deve ser preenchido.');
       }
     }  
   }
@@ -60,4 +60,31 @@ export class EsqueciSenhaComponent {
   navigateToLogin() {
     this.router.navigate(['/home']);
   }
+
+  showAlert(message : string) {
+    var alertBox = document.getElementById("customAlert");
+    var alertMessage = document.getElementById("alertmessage_customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && alertMessage && overlay_alertBox)
+    {
+      alertMessage.textContent = message;
+      overlay_alertBox.style.display = "block"; // Show the overlay_alertBox
+      alertBox.style.display = "block"; // Show the alert
+    }
+    
+  }
+  
+  hideAlert() {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+
+
 }

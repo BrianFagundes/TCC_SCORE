@@ -1,19 +1,61 @@
 .container {
   display: flex;
-  /* Torna este um flex container */
   flex-direction: row;
-  /* Organiza os itens horizontalmente */
   align-items: center;
-  /* Centraliza os itens verticalmente */
   justify-content: center;
-  /* Para centralização horizontal, se necessário */
   gap: 20px;
-  /* Espaçamento entre os itens */
   border: 2px solid gray;
-  /* Adiciona uma borda cinza */
   border-radius: 10px;
-  /* Adiciona cantos arredondados */
   margin-top: 50px;
+  height: 80px;
+}
+
+
+.parametros-container{
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+
+.frasesemdados{
+  color: black; 
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman' ;
+  margin-bottom: 5px;
+
+}
+
+.dadosevento1{
+  color: white; 
+  font-size: 18px;
+  font-family: 'Times New Roman', 'Times New Roman'; 
+  margin-top: 0px;
+  margin-bottom: 5px
+}
+
+.dadosevento2{
+  color: white; 
+  font-size: 18px;
+  font-family: 'Times New Roman', 'Times New Roman'; 
+  margin-top: 0px; 
+  width: 350px;
+}
+
+.dadosevento3{
+  color: white; 
+  font-size: 18px;
+  font-family: 'Times New Roman', 'Times New Roman'; 
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.dadosevento4{
+  color: white; 
+  font-size: 18px;
+  font-family: 'Times New Roman', 'Times New Roman'; 
+  margin-top: 0px;
+  width: 350px;
+
 }
 
 
@@ -63,6 +105,7 @@
   position: relative;
   border: 2px solid #D9D9D9;
   background-color: #D9D9D9;
+  font-family: 'Times New Roman', 'Times New Roman' ;
   /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
 }
 
@@ -78,6 +121,7 @@
   position: relative;
   border: 2px solid #D9D9D9;
   background-color: #D9D9D9;
+  font-family: 'Times New Roman', 'Times New Roman' ;
   /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
 }
 
@@ -105,13 +149,20 @@
 }
 
 .Botoes_usuario {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border: 2px solid gray;
-  /* Adiciona uma borda cinza */
   border-radius: 10px;
-  /* Adiciona cantos arredondados */
   cursor: pointer;
+}
+
+.Botoes_usuario3 {
+  width: 70px;
+  height: 70px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 1040px;
 }
 
 .logo {
@@ -244,8 +295,8 @@ body {
 }
 
 .equipe-btn, .equipe-btn2 {
-  width: 210px;
-  height: 30px;
+  width: 180px;
+  height: 25px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -255,6 +306,8 @@ body {
   background-color: #D9D9D9;
   font-family: 'Times New Roman';
   margin-top: 5px;
+   
+  margin-left: 10px;
 }
 
 .equipe-btn2 {    
@@ -278,7 +331,7 @@ body {
   background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
   position: fixed;
   width: 1460px;
-  height: 330px;
+  height: 370px;
   margin-left: -740px; 
   margin-top: -230px;   
   border-radius: 8px;
@@ -309,6 +362,13 @@ body {
   margin-top: -70px;
   border-radius: 8px;
   height: 30px;
+}
+
+.textotop{
+  color: white; 
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman' ;
+  margin-top: 0px;
 }
 
 .btn-left, .btn-right {
@@ -376,6 +436,25 @@ body {
   margin-left: 10px;
 }
 
+
+.Botoes_usuario2 {
+  width: 80px;
+  height: 80px;
+  border: 2px solid gray; /* Adiciona uma borda cinza */
+  border-radius: 10px; /* Adiciona cantos arredondados */    
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.Botoes_usuario5 {
+  width: 80px;
+  height: 80px;
+  border: 2px solid gray; /* Adiciona uma borda cinza */
+  border-radius: 10px; /* Adiciona cantos arredondados */    
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .dados{
   display: flex;
   flex-direction: column;
@@ -404,6 +483,8 @@ body {
   padding: 5px;
 }
 
+
+
 .cadastro-label2 {
   padding-top: 5%;
   font-size: 20px;
@@ -416,11 +497,8 @@ body {
   /* Adicione aqui quaisquer estilos adicionais necessários para o segundo rótulo de cadastro */
 }
 
-input[type="text"] {
-  
-  margin-top: 10px;
-  width: 350px;
-  height: 30px;
+.input2 {
+
   border: none;
   border-radius: 8px;
   padding-left: 10px;
@@ -431,8 +509,34 @@ input[type="text"] {
   font-weight: bold;
   font-size: 20px;
   font-family: 'Times New Roman', 'Times New Roman';
-  margin-right: 10px;
   padding: 5px;
+  
+  width: 1070px; 
+  height: 25px; 
+  margin-top: 0px; 
+  margin-right: 0px;
+
+}
+
+.input3 {
+
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  padding: 5px;
+  
+  width: 260px; 
+  height: 25px; 
+  margin-top: 0px; 
+  margin-right: 0px;
+
 }
 
 
@@ -440,9 +544,24 @@ input[type="text"] {
   margin-right: 10px;
   padding: 5px 10px;
   margin-top: 30px;
-  width: 300px;
+  width: 180px;
   height:35px;
   border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+}
+
+.modalpesquisarButton2 {
+  margin-right: 10px;
+  padding: 5px 10px;
+  margin-top: 5px;
+  width: 180px;
+  height:35px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 18px;
@@ -457,4 +576,605 @@ legend{
   font-weight: bold;
   font-size: 20px;
   font-family: 'Times New Roman', 'Times New Roman';
+}
+
+
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.overlay_alertBox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.alert {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the alert */
+  z-index: 1001; /* Sit on top of the overlay_alertBox */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.alert .message_customAlert {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the button */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.alert .okbtn {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.alert .okbtn:hover {
+  background-color: darkgray;
+}
+
+
+
+
+
+
+.overlay_customConfirm {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.confirm_customConfirm {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the confirm */
+  z-index: 1001; /* Sit on top of the overlay_customConfirm */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.confirm_customConfirm .message_customConfirm {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the buttons */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.confirm_customConfirm .button-container_customConfirm {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+}
+
+.confirm_customConfirm .okbtn_customConfirm, .confirm_customConfirm .cancelbtn_customConfirm {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  width: 100px; /* Ensure both buttons have the same width */
+}
+
+.confirm_customConfirm .okbtn_customConfirm:hover, .confirm_customConfirm .cancelbtn_customConfirm:hover {
+  background-color: darkgray;
+}
+
+
+
+
+
+
+
+
+@media screen and (min-width: 1000px) and (max-width: 1599px) {
+  
+  .Botoes_usuario3 {
+    margin-left: 583px;
+  }
+
+  .rectangle {
+    width: 980px;
+    height: 600px;  
+    margin-top: 0px;  
+  }
+
+  .rectangle2 {
+    width: 940px;
+    margin-left: -480px;
+  }
+
+  .top {
+    width: 940px;
+  }
+
+  
+  .input2 {
+    width: 550px;
+  }
+
+  .equipe-container {
+    width: 940px;    
+  }
+
+  .equipe-container3 {
+    width: 940px;    
+  }
+
+  .footer {
+    width: 940px;
+    margin-left: -480px;    
+  }
+
+
+  .container {
+    margin-top: 0px;
+  }
+  
+  
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 999px) {
+  
+  .logo {
+    position: absolute;
+    left: 10px;
+    width: 165px;
+    height: 40px;
+    top: 25px
+  }
+
+  .Botoes_usuario3 {
+    margin-left: 340px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .Botoes_usuario {
+    width: 60px;
+    height: 60px;  
+  }
+
+  .user-details-Ul {
+    font-size: 13px;
+    width: 60px;
+  }
+
+  .user-details-Ul-li1 {
+    font-size: 13px;    
+  }
+  
+  .user-details-Ul-li2 {
+    font-size: 13px;
+  }
+
+  .rectangle {
+    width: 580px;
+    height: 400px;  
+    margin-top: 0px;  
+  }
+
+  .rectangle2 {
+    width: 540px;
+    margin-left: -280px;
+    height: 180px;
+    margin-top: -140px; 
+  }
+
+  .top {
+    width: 540px;
+    height: 20px;
+    margin-top: -60px;
+  }
+
+  
+  .input2 {
+    width: 294px;
+    height: 18px;
+    font-size: 14px;
+  }
+
+  .input3 {
+    width: 294px;
+    height: 18px;
+    font-size: 14px;
+    width: 150px;
+  }
+
+  .equipe-container {
+    width: 540px;    
+    height: 80px;
+  }
+
+  .equipe-container3 {
+    width: 540px;    
+    height: 80px;   
+  }
+
+  .footer {
+    width: 540px;
+    margin-left: -280px;    
+  }
+
+
+  .container {
+    margin-top: 2px;
+  }
+  
+  .textotop{
+    font-size: 20px;
+    margin-top: 0px;
+  }
+
+  .equipe-btn {
+    margin-top: 0px;    
+    width: 108px;
+    height: 25px;
+    font-size: 14px;
+  }
+  
+  .equipe-btn2{
+    width: 150px;
+    height: 25px;
+    font-size: 14px;
+    margin-top: -5px;
+  }
+  
+
+  .equipe-containerdiv2 {
+    margin-top: 8px;    
+  }
+
+  .Botoes_usuario5 {
+    width: 50px;
+    height: 50px;
+  }
+
+  .frasesemdados{
+    margin-top: 25px;
+    font-size: 20px;
+  
+  }
+
+  .nomeequipe{ 
+    font-size: 14px;
+  }
+
+
+  .CriarEquipeButton,.CriarEventoButton {
+    width: 150px;
+    height: 30px;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .btn-left2, .btn-right2 {
+    width: 150px;
+    height: 25px;    
+    font-size: 14px;
+  }
+
+  .btn-left2 {
+    right: 170px;
+  }
+
+  .pagina-info {    
+    font-size: 14px;
+  }
+
+  .modal-content {
+    width: 480px;
+  }
+
+  .parametros-container{
+    overflow-y: auto;
+    max-height: 180px;
+  }
+
+
+  .modalpesquisarButton {
+    width: 130px;
+    height:35px;
+    font-size: 14px;
+  }
+
+  .modalpesquisarButton2 {
+    width: 130px;
+    height:35px;
+    font-size: 14px;
+  }
+  
+  .dadosevento4, .dadosevento2{
+    width: 200px;
+  }
+  
+  
+}
+
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+  
+  .welcome-container {
+    top: 50%;
+    margin-top: 50px;
+  }
+
+  .logo {
+    position: absolute;
+    margin-left: 0px;
+    margin-top: -90px;
+    width: 169px;
+    height: 40px;
+    cursor: pointer; /* Adicionado para indicar que a imagem é clicável */
+  }
+
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -15px;
+    margin-top: 70px;
+  }
+
+  .logout-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de logout */
+    cursor: pointer; /* Adicionado para indicar que o elemento é clicável */
+    margin-top: 68px;
+    margin-left: 80px;
+  }
+
+
+  .Botoes_usuario3 {
+    margin-left: 0px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .Botoes_usuario {
+    width: 60px;
+    height: 60px;  
+  }
+
+  .user-details-Ul {
+    font-size: 13px;
+    width: 60px;
+  }
+
+  .user-details-Ul-li1 {
+    font-size: 13px;    
+  }
+  
+  .user-details-Ul-li2 {
+    font-size: 13px;
+  }
+
+  .rectangle {
+    width: 300px;
+    height: 430px;
+    margin-top: 0px;  
+  }
+
+  .rectangle2 {
+    width: 260px;
+    margin-left: -140px;
+    height: 180px;
+    margin-top: -160px;
+  }
+
+  .top {
+    width: 260px;
+    height: 20px;
+    margin-top: -58px;
+  }
+
+  
+  .input2 {
+    width: 240px;
+    height: 18px;
+    font-size: 14px;
+    margin-left: 0px;
+  }
+
+  .input3 {
+    height: 18px;
+    font-size: 14px;
+    width: 230px;
+  }
+
+  
+
+  .equipe-container3 {
+    width: 260px;    
+    height: 80px; 
+    margin-left: 2px;  
+    margin-top: 10px;
+  }
+
+  .footer {
+    width: 260px;
+    margin-left: -140px;    
+    flex-direction: column;
+    height: 80px;
+  }
+
+
+  .container {
+    margin-top: 2px;
+    height: 140px;
+  }
+  
+  .textotop{
+    font-size: 15px;
+    margin-top: 0px;
+  }
+
+  .equipe-btn {
+    margin-top: 0px;    
+    width: 108px;
+    height: 25px;
+    font-size: 14px;
+    margin-left: 0px;
+    margin: 4px;
+  }
+  
+  .equipe-btn2{
+    width: 150px;
+    height: 25px;
+    font-size: 14px;
+    margin-top: -5px;
+  }
+
+  .equipe-containerdiv2 {
+    margin-top: 5px;
+    margin-left: -85px;    
+  }
+
+  .Botoes_usuario5 {
+    width: 50px;
+    height: 50px;
+  }
+
+  .frasesemdados{
+    margin-top: 15px;
+    font-size: 20px;
+    width: 260px;
+  }
+
+  .equipe-container {
+    width: 240px;    
+    height: 100px;
+  }
+
+  .equipe-containerdiv2 {
+    margin-top: 25px;
+    margin-left: -85px;    
+  }
+
+  .dados{
+    display: flex;
+    margin-left: 20px;
+    margin-top: -60px;
+  }
+
+  .nomeequipe{ 
+    font-size: 14px;
+    width: 150px;
+    margin-top: 0px;
+  }
+
+
+  .CriarEquipeButton,.CriarEventoButton {
+    width: 260px;
+    height: 25px;
+    font-size: 14px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .CriarEquipeButton{
+    margin-top: 2px;
+  }
+  .btn-left2, .btn-right2 {
+    width: 150px;
+    height: 30px;    
+    font-size: 14px;
+  }
+
+  .btn-left2 {
+    right: 170px;
+  }
+
+  .pagina-info {    
+    font-size: 14px;
+  }
+
+  .modal-content {
+    width: 270px;
+  }
+
+  .parametros-container{
+    overflow-y: auto;
+    max-height: 180px;
+  }
+
+
+  .modalpesquisarButton {
+    width: 110px;
+    height:25px;
+    font-size: 14px;
+  }
+
+  .modalpesquisarButton2 {
+    width: 120px;
+    height:25px;
+    font-size: 14px;
+    margin-left: -130px;
+    margin-top: 55px;
+    padding-top: 2px;
+  }
+  
+  .dadosevento4, .dadosevento2{
+    width: 130px;
+  }
+  
+  .listagemequipes{
+    overflow-y: auto;
+    max-height: 175px;
+    width: 264px;
+    border: 2px solid black;
+    border-color: black;
+    border-radius: 8px;
+    margin-left: -4px;
+  }
+  
 }

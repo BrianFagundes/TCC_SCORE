@@ -3,6 +3,10 @@ package com.api.usuario;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 import java.util.Properties;
 
 public class EmailSender {
@@ -12,11 +16,11 @@ public class EmailSender {
     private static final String USERNAME = "tccscore@outlook.com";
     private static final String PASSWORD = "Tcc@Score#";   
 
-
-    private UsuarioController usuarioController;
+    @Autowired
+    private UsuarioRepository usuariorepository;
     
-    public EmailSender(UsuarioController usuarioController) {
-        this.usuarioController = usuarioController;
+    public EmailSender(UsuarioRepository usuariorepository) {
+    	this.usuariorepository = usuariorepository;
     }
 
     public int sendEmail(String to, String subject, String body) throws MessagingException {
@@ -36,14 +40,18 @@ public class EmailSender {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(USERNAME));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-
-        
-        if(usuarioController.NaoExisteEmail(to))
+        System.out.println(to);
+        List<Usuario> usuarios = usuariorepository.findByEmail(to);      
+    	if (usuarios == null || usuarios.isEmpty())
         {
         	return 1;        
         }
         if(subject.equals("Recuperação de senha")) {
-        	body += usuarioController.RetornoSenha(to);
+        	String senha = "";
+        	for (Usuario usuario : usuarios) { 
+        		senha =  CriptografiaAES.descriptografar(usuario.getsenha());
+        	}
+        	body += senha;
         }        
         
         message.setSubject(subject);

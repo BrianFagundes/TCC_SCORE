@@ -150,6 +150,27 @@ export class CriareventoComponent {
     this.carregarDadosUsuario();
     await this.carregarEquipes();
     this.carregarEventos();
+
+    var screenWidth = window.innerWidth;
+
+    if(screenWidth > 999 )
+      {
+        this.EventosPorPagina = 3;
+      }
+      else
+      {
+        if(screenWidth > 599 )
+        {
+          this.EventosPorPagina = 2;  
+        }
+        else
+        {
+          this.EventosPorPagina = 999;
+        }
+        
+      }
+
+
   }
 
   carregarDadosUsuario() {
@@ -549,6 +570,20 @@ export class CriareventoComponent {
       alert("Evento não pode ser iniciado, Para que possa precisa ser configurado primeiro!")
     }
     else {
+
+      const evento = await this.apiService.obterUmEvento(this.Eventos[i].id ? this.Eventos[i].id.toString() : "");
+
+
+      if(evento.status == "I")
+      {
+        alert("Evento ja iniciado! Não pode ser iniciado novamente.");
+        setTimeout(() => {
+          this.Eventos = [];
+          this.carregarEventos();
+        }, 0);
+        return;
+      }
+
       const confirmation = confirm('Deseja de fato inicializar o evento? Uma vez iniciado não poderá alterar mais nenhum dado do mesmo!');
       if (confirmation) {
         const agora = new Date();
@@ -664,6 +699,20 @@ export class CriareventoComponent {
   }
 
   async FinalizarEvento(id: number, i: number) {
+
+    const evento = await this.apiService.obterUmEvento(this.Eventos[i].id ? this.Eventos[i].id.toString() : "");
+
+
+      if(evento.status == "F")
+      {
+        alert("Evento ja finalizado! Não pode ser finalizado novamente.");
+        setTimeout(() => {
+          this.Eventos = [];
+          this.carregarEventos();
+        }, 0);
+        return;
+      }
+
     const confirmation = confirm('Deseja de fato finalizar o evento? Uma vez finalizado não poderá ser reiniciado novamente!');
     const Dataatual = Date();
 

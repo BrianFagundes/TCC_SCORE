@@ -12,8 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-
+import java.util.Date;
 
 @CrossOrigin(origins = "*")
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -21,22 +20,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final JWTUtil jwtUtil;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
-    	super();
+        super();
         this.jwtUtil = jwtUtil;
         setFilterProcessesUrl("/usuarios/**");
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-    	String token = extractTokenFromHeader(request);
+        String token = extractTokenFromHeader(request);
         
-
         if (token == null) {
             return null;
         }
 
         String username = jwtUtil.extractUsername(token);
-        
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             return new UsernamePasswordAuthenticationToken(username, "f9e29a8");
@@ -47,17 +44,32 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-    	SecurityContextHolder.getContext().setAuthentication(authResult);
-    	chain.doFilter(request, response);        
+        SecurityContextHolder.getContext().setAuthentication(authResult);
+
+        String token = extractTokenFromHeader(request);
+        if (token != null && jwtUtil.isTokenValid(token)) {
+            Date expirationDate = jwtUtil.getExpirationDateFromToken(token);
+            long currentTimeMillis = System.currentTimeMillis();
+            long expirationTimeMillis = expirationDate.getTime();
+            long timeRemaining = expirationTimeMillis - currentTimeMillis;
+
+            // Renew the token if it will expire in less than 10% of its original expiration time
+            long renewalThreshold = jwtUtil.getJwtExpirationMs() / 10;
+            if (timeRemaining < renewalThreshold) {
+                String newToken = jwtUtil.generateToken(authResult);
+                System.out.println("Devolveu novo token");
+                response.setHeader("Authorization", "Bearer " + newToken);
+            }
+        }
+
+        chain.doFilter(request, response);
     }
 
     private String extractTokenFromHeader(HttpServletRequest request) {
-    	String header = request.getHeader("Authorization");
-    	if (header != null && header.startsWith("Bearer ")) {
+        String header = request.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
             return header.substring(7); // Remove "Bearer " to extract only the token
         }
         return null;
     }
-    
-    
 }

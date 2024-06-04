@@ -2,39 +2,38 @@
     <div class="welcome-container">
         <div class="user-info">
             <div class="container">
-                <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="TelaInicial()">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo">
                 <div class="image-container">
-                    <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image"
-                        class="Botoes_usuario" (click)="usuario()">
-                </div>
+                    <img id="selectedImage2" [src]="imagePath" alt="User Image" class="Botoes_usuario3" (click)="usuario()">
+                </div>               
                 <div class="user-details">
                     <ul class="user-details-Ul">
                         <li class="user-details-Ul-li1"><strong>ID:</strong> </li>
-                        <li class="user-details-Ul-li2"> {{IdUsuario }} </li>
+                        <li class="user-details-Ul-li2"> {{IdUsuario }} </li>                        
                         <li class="user-details-Ul-li2"><strong>Nome:</strong></li>
-                        <li class="user-details-Ul-li2"> {{ (nomeUsuario? nomeUsuario.length : 0) > 9 ? (nomeUsuario |
-                            slice:0:9) + '...' : nomeUsuario }} </li>
+                        <li class="user-details-Ul-li2"> {{ (nomeUsuario? nomeUsuario.length : 0) > 9 ? (nomeUsuario | slice:0:9) + '...' : nomeUsuario }} </li>                        
                     </ul>
                 </div>
                 <div class="logout-button" (click)="logout()">
-                    <img style="margin-top: 4px;" src="../../assets/Logout.png" alt="Logout" class="Botoes_usuario" />
-                </div>
-            </div>
+                    <img style="margin-top: 4px;" src="../../assets/Logout.png" alt="Logout" class="Botoes_usuario"/>
+                </div>                
+            </div>                    
         </div>
         <div class="rectangle">
             <div class="welcome-message">
-                <div class="rectangle2" style="height: 370px;">
+                <div class="rectangle2">
                     <div class="top">
-                        <p style="color: white; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-top: 0px;">Eventos da Equipe {{nomeequipe}} com avaliações recebidas</p>                  
+                        <p class="textotop">Eventos da Equipe {{nomeequipe}} com avaliações recebidas</p>                  
                     </div>
                     <div>
-                        <input style="width: 1070px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
+                        <input type="text"
                             class="input" name="procura" placeholder="Data (dia/mês/ano hr:min:seg) ou Nome do evento" maxlength="25" #procura
                             required>                        
-                        <button style="width: 180px; margin-left: 10px;" class="equipe-btn" (click)="botaopesquisarlistaeventos()" >Pesquisar</button>
-                        <button style="width: 180px; margin-left: 10px; margin-bottom: 10px;" (click)="Limpapesquisarlistaeventos()" class="equipe-btn">Limpa
+                        <button class="equipe-btn" (click)="botaopesquisarlistaeventos()" >Pesquisar</button>
+                        <button (click)="Limpapesquisarlistaeventos()" class="equipe-btn">Limpa
                             filtro</button>
                     </div>
+                    <div class="listagemequipes">
                     <div *ngIf="!filtrou">
                         <div *ngFor="let equipe of eventosNaPaginaAtual; let i = index" class="equipe-container">
                             <div class="equipe-containerdiv">
@@ -48,11 +47,11 @@
                             </div>                            
                             <div class="equipe-containerdiv2">                               
                                 <div class="equipe-containerdiv2">  
-                                    <button style="margin-right: 10px;" class="equipe-btn2" (click)="TelaAvaliacao(equipe.datasemtratamento, equipe.idevento)">Minha Média no Evento</button>                                    
+                                    <button style="margin-right: 10px;" class="equipe-btn3" (click)="TelaAvaliacao(equipe.datasemtratamento, equipe.idevento)">Minha Média no Evento</button>                                    
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                     <div *ngIf="filtrou && existe">
                         <div *ngFor="let equipe of eventosNaPaginaAtual2; let i = index" class="equipe-container">
                             <div class="equipe-containerdiv">
@@ -66,26 +65,26 @@
                             </div>                              
                             <div class="equipe-containerdiv2">                               
                                 <div class="equipe-containerdiv2">  
-                                    <button style="margin-right: 10px;" class="equipe-btn2" (click)="TelaAvaliacao(equipe.datasemtratamento, equipe.idevento)">Minha Média no Evento</button>                                    
+                                    <button style="margin-right: 10px;" class="equipe-btn3" (click)="TelaAvaliacao(equipe.datasemtratamento, equipe.idevento)">Minha Média no Evento</button>                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div *ngIf="filtrou && !existe">
                         <div  class="equipe-container3">
-                            <p style="color: black; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-bottom: 5px;" ><strong>Não existem eventos nas condições passadas!</strong></p>
+                            <p class="naoexistemdados" ><strong>Não existem eventos nas condições passadas!</strong></p>
                         </div>
                     </div>
 
-
-                    <span *ngIf="!filtrou" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas }}</span>
-                    <span *ngIf="filtrou && existe" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas2 }}</span>
-                    <span *ngIf="filtrou && !existe" class="pagina-info">Página 1/1</span>
+                </div>
+                    <span *ngIf="!filtrou && eventosPorPagina<4" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas }}</span>
+                    <span *ngIf="filtrou && existe && eventosPorPagina<4" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas2 }}</span>
+                    <span *ngIf="filtrou && !existe && eventosPorPagina<4" class="pagina-info">Página 1/1</span>
                     <button class="btn-left2" style="margin-bottom: 10px;" (click)="mudarPagina(-1)"
                         [disabled]="paginaAtual === 1">Anterior</button>
-                    <button *ngIf="!filtrou" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                    <button *ngIf="!filtrou && eventosPorPagina<4" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
                         [disabled]="paginaAtual >= (eventos.length / eventosPorPagina)">Próximo</button>                    
-                    <button *ngIf="filtrou"  class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                    <button *ngIf="filtrou && eventosPorPagina<4"  class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
                         [disabled]="paginaAtual >= (eventos2.length / eventosPorPagina)">Próximo</button>
                 </div>
                 <div class="footer">

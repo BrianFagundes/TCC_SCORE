@@ -2,10 +2,10 @@
     <div class="welcome-container">
         <div class="user-info">
             <div class="container">
-                <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="TelaInicial()">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo">
                 <div class="image-container">
-                    <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image"
-                        class="Botoes_usuario" (click)="usuario()">
+                    <img id="selectedImage2" [src]="imagePath" alt="User Image" class="Botoes_usuario3"
+                        (click)="usuario()">
                 </div>
                 <div class="user-details">
                     <ul class="user-details-Ul">
@@ -24,75 +24,97 @@
         <div class="rectangle">
             <div class="welcome-message">
                 <div class="rectangle2">
+                    <div class="top">
+                        <p class="textotop">Gerenciamento de equipes</p>
+                    </div>
                     <div>
-                        <input style="width: 1070px; height: 25px; margin-top: 0px; margin-right: 0px;" type="text"
-                            class="input" name="procura" placeholder="id ou Nome da equipe" maxlength="25" #procura
-                            required>
-                        <button style="width: 180px; margin-left: 10px;" class="equipe-btn" (click)="botaopesquisarlistaEquipes()" >Pesquisar</button>
-                        <button style="width: 180px; margin-left: 10px; margin-bottom: 10px;" (click)="LimpapesquisarlistaEquipes()" class="equipe-btn">Limpa
+                        <input class="input2" type="text" name="procura" placeholder="id ou Nome da equipe"
+                            maxlength="25" #procura required>
+                        <button style="margin-left: 10px;" class="equipe-btn"
+                            (click)="botaopesquisarlistaEquipes()">Pesquisar</button>
+                        <button style="margin-left: 10px; margin-bottom: 10px;" (click)="LimpapesquisarlistaEquipes()"
+                            class="equipe-btn">Limpa
                             filtro</button>
                     </div>
-                    <div *ngIf="!filtrou">
-                        <div *ngFor="let equipe of equipesNaPaginaAtual; let i = index" class="equipe-container">
-                            <div class="equipe-containerdiv">
-                                <img style="margin-left: 1040px" id="selectedImage" [src]="equipe.foto" alt="User Image"
-                                    class="Botoes_usuario" (click)="fileInput.click()">
-                                <input type="file" accept="image/png, image/jpeg" #fileInput
-                                    (change)="onImageSelected($event,equipe.id)" style="display:none" class="image2">
-                            </div>
-                            <span class="nomeequipe">Nome da Equipe: {{ equipe.nome }}</span>
-                            <span class="nomeequipe">Número da Equipe: {{ equipe.id }}</span>
-                            <div class="equipe-containerdiv2">
-                                <button class="equipe-btn" (click)="excluirEquipe(equipe.id, equipe.nome)">Excluir
-                                    Equipe</button>
-                                <button class="equipe-btn" (click)="Teladetalhes(equipe.id.toString(), 'D')">Detalhes
-                                    Adicionais</button>
-                                <button class="equipe-btn2" (click)="Teladetalhes(equipe.id.toString(), 'A')">Alterar
-                                    Detalhes</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="filtrou && existe">
-                        <div *ngFor="let equipe of equipesNaPaginaAtual2; let i = index" class="equipe-container">
-                            <div class="equipe-containerdiv">
-                                <img style="margin-left: 1040px" id="selectedImage" [src]="equipe.foto" alt="User Image"
-                                    class="Botoes_usuario" (click)="fileInput.click()">
-                                <input type="file" accept="image/png, image/jpeg" #fileInput
-                                    (change)="onImageSelected($event,equipe.id)" style="display:none" class="image2">
-                            </div>
-                            <span class="nomeequipe">Nome da Equipe: {{ equipe.nome }}</span>
-                            <span class="nomeequipe">Número da Equipe: {{ equipe.id }}</span>
-                            <div class="equipe-containerdiv2">
-                                <button class="equipe-btn" (click)="excluirEquipe(equipe.id, equipe.nome)">Excluir
-                                    Equipe</button>
-                                <button class="equipe-btn" (click)="Teladetalhes(equipe.id.toString(), 'D')">Detalhes
-                                    Adicionais</button>
-                                <button class="equipe-btn2" (click)="Teladetalhes(equipe.id.toString(), 'A')">Alterar
-                                    Detalhes</button>
+                    <div class="listagemequipes">
+                        <div *ngIf="!filtrou">
+                            <div *ngFor="let equipe of equipesNaPaginaAtual; let i = index" class="equipe-container">
+                                <div class="equipe-containerdiv">
+                                    <img id="selectedImage" [src]="equipe.foto" alt="User Image" class="Botoes_usuario5"
+                                    >                                    
+                                </div>
+                                <div class="dados">
+                                    <span class="nomeequipe">Nome da Equipe: {{ equipe.nome }}</span>
+                                    <span class="nomeequipe">ID da Equipe: {{ equipe.id }}</span>
+                                </div>
+                                <div class="equipe-containerdiv2">
+                                    <div class="equipe-containerdiv2">
+                                        <button style="margin-right: 10px;" class="equipe-btn2"
+                                            (click)="excluirEquipe(equipe.id, equipe.nome)">Excluir
+                                            Equipe</button>
+                                        <button style="margin-right: 10px;" class="equipe-btn2"
+                                            (click)="Teladetalhes(equipe.id.toString(), 'D')">Detalhes
+                                            Adicionais</button>
+                                        <button style="margin-right: 10px;" class="equipe-btn2"
+                                            (click)="Teladetalhes(equipe.id.toString(), 'A')">Alterar
+                                            Detalhes</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div *ngIf="filtrou && !existe">
-                        <div  class="equipe-container">
-                            <p style="color: black; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman' ;margin-bottom: 5px;" ><strong>Não existem equipes nas condições passadas!</strong></p>
+                        <div *ngIf="filtrou && existe">
+                            <div *ngFor="let equipe of equipesNaPaginaAtual2; let i = index" class="equipe-container">
+                                <div class="equipe-containerdiv">
+                                    <img id="selectedImage" [src]="equipe.foto"
+                                        alt="User Image" class="Botoes_usuario5">
+                                </div>
+                                <div class="dados">
+                                    <span class="nomeequipe">Nome da Equipe: {{ equipe.nome }}</span>
+                                    <span class="nomeequipe">ID da Equipe: {{ equipe.id }}</span>
+                                </div>
+                                <div class="equipe-containerdiv2">
+                                    <div class="equipe-containerdiv2">
+                                        <button style="margin-right: 10px;" class="equipe-btn2"
+                                            (click)="excluirEquipe(equipe.id, equipe.nome)">Excluir
+                                            Equipe</button>
+                                        <button style="margin-right: 10px;" class="equipe-btn2"
+                                            (click)="Teladetalhes(equipe.id.toString(), 'D')">Detalhes
+                                            Adicionais</button>
+                                        <button style="margin-right: 10px;" class="equipe-btn2"
+                                            (click)="Teladetalhes(equipe.id.toString(), 'A')">Alterar
+                                            Detalhes</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div *ngIf="filtrou && !existe">
+                            <div class="equipe-container">
+                                <p
+                                class="naoexistemdados">
+                                    <strong>Não existem equipes nas condições passadas!</strong></p>
+                            </div>
+                        </div>
 
-
-                    <span *ngIf="!filtrou" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas }}</span>
-                    <span *ngIf="filtrou && existe" class="pagina-info">Página {{ paginaAtual }}/{{ totalDePaginas2 }}</span>
-                    <span *ngIf="filtrou && !existe" class="pagina-info">Página 1/1</span>
-                    <button class="btn-left2" style="margin-bottom: 10px;" (click)="mudarPagina(-1)"
-                        [disabled]="paginaAtual === 1">Anterior</button>
-                    <button *ngIf="!filtrou" class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
-                        [disabled]="paginaAtual >= (equipes.length / equipesPorPagina)">Próximo</button>                    
-                    <button *ngIf="filtrou"  class="btn-right2" style="margin-bottom: 10px;" (click)="mudarPagina(1)"
+                    </div>
+                    <span *ngIf="!filtrou && equipesPorPagina<4" class="pagina-info">Página {{ paginaAtual }}/{{
+                        totalDePaginas }}</span>
+                    <span *ngIf="filtrou && existe && equipesPorPagina<4" class="pagina-info">Página {{ paginaAtual
+                        }}/{{ totalDePaginas2 }}</span>
+                    <span *ngIf="filtrou && !existe && equipesPorPagina<4" class="pagina-info">Página 1/1</span>
+                    <button *ngIf="equipesPorPagina<4" class="btn-left2" style="margin-bottom: 10px;"
+                        (click)="mudarPagina(-1)" [disabled]="paginaAtual === 1">Anterior</button>
+                    <button *ngIf="!filtrou && equipesPorPagina<4" class="btn-right2" style="margin-bottom: 10px;"
+                        (click)="mudarPagina(1)"
+                        [disabled]="paginaAtual >= (equipes.length / equipesPorPagina)">Próximo</button>
+                    <button *ngIf="filtrou && equipesPorPagina<4" class="btn-right2" style="margin-bottom: 10px;"
+                        (click)="mudarPagina(1)"
                         [disabled]="paginaAtual >= (equipes2.length / equipesPorPagina)">Próximo</button>
                 </div>
                 <div class="footer">
-                    <button class="btn-left" (click)="TelaInicial()">Tela Inicial</button>                    
+                    <button class="btn-left" (click)="TelaInicial()">Tela Inicial</button>
                     <button class="btn-right3" (click)="criarNovaEquipe()">(+) Criar nova equipe?</button>
-                    <button class="btn-right" (click)="CriarEvento()" [disabled]="habilitaevento">Gerenciar Eventos</button>
+                    <button class="btn-right" (click)="CriarEvento()" [disabled]="habilitaevento">Gerenciar
+                        Eventos</button>
                 </div>
             </div>
         </div>
@@ -110,3 +132,19 @@
         </div>
     </div>
 </div>
+
+<div id="overlay_alertBox" class="overlay_alertBox"></div>
+  <div id="customAlert" class="alert">
+    <p id="alertmessage_customAlert" class="message_customAlert"></p>
+    <button class="okbtn" (click)="hideAlert()">OK</button>
+  </div>
+
+  <div id="overlay_customConfirm" class="overlay_customConfirm"></div>
+  <div id="customConfirm" class="confirm_customConfirm">
+    <p id="confirmmessage_customConfirm" class="message_customConfirm"></p>
+    <div class="button-container_customConfirm">
+        <button class="okbtn_customConfirm" (click)="handleConfirm(true)">OK</button>
+        <button class="cancelbtn_customConfirm" (click)="handleConfirm(false)">Cancelar</button>
+    </div>
+  </div>
+

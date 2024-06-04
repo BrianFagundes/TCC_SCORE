@@ -156,6 +156,26 @@ export class AvaliacaoparticipantesComponent {
     localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
     this.carregarparticipante();
+
+    if(window.innerWidth > 999 )
+      {
+        this.participantesPorPagina = 3;
+      }
+      else
+      {
+        if(window.innerWidth > 599 )
+        {
+          this.participantesPorPagina = 2;  
+        }
+        else
+        {
+          this.participantesPorPagina = 999;
+        }
+        
+      }
+
+
+
   }
 
   carregarDadosUsuario() {
@@ -276,10 +296,11 @@ export class AvaliacaoparticipantesComponent {
     if (valorProcura) {
       if (valorProcura.length > 0) {
         this.filtrou = true;
-
+        
         this.participantes2 = this.participantes.filter(participante =>
-          participante.id === valorProcura
+          participante.id == valorProcura
         );
+        
         if (this.participantes2.length == 0) {
           this.existe = false;
         }
@@ -287,7 +308,7 @@ export class AvaliacaoparticipantesComponent {
           this.existe = true;
         }
         if (!this.existe) {
-          this.participantes2 = this.participantes.filter(participante => participante.nome.toLowerCase() === valorProcura.toLowerCase());
+          this.participantes2 = this.participantes.filter(participante => participante.nome.toLowerCase() == valorProcura.toLowerCase());
           if (this.participantes2.length == 0) {
             this.existe = false;
           }

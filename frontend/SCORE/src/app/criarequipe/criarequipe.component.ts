@@ -89,8 +89,8 @@ export class CriarequipeComponent {
   mostrarconfSenhaModal: boolean = false;
   filtrou: boolean = false;
   existe: boolean = false;
-  habilitaevento : boolean = true;
-
+  habilitaevento : boolean = true;  
+  screenWidth: number = window.innerWidth;
 
 
   constructor(private router: Router, private apiService: ApiService) {
@@ -105,6 +105,26 @@ export class CriarequipeComponent {
     localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
     this.carregarEquipes();
+
+    this.screenWidth = window.innerWidth;
+
+    if(this.screenWidth > 999 )
+      {
+        this.equipesPorPagina = 3;
+      }
+      else
+      {
+        if(this.screenWidth > 599 )
+        {
+          this.equipesPorPagina = 2;  
+        }
+        else
+        {
+          this.equipesPorPagina = 999;
+        }
+        
+      }
+
   }
 
   carregarDadosUsuario() {
@@ -171,13 +191,14 @@ export class CriarequipeComponent {
   }
 
   logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
-    if (confirmation) {
-      localStorage.setItem('imagem', "");
-      localStorage.setItem('Usuario', "");
-      localStorage.setItem('ID', "");
-      this.router.navigate(['/home']); // Redireciona para a tela de login
-    }
+    this.showConfirm('Deseja realmente fazer o log-off?', (confirmation: boolean) => {
+      if (confirmation) {
+        localStorage.setItem('imagem', "");
+        localStorage.setItem('Usuario', "");
+        localStorage.setItem('ID', "");
+        this.router.navigate(['/home']); // Redireciona para a tela de login
+      }
+    });
   }
 
   get equipesNaPaginaAtual() {
@@ -197,7 +218,7 @@ export class CriarequipeComponent {
       this.abrirModal()
     }
     else
-      alert("O usuário pode ter no máximo 100 equipes!");
+      this.showAlert("O usuário pode ter, no máximo, 100 equipes.");
   }
 
   mudarPagina(numero: number) {
@@ -224,14 +245,22 @@ export class CriarequipeComponent {
 
 
   confirmarCancelar() {
-    if (confirm('Gostaria de Cancelar a criação da Equipe?')) {
-      this.fecharModal();
-    }
+    this.showConfirm('Gostaria de cancelar a criação da equipe?', (confirmation: boolean) => {
+      if (confirmation) {
+        this.fecharModal();
+      }
+    });
   }
 
-  async confirmarCriacao() {
+  async confirmarCriacao() {   
+    this.showConfirm(`Gostaria de criar a nova equipe com o nome:  ${this.nomeEquipe?.nativeElement.value}?`, (confirmation: boolean) => {
+      this.criaequipe(confirmation);
+    });       
+  }
+
+  async criaequipe(confirm : boolean){
     const ID = localStorage.getItem('ID');
-    if (confirm(`Gostaria de Criar a nova equipe com o nome: ${this.nomeEquipe?.nativeElement.value}?`)) {
+    if (confirm) {
       const dadosEmpresa = {
         nome: this.nomeEquipe?.nativeElement.value,
         foto: '../../assets/upload.png',
@@ -265,37 +294,40 @@ export class CriarequipeComponent {
 
       if (isValid !== 0) {
         if (isValid == 1)
-          alert("Erro ao realizar a inclusão!");
+          this.showAlert("Erro ao realizar a inclusão.");
         else if (isValid == -1) {
-          alert("Falha de conexão com a API!")
+          this.showAlert("Falha na conexão com a API.")
         }
       }
       else
-        alert("Inclusão da equipe realizada com sucesso!")
+      this.showAlert("Inclusão da equipe realizada com sucesso.")
 
       this.fecharModal();
       this.nomeEquipe!.nativeElement.value = ''; // Limpar o nome da equipe para futuras criações
       this.equipes = [];
       this.carregarEquipes();
-    }    
+    } 
   }
 
   excluirEquipe(index: number, nome: string) {
 
-    if (confirm('Tem certeza que deseja excluir a equipe ' + nome + '?')) {
-      this.apiService.deletarEquipe(index.toString())
-        .then(() => {
-          alert('Equipe ' + nome + ' deletada com sucesso!');
-          this.equipes = [];
+    this.showConfirm('Tem certeza de que deseja excluir a equipe ' + nome + '?', (confirmation: boolean) => {
+      if (confirmation) {
 
-          setTimeout(() => {
-            this.carregarEquipes();
-          }, 0);
+        this.apiService.deletarEquipe(index.toString())
+          .then(() => {
+            this.showAlert('Equipe ' + nome + ' deletada com sucesso.');
+            this.equipes = [];
 
-          this.validarequipes2(index);
+            setTimeout(() => {
+              this.carregarEquipes();
+            }, 0);
 
-        })
-    }
+            this.validarequipes2(index);
+
+          })
+      }
+    });
   }
 
   Teladetalhes(idtela: string, tipo: string) {
@@ -387,6 +419,63 @@ export class CriarequipeComponent {
   CriarEvento(){
     this.router.navigate(['/criarevento']);
   }
+
+  showAlert(message : string) {
+    var alertBox = document.getElementById("customAlert");
+    var alertMessage = document.getElementById("alertmessage_customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && alertMessage && overlay_alertBox)
+    {
+      alertMessage.textContent = message;
+      overlay_alertBox.style.display = "block"; // Show the overlay_alertBox
+      alertBox.style.display = "block"; // Show the alert
+    }
+    
+  }
+  
+  hideAlert() {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+
+  showConfirm(message: string, callback: (result: boolean) => void): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var confirmMessage = document.getElementById("confirmmessage_customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+    
+    if(confirmMessage && overlay && confirmBox)
+    {
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+    }   
+
+    // Store the callback to use it later
+    (confirmBox as any).callback = callback;
+  }
+
+  handleConfirm(result: boolean): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+
+    if(overlay && confirmBox)
+    {
+      confirmBox.style.display = "none"; // Hide the confirm box
+      overlay.style.display = "none"; // Hide the overlay
+    }
+    // Call the callback with the result
+    if ((confirmBox as any).callback) {
+      (confirmBox as any).callback(result);
+    }
+  }
+
 
 
 }

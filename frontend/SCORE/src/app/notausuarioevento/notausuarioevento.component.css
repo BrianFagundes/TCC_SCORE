@@ -1,230 +1,179 @@
 .container {
-    display: flex; /* Torna este um flex container */
-    flex-direction: row; /* Organiza os itens horizontalmente */
-    align-items: center; /* Centraliza os itens verticalmente */
-    justify-content: center; /* Para centralização horizontal, se necessário */
-    gap: 20px; /* Espaçamento entre os itens */
-    border: 2px solid gray; /* Adiciona uma borda cinza */
-    border-radius: 10px; /* Adiciona cantos arredondados */
-    margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  margin-top: 50px;
+  height: 80px;
+}
+
+.fieldset_inline9{
+  border-width: 0px;
+  border-color: white;
+}
+
+
+.nota_inline {
+  color: white;
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-top: 0px;
+}
+
+.container2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px; /* Largura máxima do container */
+  margin: auto; /* Centraliza o container */
+  border-radius: 8px;
+}
+  
+  .user-details-Ul {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: 'Times New Roman';
+    font-size: 20px;
+    width: 200px;
+    list-style: none;
+  }
+  .user-details-Ul-li1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .user-details-Ul-li2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: -15px;
   }
   
-  .container2 {
+  .Botoes_usuario {
+    width: 70px;
+    height: 70px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+  .Botoes_usuario3 {
+    width: 70px;
+    height: 70px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 1040px;
+}
+  
+  .logo {
+    position: absolute;
+    left: 57px;
+    width: 276px;
+    height: 65px;
+  }
+  
+  .image-container, .user-details-and-logout {
+    display: flex;
+    flex-direction: column; /* Organiza os itens internos verticalmente */
+    align-items: center; /* Centraliza os itens internos verticalmente */
+  }
+  
+  .user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+  }
+  
+  
+  
+  .rectangle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 1500px;
+    height: 600px;
+    background-color: #201f26;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", sans-serif;
+    background-color: #201f26;
+    color: white;
+  }
+  
+  .welcome-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .welcome-message {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .rectangle2 {
+    display: block;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    width: 1460px;
+    height: 370px;
+    margin-left: -740px; 
+    margin-top: -230px;   
+    border-radius: 8px;
+    padding-bottom: 70px; /* Espaço suficiente para não sobrepor os botões */
+  }
+
+  .top {
+    display: block;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    width: 1460px;
+    margin-left: -10px;    
+    margin-top: -70px;
+    border-radius: 8px;
+    height: 30px;
+  }
+
+  .footer {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 1200px; /* Largura máxima do container */
-    margin: auto; /* Centraliza o container */
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    bottom: 10px;
+    width: 1460px;
     border-radius: 8px;
+    height: 40px;
+    margin-left: -10px;
+
   }
-    
-    .user-details-Ul {
-      text-align: left;
-      padding: 0;
-      margin: 0;
-      list-style-type: none;
-      font-family: 'Times New Roman';
-      font-size: 20px;
-      width: 200px;
-      list-style: none;
-    }
-    .user-details-Ul-li1 {
-      font-size: 20px;
-      margin-bottom: 10px;
-      margin-top: 10px;
-    }
-    .user-details-Ul-li2 {
-      font-size: 20px;
-      margin-bottom: 10px;
-      margin-top: -15px;
-    }
-    
-    .Botoes_usuario {
-      width: 100px;
-      height: 100px;
-      border: 2px solid gray; /* Adiciona uma borda cinza */
-      border-radius: 10px; /* Adiciona cantos arredondados */    
-      cursor: pointer;
-    }
-    
-    .logo {
-      position: absolute;
-      left: 57px;
-      width: 276px;
-      height: 65px;
-    }
-    
-    .image-container, .user-details-and-logout {
-      display: flex;
-      flex-direction: column; /* Organiza os itens internos verticalmente */
-      align-items: center; /* Centraliza os itens internos verticalmente */
-    }
-    
-    .user-details ul {
-      text-align: left; /* Alinha o texto à direita */
-      padding: 0; /* Remove o preenchimento */
-      margin: 0; /* Remove a margem */
-      list-style-type: none; /* Remove os marcadores de lista */
-      font-family: "Times New Roman";
-      font-size: 20px;
-    }
-    
-    
-    
-    .rectangle {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 1500px;
-      height: 600px;
-      background-color: #201f26;
-      border-radius: 10px;
-      margin: 0 auto;
-      margin-top: 20px;
-    }
-    
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Times New Roman", sans-serif;
-      background-color: #201f26;
-      color: white;
-    }
-    
-    .welcome-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-    
-    .welcome-message {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-  
-    .rectangle2 {
-      display: block;
-      margin-bottom: 10px;
-      justify-content: space-between;
-      padding: 10px;
-      background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
-      position: fixed;
-      width: 1460px;
-      height: 330px;
-      margin-left: -740px; 
-      margin-top: -230px;   
-      border-radius: 8px;
-      padding-bottom: 70px; /* Espaço suficiente para não sobrepor os botões */
-    }
-  
-    .top {
-      display: block;
-      padding: 10px;
-      background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
-      position: fixed;
-      width: 1460px;
-      margin-left: -10px;    
-      margin-top: -70px;
-      border-radius: 8px;
-      height: 30px;
-    }
-  
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
-      position: fixed;
-      bottom: 10px;
-      width: 1460px;
-      border-radius: 8px;
-      height: 40px;
-      margin-left: -10px;
-  
-    }
-  
-    .CriarEquipeButton {
-      margin-top: 0px;
-      width: 400px;
-      height: 40px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
-      position: relative;
-      border: 2px solid #D9D9D9;
-      background-color: #D9D9D9;
-      font-family: 'Times New Roman';
-      /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
-    }
-  
-    .user-image {
-      width: 100%; /* Faz a imagem ocupar toda a largura do container */
-      height: auto; /* Mantém a proporção da imagem */
-      border-radius: 8px; /* Cantos arredondados para a imagem */
-  }
-  
-  .dado-item {
-    display: flex;
-    flex-direction: column; /* Organiza o conteúdo do item em coluna */
-    justify-content: center; /* Centraliza o conteúdo verticalmente */
-    align-items: center; /* Centraliza o conteúdo horizontalmente */
-    padding: 10px; /* Espaçamento interno */
-    border: 1px solid #D9D9D9; /* Borda opcional para melhor visualização */
-    border-radius: 8px; /* Cantos arredondados */
-  }
-  
-  .dado-item p {
-    color: white;
-    font-family: 'Times New Roman', serif;
-    font-size: 16px;
-    margin-top: 0;
-  }
-  
-  .dado-item legend, .titulo {
-    color: white;
-    font-family: 'Times New Roman', serif;
-    font-size: 18px;
-  }
-  
-  .dado-item fieldset {
-    width: 100%; /* Ocupa toda a largura do item */
-    border: none; /* Remove a borda do fieldset para um look mais limpo */
-    text-align: center; /* Centraliza o texto dentro do fieldset */
-    max-height: 50px; /* Define a altura máxima do fieldset */
-    overflow: hidden; /* Previne que o conteúdo exceda o tamanho do fieldset */
-    display: flex; /* Habilita flexbox para melhor controle do layout interno */
-    justify-content: center; /* Centraliza o conteúdo horizontalmente */
-    align-items: center; /* Centraliza o conteúdo verticalmente */
-    padding: 5px; /* Espaçamento interno para não colar nas bordas */
-  }
-  
-  .dado-item legend, .dado-item p {
-    margin: 0; /* Remove margens padrão */
-  }
-  
-  .dados-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas de tamanho igual */
-    gap: 10px; /* Espaçamento entre os itens da grade */
-    padding: 20px; /* Espaçamento interno */
-    max-width: 100%; /* Ocupa a largura máxima permitida */
-    margin-left: 10%;
-  }
-  
-    .image-container2 {
-      margin-top: 80px;
-      width: 20%; /* Define a largura do container da imagem */
-      text-align: center; /* Centraliza a imagem horizontalmente */
-  }
-    
-  .btn-right, .btn-right3 {
+
+  .CriarEquipeButton {
+    margin-top: 0px;
     width: 400px;
     height: 40px;
     border: none;
@@ -236,6 +185,656 @@
     border: 2px solid #D9D9D9;
     background-color: #D9D9D9;
     font-family: 'Times New Roman';
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
   }
-    
-    
+
+  .user-image {
+    width: 100%; /* Faz a imagem ocupar toda a largura do container */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 8px; /* Cantos arredondados para a imagem */
+}
+
+.dado-item {
+  display: flex;
+  flex-direction: column; /* Organiza o conteúdo do item em coluna */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  padding: 10px; /* Espaçamento interno */
+  border: 1px solid #D9D9D9; /* Borda opcional para melhor visualização */
+  border-radius: 8px; /* Cantos arredondados */
+}
+
+.dado-item p {
+  color: white;
+  font-family: 'Times New Roman', serif;
+  font-size: 16px;
+  margin-top: 0;
+}
+
+.dado-item legend, .titulo {
+  color: white;
+  font-family: 'Times New Roman', serif;
+  font-size: 18px;
+}
+
+.dado-item fieldset {
+  width: 100%; /* Ocupa toda a largura do item */
+  border: none; /* Remove a borda do fieldset para um look mais limpo */
+  text-align: center; /* Centraliza o texto dentro do fieldset */
+  max-height: 50px; /* Define a altura máxima do fieldset */
+  overflow: hidden; /* Previne que o conteúdo exceda o tamanho do fieldset */
+  display: flex; /* Habilita flexbox para melhor controle do layout interno */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  padding: 5px; /* Espaçamento interno para não colar nas bordas */
+}
+
+.dado-item legend, .dado-item p {
+  margin: 0; /* Remove margens padrão */
+}
+
+.dados-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas de tamanho igual */
+  gap: 10px; /* Espaçamento entre os itens da grade */
+  padding: 20px; /* Espaçamento interno */
+  max-width: 100%; /* Ocupa a largura máxima permitida */
+  margin-left: 10%;
+}
+
+  .image-container2 {
+    margin-top: 80px;
+    width: 20%; /* Define a largura do container da imagem */
+    text-align: center; /* Centraliza a imagem horizontalmente */
+}
+  
+.btn-right, .btn-right3 {
+  width: 400px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: 'Times New Roman';
+}
+
+
+.cabecalho {
+  color: white;
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-top: 0px;
+}
+
+
+@media screen and (min-width: 1000px) and (max-width: 1599px) {
+  
+  .Botoes_usuario3 {
+    margin-left: 583px;
+  }
+
+  .rectangle {
+    width: 980px;
+    height: 600px;  
+    margin-top: 0px;  
+  }
+
+  .rectangle2 {
+    width: 940px;
+    margin-left: -480px;
+    height: 370px;
+}
+
+  .top {
+    width: 940px;
+  }
+
+  
+  .input2 {
+    width: 550px;
+  }
+
+  .equipe-container {
+    width: 940px;    
+  }
+
+  .equipe-container3 {
+    width: 940px;    
+  }
+
+  .footer {
+    width: 940px;
+    margin-left: -10px;
+}
+
+
+  .container {
+    margin-top: 0px;
+  }
+
+  .btn-right, .btn-right3 {
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+    font-family: "Times New Roman";
+}
+
+.CriarEquipeButton {
+  margin-top: 0px;
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+}
+
+.dado-item   legend, .titulo {
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+}
+
+.dado-item   p {
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+.container2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  width: 88%;
+  height: 102%;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.nota_inline {
+  color: white;
+  font-size: 20px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-top: 0px;
+}
+  
+  
+}
+
+@media screen and (min-width: 600px) and (max-width: 999px) {
+  
+  .logo {
+    position: absolute;
+    left: 10px;
+    width: 165px;
+    height: 40px;
+    top: 25px
+  }
+
+  .Botoes_usuario3 {
+    margin-left: 340px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .Botoes_usuario {
+    width: 60px;
+    height: 60px;  
+  }
+
+  .user-details-Ul {
+    font-size: 13px;
+    width: 60px;
+  }
+
+  .user-details-Ul-li1 {
+    font-size: 13px;    
+  }
+  
+  .user-details-Ul-li2 {
+    font-size: 13px;
+  }
+
+  .rectangle {
+    width: 580px;
+    height: 400px;  
+    margin-top: 0px;  
+  }
+
+  .rectangle2 {
+    width: 540px;
+    margin-left: -280px;
+    height: 180px;
+    margin-top: -140px; 
+  }
+
+  .top {
+    width: 540px;
+    height: 20px;
+    margin-top: -60px;
+  }
+
+  
+  .input2 {
+    width: 294px;
+    height: 18px;
+    font-size: 14px;
+  }
+
+  .input3 {
+    width: 294px;
+    height: 18px;
+    font-size: 14px;
+    width: 150px;
+  }
+
+  .equipe-container {
+    width: 540px;    
+    height: 80px;
+  }
+
+  .equipe-container3 {
+    width: 540px;    
+    height: 80px;   
+  }
+
+  .footer {
+    width: 540px;
+    margin-left: -280px;    
+  }
+
+
+  .container {
+    margin-top: 2px;
+  }
+  
+  .textotop{
+    font-size: 20px;
+    margin-top: 0px;
+  }
+
+
+  .cabecalho {
+    color: white;
+    font-size: 30px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-top: 0px;
+  }
+
+
+  .dados-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    padding: 20px;
+    margin-left: 10%;
+    overflow-y: auto;
+    max-height: 180px;
+    width: 360px;
+    margin-right: 30px;
+}
+
+.dado-item   p {
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+.dado-item   legend, .titulo {
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+}
+
+.fieldset_inline9{
+  border-width: 1px;
+  border-color: white;
+}
+
+.cabecalho {
+  color: white;
+  font-size: 20px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-top: 0px;
+}
+
+.fieldset_inline9 {
+  border-width: 1px;
+  border-color: white;
+  width: 25px;
+}
+
+.container2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  width: 95%;
+  height: 102%;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  margin-top: -55px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dados-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  padding: 20px;
+  margin-left: 5%;
+  overflow-y: auto;
+  max-height: 112px;
+  width: 270px;
+  margin-right: 30px;
+}
+
+.dado-item   legend, .titulo {
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+}
+
+.dado-item   p {
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+.CriarEquipeButton {
+  margin-top: 5px;
+  width: 170px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  
+}
+
+.btn-right, .btn-right3 {
+  width: 170px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-top: 5px;
+}
+
+.footer {
+  width: 540px;
+  margin-left: -10px;
+}
+
+
+.nota_inline {
+  color: white;
+  font-size: 20px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-top: 0px;
+}
+  
+}
+
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+  
+  .welcome-container {
+    top: 50%;
+    margin-top: 50px;
+  }
+
+  .logo {
+    position: absolute;
+    margin-left: 0px;
+    margin-top: -90px;
+    width: 169px;
+    height: 40px;
+    cursor: pointer; /* Adicionado para indicar que a imagem é clicável */
+  }
+
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -15px;
+    margin-top: 70px;
+  }
+
+  .logout-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de logout */
+    cursor: pointer; /* Adicionado para indicar que o elemento é clicável */
+    margin-top: 68px;
+    margin-left: 80px;
+  }
+
+
+  .Botoes_usuario3 {
+    margin-left: 0px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .Botoes_usuario {
+    width: 60px;
+    height: 60px;  
+  }
+
+  .user-details-Ul {
+    font-size: 13px;
+    width: 60px;
+  }
+
+  .user-details-Ul-li1 {
+    font-size: 13px;    
+  }
+  
+  .user-details-Ul-li2 {
+    font-size: 13px;
+  }
+
+  .rectangle {
+    width: 300px;
+    height: 472px;
+    margin-top: 0px;
+}
+
+.rectangle2 {
+  width: 260px;
+  margin-left: -140px;
+  height: 280px;
+  margin-top: -180px;
+}
+
+.container2{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 8px;
+  margin-left: -73px;
+}
+
+  .top{
+    width: 260px;
+    height: 20px;
+    margin-top: -58px;
+}
+
+  
+  .input2 {
+    width: 240px;
+    height: 18px;
+    font-size: 14px;
+    margin-left: 0px;
+  }
+
+  .input3 {
+    height: 18px;
+    font-size: 14px;
+    width: 230px;
+  }
+
+  
+
+  .equipe-container3 {
+    width: 260px;    
+    height: 80px; 
+    margin-left: 2px;  
+    margin-top: 10px;
+  }
+
+  .footer {
+    width: 260px;
+    margin-left: -10px;
+    flex-direction: column;
+    height: 18px;
+}
+
+
+.container {
+  margin-top: 36px;
+  height: 140px;
+}
+  
+  .textotop{
+    font-size: 15px;
+    margin-top: 0px;
+  }
+  
+
+  
+  .cabecalho{
+    color: white;
+    font-size: 15px;
+    font-family: "Times New Roman", "Times New Roman";
+    margin-top: 0px;
+}
+
+.dados-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  padding: 20px;
+  margin-left: 10%;
+  overflow-y: auto;
+  max-height: 93px;
+  margin-left: 13px;
+  margin-top: 0px;
+  width: 180px;
+}
+
+.user-image{
+  width: 100px;
+  height: 100px;
+  margin-top: -86px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 136px;
+}
+
+.nota_inline{
+  color: white;
+  font-size: 20px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-top: 0px;
+  width: 100px;
+  margin-left: 136px;
+}
+
+.fieldset_inline9 {
+  border-width: 1px;
+  border-color: white;
+  margin-left: -21px;
+  height: 128px;
+  margin-top: 140px;
+  margin-left: 1px;
+}
+
+.CriarEquipeButton{
+  margin-top: -4px;
+  width: 250px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-left: 5px;
+}
+
+
+.btn-right, .btn-right3 {
+  width: 250px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-left: 5px;
+}
+
+}
+  

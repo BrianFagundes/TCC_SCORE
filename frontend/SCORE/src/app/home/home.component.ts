@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 // Declaração do tipo global para o objeto 'google'
 declare global {
@@ -17,15 +19,32 @@ export class HomeComponent {
   @ViewChild('passwordInput') passwordInput: ElementRef | undefined;
   rememberMe: boolean = false;
   mostrarSenha: boolean = false;
+  screenWidth: number = window.innerWidth;
+  screenSubscription: Subscription | undefined;
   
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
+    const sessaoexpirada = localStorage.getItem('sessaoexpirada');
+    if(sessaoexpirada == 'true')
+    {
+      this.showAlert("Sessão expirada. O usuário será obrigado a realizar a autenticação novamente.");  
+      localStorage.setItem('sessaoexpirada', "false");
+    }
+    
     localStorage.setItem('Teladecadastro', "false");
     localStorage.setItem('ID', "");
     localStorage.setItem('jwtToken', "");
     const remember = localStorage.getItem('relembrar');
     this.rememberMe = remember === 'S';
+
+    // Set up the screen size listener
+    this.screenSubscription = fromEvent(window, 'resize').pipe(
+      debounceTime(300),
+      map(() => {
+        this.screenWidth = window.innerWidth;
+      })
+    ).subscribe();
     
     // Configura os campos de entrada somente se "relembrar" estiver definido como verdadeiro
     if (this.rememberMe) {
@@ -37,6 +56,8 @@ export class HomeComponent {
   
     // Carregar o script do Google Identity Services de forma assíncrona
     this.loadGoogleSignInScript();
+
+
   }
   
   toggleSenha()
@@ -50,7 +71,7 @@ export class HomeComponent {
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
     document.head.appendChild(script);   
-    this.apiService.autenticarUsuario();
+    this.apiService.autenticarUsuario("","");
     script.onload = () => {
       // Configurar o botão de login do Google
       window.google.accounts.id.initialize({
@@ -64,9 +85,9 @@ export class HomeComponent {
           shape: 'pill',
           theme: 'filled_blue',
           text: 'signin_with',
-          size: 'large',
+          size: this.screenWidth < 600 ? 'small':'large',
           logo_alignment: 'left',
-          width: 500
+          width: this.screenWidth < 600 ? 200 : 500 
         }
       );
     };
@@ -110,7 +131,7 @@ export class HomeComponent {
           } 
           else if( pIdentificador === 0)
           {
-            alert("Usuário não cadastrado pelo sistema do Google/Facebook!")
+            this.showAlert("Usuário não cadastrado pelo sistema do Google.");
           } 
           else
           {
@@ -120,7 +141,7 @@ export class HomeComponent {
           throw new Error("apiService.cadastrarUsuarioAutomatico não está definido.");
         }          
       } catch (error) {
-        alert('Erro ao realizar o login: ' + error);
+        this.showAlert('Erro ao realizar o login. ' + error);
       }   
     }
   }
@@ -138,9 +159,9 @@ export class HomeComponent {
     try {
       const nome = this.usernameInput?.nativeElement.value;
       const senha = this.passwordInput?.nativeElement.value;      
-      this.apiService.autenticarUsuario();
+      await this.apiService.autenticarUsuario(nome, senha);
       const isValid = await this.apiService.validarUsuario(nome, senha);
-      
+
       if (isValid > 0) {      
         
         if (this.rememberMe) {
@@ -158,7 +179,7 @@ export class HomeComponent {
         this.router.navigate(['/inicio']);
         // Faça algo quando o usuário estiver autenticado, por exemplo, redirecionar para outra página
       } else {
-        alert("Usuário ou senha inválido, tente novamente!")
+        this.showAlert("Usuário ou senha inválido, tente novamente!")
         // Faça algo quando o usuário não estiver autenticado
       }
     } catch (error) {
@@ -170,4 +191,32 @@ export class HomeComponent {
   toggleRememberMe() {
     this.rememberMe = !this.rememberMe;
   }
+
+  showAlert(message : string) {
+    var alertBox = document.getElementById("customAlert");
+    var alertMessage = document.getElementById("alertMessage");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && alertMessage && overlay_alertBox)
+    {
+      alertMessage.textContent = message;
+      overlay_alertBox.style.display = "block"; // Show the overlay_alertBox
+      alertBox.style.display = "block"; // Show the alert
+    }
+    
+  }
+  
+  hideAlert() {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+  
+  
+
 }

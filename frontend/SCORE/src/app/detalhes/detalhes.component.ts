@@ -54,6 +54,7 @@ export class DetalhesComponent {
   idpesquisalistaparticipante: number = 0;
   existenalistaparticipantes: boolean = false;
   tipotela : string = "";
+  screenWidth: number = window.innerWidth;
 
 
 
@@ -75,6 +76,10 @@ export class DetalhesComponent {
     this.carregarDadosUsuario();
     this.carregarEquipe();
     this.obterModelo();
+
+    this.screenWidth = window.innerWidth;
+
+    
   }
 
   carregarDadosUsuario() {
@@ -342,8 +347,6 @@ export class DetalhesComponent {
             });
           })
           .catch(error => {
-
-            alert('Erro ao obter o usuário:' + error);
           });
       });
 
@@ -355,7 +358,7 @@ export class DetalhesComponent {
       }, 0);
 
     } catch (error) {
-      alert('Erro ao carregar equipe: ' + error);
+      await this.showAlert('Erro ao carregar equipe: ' + error);
 
     }
   }
@@ -404,13 +407,14 @@ export class DetalhesComponent {
   }
 
   logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
-    if (confirmation) {
-      localStorage.setItem('imagem', "");
-      localStorage.setItem('Usuario', "");
-      localStorage.setItem('ID', "");
-      this.router.navigate(['/home']);
-    }
+    this.showConfirm('Deseja realmente fazer o log-off?', (confirmation: boolean) => {
+      if (confirmation) {
+        localStorage.setItem('imagem', "");
+        localStorage.setItem('Usuario', "");
+        localStorage.setItem('ID', "");
+        this.router.navigate(['/home']);
+      }
+    });
   }
 
   toggleParametro(index: number) {
@@ -427,17 +431,21 @@ export class DetalhesComponent {
 
   async confirmarAlteracao() {
 
-    if (confirm(`Gostaria de Alterar a equipe ${this.nomeEquipe?.nativeElement.value}?`)) {
-      try {
-        this.criticar();
-        this.AjustarEquipe()
+    this.showConfirm(`Gostaria de Alterar a equipe ${this.nomeEquipe?.nativeElement.value}?`, (confirmation: boolean) => {
+      if (confirmation) {
+        this.confirmarAlteracao2();
       }
-      catch (ex) {
-        const erro = ex as Error;
-        alert("Erro ao tentar ajustar equipe: " + erro.toString().substring(7));
-      }
+    });
+  }
 
-
+  async confirmarAlteracao2(){
+    try {
+      this.criticar();
+      this.AjustarEquipe()
+    }
+    catch (ex) {
+      const erro = ex as Error;
+      await this.showAlert("Erro ao tentar ajustar equipe: " + erro.toString().substring(7));
     }
   }
 
@@ -505,16 +513,16 @@ export class DetalhesComponent {
     const isValid = await this.apiService.AlterarEquipe(dadosEmpresa);
     if (isValid !== 0) {
       if (isValid == 1)
-        alert("Erro ao realizar a Alteração!");
+        await this.showAlert("Erro ao realizar a Alteração!");
       else if (isValid == -1) {
-        alert("Falha de conexão com a API!");
+        await this.showAlert("Falha de conexão com a API!");
       }
     }
     else {
       setTimeout(() => {
         this.ajusteparticipante();
       }, 0);
-      alert("Alteração da equipe realizada com sucesso!");
+      await this.showAlert("Alteração da equipe realizada com sucesso!");
       this.TelaCriacaoequipe();
     }
   }
@@ -541,11 +549,11 @@ export class DetalhesComponent {
 
         if (isValid !== 0) {
           if (isValid == 1) {
-            alert("Erro ao realizar a inclusão!");
+            await this.showAlert("Erro ao realizar a inclusão!");
             break;
           }
           else if (isValid == -1) {
-            alert("Falha de conexão com a API!")
+            await this.showAlert("Falha de conexão com a API!")
             break;
           }
         }
@@ -558,37 +566,48 @@ export class DetalhesComponent {
   }
 
   BotaoCancelar() {
-    if (confirm('Tem certeza que deseja cancelar a edição da equipe ' + this.nomeEquipe?.nativeElement.value + '?')) {
-      this.TelaCriacaoequipe();
-    }
+    this.showConfirm('Tem certeza que deseja cancelar a edição da equipe ' + this.nomeEquipe?.nativeElement.value + '?', (confirmation: boolean) => {
+      if (confirmation) {
+        this.TelaCriacaoequipe();
+      }
+    });
   }
 
   BotaoCancelarParametros() {
-    if (confirm('Tem certeza que deseja cancelar a configuração de parâmetros?')) {
-      this.fecharModal();
-    }
+    this.showConfirm('Tem certeza que deseja cancelar a configuração de parâmetros?', (confirmation: boolean) => {
+      if (confirmation) {
+        this.fecharModal();
+      }
+    });
   }
 
   BotaoCancelarparticipantes() {
-    if (confirm('Tem certeza que deseja cancelar a gestão de Participantes? Todas as alterações serão perdidas')) {
-      this.participantesSelecionados = [];
-      for (const participante of this.participantesSelecionados2) {
-        this.participantesSelecionados.push({
-          id: participante.id,
-          imagem: participante.imagem,
-          nome: participante.nome,
-          email: participante.email,
-          moderador: participante.moderador
-        });
+    this.showConfirm('Tem certeza que deseja cancelar a gestão de Participantes? Todas as alterações serão perdidas', (confirmation: boolean) => {
+      if (confirmation) {
+        this.participantesSelecionados = [];
+        for (const participante of this.participantesSelecionados2) {
+          this.participantesSelecionados.push({
+            id: participante.id,
+            imagem: participante.imagem,
+            nome: participante.nome,
+            email: participante.email,
+            moderador: participante.moderador
+          });
+        }
+        this.fecharparticipantes();
       }
-      this.fecharparticipantes();
-    }
+    });
   }
 
-  BotaoGuardarParametros() {
-    if (confirm('Tem certeza que deseja Guardar a configuração de parâmetros?')) {
+  async BotaoGuardarParametros() {
+    this.showConfirm('Tem certeza que deseja Guardar a configuração de parâmetros?', (confirmation: boolean) => {
+      if (confirmation) {
+        this.BotaoGuardarParametros2();
+      }
+    });
+  }
 
-
+  async BotaoGuardarParametros2() {
       this.dadosParametrosSalvos = [];
       for (let i = 0; i < this.quantidadeLinhas; i++) {
 
@@ -605,9 +624,8 @@ export class DetalhesComponent {
         }
       }
 
-      alert("Dados armazenados no sistema, para que sejam de fato assimilados, deve-se confirmar a edição no final da tela.")
+      await this.showAlert("Dados armazenados no sistema, para que sejam de fato assimilados, deve-se confirmar a edição no final da tela.")
       this.fecharModal();
-    }
   }
 
   fecharModal() {
@@ -709,12 +727,12 @@ export class DetalhesComponent {
     });
   }
 
-  adicionarParametro() {
+  async adicionarParametro() {
     if (this.parametros.length < 20) {
       this.parametros.push({ parametro: '' });
       this.quantidadeLinhas++;
     } else {
-      alert('O limite máximo de parâmetros é 20');
+      await this.showAlert('O limite máximo de parâmetros é 20');
     }
   }
 
@@ -765,11 +783,12 @@ export class DetalhesComponent {
 
   }
 
-  adicionarParticipante() {
+  async adicionarParticipante() {
     var naoExiste = this.participantesSelecionados.some(a => a.id === this.id);
 
     if (naoExiste) {
-      alert('Usuário indicado já existe na lista de participantes. Não é possível adicionar outro.');
+      
+      await this.showAlert('Usuário indicado já existe na lista de participantes. Não é possível adicionar outro.');
       this.existe = false;
       this.procura!.nativeElement.value = "";
     } else {
@@ -780,37 +799,42 @@ export class DetalhesComponent {
         email: this.email,
         moderador: false
       });
-      alert("Participante " + this.email + "Adicionado com sucesso!");
+      await this.showAlert("Participante " + this.email + "Adicionado com sucesso!");
       this.existe = false;
       this.procura!.nativeElement.value = "";
     }
   }
 
 
-  excluirparticipante(id: number, usuario: string) {
+  async excluirparticipante(id: number, usuario: string) {
     const ID = localStorage.getItem('ID');
     if (ID) {
       if (usuario == ID)
-        alert("O usuário não pode se deletar como participante do Grupo!");
+        await this.showAlert("O usuário não pode se deletar como participante do Grupo!");
       else {
         this.participantesSelecionados.splice(id, 1);
       }
     }
   }
 
-  excluirparticipante2(id: number) {
-    const ID = localStorage.getItem('ID');
-    confirm("Deseja exluir o participante " + this.participantesSelecionados[id].email + " permanentemente?")
-    {
+  async excluirparticipante2(id: number) {
+    this.showConfirm("Deseja exluir o participante " + this.participantesSelecionados[id].email + " permanentemente?", (confirmation: boolean) => {
+      if (confirmation) {
+        this.excluirparticipante3(id);
+      }
+    });
+  }
+
+  async excluirparticipante3(id: number) {
+    const ID = localStorage.getItem('ID');    
       if (ID) {
         if (this.participantesSelecionados[id].id == ID)
-          alert("O usuário não pode se deletar como participante do Grupo!");
+          await this.showAlert("O usuário não pode se deletar como participante do Grupo!");
         else {
           this.participantesSelecionados.splice(id, 1);
           this.existenalistaparticipantes = false;
         }
       }
-    }
   }
 
   async BotaoGravarParticipantes() {
@@ -823,16 +847,17 @@ export class DetalhesComponent {
         i++;      
     }
     if(i<=0){
-      alert("É necessário ao menos um moderador!");
+      await this.showAlert("É necessário ao menos um moderador!");
     }
     else
     {
       if(this.participantesSelecionados.find(a=> a.id == ID)?.moderador == false)
       {
-        alert("O usuário não pode se retirar como moderador, esta operação deve ser realizada por outro moderador!");
+        await this.showAlert("O usuário não pode se retirar como moderador, esta operação deve ser realizada por outro moderador!");
       }
       else{
-        alert("Ajuste de Participantes realizada com sucesso! Para confirmar a alteração pressione confirmar na tela");
+        await this.showAlert("Ajuste de Participantes realizada com sucesso! Para confirmar a alteração pressione confirmar na tela");
+        this.Limpapesquisarlistaparticipantes();
         this.carregarParticipantes();
         this.fecharparticipantes();
       }      
@@ -915,8 +940,72 @@ export class DetalhesComponent {
 
   }
 
-  TelaInicial() {
+  TelaInicial() {    
     this.router.navigate(['/inicio']);
   }
+
+
+  showAlert(message: string): Promise<boolean> {
+    const confirmBox = document.getElementById("customAlert") as HTMLDivElement;
+    const confirmMessage = document.getElementById("alertmessage_customAlert") as HTMLParagraphElement;
+    const overlay = document.getElementById("overlay_alertBox") as HTMLDivElement;
+    return new Promise((resolve) => {
+
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+
+      // Assign resolve function to the buttons
+      (document.getElementById("okbtn_customAlert") as HTMLButtonElement).onclick = () => {
+        resolve(true);
+        this.hideAlert();
+      };
+    });
+    
+  }
+  
+  hideAlert(): void {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+
+  showConfirm(message: string, callback: (result: boolean) => void): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var confirmMessage = document.getElementById("confirmmessage_customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+    
+    if(confirmMessage && overlay && confirmBox)
+    {
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+    }   
+
+    // Store the callback to use it later
+    (confirmBox as any).callback = callback;
+  }
+
+  handleConfirm(result: boolean): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+
+    if(overlay && confirmBox)
+    {
+      confirmBox.style.display = "none"; // Hide the confirm box
+      overlay.style.display = "none"; // Hide the overlay
+    }
+    // Call the callback with the result
+    if ((confirmBox as any).callback) {
+      (confirmBox as any).callback(result);
+    }
+  }
+
+
 
 }

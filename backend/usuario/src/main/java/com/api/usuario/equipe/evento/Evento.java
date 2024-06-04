@@ -30,6 +30,11 @@ public class Evento {
 	private String dataultimoevento;
 
 	private String chavepix;
+
+	private String duracao;
+	
+	private String horafim;
+	
 	
 	
 	public Long getid() {
@@ -114,6 +119,22 @@ public class Evento {
 
 	public void setChavepix(String chavepix) {
 		this.chavepix = chavepix;
+	}
+
+	public String getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(String duracao) {
+		this.duracao = duracao;
+	}
+
+	public String getHorafim() {
+		return horafim;
+	}
+
+	public void setHorafim(String horafim) {
+		this.horafim = horafim;
 	}
 	
 	

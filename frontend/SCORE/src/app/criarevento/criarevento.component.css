@@ -1,3 +1,5 @@
+
+
 .modal {
     position: fixed;
     top: 0;
@@ -11,6 +13,7 @@
     /* Adicione aqui quaisquer estilos adicionais necessários para o modal */
   }
 
+  
   .modal2 {
     display: none;
     position: fixed;
@@ -70,25 +73,6 @@
     /* Adicione aqui quaisquer estilos adicionais necessários para o segundo rótulo de cadastro */
   }
 
-  .modalCampo {
-    display: block;
-      width: 270px;
-      height: 40px;
-      margin-bottom: 20px;
-      border: none;
-      border-radius: 8px;
-      padding-left: 10px;
-      background-color: #201f26;
-      border-color: #201f26;
-      outline: none;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-
-
-      font-family: 'Times New Roman', Times New Roman;
-      /* Adicione aqui quaisquer estilos adicionais necessários para o input do modal */
-  }
 
   .importancia-fieldset,
   .notacao-fieldset {
@@ -122,7 +106,7 @@
     margin-right: 10px;
     padding: 5px 10px;
     margin-top: 30px;
-    width: 250px;
+    width: 160px;
     height:35px;
     border: none;
     border-radius: 8px;
@@ -131,8 +115,7 @@
     font-weight: bold;
     position: relative;
     border: 2px solid #D9D9D9;
-    background-color: #D9D9D9;
-  
+    background-color: #D9D9D9; 
   
   }
   
@@ -180,27 +163,9 @@
     text-decoration: none;
     cursor: pointer;
   }
+  
 
-  input[type="text"] {
-
-    margin-top: 10px;
-    width: 570px;
-    height: 30px;
-    border: none;
-    border-radius: 8px;
-    padding-left: 10px;
-    background-color: #201f26;
-    border-color: #201f26;
-    outline: none;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    font-family: 'Times New Roman', 'Times New Roman';
-    margin-right: 10px;
-    padding: 5px;
-  }
-
-  .container1{
+  .Evento-Dados{
     display: flex;
     flex-direction: column; /* Alinha os botões verticalmente */
     justify-content: space-between;
@@ -209,41 +174,46 @@
 
 .Evento-container {
     width: 1460px;
-    height: 120px;
+    height: 105px;
     background-color: #d9d9d96b; /* Fundo cinza */
     display: flex;
-    flex-direction: column; /* Alinha os botões verticalmente */
     justify-content: space-between; /* Distribui os botões uniformemente */
     margin-bottom: 10px; /* Espaço entre cada Evento */      
     border-radius: 8px;
     align-items: center;
   }
   .Evento-containerdiv {
-    display: flex;
-    justify-content: center;
-    margin-left: -2380px;
     margin-top: 10px;
   }
 
   .Evento-containerdiv2 {
+    margin-top: 0px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-top: -117px;
-    margin-left: 1230px;
+    align-items: center; /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente dentro do contêiner */
+    margin-top: -4px;
   }
 
   .Evento-containerdiv3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: -37px;
-    margin-left: 800px;
+    margin-top: 56px;
+    margin-left: 680px;
+  }
+
+  .dados{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente os itens */
+    justify-content: center; /* Centraliza verticalmente dentro do contêiner */
+    margin-left: 50px;
   }
 
   .Evento-btn3 {
-    width: 210px;
-    height: 30px;
+    width: 130px;
+    height: 25px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -252,8 +222,8 @@
     position: relative;
     background-color: #D9D9D9;
     font-family: 'Times New Roman';
-    margin-top: 5px;
-    color: green;
+    margin-top: -25px;     
+    margin-left: -330px;
   }
 
   .Evento-btn4 {
@@ -272,8 +242,8 @@
   }
 
   .Evento-btn, .Evento-btn2 {
-    width: 210px;
-    height: 30px;
+    width: 180px;
+    height: 25px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -282,29 +252,46 @@
     position: relative;
     background-color: #D9D9D9;
     font-family: 'Times New Roman';
-    margin-top: 5px;
+    margin-top: 5px;     
+    margin-left: 10px;
   }
 
-  .Evento-btn2 {    
-    margin-bottom: 10px;
-  }
-
-  .equipe-containerdiv {
-    display: flex;
-    justify-content: center;
-    margin-left: -2380px;
-    margin-top: 10px;
-  }
-
-  .nomeEvento{ 
-    font-size: 20px;
-    color: white;    
+  .Evento-btn5, .Evento-btn6 {
+    width: 180px;
+    height: 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
     font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
     font-family: 'Times New Roman';
-    margin-top: 5px;
+    margin-top: 5px;  
+    margin-left: 10px;
   }
   
-  .EquipeEvento {
+.Evento-btn6{
+  margin-bottom: 10px;
+}
+
+  .Evento-btn2 {    
+    margin-bottom: 0px;
+    margin-right: 4px;
+  }
+  
+  
+
+  .nomeEvento{ 
+    margin-top: 0px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    font-family: "Times New Roman";
+    margin-left: -120px;
+  }
+  
+  .EventoEvento {
     width: 200px;
     height: 35px;
     border: none;
@@ -321,7 +308,7 @@
     padding: 5px;
   }
 
-.rectangle2 {
+  .rectangle2 {
     display: block;
     margin-bottom: 10px;
     justify-content: space-between;
@@ -329,11 +316,30 @@
     background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
     position: fixed;
     width: 1460px;
-    height: 430px;
+    height: 370px;
     margin-left: -740px; 
-    margin-top: -290px;   
+    margin-top: -230px;   
     border-radius: 8px;
     padding-bottom: 70px; /* Espaço suficiente para não sobrepor os botões */
+  }
+
+  .top {
+    display: block;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
+    position: fixed;
+    width: 1460px;
+    margin-left: -10px;    
+    margin-top: -70px;
+    border-radius: 8px;
+    height: 30px;
+  }
+
+  .textotop{
+    color: white; 
+    font-size: 30px;
+    font-family: 'Times New Roman', 'Times New Roman' ;
+    margin-top: -2px;
   }
 
 
@@ -347,12 +353,13 @@
     width: 1460px;
     margin-left: -740px;    
     border-radius: 8px;
+    height: 40px;
   }
 
   
   
   .btn-left, .btn-right, .btn-right3 {
-    width: 400px;
+    width: 300px;
     height: 40px;
     border: none;
     border-radius: 8px;
@@ -383,6 +390,7 @@
     background-color: #D9D9D9;
     right: 10px;
     font-family: 'Times New Roman';
+    margin-bottom: 10px;
   }
   
   .btn-left2 {
@@ -411,16 +419,17 @@
   }
 
 
-.container {
-    display: flex; /* Torna este um flex container */
-    flex-direction: row; /* Organiza os itens horizontalmente */
-    align-items: center; /* Centraliza os itens verticalmente */
-    justify-content: center; /* Para centralização horizontal, se necessário */
-    gap: 20px; /* Espaçamento entre os itens */
-    border: 2px solid gray; /* Adiciona uma borda cinza */
-    border-radius: 10px; /* Adiciona cantos arredondados */
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border: 2px solid gray;
+    border-radius: 10px;
     margin-top: 50px;
-  }
+    height: 80px;
+}
   
   
   .user-details-Ul {
@@ -445,11 +454,40 @@
   }
   
   .Botoes_usuario {
+    width: 70px;
+    height: 70px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+  .Botoes_usuario1 {
     width: 100px;
     height: 100px;
     border: 2px solid gray; /* Adiciona uma borda cinza */
     border-radius: 10px; /* Adiciona cantos arredondados */    
     cursor: pointer;
+    margin-left: 1040px
+  }
+
+  
+.Botoes_usuario3 {
+  width: 70px;
+  height: 70px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 1040px;
+}
+
+  .Botoes_usuario5 {
+    width: 80px;
+    height: 80px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+    margin-left: 10px
   }
   
   .logo {
@@ -459,11 +497,14 @@
     height: 65px;
   }
   
-  .image-container, .user-details-and-logout {
-    display: flex;
-    flex-direction: column; /* Organiza os itens internos verticalmente */
-    align-items: center; /* Centraliza os itens internos verticalmente */
-  }
+  .image-container,
+.user-details-and-logout {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens internos verticalmente */
+  align-items: center;
+  /* Centraliza os itens internos verticalmente */
+}
   
   .user-image{
     max-width: 80px; 
@@ -533,7 +574,7 @@
 
     margin-top: 10px;
     width: 350px;
-    height: 30px;
+    height: 25px; 
     border: none;
     border-radius: 8px;
     padding-left: 10px;
@@ -548,9 +589,27 @@
     padding: 5px;
   }
 
+
+  .input1 {
+    width: 650px;
+    height: 25px; 
+    border: none;
+    border-radius: 8px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    padding: 5px;
+    margin-top: 0px; 
+    margin-right: 0px;
+  }
+
   .modalCampo {
     display: block;
-      width: 580px;
+      width: 570px;
       height: 40px;
       margin-bottom: 20px;
       border: none;
@@ -565,10 +624,1142 @@
       font-family: 'Times New Roman', Times New Roman;
       /* Adicione aqui quaisquer estilos adicionais necessários para o input do modal */
   }
+
+ 
+
   
-  @media screen and (max-width: 600px) {
-    .welcome-message {
-        padding: 0 20px;
-    }
+  .p1{
+    color: black;
+    font-size: 30px;
+    font-family: 'Times New Roman', 'Times New Roman' ;
+    margin-bottom: 5px;
+  }
+
+  .fieldset1{
+    margin-top: 10px; 
+    width: 550px;
+  }
+
+  .input_modal1{
+    margin-top: 10px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-right: 10px;
+    padding: 5px;
+    width: 170px;
+  }
+
+  .parametros-container {
+    margin-top: 20px;
+}
+
+.equipe-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.equipe-fieldset {
+    width: 370px;
+    height: 70px;
+    display: flex;
+}
+
+.equipe-imagem {
+    width: 50px;
+    height: 50px;
+}
+
+.equipe-detalhes {
+    margin-left: 20px;
+}
+
+.equipe-id,
+.equipe-nome {
+    color: white;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.importancia-fieldset {
+    height: 70px;
+}
+
+.importancia-fieldset legend {
+    text-align: center;
+}
+
+.resultado-pesquisa {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: white;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.equipe-selecionada {
+    margin-top: 10px;
+    width: 550px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+
+@media screen and (min-width: 1000px) and (max-width: 1599px) {
+
+  .container {
+    margin-top: 0px;
+  }
+
+  .Botoes_usuario3 {
+    margin-left: 583px;
+  }
+
+  .rectangle {
+    width: 980px;
+    height: 600px;  
+    margin-top: 0px;  
+  }
+
+  .rectangle2 {
+    width: 940px;
+    margin-left: -480px;
+  }
+
+  .top {
+    width: 940px;
+  }
+
+  
+  .input2 {
+    width: 550px;
+  } 
+
+  .footer {
+    width: 940px;
+    margin-left: -480px;    
+  }
+
+  .Evento-container {
+    width: 940px;    
+  }
+
+  .Evento-container3 {
+    width: 940px;    
+  }
+
+  .input1{
+    width: 330px;
+  }
+
+  .EventoEvento{
+    width: 100px;
+  }
+
+  .parametros-container {
+    max-height: 150px;
+    overflow-y: auto;
+}
+  
+}
+
+@media screen and (min-width: 600px) and (max-width: 999px) {
+  .container {
+    margin-top: 2px;
+  }
+
+  .Botoes_usuario3 {
+    margin-left: 340px;
+      width: 60px;
+      height: 60px;
+  }
+
+  .rectangle {
+    width: 580px;
+    height: 400px;  
+    margin-top: 0px; 
+  }
+
+  .rectangle2 {
+    width: 540px;
+    margin-left: -280px;
+    height: 180px;
+    margin-top: -140px;
+  }
+
+  .top {
+    width: 540px;
+    height: 20px;
+    margin-top: -60px;
+  }
+
+  
+  .input2 {
+    width: 294px;
+    height: 18px;
+    font-size: 14px;
+  } 
+
+  .footer {
+    width: 540px;
+    margin-left: -280px;     
+  }
+
+  .Evento-container {
+    width: 540px;    
+    height: 80px;  
+  }
+
+  .Evento-container3 {
+    width: 540px;    
+    height: 80px;   
+  }
+
+  .input1{
+    width: 155px;
+    height: 18px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-family: "Times New Roman", "Times New Roman";
+    margin-top: 0px;
+    margin-right: 0px;    
+  }
+
+  .EventoEvento{    
+    margin-left: 10px;
+    margin-top: 0px;
+    width: 79px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+
+
+  .logo {
+    position: absolute;
+    left: 10px;
+    width: 165px;
+    height: 40px;
+    top: 25px
+  }
+
+  .Botoes_usuario {
+    width: 60px;
+    height: 60px;  
+  }
+
+  .user-details-Ul {
+    font-size: 13px;
+    width: 60px;
+  }
+
+  .user-details-Ul-li1 {
+    font-size: 13px;    
   }
   
+  .user-details-Ul-li2 {
+    font-size: 13px;
+  }
+  .Evento-btn6{
+    margin-left: 10px;
+    margin-top: 0px;
+    width: 86px;
+    height: 25px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: "Times New Roman";
+  }
+
+  .Evento-btn5{
+    margin-left: 10px;
+    margin-top: 0px;
+    width: 86px;
+    height: 25px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: "Times New Roman";
+  }
+
+  .Botoes_usuario5 {
+    width: 50px;
+    height: 50px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.nomeEvento{
+  margin-top: 0px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  font-family: "Times New Roman";
+}
+
+.Evento-btn2{
+  border: none;
+  border-radius: 8px;
+ cursor: pointer;
+  font-weight: bold;
+ position: relative;
+ background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-left: 10px;
+width: 150px;
+    height: 22px;
+    font-size: 14px;
+    margin-top: 1px;
+margin-right: 10px;
+}
+
+.Evento-btn3{
+  width: 76px;
+  height: 22px;
+  font-size: 14px;
+  margin-left: -230px;
+  margin-top: -22px;
+}
+
+.btn-left2,.btn-right2 {
+    
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  right: 10px;
+  font-family: "Times New Roman";
+  width: 150px;
+      height: 25px;
+      font-size: 14px;
+      margin-bottom: 10px;
+}
+
+.btn-left2{
+  right: 170px;
+}
+
+.pagina-info {
+  font-size: 14px;
+}
+
+.btn-left{
+  height: 30px;
+  font-size: 14px;
+  width: 170px;
+  margin-top: 5px;
+}
+
+.btn-left, .btn-right, .btn-right3 {
+  height: 30px;
+  font-size: 14px;
+  width: 170px;
+  margin-top: 5px;
+}
+
+.textotop{
+  font-size: 20px;
+  margin-top: 0px;
+}
+
+.modal-content{
+  background-color: #000;
+  padding: 20px;
+  border-radius: 5px;
+  width: 480px;
+  height: 420px;
+}
+
+.modalCampo {
+  display: block;
+  width: 470px;
+  height: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Times New Roman", Times New Roman;
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: -10px;
+}
+
+legend {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Times New Roman", "Times New Roman";
+}
+
+
+.input_modal1 {
+  margin-top: 10px;
+  height: 20px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-right: 10px;
+  padding: 5px;
+  width: 202px;
+}
+
+.modalpesquisarButton {
+  margin-right: 10px;
+  padding: 5px 10px;
+  margin-top: 30px;
+  width: 105px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+}
+
+
+
+.equipe-imagem {
+  width: 40px;
+  height: 40px;
+}
+
+.equipe-id, .equipe-nome {
+  color: white;
+  font-size: 14px;
+  font-family: "Times New Roman",
+  Times,
+  serif;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+
+.equipe-fieldset {
+  width: 287px;
+  height: 50px;
+  display: flex;
+}
+
+.buttonescolher {
+  margin-right: 10px;
+  padding: 5px;
+  margin-top: 10px;
+  width: 73px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  margin-left: 10px;
+}
+
+.importancia-fieldset {
+  height: 50px;
+}
+
+.fieldset1 {
+  margin-top: 10px;
+  width: 452px;
+}
+
+
+.equipe-selecionada {
+  margin-top: 10px;
+  width: 453px;
+  height: 90px;
+}
+
+.resultado-pesquisa {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  color: white;
+  font-size: 18px;
+  font-family: "Times New Roman",
+  Times,
+  serif;
+}
+
+
+.modalCancelaButton {
+  margin-top: -5px;
+  width: 280px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+}
+
+
+.modalcriarButton {
+  margin-top: -5px;
+  width: 280px;
+  margin-left: 20px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  color: green;
+}
+
+.cadastro-label2 {
+  padding-top: 5%;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: -35px;
+  margin-left: 0px;
+  color: #ffffff;
+  font-family: "Times New Roman";
+}
+
+.parametros-container {
+  max-height: 90px;
+  overflow-y: auto;
+}
+
+
+}
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+  .container {
+    margin-top: 70px;
+    height: 140px;
+}
+
+.Botoes_usuario3 {
+  margin-left: 0px;
+  width: 60px;
+  height: 60px;
+}
+
+  .rectangle{
+    width: 300px;
+    height: 500px;
+    margin-top: 0px;
+}
+
+.rectangle2 {
+  width: 260px;
+  margin-left: -140px;
+  height: 243px;
+  margin-top: -192px;
+}
+
+  .top {
+    width: 260px;
+    height: 20px;
+    margin-top: -58px;
+  }
+
+  
+  .input2 {
+    width: 240px;
+    height: 18px;
+    font-size: 14px;
+    margin-left: 0px;
+  }
+
+  .footer {
+    width: 260px;
+    margin-left: -140px;
+    flex-direction: column;
+    height: 80px;
+}
+
+  .Evento-container3 {
+    width: 260px;    
+    height: 80px; 
+    margin-left: 2px;  
+    margin-top: 10px;  
+  }
+
+  .input1{
+    width: 155px;
+    height: 18px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-family: "Times New Roman", "Times New Roman";
+    margin-top: 0px;
+    margin-right: 0px;    
+  }
+
+  .EventoEvento{    
+    margin-left: 10px;
+    margin-top: 0px;
+    width: 79px;
+    height: 25px;
+    font-size: 14px;
+  }
+
+
+
+  .logo {
+    position: absolute;
+    margin-left: 0px;
+    margin-top: -90px;
+    width: 169px;
+    height: 40px;
+    cursor: pointer; /* Adicionado para indicar que a imagem é clicável */
+  }
+
+  .Botoes_usuario {
+    width: 60px;
+    height: 60px;  
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -15px;
+    margin-top: 70px;
+  }
+
+  .user-details-Ul {
+    font-size: 13px;
+    width: 60px;
+  }
+
+  .user-details-Ul-li1 {
+    font-size: 13px;    
+  }
+  
+  .user-details-Ul-li2 {
+    font-size: 13px;
+  }
+
+
+  .Evento-btn6{
+    margin-left: 10px;
+    margin-top: 0px;
+    width: 86px;
+    height: 25px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: "Times New Roman";
+  }
+
+  .Evento-btn5{
+    margin-left: 10px;
+    margin-top: 0px;
+    width: 86px;
+    height: 25px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    background-color: #D9D9D9;
+    font-family: "Times New Roman";
+  }
+
+  .Botoes_usuario5 {
+    width: 50px;
+    height: 50px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.Evento-btn2{
+  border: none;
+  border-radius: 8px;
+ cursor: pointer;
+  font-weight: bold;
+ position: relative;
+ background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-left: 10px;
+width: 150px;
+    height: 22px;
+    font-size: 14px;
+    margin-top: 1px;
+margin-right: 10px;
+}
+
+
+
+.btn-left2,.btn-right2 {
+    
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  right: 10px;
+  font-family: "Times New Roman";
+  width: 150px;
+      height: 25px;
+      font-size: 14px;
+      margin-bottom: 10px;
+}
+
+.btn-left2{
+  right: 170px;
+}
+
+.pagina-info {
+  font-size: 14px;
+}
+
+.btn-left{
+  height: 30px;
+  font-size: 14px;
+  width: 170px;
+  margin-top: 5px;
+}
+
+.btn-left, .btn-right, .btn-right3 {
+  height: 30px;
+  font-size: 14px;
+  width: 170px;
+  margin-top: 5px;
+}
+
+.textotop{
+  font-size: 20px;
+  margin-top: 0px;
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: -10px;
+}
+
+legend {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Times New Roman", "Times New Roman";
+}
+
+
+.equipe-id, .equipe-nome {
+  color: white;
+  font-size: 14px;
+  font-family: "Times New Roman",
+  Times,
+  serif;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+
+.modalCancelaButton {
+  margin-top: -5px;
+  width: 280px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+}
+
+
+.modalcriarButton {
+  margin-top: -5px;
+  width: 280px;
+  margin-left: 20px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  color: green;
+}
+
+.parametros-container {
+  max-height: 90px;
+  overflow-y: auto;
+}
+
+.listagemequipes {
+  overflow-y: auto;
+  max-height: 212px;
+  width: 260px;
+  border: 2px solid black;
+  border-color: black;
+  border-radius: 8px;
+  margin-left: -2px;
+}
+
+.input1 {
+  width: 245px;
+  height: 18px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-top: 0px;
+  margin-right: 0px;
+}
+
+.EventoEvento {
+  margin-left: 0px;
+  margin-top: 1px;
+  width: 130px;
+  height: 25px;
+  font-size: 14px;
+}
+
+.Evento-btn5 {
+  margin-left: 0px;
+  margin-top: 0px;
+  width: 130px;
+  height: 25px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+}
+
+.Evento-btn6 {
+  margin-left: 1px;
+  margin-top: 1px;
+  width: 129px;
+  height: 25px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+}
+
+
+
+.btn-left, .btn-right, .btn-right3 {
+  height: 30px;
+  font-size: 14px;
+  width: 260px;
+  margin-top: 5px;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.logout-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de logout */
+    cursor: pointer; /* Adicionado para indicar que o elemento é clicável */
+    margin-top: 68px;
+    margin-left: 80px;
+  }
+
+.welcome-container {
+  top: 50%;
+  margin-top: 50px;
+}
+
+
+.Evento-btn3 {
+  width: 150px;
+  height: 22px;
+  font-size: 14px;
+  margin-left: 0px;
+  margin-top: 1px;
+}
+
+.nomeEvento{
+  font-size: 14px;
+  width: 150px;
+  margin-top: 0px;
+}
+
+.dados{
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente os itens */
+  justify-content: center; /* Centraliza verticalmente dentro do contêiner */
+  margin-left: 50px;
+  margin-top: -100px;
+}
+
+.Evento-containerdiv2 {
+  margin-top: 25px;
+  margin-left: -126px;
+}
+
+.Evento-container {
+  width: 240px;
+  height: 170px;
+  background-color: #d9d9d96b;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+
+/* Apartir daqui   */
+.cadastro-label2{
+  padding-top: 5%;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  margin-left: 7px;
+  color: #ffffff;
+  font-family: "Times New Roman";
+}
+
+.modalCampo {
+  display: block;
+  width: 250px;
+  height: 20px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Times New Roman", Times New Roman;
+}
+
+.fieldset1{
+  margin-top: 10px;
+  width: 250px;
+}
+
+.input_modal1{
+  margin-top: 3px;
+  height: 20px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-right: 10px;
+  padding: 5px;
+  width: 247px;
+}
+
+
+.modalpesquisarButton {
+  margin-right: 10px;
+  padding: 5px 10px;
+  margin-top: 5px;
+  width: 105px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+}
+
+.equipe-fieldset{
+  width: 142px;
+  height: 40px;
+  display: flex;
+}
+
+.buttonescolher {
+  margin-right: -10px;
+  padding: 5px;
+  margin-top: 1px;
+  width: 65px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  margin-left: -11px;
+}
+
+.importancia-fieldset {
+  height: 40px;
+}
+
+
+
+.equipe-selecionada {
+  margin-top: 10px;
+  width: 269px;
+  height: 90px;
+}
+
+.resultado-pesquisa {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  color: white;
+  font-size: 16px;
+  font-family: "Times New Roman",
+    Times,
+    serif;
+}
+
+.equipe-imagem {
+  width: 30px;
+  height: 30px;
+}
+
+.equipe-id{
+  color: white;
+  font-size: 14px;
+  font-family: "Times New Roman",
+    Times,
+    serif;
+  margin-left: -13px;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.modal-content {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  height: 420px;
+}
+
+.equipe-nome {
+  color: white;
+  font-size: 14px;
+  font-family: "Times New Roman",
+    Times,
+    serif;
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-left: -13px;
+}
+
+}

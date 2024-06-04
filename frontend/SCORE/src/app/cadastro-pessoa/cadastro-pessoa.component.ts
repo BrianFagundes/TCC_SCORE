@@ -73,17 +73,17 @@ export class CadastroPessoaComponent {
 
     if (!isEmailValido(email))
     {
-      alert('Email em formato inválido!');
+      this.showAlert('E-mail em formato inválido!');
       return;
     }
     // Verifique se as senhas coincidem
     if (senha !== senha2) {
-      alert('As senhas não coincidem.');
+      this.showAlert('As senhas não coincidem.');
       return;
     }
 
     if (senha.length < 8) {
-      alert('A senha possui menos de 8 caracteres.');
+      this.showAlert('A senha possui menos de 8 caracteres.');
       return;
     }
 
@@ -93,13 +93,13 @@ export class CadastroPessoaComponent {
     const regexSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
 
     if (!regexUpperCase.test(senha) || !regexLowerCase.test(senha) || !regexDigit.test(senha) || !regexSpecialChar.test(senha)) {
-      alert('A senha Deve possuir no minimo um caractere maiusculo, um caractere mnusculo, um caractere especial e/ou um numeral.');
+      this.showAlert('A senha deve possuir, no mínimo, um caractere maiúsculo, um caractere minúsculo, um caractere especial e um numeral.');
       return;
     }
 
     if(!this.Aceito)
     {
-      alert("O usuário deve concordar com as Políticas de Privacidade e os Termos de Serviço para conseguir cadastrar-se no sistema!");
+      this.showAlert("O usuário deve concordar com as Políticas de Privacidade e os Termos de Serviço para conseguir cadastrar-se no sistema.");
       return;
     }
     this.confirmaremail = true;
@@ -115,8 +115,9 @@ export class CadastroPessoaComponent {
     if (modal) {
       modal.style.display = 'block';
     }    
+
     
-    this.apiService.autenticarUsuario();
+    await this.apiService.autenticarUsuario("","");
 
     const isValid = await this.apiService.cadastrarUsuario(this.dadosUsuario);     
     
@@ -124,7 +125,7 @@ export class CadastroPessoaComponent {
     {
       if (isValid === 0)
       {
-        alert('Cadastro Realizado com sucesso!');
+        this.showAlert('Cadastro realizado com sucesso!');
         this.nomeInput.nativeElement.value = ''; 
         this.emailInput.nativeElement.value = '';
         this.senhaInput.nativeElement.value = '';
@@ -132,7 +133,7 @@ export class CadastroPessoaComponent {
       }
       else if (isValid === 1)
       {
-        alert('E-mail já cadastrado no sistema!');
+        this.showAlert('E-mail já cadastrado no sistema.');
         this.nomeInput.nativeElement.value = ''; 
         this.emailInput.nativeElement.value = '';
         this.senhaInput.nativeElement.value = '';
@@ -140,7 +141,7 @@ export class CadastroPessoaComponent {
       }
       else if (isValid === 2)
       {
-        alert('Usuário já cadastrado no sistema!');
+        this.showAlert('Usuário já cadastrado no sistema.');
         this.nomeInput.nativeElement.value = ''; 
         this.emailInput.nativeElement.value = '';
         this.senhaInput.nativeElement.value = '';
@@ -148,7 +149,7 @@ export class CadastroPessoaComponent {
       }
       else
       {
-        alert('Falha ao Realizar o cadastro. Por favor, tente novamente mais tarde.');
+        this.showAlert('Falha ao realizar o cadastro. Por favor, tente novamente mais tarde.');
       }  
     }
 
@@ -200,8 +201,34 @@ export class CadastroPessoaComponent {
       this.cadastrarDados();
     else
     {
-      alert("Validação inválida! Cadastramento cancelado!");
+      this.showAlert("Validação inválida. Cadastramento cancelado.");
       this.confirmaremail = false;
     }      
   }
+
+  showAlert(message : string) {
+    var alertBox = document.getElementById("customAlert");
+    var alertMessage = document.getElementById("alertmessage_customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && alertMessage && overlay_alertBox)
+    {
+      alertMessage.textContent = message;
+      overlay_alertBox.style.display = "block"; // Show the overlay_alertBox
+      alertBox.style.display = "block"; // Show the alert
+    }
+    
+  }
+  
+  hideAlert() {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+
 }

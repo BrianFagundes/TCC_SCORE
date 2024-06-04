@@ -17,7 +17,7 @@ import io.jsonwebtoken.io.DecodingException;
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-    // Substitua estes valores pelas suas strings seguras geradas
+    
     private final String expectedUser = "f6546317";
     private final String expectedPassword = "f9e29a8";
 

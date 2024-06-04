@@ -21,9 +21,15 @@ public class UsuarioController {
     private CriptografiaAES criptografiaAES;    
     @Autowired
     private ParticipanteRepository participanteRepository;
+    
+    public UsuarioController(UsuarioRepository usuarioRepository, CriptografiaAES criptografiaAES ) {
+        this.usuarioRepository = usuarioRepository;
+        this.criptografiaAES = criptografiaAES;
+    }
 
     @PostMapping
     public int criarUsuario(@RequestBody Usuario usuario) {
+    	
     	List<Usuario> usuarios = usuarioRepository.findByEmail(usuario.getEmail());  
     	usuario.setsenha(criptografiaAES.criptografar(usuario.getsenha()));
     	if (usuarios != null && !usuarios.isEmpty()) {
@@ -76,7 +82,7 @@ public class UsuarioController {
     
     @PostMapping("/Validacao")
     public Long obterUsuario(@RequestBody Usuario usuario1) {
-    	System.out.println("obterUsuario");
+    	System.out.println("Validacao");
     	System.out.println(usuario1.getEmail());
     	System.out.println(usuario1.getsenha());
     	int intValue = 0;
@@ -84,6 +90,26 @@ public class UsuarioController {
     	
     	List<Usuario> usuarios = usuarioRepository.findByEmail(usuario1.getEmail());
     	
+    	System.out.println(usuarios);
+    	
+    	if (usuarios != null) {
+    		for (Usuario usuario : usuarios) { 
+    			usuario.setsenha(criptografiaAES.descriptografar(usuario.getsenha()));
+    			System.out.println(usuario.getId());
+				if (usuario.getsenha().equals(usuario1.getsenha()))
+					Saida = usuario.getId();
+			}
+    	}
+    	System.out.println(Saida);
+        return Saida;
+    }
+    
+    
+    public Long obterUsuario2(Usuario usuario1) {
+    	int intValue = 0;
+    	Long Saida = (long) intValue;    	 
+    	
+    	List<Usuario> usuarios = usuarioRepository.findByEmail(usuario1.getEmail());
     	if (usuarios != null) {
     		for (Usuario usuario : usuarios) { 
     			usuario.setsenha(criptografiaAES.descriptografar(usuario.getsenha()));
@@ -94,7 +120,6 @@ public class UsuarioController {
     	
         return Saida;
     }
-    
     
     
     @GetMapping("/Nome/Levanta/{id}")
@@ -196,25 +221,4 @@ public class UsuarioController {
         
     }
     
-    public String RetornoSenha(String email)
-    {
-    	List<Usuario> usuarios = usuarioRepository.findByEmail(email);    
-    	
-        if (usuarios != null) {        	
-            for (Usuario usuario : usuarios) { 
-            	usuario.setsenha(criptografiaAES.descriptografar(usuario.getsenha()));
-            	return usuario.getsenha();                    
-            }
-        }
-        return "";
-    }
-    
-    public boolean NaoExisteEmail(String email)
-    {
-    	List<Usuario> usuarios = usuarioRepository.findByEmail(email);      
-    	if (usuarios != null && !usuarios.isEmpty()) {
-    	    return false; // Se a lista não está vazia, significa que o usuário existe
-    	}
-    	return true; // Se a lista está vazia (ou nula), significa que o usuário não existe
-    }
 }

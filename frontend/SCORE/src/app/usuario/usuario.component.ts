@@ -2,7 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../api.service';
-
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-usuario',
@@ -18,6 +19,9 @@ export class UsuarioComponent {
   @ViewChild('novaSenha') novaSenha: ElementRef | undefined;
   @ViewChild('confirmacaoSenha') confirmacaoSenha: ElementRef | undefined;
 
+  screenWidth: number = window.innerWidth;
+  screenHeight: number = window.innerHeight;
+  screenSubscription: Subscription | undefined;
 
   mostrarSenha : boolean = false;
   editMode: boolean = false;
@@ -40,6 +44,21 @@ export class UsuarioComponent {
   ngOnInit() {
     localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
+
+    // Set up the screen size listener
+    this.screenSubscription = fromEvent(window, 'resize').pipe(
+      debounceTime(300),
+      map(() => {
+        this.screenWidth = window.innerWidth;
+        this.screenHeight = window.innerHeight;
+        console.log(`Screen size updated: ${this.screenWidth}x${this.screenHeight}`);
+      })
+    ).subscribe();
+  }
+
+  ngOnDestroy() {
+    // Cleanup the subscription
+    this.screenSubscription?.unsubscribe();
   }
 
   carregarDadosUsuario() {
@@ -55,21 +74,34 @@ export class UsuarioComponent {
 
   getBotaoEstilos()
   {
-    if(this.usuariogoogle)
+    if(this.screenWidth > 999)
     {
-      return {
-        'width': '270px',
-        // outros estilos conforme necessário
-      };
+      if(this.usuariogoogle)
+        {
+          return {
+            'width': '350px',
+            // outros estilos conforme necessário
+          };
+        }
+        else
+        {
+          return {
+            'width': '310px'
+            // outros estilos conforme necessário
+          };
+        }
     }
     else
     {
       return {
-        'width': '150px'
+        'width': '210px'
         // outros estilos conforme necessário
       };
     }
+    
   }
+
+  
 
   // getBotaoEstilos2()
   // {

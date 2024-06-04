@@ -1,14 +1,16 @@
 
 .container {
-    display: flex; /* Torna este um flex container */
-    flex-direction: row; /* Organiza os itens horizontalmente */
-    align-items: center; /* Centraliza os itens verticalmente */
-    justify-content: center; /* Para centralização horizontal, se necessário */
-    gap: 20px; /* Espaçamento entre os itens */
-    border: 2px solid gray; /* Adiciona uma borda cinza */
-    border-radius: 10px; /* Adiciona cantos arredondados */
-    margin-top: 50px;
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  margin-top: 50px;
+  height: 80px;
+}
+
   
   
   .user-details-Ul {
@@ -33,12 +35,12 @@
   }
   
   .Botoes_usuario {
-    width: 100px;
-    height: 100px;
-    border: 2px solid gray; /* Adiciona uma borda cinza */
-    border-radius: 10px; /* Adiciona cantos arredondados */    
+    width: 70px;
+    height: 70px;
+    border: 2px solid gray;
+    border-radius: 10px;
     cursor: pointer;
-  }
+}
   
   .logo {
     position: absolute;
@@ -129,11 +131,10 @@
     padding: 5px;
   }
 
-  input[type="text"] {
-  
+  input[type=text] {
     margin-top: 10px;
-    width: 350px;
-    height: 30px;
+    width: 1060px;
+    height: 25px;
     border: none;
     border-radius: 8px;
     padding-left: 10px;
@@ -143,28 +144,19 @@
     color: white;
     font-weight: bold;
     font-size: 20px;
-    font-family: 'Times New Roman', 'Times New Roman';
+    font-family: "Times New Roman", "Times New Roman";
     margin-right: 10px;
     padding: 5px;
-  }
+    margin-bottom: 10px;
+}
 
-  .equipe-btn, .equipe-btn2 {
-    width: 210px;
-    height: 30px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    position: relative;
-    background-color: #D9D9D9;
-    font-family: 'Times New Roman';
-    margin-top: 5px;
-  }
+
   
   .equipe-btn2 {    
     margin-bottom: 10px;
   }
+
+  
 
   .welcome-message {
     max-width: 600px;
@@ -341,7 +333,7 @@
     background-color: rgba(211, 211, 211, 0.2); /* Cinza claro com transparência de 80% */
     position: fixed;
     width: 1460px;
-    height: 330px;
+    height: 370px;
     margin-left: -740px; 
     margin-top: -230px;   
     border-radius: 8px;
@@ -365,4 +357,655 @@
     padding: 5px;
   }
   
+  .Botoes_usuario3 {
+    width: 70px;
+    height: 70px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 1040px;
+}
+
+  .textotop{
+   
+    color: white;
+    font-size: 30px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-top: 0px;
+
+}
+
+
+.equipe-btn, .equipe-btn2 {
+  width: 180px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.equipe-btn3 {
+  width: 200px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.naoexistemdados {
+  color: black;
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-bottom: 5px;
+}
+
+  @media screen and (min-width: 1000px) and (max-width: 1599px) {
   
+    .Botoes_usuario3 {
+      margin-left: 583px;
+    }
+  
+    .rectangle {
+      width: 980px;
+      height: 600px;  
+      margin-top: 0px;  
+    }
+  
+    .rectangle2 {
+      width: 940px;
+      margin-left: -480px;
+    }
+  
+    .top {
+      width: 940px;
+    }
+  
+    
+    .input2 {
+      width: 550px;
+    }
+  
+    .equipe-container {
+      width: 940px;    
+    }
+  
+    .equipe-container3 {
+      width: 940px;    
+    }
+  
+    .footer {
+      width: 940px;
+      margin-left: -480px;    
+    }
+  
+  
+    .container {
+      margin-top: 0px;
+    }
+
+    input[type=text] {
+      margin-top: 0px;
+      width: 540px;
+      height: 20px;
+      border: none;
+      border-radius: 8px;
+      padding-left: 10px;
+      background-color: #201f26;
+      border-color: #201f26;
+      outline: none;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      font-family: "Times New Roman", "Times New Roman";
+      margin-right: 10px;
+      padding: 5px;
+  }
+
+  
+  
+  }
+  
+  @media screen and (min-width: 600px) and (max-width: 999px) {
+  
+    .logo {
+      position: absolute;
+      left: 10px;
+      width: 165px;
+      height: 40px;
+      top: 25px
+    }
+  
+    .Botoes_usuario3 {
+      margin-left: 340px;
+      width: 60px;
+      height: 60px;
+    }
+  
+    .Botoes_usuario {
+      width: 60px;
+      height: 60px;  
+    }
+  
+    .user-details-Ul {
+      font-size: 13px;
+      width: 60px;
+    }
+  
+    .user-details-Ul-li1 {
+      font-size: 13px;    
+    }
+    
+    .user-details-Ul-li2 {
+      font-size: 13px;
+    }
+  
+    .rectangle {
+      width: 580px;
+      height: 400px;  
+      margin-top: 0px;  
+    }
+  
+    .rectangle2 {
+      width: 540px;
+      margin-left: -280px;
+      height: 180px;
+      margin-top: -140px; 
+    }
+  
+    .top {
+      width: 540px;
+      height: 20px;
+      margin-top: -60px;
+    }
+  
+    
+    .input2 {
+      width: 294px;
+      height: 18px;
+      font-size: 14px;
+    }
+  
+    .input3 {
+      width: 294px;
+      height: 18px;
+      font-size: 14px;
+      width: 150px;
+    }
+  
+    .equipe-container {
+      width: 540px;    
+      height: 80px;
+    }
+  
+    .equipe-container3 {
+      width: 540px;    
+      height: 80px;   
+    }
+  
+    .footer {
+      width: 540px;
+      margin-left: -280px;    
+    }
+  
+  
+    .container {
+      margin-top: 2px;
+    }
+    
+    .textotop{
+      font-size: 20px;
+      margin-top: 0px;
+    }
+
+    .equipe-btn, .equipe-btn2 {
+      width: 158px;
+      height: 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      position: relative;
+      background-color: #D9D9D9;
+      font-family: "Times New Roman";
+      margin-top: 5px;
+  }
+
+  input[type=text] {
+    margin-top: 10px;
+    width: 184px;
+    height: 20px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: "Times New Roman", "Times New Roman";
+    margin-right: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.naoexistemdados {
+  color: black;
+  font-size: 24px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-bottom: 5px;
+}
+
+.nomeequipe {
+  margin-top: 0px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  font-family: "Times New Roman";
+}
+
+.Botoes_usuario2 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.btn-left2 {
+  width: 150px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  right: 170px;
+}
+
+.btn-right2 {
+  width: 150px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  right: 10px;
+  font-family: "Times New Roman";
+}
+
+.pagina-info {
+  position: absolute;
+  bottom: 20px;
+  font-size: 16px;
+  left: 10px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  font-family: "Times New Roman";
+  bottom: 13px;
+}
+
+.CriarEquipeButton {
+  margin-top: 5px;
+  width: 170px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+}
+
+.equipe-btn3 {
+  width: 160px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+input[type=text] {
+  margin-top: 0px;
+  width: 184px;
+  height: 20px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-right: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 599px) {
+  
+    .welcome-container {
+      top: 50%;
+      margin-top: 50px;
+    }
+  
+    .logo {
+      position: absolute;
+      margin-left: 0px;
+      margin-top: -90px;
+      width: 169px;
+      height: 40px;
+      cursor: pointer; /* Adicionado para indicar que a imagem é clicável */
+    }
+  
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 70px;
+    }
+  
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: -15px;
+      margin-top: 70px;
+    }
+  
+    .logout-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Adicione aqui quaisquer estilos adicionais necessários para o botão de logout */
+      cursor: pointer; /* Adicionado para indicar que o elemento é clicável */
+      margin-top: 68px;
+      margin-left: 80px;
+    }
+  
+  
+    .Botoes_usuario3 {
+      margin-left: 0px;
+      width: 60px;
+      height: 60px;
+    }
+  
+    .Botoes_usuario {
+      width: 60px;
+      height: 60px;  
+    }
+  
+    .user-details-Ul {
+      font-size: 13px;
+      width: 60px;
+    }
+  
+    .user-details-Ul-li1 {
+      font-size: 13px;    
+    }
+    
+    .user-details-Ul-li2 {
+      font-size: 13px;
+    }
+  
+    .rectangle {
+      width: 300px;
+      height: 430px;
+      margin-top: 0px;  
+    }
+  
+    .rectangle2{
+      width: 260px;
+      margin-left: -140px;
+      height: 243px;
+      margin-top: -160px;
+  }
+  
+    .top {
+      width: 260px;
+      height: 20px;
+      margin-top: -58px;
+    }
+  
+    
+    .input2 {
+      width: 240px;
+      height: 18px;
+      font-size: 14px;
+      margin-left: 0px;
+    }
+  
+    .input3 {
+      height: 18px;
+      font-size: 14px;
+      width: 230px;
+    }
+  
+    
+  
+    .equipe-container3 {
+      width: 260px;    
+      height: 80px; 
+      margin-left: 2px;  
+      margin-top: 10px;
+    }
+  
+    .footer {
+      width: 260px;
+      margin-left: -140px;    
+      flex-direction: column;
+      height: 14px;
+    }
+  
+  
+    .container {
+      margin-top: 2px;
+      height: 140px;
+    }
+    
+    .textotop {
+      font-size: 15px;
+      margin-top: -6px;
+  }
+
+  input[type=text] {
+    margin-top: 5px;
+    width: 245px;
+    height: 20px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: "Times New Roman", "Times New Roman";
+    margin-right: 10px;
+    padding: 5px;
+}
+.equipe-btn, .equipe-btn2 {
+  width: 115px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.equipe-container {
+  width: 240px;
+  height: 100px;
+  background-color: #d9d9d96b;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.Botoes_usuario2 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+
+.equipe-btn3 {
+  width: 160px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-top: 95px;
+  margin-left: -188px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+
+.equipe-container {
+  width: 260px;
+  height: 120px;
+  background-color: #d9d9d96b;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.Botoes_usuario2 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.dados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
+  margin-top: -45px;
+}
+
+.equipe-container {
+  width: 240px;
+  height: 120px;
+  background-color: #d9d9d96b;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.nomeequipe {
+  margin-top: 0px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  font-family: "Times New Roman";
+}
+
+
+.CriarEquipeButton {
+  margin-top: -4px;
+  width: 250px;
+  height: 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  font-family: "Times New Roman";
+  margin-left: 5px;
+}
+
+.listagemequipes {
+  overflow-y: auto;
+  max-height: 235px;
+  width: 264px;
+  border: 2px solid black;
+  border-color: black;
+  border-radius: 8px;
+  margin-left: -4px;
+}
+
+.naoexistemdados {
+  color: black;
+  font-size: 22px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-bottom: 5px;
+}
+
+  }

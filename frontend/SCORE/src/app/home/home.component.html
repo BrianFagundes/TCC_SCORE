@@ -3,7 +3,7 @@
     <div class="main-container">
       <div class="rectangle">
         <div  class="login-text">Fazer login com</div>
-        <button style="margin-top: 50px;" class="login-button2 google" id="google-button">
+        <button class="login-button2 google" id="google-button">
         </button>
         <!-- <button class="login-button3 facebook">
             <img src="../../assets/Index/Face.png" alt="Facebook" class="button-icon2">
@@ -13,14 +13,14 @@
         <div class="line"></div>
         <div class="login">
             <img src="../../assets/Index/Login.png" alt="Google" class="login-imagem">
-            <div class="login-label"><input placeholder="E-mail" style="margin-top: 20px; width: 300px;" type="text" id="login" name="login" class="home-input" #usernameInput required></div>
+            <div class="login-label"><input placeholder="E-mail" type="text" id="login" name="login" class="home-input" #usernameInput required></div>
         </div>
         <div class="line"></div>
         <div class="password">
             <img src="../../assets/Index/Senha.png" alt="Google" class="password-imagem">
             <div class="password-label">
-              <input placeholder="Senha" style="margin-top: 20px; width: 300px; margin-left: 10px;" [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha" class="home-input" #passwordInput required>
-              <button style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);" id="mostrarsenha2" (click)="toggleSenha()" class="mostrarsenha">
+              <input placeholder="Senha" style="@media screen and (min-width: 0px) and (max-width: 599px)  { margin-left: 0px;}; @media screen and (min-width: 600px) { margin-left: 10px;}" [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha" class="home-input" #passwordInput required>
+              <button id="mostrarsenha2" (click)="toggleSenha()" class="mostrarsenha2">
                 <img style="width: 40px; height: 20px;" class="mostrarsenha" [src]="mostrarSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'" alt="Mostrar/Ocultar Senha">
               </button>
             </div>
@@ -36,3 +36,9 @@
       </div>
     </div>
   </div>  
+
+  <div id="overlay_alertBox" class="overlay_alertBox"></div>
+  <div id="customAlert" class="alert">
+    <p id="alertMessage" class="message"></p>
+    <button class="okbtn" (click)="hideAlert()">OK</button>
+  </div>

@@ -24,7 +24,7 @@ public class CriptografiaAES {
         }
     }
 
-    public String descriptografar(String valorCriptografado) {
+    public static String descriptografar(String valorCriptografado) {
         try {
             SecretKey secretKey = new SecretKeySpec(KEY, ALGORITHM);
             Cipher cipher = Cipher.getInstance(ALGORITHM);

@@ -1,8 +1,18 @@
 package com.api.usuario.equipe.evento;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.usuario.equipe.evento.Times.TimeRepository;
 import com.api.usuario.equipe.evento.Nota.*;
 import com.api.usuario.equipe.participante.*;
+
+
 import com.api.usuario.equipe.custos.*;
 import com.api.usuario.equipe.*;
-import com.api.usuario.EmailController;
 import com.api.usuario.*;
 
 
@@ -44,6 +55,27 @@ public class EventoController {
 	private EmailController emailController;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	
+	public EventoController(EventoRepository eventoRepository, 
+							ParticipanteRepository participanteRepository,
+							CustoRepository custorepository,
+							TimeRepository timerepository,
+							NotaRepository notaRepository,
+							EquipeRepository equipeRepository,
+							UsuarioRepository usuarioRepository,
+							EmailController emailController
+							) {
+        this.eventoRepository = eventoRepository; 
+        this.participanteRepository = participanteRepository;
+        this.custorepository = custorepository;
+        this.timerepository = timerepository;
+        this.notaRepository = notaRepository;
+        this.equipeRepository = equipeRepository;
+        this.usuarioRepository = usuarioRepository;
+        this.emailController = emailController;
+        
+    }
 	
 	
 	@PostMapping("/criar")
@@ -95,7 +127,17 @@ public class EventoController {
 			Eventoalterar.setQuantidade_time(Evento.getQuantidade_time());	
 			Eventoalterar.setStatus("C");
 			Eventoalterar.setChavepix(Evento.getChavepix());
-			Eventoalterar.setDataultimoevento(null);					
+			Eventoalterar.setDataultimoevento(null);
+			Eventoalterar.setDuracao(Evento.getDuracao());
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		    LocalTime hora = LocalTime.parse(Evento.getHora(), formatter);
+		    LocalTime Tempoduracao = LocalTime.parse(Evento.getDuracao(), formatter);
+		    Duration duracao = Duration.ofHours(Tempoduracao.getHour()).plusMinutes(Tempoduracao.getMinute());
+		    String horafim = hora.plus(duracao).toString();
+		    
+		    Eventoalterar.setHorafim(horafim);
+		    
 			
 			eventoRepository.save(Eventoalterar);
 			return 0;
@@ -107,11 +149,20 @@ public class EventoController {
 	
 	@PutMapping("/Alterar/Status")
 	public int alterarStatus(@RequestBody Evento Evento) {
+		System.out.println(Evento.getDia() + "testetestetse");
+		System.out.println(Evento.getid());
+		System.out.println(Evento.getStatus());
+		System.out.println(Evento.getDataultimoevento());
+		
 		try {
+			System.out.println("0");
 			Evento Eventoalterar = eventoRepository.findById(Evento.getid()).orElse(null);
+			System.out.println("1");
 			Eventoalterar.setStatus(Evento.getStatus());
+			System.out.println("2");
 			Eventoalterar.setDataultimoevento(Evento.getDataultimoevento());
-
+			System.out.println("3");
+			System.out.println(Evento.getStatus());
 			if (Evento.getStatus().equals("F")) {
 				Equipe equipe = equipeRepository.findById(Evento.getEquipe()).orElse(null);
 				equipe.setStatuseventos("F");
@@ -162,13 +213,15 @@ public class EventoController {
 				}
 			}
 			else {
+				System.out.println(Evento.getStatus());
 				List<Participante> participantes = participanteRepository.findByEquipe(Eventoalterar.getEquipe());
 				for (int i = 0; i < participantes.size(); i++) {
 					boolean isValid = custorepository.existsByEventoAndUsuarioAndCusto(Eventoalterar.getid(),
 							participantes.get(i).getUsuario(), true);
 					if (isValid) {
-						Usuario usuario = usuarioRepository.getById(participantes.get(i).getUsuario());
-						emailController.enviarEmail2(usuario.getEmail(), "Dados do Evento: " + Eventoalterar.getNome(), "O Evento " + Eventoalterar.getNome() + " foi iniciado, favor consultar os dados dos times em: Tela inicial -> Dados do evento -> Pressione sobre o Evento -> Sortear Equipes");
+						System.out.println(participantes.get(i).getUsuario());
+						Usuario usuario = usuarioRepository.findById(participantes.get(i).getUsuario()).orElse(null);
+						emailController.enviarEmail2(usuario.getEmail(), "Dados do Evento: " + Eventoalterar.getNome(), "O Evento " + Eventoalterar.getNome() + " foi iniciado, favor consultar os dados do Evento em sua tela de acesso!");
 					}
 				}	
 			}
@@ -176,6 +229,7 @@ public class EventoController {
 			eventoRepository.save(Eventoalterar);
 			return 0;
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return 1;
 		}
 

@@ -2,10 +2,10 @@
     <div class="welcome-container">
         <div class="user-info">
             <div class="container">
-                <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="TelaInicial()">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo">
                 <div class="image-container">
-                    <img style="margin-left: 1040px;" id="selectedImage2" [src]="imagePath" alt="User Image"
-                        class="Botoes_usuario" (click)="usuario()">
+                    <img id="selectedImage2" [src]="imagePath" alt="User Image" class="Botoes_usuario3"
+                        (click)="usuario()">
                 </div>
                 <div class="user-details">
                     <ul class="user-details-Ul">
@@ -23,33 +23,33 @@
         </div>
         <div class="rectangle">
             <div class="welcome-message">
-                <div *ngIf="tipotela == 'D'" class="linha linha3" style="margin-top: 10px; border-radius: 10px;">
-                    <p style="color: rgba(255, 255, 255, 0);">.</p>
-                    <p
-                        style="color: white; font-size: 30px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: -10px">
-                        Consulta de dados do Evento</p>
+                <div *ngIf="tipotela != 'D'" class="top">
+                    <p class="textotop">Alteração de dados do Evento</p>
                 </div>
-                <div class="linha linha1" style="margin-top: 20px; border-radius: 10px;">
+                <div *ngIf="tipotela == 'D'" class="top">
+                    <p class="textotop">Consulta de dados do Evento</p>
+                </div>    
+                <div class="linha linha1">
                     <div class="coluna esquerda">
                         <img [src]="imagePath2" alt="Imagem"
-                            style="width: 200px; height: 200px; margin-top: 70px; border-radius: 10px;">
+                            class="imagem_inline2">
                     </div>
                     <div class="coluna direita">
                         <div class="sublinha">
-                            <input style="width: 800px;" type="text" name="nomeEquipe" placeholder="Nome da Equipe" #nomeEquipe required
+                            <input class="input_inline1" name="nomeEquipe" placeholder="Nome da Equipe" #nomeEquipe required
                                 [disabled]="true">
                         </div>
                         <div class="sublinha">
-                            <input style="width: 190px;" type="text" name="nomeEquipe" placeholder="ID Evento" #IdEvento required
+                            <input class="input_inline2" name="nomeEquipe" placeholder="ID Evento" #IdEvento required
                             [disabled]="true">
-                            <input style="width: 590px;" type="text" name="sigla"
+                            <input class="input_inline3" name="sigla"
                                 placeholder="Nome do Evento*" #nomeevento required
                                 [disabled]="true">                            
                         </div>
                         <div class="sublinha">     
-                            <input style="width: 490px;" type="text" name="nomeEquipe" placeholder="Local do evento* - Escolha no mapa" #localevento required
+                            <input class="input_inline4" name="nomeEquipe" placeholder="Local do evento* - Escolha no mapa" #localevento required
                                 [disabled]="true">      
-                                <button style="margin-top: 10px;" (click)="abrirmapa()">Encontrar no mapa</button>                 
+                                <button class="button8" (click)="abrirmapa()">Encontrar no mapa</button>                 
                         </div>
                         <div class="container-flex">
                             <div class="container-flex" style="margin-top: -13px;">
@@ -57,13 +57,17 @@
                                     <option value="0">Evento Semanal</option>
                                     <option value="1">Evento Único</option>
                                 </select>  
-                                <p style="margin-left: 10px; margin-top: 35px;" class="cadastro-label3">Hora do Evento: </p>
-                                <input style="width: 438px; margin-left: 10px;" type="time" name="nomeEquipe" placeholder="Hora do próximo evento*" #horaevento required 
+                                <p class="cadastro-label3 p_inline1">Hora do Evento: </p>
+                                <input type="time" name="nomeEquipe" placeholder="Hora do próximo evento*" #horaevento required 
                                     [disabled]="tipotela == 'D'">
+                                <p class="cadastro-label3 p_inline2">Duração do Evento: </p>
+                                <input type="time" name="nomeEquipe" placeholder="Duração do evento*" #duracaoevento required 
+                                    [disabled]="tipotela == 'D'">
+
                             </div>                                                      
                         </div> 
                         <div class="container-flex"> 
-                            <fieldset *ngIf="!frequencia" style="display: flex; width: 780px; margin-left: 160px; margin-top: -20px;">
+                            <fieldset *ngIf="!frequencia" class="fieldset_inline1">
                                 <legend>Dias da Semana</legend>
                                 <p class="cadastro-label3">Seg</p>
                                 <input type="checkbox" [checked]="Seg" #segunda  [disabled]="tipotela == 'D'">
@@ -80,36 +84,35 @@
                                 <p class="cadastro-label3" >Dom</p>
                                 <input type="checkbox" [checked]="Dom" #domingo  [disabled]="tipotela == 'D'">
                             </fieldset>
-                            <fieldset *ngIf="frequencia" style="display: flex; width: 780px; margin-left: 160px; margin-top: -20px;" >
+                            <fieldset *ngIf="frequencia" class="fieldset_inline2" >
                                 <legend>Dia do Evento</legend>
-                            <input  style="width: 750px; margin-left: 10px;" type="date" name="diaevento" placeholder="Data do próximo evento*" id="diaevento" #diaevento required 
+                            <input  type="date" name="diaevento" placeholder="Data do próximo evento*" id="diaevento" #diaevento required 
                                 [disabled]="tipotela == 'D'">                                 
                             </fieldset>                                                 
                         </div>                                               
                     </div>
                 </div>
-                <div class="linha linha2" style="margin-top: 10px; border-radius: 10px;">
-                    <div class="sublinha">
-                        <button class="sortear-button" (click)="abrirsorteio()">
+                <div class="linha2">
+                    
+                        <button class="button1" (click)="abrirsorteio()">
                             <div class="botaosortear">
-                                <p *ngIf="tipotela == 'A'" style="margin-top: -15px;">Sortear Equipes</p>
-                                <p *ngIf="tipotela == 'D'" style="margin-top: -15px;">Equipes Sorteadas</p>
+                                <p *ngIf="tipotela == 'A'" class="imagem_dado" >Sortear Equipes</p>
+                                <p *ngIf="tipotela == 'D'" class="imagem_dado">Equipes Sorteadas</p>
                                 <img src="../../assets/dado.png" alt="Dado"
-                                    style="width:50px; height:50px; margin-top: -13px;">
+                                    class="imagem_inline1">
                             </div>
                         </button>
-                        <button class="sortear-button" (click)="AbrirCustos()">                            
+                        <button class="button1" (click)="AbrirCustos()">                            
                                 Gestão Custos  
-                        </button>
-                        <button *ngIf="tipotela == 'D'" (click)="TelaCriacaoevento()">Voltar</button>
-                    </div>
+                        </button>                       
+                    
                 </div>
-                <div *ngIf="tipotela == 'A'" class="linha linha3" style="margin-top: 10px; border-radius: 10px;">
-                    <div class="sublinha">
-                        <button *ngIf="tipotela == 'A'" style="color: green;" (click)="Gravadados()" >Confirmar</button>
-                        <button *ngIf="tipotela == 'A'" style="color: red;" (click)="Canceladados()">Cancelar</button>
-                        <button *ngIf="tipotela == 'A'" (click)="TelaCriacaoevento()">Voltar</button>
-                    </div>
+                <div class="linha3">
+                    
+                    <button class="button-left"  *ngIf="tipotela == 'A'" style="color: green;" (click)="Gravadados()" >Confirmar</button>
+                    <button class="button-center" *ngIf="tipotela == 'A'" style="color: red;" (click)="Canceladados()">Cancelar</button>
+                    <button class="button-right"  (click)="TelaCriacaoevento()">Voltar</button>
+                    
                 </div>
             </div>
         </div>
@@ -121,22 +124,22 @@
         <span class="close" (click)="fecharmapa()">&times;</span>
         <p class="cadastro-label2">Encontre no mapa o local</p>        
         <div *ngIf="tipotela == 'A'" >
-            <input style="width: 470px;" type="text" name="modalnomeEquipe" placeholder="Digite o local para pesquisa!" #localevento2 required>      
-            <button style="margin-top: 10px; width: 200px; margin-bottom: 10px;" (click)="pesquisarLocal()">Pesquisar</button> 
+            <input class="input_inline5" name="modalnomeEquipe" placeholder="Digite o local para pesquisa!" #localevento2 required>      
+            <button class="button6" (click)="pesquisarLocal()">Pesquisar</button> 
         </div>
         <div #mapContainer class="map-container" ></div> 
         <div *ngIf="tipotela == 'A'" >
-            <fieldset style="width: 660px; margin-top: 10px;" >
-                <legend >
+            <fieldset class="fieldset_inline3" >
+                <legend class="legend_inline1">
                     Local Definido para o evento: 
                 </legend>
-                <input style="width: 640px;" type="text" name="nomeEquipe" placeholder="Local Definido para o evento" #localevento3 required
+                <input class="input_inline6" name="nomeEquipe" placeholder="Local Definido para o evento" #localevento3 required
                                     [disabled]="true" > 
             </fieldset >
         </div>               
         <div>
-            <button *ngIf="tipotela == 'A'" style="width: 340px; color: green;" (click)="confirmaLocal()">Confirmar</button>
-            <button *ngIf="tipotela == 'A'" style="width: 340px; color: red;" (click)="cancelaLocal()">Cancelar</button>
+            <button class="button7" *ngIf="tipotela == 'A'" style="color: green;" (click)="confirmaLocal()">Confirmar</button>
+            <button  class="button7" *ngIf="tipotela == 'A'" style="color: red;" (click)="cancelaLocal()">Cancelar</button>
         </div>
     </div>
 </div>
@@ -145,37 +148,37 @@
     <div class="modal-content">
         <span class="close" (click)="fecharcustos()">&times;</span>
         <p class="cadastro-label2">Defina os Participantes de sua equipe que pagaram</p>        
-        <fieldset style="margin-top: 10px;">
-            <legend>Participantes da Equipe</legend>
+        <fieldset class="fieldset_inline7">
+            <legend class="legend_inline1">Participantes da Equipe</legend>
             <div *ngIf="tipotela == 'A'">
-                <input style="width: 260px;" type="text" name="procura" placeholder="id ou email do participante"
+                <input class="input_inline7" name="procura" placeholder="id ou email do participante"
                     maxlength="25" #procura2 required>
-                <button style="width: 180px;" class="modalpesquisarButton"
+                <button class="button4"
                 (click)="botaopesquisarlistaparticipantesCusto()"
                     >Pesquisar</button>
-                <button style="width: 180px;" class="modalpesquisarButton"
+                <button class="button4"
                 (click)="LimpapesquisarlistaparticipantesCusto()"    
                     >Limpa filtro</button>
             </div>
             <div *ngIf="!filtrou" class="parametros-container" style="margin-top: 20px;">
                 <div *ngFor="let participante of participantesSelecionados; let i = index"
                     style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <fieldset style="width: 530px; height: 70px; display: flex;">
-                        <legend>Dados do participante</legend>
-                        <img [src]="participante.imagem" style="width: 50px; height: 50px;">
+                    <fieldset class="fieldset_inline6">
+                        <legend class="legend_inline1">Dados do participante</legend>
+                        <img [src]="participante.imagem" class="imagem_inline3">
                         <div style="margin-left: 20px;">
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                                class="nome_inline">
                                 <strong>{{ participante.nome }}</strong>
                             </p>
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                                class="nome_inline">
                                 {{ participante.email }}</p>
                         </div>
                     </fieldset>
                     <div>
                         <fieldset class="importancia-fieldset" style="height: 70px; margin-right: 1px;">
-                            <legend>Pagou</legend>
+                            <legend class="legend_inline1">Pagou</legend>
                             <input style="margin-left: 20px;"  [disabled]="tipotela == 'D'" type="checkbox" id="rememberCheckbox"  (click)="setarpagador(i)"
                                 [checked]="participante.Pagou">
                         </fieldset>
@@ -184,22 +187,22 @@
             </div>
             <div *ngIf="filtrou && existenalistaparticipantes" class="parametros-container" style="margin-top: 20px;">
                 <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <fieldset style="width: 530px; height: 70px; display: flex;">
-                        <legend>Dados do participante</legend>
+                    <fieldset class="fieldset_inline6">
+                        <legend class="legend_inline1">Dados do participante</legend>
                         <img [src]="imagempesquisalistaparticipante" style="width: 50px; height: 50px;">
                         <div style="margin-left: 20px;">
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;margin-bottom: 5px;">
+                            class="nome_inline">
                                 <strong>{{nomepesquisalistaparticipante}}</strong>
                             </p>
                             <p
-                                style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                            class="nome_inline">
                                 {{ emailpesquisalistaparticipante }}</p>
                         </div>
                     </fieldset>
                     <div>
                         <fieldset class="importancia-fieldset" style="height: 70px; margin-right: 1px;">
-                            <legend>Pagou</legend>
+                            <legend class="legend_inline1">Pagou</legend>
                             <input style="margin-left: 20px;" type="checkbox" id="rememberCheckbox"
                             (click)="setarpagador(idpesquisalistaparticipante)"
                                 [checked]="Pagadorpesquisalistaparticipante">
@@ -216,15 +219,15 @@
         <div class="parametros-container" style="margin-top: 20px;">
         </div>
         <div>
-            <fieldset *ngIf="tipotela == 'A'" style="margin-top: 10px;">
-                <legend>Chave do Pix</legend>
-                <input style="width: 650px;" type="text" name="procura" placeholder="Chave do Pix" #chavepix required>
+            <fieldset *ngIf="tipotela == 'A'" class="fieldset_inline8">
+                <legend class="legend_inline1">Chave do Pix</legend>
+                <input class="input_inline8" name="procura" placeholder="Chave do Pix" #chavepix required>
             </fieldset>
             <p  *ngIf="tipotela == 'D'" style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">Chave pix: {{ChavePix}}</p>               
         </div>
         <div class="modal-actions">
-            <button *ngIf="tipotela == 'A'" style="color: green; width: 340px;" (click)="BotaoGravarParticipantesCusto()" >Guardar</button>
-            <button *ngIf="tipotela == 'A'" style="color: red; width: 340px;"  (click)="BotaoCancelarparticipantesCusto()">Cancelar</button>
+            <button class="button5" *ngIf="tipotela == 'A'" style="color: green" (click)="BotaoGravarParticipantesCusto()" >Guardar</button>
+            <button class="button5" *ngIf="tipotela == 'A'" style="color: red"  (click)="BotaoCancelarparticipantesCusto()">Cancelar</button>
         </div>
     </div>
 </div>
@@ -235,30 +238,30 @@
         <span class="close" (click)="fecharsorteio()">&times;</span>
         <p class="cadastro-label2">Defina os Times de sua equipe</p>        
         <fieldset style="margin-top: 10px;">
-            <legend>Dados do sorteio</legend>
+            <legend class="legend_inline1">Dados do sorteio</legend>
             <div *ngIf="tipotela == 'A'">
-                <input style="width: 400px;" type="number" name="procura" placeholder="Quantidade por Time" min = 1 
+                <input type="number" name="procura" placeholder="Quantidade por Time" min = 1 
                     maxlength="25" #quantidade required>
-                <button *ngIf="!sorteio" style="width: 230px;" class="modalpesquisarButton"
+                <button *ngIf="!sorteio" class="button2"
                 (click)="sorteiotimes()"
                     >Sortear</button>
-                <button *ngIf="sorteio" style="width: 230px;" class="modalpesquisarButton"
+                <button *ngIf="sorteio" class="button2"
                 (click)="sorteiotimes()"    
                     >Sortear Novamente</button>
             </div>
             <div *ngIf="sorteio" class="parametros-container" style="margin-top: 20px;">
                 <div *ngFor="let time of TimesExistentes; let i = index" style="margin-bottom: 20px;">
-                    <fieldset  style="width: 620px;">
-                        <legend>{{ time.nomeTime }}</legend>
+                    <fieldset  class="fieldset_inline5">
+                        <legend class="legend_inline1">{{ time.nomeTime }}</legend>
                         <div *ngFor="let competidor of time.competidores" style="display: flex; align-items: center; margin-bottom: 10px;">
-                            <fieldset style="width: 580px; height: 70px; display: flex;">
-                                <legend>Dados do competidor</legend>
-                                <img [src]="competidor.imagem" style="width: 50px; height: 50px;">
+                            <fieldset class="fieldset_inline4">
+                                <legend class="legend_inline1">Dados do competidor</legend>
+                                <img [src]="competidor.imagem" class="imagem_inline3">
                                 <div style="margin-left: 20px;">
-                                    <p style="color: white; font-size: 18px; font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px; margin-bottom: 5px;">
+                                    <p class="nome_inline">
                                         <strong>{{ competidor.nome }}</strong>
                                     </p>
-                                    <p style="color: white; font-size: 18px; font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">
+                                    <p class="nome_inline">
                                         {{ competidor.email }}
                                     </p>
                                 </div>
@@ -279,8 +282,8 @@
                 style="color: white; font-size: 18px;font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;">                
         </div>
         <div class="modal-actions">
-            <button *ngIf="tipotela == 'A'" style="color: green; width: 340px;" (click)="BotaoGravarSorteio()" >Guardar</button>
-            <button *ngIf="tipotela == 'A'" style="color: red; width: 340px;"  (click)="BotaoCancelarSorteio()">Cancelar</button>
+            <button class="button3" *ngIf="tipotela == 'A'" style="color: green" (click)="BotaoGravarSorteio()" >Guardar</button>
+            <button class="button3" *ngIf="tipotela == 'A'" style="color: red"  (click)="BotaoCancelarSorteio()">Cancelar</button>
         </div>
     </div>
 </div>

@@ -39,6 +39,7 @@ export class DetalheeventoComponent {
   @ViewChild('IdEvento') IdEvento: ElementRef | undefined;
   @ViewChild('nomeevento') nomeevento: ElementRef | undefined;
   @ViewChild('horaevento') horaevento: ElementRef | undefined;
+  @ViewChild('duracaoevento') duracaoevento: ElementRef | undefined;  
   @ViewChild('diaevento') diaevento: ElementRef | undefined;
   @ViewChild('segunda') segunda: ElementRef | undefined;
   @ViewChild('terca') terca: ElementRef | undefined;
@@ -88,7 +89,7 @@ export class DetalheeventoComponent {
   imagempesquisalistaparticipante: string = "";
   nomepesquisalistaparticipante: string = "";
   emailpesquisalistaparticipante: string = "";
-  ChavePix: string = "930043164";
+  ChavePix: string = "";
 
   idpesquisalistaparticipante: number = 0;
   qtdTime: number = 0;
@@ -331,6 +332,8 @@ export class DetalheeventoComponent {
     if (evento.local.length > 0)
       this.localevento!.nativeElement.value = "Local: " + evento.local;
     this.horaevento!.nativeElement.value = evento.hora;
+    this.duracaoevento!.nativeElement.value = evento.duracao;
+    
     
     this.qtdTime = evento.quantidade_time;
     let selectElement = document.getElementById("EquipeEvento") as HTMLSelectElement;
@@ -421,6 +424,7 @@ export class DetalheeventoComponent {
   async Gravadados() {
     const local = this.localevento?.nativeElement.value.substring(7);
     const hora = this.horaevento?.nativeElement.value;
+    const duracao = this.duracaoevento?.nativeElement.value;
     const IDEquipe = localStorage.getItem('idtelaEquipe');
     const IdEvento = this.IdEvento?.nativeElement.value.substring(11);
     const nomeEvento = this.nomeevento?.nativeElement.value.substring(13);
@@ -503,6 +507,15 @@ export class DetalheeventoComponent {
       }
 
       
+      if (duracao.length == 0) {
+        erro += "7;";
+      }
+
+      if (duracao == "00:00") {
+        erro += "8;";
+      }
+
+      
 
     if (erro.length > 0) {
       var mensagem = "";
@@ -514,6 +527,12 @@ export class DetalheeventoComponent {
         mensagem += " - Dia não foi preenchido com um período ou data válida; \n";
       if (erro.toString().includes("4;"))
         mensagem += ` - A data e hora do evento (${this.formatarDataHora(dataHoraEvento)}) não podem ser anteriores à data e hora atuais (${this.formatarDataHora(agora)})! Favor Ajustar. \n`
+      if (erro.toString().includes("7;")){
+        mensagem += ` - Evento deve possuir a indicação de duração, para que o sistema possa iniciar e finalizar este corretamente! \n`
+      }
+      if (erro.toString().includes("8;")){
+        mensagem += ` - Evento deve possuir a indicação de duração diferente de 00:00, para que o sistema possa iniciar e finalizar este corretamente! \n`
+      }
       if (erro.toString().includes("5;")){
         mensagem += ` - Existem Participantes que pagaram mas não estão nos times existentes, sendo eles: \n`
         pagaramMasNaoEstaoNosTimes.forEach(part => mensagem +=`${part.nome} (${part.email}); \n`);
@@ -540,7 +559,8 @@ export class DetalheeventoComponent {
           dia: dia,
           hora: hora,
           quantidade_time: this.qtdTime,
-          chavepix: this.ChavePix
+          chavepix: this.ChavePix,
+          duracao: duracao
         };
 
         const isValid = await this.apiService.AlterarEvento(dadosEvento);

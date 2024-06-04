@@ -60,6 +60,25 @@ export class NotasrecebidasComponent {
     localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
     await this.carregarEquipe();
+
+    if(window.innerWidth > 999 )
+      {
+        this.eventosPorPagina = 3;
+      }
+      else
+      {
+        if(window.innerWidth > 599 )
+        {
+          this.eventosPorPagina = 2;  
+        }
+        else
+        {
+          this.eventosPorPagina = 999;
+        }
+        
+      }
+
+
   }
 
   carregarDadosUsuario() {

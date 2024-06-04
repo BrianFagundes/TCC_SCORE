@@ -4,41 +4,39 @@
   </div>
   <div class="cadastro-container">
     <div class="cadastro-rectangle">
-      <div style="margin-top: 0px; padding-top: 5%;" class="cadastro-label">Cadastro de Usuário:</div>
+      <div class="cadastro-label">Cadastro de Usuário:</div>
       <div style="margin-top: 5px;" class="line"></div>
-      <input placeholder="Digite o seu Nome" style="margin-top: 20px" type="text" id="nome" name="nome"
+      <input placeholder="Digite o seu Nome" type="text" id="nome" name="nome"
         class="cadastro-input" #nomeInput required>
       <div style="margin-top: 5px;" class="line"></div>
-      <input placeholder="Digite o seu E-mail" style="margin-top: 20px;" type="email" id="email" name="email"
+      <input placeholder="Digite o seu E-mail" type="email" id="email" name="email"
         class="cadastro-input" #emailInput required>
       <div style="margin-top: 5px;" class="line"></div>
       <span class="input-group-text"><i class="fas fa-lock"></i></span>
-      <input placeholder="Digite a sua Senha" style="margin-top: 20px; margin-left: -30px; width: 390px;"
-        [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha" class="cadastro-input" #senhaInput required>
+      <input placeholder="Digite a sua Senha" style="margin-left: -30px;"
+        [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha" class="cadastro-input-22" #senhaInput required>
       <button
-        style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
-        id="mostrarsenha2" (click)="toggleSenha()" class="mostrarsenha">
-        <img style="width: 40px; height: 20px;" class="mostrarsenha"
+        id="mostrarsenha2" (click)="toggleSenha()" class="mostrarsenha2">
+        <img class="mostrarsenha"
           [src]="mostrarSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'"
           alt="Mostrar/Ocultar Senha">
       </button>
       <div style="margin-top: 5px;" class="line"></div>
-      <input placeholder="Digite a sua Senha novamente" style="margin-top: 20px; margin-left: -30px; width: 390px;"
-        [type]="mostrarConfSenha ? 'text' : 'password'" id="senha2" name="senha2" class="cadastro-input" #senha2Input
+      <input placeholder="Digite a sua Senha novamente" style="margin-left: -30px;"
+        [type]="mostrarConfSenha ? 'text' : 'password'" id="senha2" name="senha2" class="cadastro-input-22" #senha2Input
         required>
       <button
-        style="margin-left: 0px; width: 10px; height: 5px; border-radius: 8px; margin-top: 30px; border-color: rgba(240, 248, 255, 0); background-color:  rgba(240, 248, 255, 0);"
-        id="mostrarsenha2" (click)="toggleConfSenha()" class="mostrarsenha">
-        <img style="width: 40px; height: 20px;" class="mostrarsenha"
+        id="mostrarsenha2" (click)="toggleConfSenha()" class="mostrarsenha2">
+        <img class="mostrarsenha"
           [src]="mostrarConfSenha ? '../../assets/olho_aberto_white.png' : '../../assets/olho_fechado_white.png'"
           alt="Mostrar/Ocultar Senha">
       </button>
       <div style="margin-top: 5px;" class="line"></div>
-      <div style="display: flex; align-items: center; margin-left: 130px; margin-top: 20px;">
+      <div class="Checkboxtermos">
         <input type="checkbox" id="termsCheckbox" style="margin-right: 5px;" [checked]="Aceito"
           (change)="alteraraceito()">
         <label for="termsCheckbox" style="color: white;">
-          Concordo com as <a href="politicas">políticas de privacidade</a> e os <a href="termos">termos de serviço</a>
+          Aceito as <a href="politicas">políticas de privacidade</a> e os <a href="termos">termos de serviço</a>
         </label>
       </div>
       <button class="cadastro-submit" (click)="cadastrarUsuario()">Cadastrar</button>
@@ -65,4 +63,11 @@
     <img src="../../assets/Aguarde2.gif" alt="Pop-up Image">
   </div>
 </div>
+
+<div id="overlay_alertBox" class="overlay_alertBox"></div>
+  <div id="customAlert" class="alert">
+    <p id="alertmessage_customAlert" class="message_customAlert"></p>
+    <button class="okbtn" (click)="hideAlert()">OK</button>
+  </div>
+
 

@@ -91,6 +91,8 @@ export class TelaInicialComponent {
   existenalistaeventos: boolean = false;
   habilitaevento : boolean = true;
 
+  screenWidth: number = window.innerWidth;
+
   participantesSelecionadoseventos: Array<{ id: string, imagem: string; nome: string; idequipe:number }> = [];
 
 
@@ -106,6 +108,23 @@ export class TelaInicialComponent {
     localStorage.setItem('Teladecadastro', "false");
     this.carregarDadosUsuario();
     this.carregarEquipes();
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth > 999 )
+    {
+      this.equipesPorPagina = 3;
+    }
+    else
+    {
+      if(this.screenWidth > 599 )
+      {
+        this.equipesPorPagina = 2;  
+      }
+      else
+      {
+        this.equipesPorPagina = 999;
+      }
+      
+    }
   }
 
   carregarDadosUsuario() {
@@ -145,13 +164,14 @@ export class TelaInicialComponent {
   }
 
   logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
-    if (confirmation) {
-      localStorage.setItem('imagem', "");
-      localStorage.setItem('Usuario', "");
-      localStorage.setItem('ID', "");
-      this.router.navigate(['/home']); // Redireciona para a tela de login
-    }
+    this.showConfirm('Deseja realmente fazer o log-off?', (confirmation: boolean) => {
+      if (confirmation) {
+        localStorage.setItem('imagem', "");
+        localStorage.setItem('Usuario', "");
+        localStorage.setItem('ID', "");
+        this.router.navigate(['/home']); // Redireciona para a tela de login
+      }
+    });
   }
 
   CriarEquipe() {
@@ -382,7 +402,7 @@ export class TelaInicialComponent {
     const indice = this.equipes.findIndex(equipe => equipe.id === id);
     
     if(!this.equipes[indice].statuseventos)
-      alert("Todos os Eventos vinculados a Equipe nunca foram finalizados, portanto, não existem notas atribuidas!");
+      this.showAlert("Todos os eventos vinculados à equipe nunca foram finalizados, portanto, não existem notas atribuídas.");
     else
     {
       localStorage.setItem('idtelaEquipe', id.toString());
@@ -390,4 +410,63 @@ export class TelaInicialComponent {
     }    
   }
 
+  showAlert(message : string) {
+    var alertBox = document.getElementById("customAlert");
+    var alertMessage = document.getElementById("alertmessage_customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && alertMessage && overlay_alertBox)
+    {
+      alertMessage.textContent = message;
+      overlay_alertBox.style.display = "block"; // Show the overlay_alertBox
+      alertBox.style.display = "block"; // Show the alert
+    }
+    
+  }
+  
+  hideAlert() {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+
+  showConfirm(message: string, callback: (result: boolean) => void): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var confirmMessage = document.getElementById("confirmmessage_customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+    
+    if(confirmMessage && overlay && confirmBox)
+    {
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+    }   
+
+    // Store the callback to use it later
+    (confirmBox as any).callback = callback;
+  }
+
+  handleConfirm(result: boolean): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+
+    if(overlay && confirmBox)
+    {
+      confirmBox.style.display = "none"; // Hide the confirm box
+      overlay.style.display = "none"; // Hide the overlay
+    }
+    // Call the callback with the result
+    if ((confirmBox as any).callback) {
+      (confirmBox as any).callback(result);
+    }
+  }
+
+
 }
+
+
