@@ -80,6 +80,11 @@ public class AuthenticationController {
     public ResponseEntity<String> checkHealth() {
         return ResponseEntity.ok(null);
     }
+
+    @GetMapping("/habilita")
+    public ResponseEntity<String> checkHealth2() {
+        return ResponseEntity.ok(null);
+    }
     
     @PostMapping("/Validate")
     public ResponseEntity<?> validateToken(@RequestBody String jwtRequest) {

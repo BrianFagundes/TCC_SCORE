@@ -95,7 +95,7 @@ public class TarefaPeriodica {
 				);  
         
         if (!eventos.isEmpty()) {
-        	System.out.println(eventos.getFirst().getDia());
+        	System.out.println(eventos.get(0).getDia());
         	for (Evento evento : eventos) {
         		evento.setStatus("I");
         		evento.setDataultimoevento(dataAtual);
@@ -150,7 +150,7 @@ public class TarefaPeriodica {
 				);  
         
         if (!eventos.isEmpty()) {
-        	System.out.println(eventos.getFirst().getDia());
+        	System.out.println(eventos.get(0).getDia());
         	for (Evento evento : eventos) {
         		evento.setStatus("F");
         		evento.setDataultimoevento(dataAtual);

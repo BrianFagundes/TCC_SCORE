@@ -126,7 +126,7 @@ interface Evento{
 })
 export class ApiService {
   
-  private apiUrl = 'http://54.88.227.50:8080'; // Substitua pela URL da sua API
+  private apiUrl = 'https://app.tccscore.com'; // Substitua pela URL da sua API
 
   private jwtHelper = new JwtHelperService();
 

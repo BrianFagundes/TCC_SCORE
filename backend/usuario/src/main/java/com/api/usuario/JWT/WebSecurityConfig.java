@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/authenticate").permitAll() // Permitir acesso sem autenticação
             .antMatchers("/api/Validate").permitAll()
             .antMatchers("/api/health").permitAll()
+            .antMatchers("/api/habilita").permitAll()
             .antMatchers("/api/renew-token").permitAll()
             .antMatchers("/Email/**").permitAll()
             .antMatchers("/usuarios/**").authenticated()
