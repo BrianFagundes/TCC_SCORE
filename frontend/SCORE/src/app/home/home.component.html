@@ -29,10 +29,10 @@
         <div class="remember-me">
             <input type="checkbox" id="rememberCheckbox" (change)="toggleRememberMe()" [checked]="rememberMe">
             <div class="remember-me2"><label for="rememberCheckbox">Me lembrar</label></div>
-            <span class="forgot-password" (click)="navigateToEsqueci()">Esqueceu senha?</span>
+            <span class="forgot-password" (click)="navigateToEsqueci()" tabindex="0">Esqueceu senha?</span>
         </div>
         <button class="login-button main" (click)="Login()">Login</button>
-        <div class="create-account" (click)="navigateToCadastro()">Criar nova conta</div>
+        <div class="create-account" (click)="navigateToCadastro()" tabindex="0" >Criar nova conta</div>
       </div>
     </div>
   </div>  

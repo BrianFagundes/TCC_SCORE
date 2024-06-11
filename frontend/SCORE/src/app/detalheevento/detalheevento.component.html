@@ -2,20 +2,17 @@
     <div class="welcome-container">
         <div class="user-info">
             <div class="container">
-                <img src="../../assets/Logo.png" alt="Logo" class="logo">
+                <img src="../../assets/Logo.png" alt="Logo" class="logo" (click)="TelaInicial()">
                 <div class="image-container">
                     <img id="selectedImage2" [src]="imagePath" alt="User Image" class="Botoes_usuario3"
                         (click)="usuario()">
                 </div>
                 <div class="user-details">
-                    <ul class="user-details-Ul">
-                        <li class="user-details-Ul-li1"><strong>ID:</strong> </li>
-                        <li class="user-details-Ul-li2"> {{IdUsuario }} </li>
-                        <li class="user-details-Ul-li2"><strong>Nome:</strong></li>
-                        <li class="user-details-Ul-li2"> {{ (nomeUsuario? nomeUsuario.length : 0) > 9 ? (nomeUsuario |
-                            slice:0:9) + '...' : nomeUsuario }} </li>
-                    </ul>
-                </div>
+                    <div class="user-details-container">
+                      <div class="user-details-label"><strong>Nome:</strong></div>
+                      <div class="user-details-content nome-usuario">{{ nomeUsuario }}</div>
+                    </div>
+                  </div>
                 <div class="logout-button" (click)="logout()">
                     <img style="margin-top: 4px;" src="../../assets/Logout.png" alt="Logout" class="Botoes_usuario" />
                 </div>
@@ -158,7 +155,7 @@
                     >Pesquisar</button>
                 <button class="button4"
                 (click)="LimpapesquisarlistaparticipantesCusto()"    
-                    >Limpa filtro</button>
+                    >Limpar filtro</button>
             </div>
             <div *ngIf="!filtrou" class="parametros-container" style="margin-top: 20px;">
                 <div *ngFor="let participante of participantesSelecionados; let i = index"
@@ -287,3 +284,24 @@
         </div>
     </div>
 </div>
+
+<div id="myModal" class="modal2">
+    <div class="modal-content2">
+        <img src="../../assets/Aguarde2.gif" alt="Pop-up Image">
+    </div>
+</div>
+
+<div id="overlay_alertBox" class="overlay_alertBox"></div>
+    <div id="customAlert" class="alert">
+        <p id="alertmessage_customAlert" class="message_customAlert"></p>
+        <button id="okbtn_customAlert" class="okbtn">OK</button>
+    </div>
+
+    <div id="overlay_customConfirm" class="overlay_customConfirm"></div>
+  <div id="customConfirm" class="confirm_customConfirm">
+    <p id="confirmmessage_customConfirm" class="message_customConfirm"></p>
+    <div class="button-container_customConfirm">
+        <button class="okbtn_customConfirm" (click)="handleConfirm(true)">OK</button>
+        <button class="cancelbtn_customConfirm" (click)="handleConfirm(false)">Cancelar</button>
+    </div>
+  </div>

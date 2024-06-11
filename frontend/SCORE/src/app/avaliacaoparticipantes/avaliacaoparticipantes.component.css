@@ -46,6 +46,7 @@
     left: 57px;
     width: 276px;
     height: 65px;
+    cursor: pointer;
   }
   
   .image-container, .user-details-and-logout {
@@ -331,6 +332,7 @@
     position: relative;
     border: 2px solid #D9D9D9;
     background-color: #D9D9D9;
+    font-family: 'Times New Roman', 'Times New Roman';
     /* Adicione aqui quaisquer estilos adicionais necessários para o botão de edição */
   }
 
@@ -563,7 +565,155 @@
     margin-left: 10px;
     margin-bottom: 10px;
   }
+
   
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.overlay_alertBox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.alert {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the alert */
+  z-index: 1001; /* Sit on top of the overlay_alertBox */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.alert .message_customAlert {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the button */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.alert .okbtn {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.alert .okbtn:hover {
+  background-color: darkgray;
+}
+
+  
+
+.overlay_customConfirm {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.confirm_customConfirm {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the confirm */
+  z-index: 1001; /* Sit on top of the overlay_customConfirm */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.confirm_customConfirm .message_customConfirm {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the buttons */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.confirm_customConfirm .button-container_customConfirm {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+}
+
+.confirm_customConfirm .okbtn_customConfirm, .confirm_customConfirm .cancelbtn_customConfirm {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  width: 100px; /* Ensure both buttons have the same width */
+}
+
+.confirm_customConfirm .okbtn_customConfirm:hover, .confirm_customConfirm .cancelbtn_customConfirm:hover {
+  background-color: darkgray;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  width: 150px; /* Define a largura do contêiner para 150px */
+  text-align: left;
+}
+
+.user-details-label {
+  margin-bottom: 5px; /* Espaço entre o label e o conteúdo */
+  width: 50px; /* Garante que o label ocupe 100% da largura do contêiner */
+}
+
+.user-details-content.nome-usuario {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 100%; /* Garante que o conteúdo ocupe 100% da largura do contêiner */
+  word-wrap: break-word;
+}
+
+
   @media screen and (min-width: 1000px) and (max-width: 1599px) {
   
     .Botoes_usuario3{
@@ -963,7 +1113,7 @@
   position: relative;
   border: 2px solid #D9D9D9;
   background-color: #D9D9D9;
-  font-family: "Times New Roman";
+  font-family: "Times New Roman", "Times New Roman";
 }
 
 .participante-container3 {
@@ -1070,6 +1220,15 @@
   position: relative;
   border: 2px solid #D9D9D9;
   background-color: #D9D9D9;
+}
+
+
+.user-details-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 60px;
+  text-align: left;
 }
 
 
@@ -1271,7 +1430,7 @@
 
 .nomeparticipante {
   margin-top: 0px;
-  font-size: 14px;
+  font-size: 12px;
   color: white;
   font-weight: bold;
   font-family: "Times New Roman";
@@ -1427,5 +1586,25 @@
   max-height: 180px;
   overflow-y: auto;
 }
+
+
+.logout-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 68px;
+  margin-left: 0px;
+}
+
+
+.user-details-container {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 137px;
+text-align: left;
+}
+
 
 }

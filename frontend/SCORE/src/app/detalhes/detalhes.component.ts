@@ -433,20 +433,24 @@ export class DetalhesComponent {
 
     this.showConfirm(`Gostaria de Alterar a equipe ${this.nomeEquipe?.nativeElement.value}?`, (confirmation: boolean) => {
       if (confirmation) {
+        
         this.confirmarAlteracao2();
+        
       }
     });
   }
 
   async confirmarAlteracao2(){
-    try {
+       
+    try {      
       this.criticar();
       this.AjustarEquipe()
     }
     catch (ex) {
       const erro = ex as Error;
       await this.showAlert("Erro ao tentar ajustar equipe: " + erro.toString().substring(7));
-    }
+    }  
+    
   }
 
   criticar() {
@@ -510,6 +514,10 @@ export class DetalhesComponent {
     };
 
 
+    const modal = document.getElementById('myModal');
+    if (modal) {
+      modal.style.display = 'block';
+    } 
     const isValid = await this.apiService.AlterarEquipe(dadosEmpresa);
     if (isValid !== 0) {
       if (isValid == 1)
@@ -525,6 +533,9 @@ export class DetalhesComponent {
       await this.showAlert("Alteração da equipe realizada com sucesso!");
       this.TelaCriacaoequipe();
     }
+    if (modal) {
+      modal.style.display = 'none';
+    } 
   }
 
   async ajusteparticipante() {

@@ -1,3 +1,23 @@
+.modal2 {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.modal-content2{
+  background-color: #fefefe00;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);    
+}
+
 .welcome-message {
   margin-bottom: 20px;
 }
@@ -250,6 +270,7 @@ textarea{
     left: 57px;
     width: 276px;
     height: 65px;
+    cursor: pointer;
   }
 
   .Botoes_usuario3 {
@@ -737,18 +758,28 @@ textarea{
   background-color: rgba(240, 248, 255, 0);
 }
 
-.pParticipante_inline1{
-  color: white; 
+.pParticipante_inline1 {
+  color: white;
   font-size: 18px;
-  font-family: 'Times New Roman', 'Times New Roman'; margin-top: 0px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-top: 0px;
   margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
 }
 
-.pParticipante_inline2{
+
+.pParticipante_inline2 {
   color: white; 
   font-size: 18px;
-  font-family: 'Times New Roman', 'Times New Roman'; 
+  font-family: 'Times New Roman', 'Times New Roman';
   margin-top: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px; /* Defina a largura conforme necessário */
 }
 
 .imagem_inline2 {
@@ -948,6 +979,38 @@ body {
 .confirm_customConfirm .okbtn_customConfirm:hover, .confirm_customConfirm .cancelbtn_customConfirm:hover {
   background-color: darkgray;
 }
+
+
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  width: 150px; /* Define a largura do contêiner para 150px */
+  text-align: left;
+}
+
+.user-details-label {
+  margin-bottom: 5px; /* Espaço entre o label e o conteúdo */
+  width: 50px; /* Garante que o label ocupe 100% da largura do contêiner */
+}
+
+.user-details-content.nome-usuario {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 100%; /* Garante que o conteúdo ocupe 100% da largura do contêiner */
+  word-wrap: break-word;
+}
+
 
 
 
@@ -1578,13 +1641,23 @@ legend{
   font-family: "Times New Roman", "Times New Roman";
   margin-top: 0px;
   margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
 }
+
+
 
 .pParticipante_inline2 {
   color: white;
   font-size: 14px;
   font-family: "Times New Roman", "Times New Roman";
   margin-top: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px; /* Defina a largura conforme necessário */
 }
 
 .imagem_inline2 {
@@ -1668,13 +1741,21 @@ legend{
 .fieldset_inline4{
   width: 507px;
 }
+
+.user-details-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 60px;
+  text-align: left;
+}
   }
 
 
   @media screen and (min-width: 0px) and (max-width: 599px) {
   
     .welcome-container {
-      top: 50%;
+      top: 40%;
       margin-top: 50px;
     }
   
@@ -2120,7 +2201,7 @@ legend{
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   position: relative;
   border: 2px solid #D9D9D9;
@@ -2240,14 +2321,27 @@ legend{
   font-family: "Times New Roman", "Times New Roman";
   margin-top: 0px;
   margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 140px;
 }
+
+
 
 .pParticipante_inline2 {
   color: white;
   font-size: 11px;
   font-family: "Times New Roman", "Times New Roman";
   margin-top: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 140px; /* Defina a largura conforme necessário */
 }
+
+
+
 
 .explicacao_inline {
   color: white;
@@ -2306,6 +2400,25 @@ legend{
   margin-top: 10px;
   margin-left: -21px;
   width: 254px;
+}
+
+
+.logout-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 68px;
+  margin-left: 0px;
+}
+
+
+.user-details-container {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 137px;
+text-align: left;
 }
 
   }

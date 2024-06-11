@@ -266,8 +266,8 @@ export class AvaliacaoparticipantesComponent {
     this.router.navigate(['/usuario']);
   }
 
-  logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
+  async logout() {
+    const confirmation = await this.showConfirm('Deseja mesmo fazer o log-off?');
     if (confirmation) {
       localStorage.setItem('imagem', "");
       localStorage.setItem('Usuario', "");
@@ -339,11 +339,11 @@ export class AvaliacaoparticipantesComponent {
   }
 
   get totalDePaginas() {
-    return Math.ceil(this.participantes.length / this.participantesPorPagina);
+    return this.participantes.length == 0 ? 1 : Math.ceil(this.participantes.length / this.participantesPorPagina);
   }
 
   get totalDePaginas2() {
-    return Math.ceil(this.participantes2.length / this.participantesPorPagina);
+    return this.participantes2.length == 0 ? 1 : Math.ceil(this.participantes2.length / this.participantesPorPagina);
   }
 
   mudarPagina(numero: number) {
@@ -641,7 +641,7 @@ export class AvaliacaoparticipantesComponent {
   }
 
   async AlterarDados(){
-    const confirmation = confirm('Deseja de fato realizar a alteração de notas do Participante ' + this.participante + "?");
+    const confirmation = await this.showConfirm('Deseja de fato realizar a alteração de notas do Participante ' + this.participante + "?");
     if (confirmation) {
     const idusuario = localStorage.getItem('ID');
     const idevento = localStorage.getItem('avaliacaoparticipantes_id');
@@ -704,7 +704,7 @@ export class AvaliacaoparticipantesComponent {
       }  
 
       const Notavalida = await this.apiService.AlterarNota(nota);
-      alert("alteração de nota realizada com sucesso!");
+      this.showAlert("alteração de nota realizada com sucesso!");
       this.parametros = [];
       this.participantes = [];
       this.exibirModal = false;
@@ -718,5 +718,70 @@ Telaavaliacaopendente()
 {
   this.router.navigate(['/avaliacoespendentes']);
 }
+
+showAlert(message: string): Promise<boolean> {
+  const confirmBox = document.getElementById("customAlert") as HTMLDivElement;
+  const confirmMessage = document.getElementById("alertmessage_customAlert") as HTMLParagraphElement;
+  const overlay = document.getElementById("overlay_alertBox") as HTMLDivElement;
+  return new Promise((resolve) => {
+
+    confirmMessage.textContent = message;
+    overlay.style.display = "block"; // Show the overlay
+    confirmBox.style.display = "block"; // Show the confirm box
+
+    // Assign resolve function to the buttons
+    (document.getElementById("okbtn_customAlert") as HTMLButtonElement).onclick = () => {
+      resolve(true);
+      this.hideConfirm();
+    };
+  });
+  
+}
+
+hideConfirm(): void {
+  var alertBox = document.getElementById("customAlert");
+  var overlay_alertBox = document.getElementById("overlay_alertBox");
+
+  if(alertBox && overlay_alertBox)
+  {
+    alertBox.style.display = "none"; // Hide the alert
+    overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+  }
+}
+
+
+showConfirm(message: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    const confirmBox = document.getElementById("customConfirm");
+    const confirmMessage = document.getElementById("confirmmessage_customConfirm");
+    const overlay = document.getElementById("overlay_customConfirm");
+
+    if(confirmMessage && overlay && confirmBox) {
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+    }
+
+    // Store the resolve function to use it later
+    (confirmBox as any).resolvePromise = resolve;
+  });
+}
+
+handleConfirm(result: boolean): void {
+  const confirmBox = document.getElementById("customConfirm");
+  const overlay = document.getElementById("overlay_customConfirm");
+
+  if(overlay && confirmBox) {
+    confirmBox.style.display = "none"; // Hide the confirm box
+    overlay.style.display = "none"; // Hide the overlay
+  }
+
+  // Call the resolve function with the result
+  if ((confirmBox as any).resolvePromise) {
+    (confirmBox as any).resolvePromise(result);
+  }
+}
+
+
 
 }

@@ -68,6 +68,7 @@ export class UsuarioComponent {
          
     this.nomeUsuario = Usuario ? Usuario.toString() : '';
     this.IdUsuario = ID ? ID.toString() : '';
+    
     this.imagePath = Imagem? Imagem.toString() : '../../assets/avatar 1.png';  
     localStorage.setItem('userImage', this.imagePath);  
   }
@@ -286,7 +287,7 @@ export class UsuarioComponent {
     const ID = localStorage.getItem('ID');
     var novaSenha = localStorage.getItem('AltSenha');
     const foto = localStorage.getItem('userImage');
-
+    
     if(nome && email && ID && foto && ((novaSenha) || (novaSenha == null)))
     {
       this.apiService.atualizarUsuario(ID, nome, email, foto, novaSenha == null? "":novaSenha);
@@ -299,15 +300,16 @@ export class UsuarioComponent {
       this.mostrarSenha = false;
     }
 
+    localStorage.setItem('imagem', foto ? foto : '../../assets/avatar 1.png');
     localStorage.setItem('Usuario', nome);
     this.nomeUsuario = nome;
-    alert('Gravado com sucesso');
+    this.showAlert('Gravado com sucesso.');
   }
 
   async deleteAccount() {
-    var confirmation = confirm('Deseja de fato excluir a conta?');
+    var confirmation = await this.showConfirm('Deseja realmente excluir a conta?');
     const ID = localStorage.getItem('ID');
-    var alerta = "Exclusão cancelada!";
+    var alerta = "Exclusão cancelada.";
 
     if(confirmation){
       const listaequipesummoderador = await this.apiService.obterEquipesPorParticipanteComUmModerador(ID?.toString() ? ID?.toString() : "0");
@@ -315,22 +317,22 @@ export class UsuarioComponent {
       if(listaequipesummoderador.length > 0)
       {
         confirmation = false;
-        alerta = "A operação de delete não pode ser realizada, pois, existem equipes com apenas você como moderador, sendo elas: \n"
+        alerta = "A operação de exclusão não pode ser realizada, pois existem equipes com apenas você como moderador, sendo elas: \n"
         for (let i = 0; i < listaequipesummoderador.length - 1; i++) 
           alerta += "Equipe: " + listaequipesummoderador[i] + "; \n"
-        alerta += "Equipe " + listaequipesummoderador[listaequipesummoderador.length - 1] + ". \nFavor deletar as equipes ou eleger outros moderadores!"
+        alerta += "Equipe " + listaequipesummoderador[listaequipesummoderador.length - 1] + ". \nPor favor, delete as equipes ou eleja outros moderadores."
 
       }
         
     }
     
     if(!confirmation)
-      alert(alerta);
+      this.showAlert(alerta);
 
     if(confirmation) {
       this.apiService.deletarUsuario(ID? ID.toString(): "")
       .then(() => {
-        alert('Usuário deletado com sucesso!');    
+        this.showAlert('Usuário deletado com sucesso!');    
           localStorage.setItem('imagem', "");
           localStorage.setItem('Usuario', "");
           localStorage.setItem('ID', "");
@@ -345,8 +347,8 @@ export class UsuarioComponent {
     
   }
 
-  logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
+  async logout() {
+    const confirmation = await this.showConfirm('Deseja mesmo fazer o log-off?');
     if(confirmation) {
       localStorage.setItem('imagem', "");
       localStorage.setItem('Usuario', "");
@@ -361,8 +363,8 @@ export class UsuarioComponent {
     this.showModal = !this.showModal;
   }
 
-  cancelar() {
-    if (confirm('Deseja cancelar a alteração de senha?')) {
+  async cancelar() {
+    if (await this.showConfirm('Deseja cancelar a alteração de senha?')) {
       this.novaSenha!.nativeElement.value = '';
       this.novaSenha!.nativeElement.value = '';
       this.toggleModal();
@@ -379,12 +381,12 @@ export class UsuarioComponent {
     const novaSenha = this.novaSenha?.nativeElement.value;
     const confirmacaoSenha = this.confirmacaoSenha?.nativeElement.value;
     if (novaSenha !== confirmacaoSenha) {
-      alert('As senhas não correspondem.');
+      this.showAlert('As senhas não correspondem.');
       return;
     } 
     
     if (novaSenha.length < 8) {
-      alert('A senha possui menos de 8 caracteres.');
+      this.showAlert('A senha deve ter pelo menos 8 caracteres.');
       return;
     }
 
@@ -394,11 +396,11 @@ export class UsuarioComponent {
     const regexSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
 
     if (!regexUpperCase.test(novaSenha) || !regexLowerCase.test(novaSenha) || !regexDigit.test(novaSenha) || !regexSpecialChar.test(novaSenha)) {
-      alert('A senha Deve possuir no minimo um caractere maiusculo, um caractere mnusculo, um caractere especial e/ou um numeral.');
+      this.showAlert('A senha deve conter pelo menos um caractere maiúsculo, um caractere minúsculo, um caractere especial e/ou um numeral.');
       return;
     }
 
-    alert("A senha foi armazenada para alteração, para que a alteração ocorra de fato, deve-se pressionar o botão gravar!");
+    this.showAlert("A senha foi armazenada para alteração. Para que a alteração ocorra de fato, você deve pressionar o botão Gravar.");
     localStorage.setItem('AltSenha', novaSenha);
     this.senhaInput!.nativeElement.value = novaSenha;
     this.mostraNovaSenha = true;
@@ -409,4 +411,72 @@ export class UsuarioComponent {
   TelaInicial(){
     this.router.navigate(['/inicio']);
   }
+
+  showAlert(message: string): Promise<boolean> {
+    const confirmBox = document.getElementById("customAlert") as HTMLDivElement;
+    const confirmMessage = document.getElementById("alertmessage_customAlert") as HTMLParagraphElement;
+    const overlay = document.getElementById("overlay_alertBox") as HTMLDivElement;
+    return new Promise((resolve) => {
+
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+
+      // Assign resolve function to the buttons
+      (document.getElementById("okbtn_customAlert") as HTMLButtonElement).onclick = () => {
+        resolve(true);
+        this.hideConfirm();
+      };
+    });
+    
+  }
+  
+  hideConfirm(): void {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+  
+  
+  showConfirm(message: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      const confirmBox = document.getElementById("customConfirm");
+      const confirmMessage = document.getElementById("confirmmessage_customConfirm");
+      const overlay = document.getElementById("overlay_customConfirm");
+  
+      if(confirmMessage && overlay && confirmBox) {
+        confirmMessage.textContent = message;
+        overlay.style.display = "block"; // Show the overlay
+        confirmBox.style.display = "block"; // Show the confirm box
+      }
+  
+      // Store the resolve function to use it later
+      (confirmBox as any).resolvePromise = resolve;
+    });
+  }
+  
+  handleConfirm(result: boolean): void {
+    const confirmBox = document.getElementById("customConfirm");
+    const overlay = document.getElementById("overlay_customConfirm");
+  
+    if(overlay && confirmBox) {
+      confirmBox.style.display = "none"; // Hide the confirm box
+      overlay.style.display = "none"; // Hide the overlay
+    }
+  
+    // Call the resolve function with the result
+    if ((confirmBox as any).resolvePromise) {
+      (confirmBox as any).resolvePromise(result);
+    }
+  }
+
+  usuario() {
+    this.router.navigate(['/usuario']);
+  }
+
 }

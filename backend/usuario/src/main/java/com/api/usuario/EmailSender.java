@@ -46,6 +46,10 @@ public class EmailSender {
         {
         	return 1;        
         }
+    	
+    	if(usuarios.get(0).getsenha().equals(""))
+    		return 2;
+    		
         if(subject.equals("Recuperação de senha")) {
         	String senha = "";
         	for (Usuario usuario : usuarios) { 

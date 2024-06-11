@@ -362,6 +362,7 @@
     left: 57px;
     width: 276px;
     height: 65px;
+    cursor: pointer;
   }
   
   .image-container,
@@ -573,6 +574,36 @@ body {
 
 .confirm_customConfirm .okbtn_customConfirm:hover, .confirm_customConfirm .cancelbtn_customConfirm:hover {
   background-color: darkgray;
+}
+
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  width: 150px; /* Define a largura do contêiner para 150px */
+  text-align: left;
+}
+
+.user-details-label {
+  margin-bottom: 5px; /* Espaço entre o label e o conteúdo */
+  width: 50px; /* Garante que o label ocupe 100% da largura do contêiner */
+}
+
+.user-details-content.nome-usuario {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 100%; /* Garante que o conteúdo ocupe 100% da largura do contêiner */
+  word-wrap: break-word;
 }
 
 
@@ -809,6 +840,15 @@ body {
     .dadosevento4, .dadosevento2{
       width: 200px;
     }
+
+    .user-details-container{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 60px;
+      text-align: left;
+  }
+  
     
     
   }
@@ -816,10 +856,10 @@ body {
   
 @media screen and (min-width: 0px) and (max-width: 599px) {
   
-  .welcome-container {
-    top: 50%;
-    margin-top: 50px;
-  }
+    .welcome-container {
+      top: 40%;
+      margin-top: 50px;
+    }
 
   .logo {
     position: absolute;
@@ -958,7 +998,7 @@ body {
   .equipe-btn2{
     width: 150px;
     height: 25px;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 2px;
   }
 
@@ -974,7 +1014,7 @@ body {
   }
 
   .equipe-container {
-    width: 240px;    
+    width: 264px;    
     height: 130px;
   }
 
@@ -990,7 +1030,7 @@ body {
   }
 
   .nomeequipe{ 
-    font-size: 14px;
+    font-size: 12px;
     width: 150px;
     margin-top: 0px;
   }
@@ -1076,5 +1116,24 @@ body {
   .modalcriarButton, .modalCancelaButton {
     width: 120px;    
   }
+
+  .logout-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 68px;
+    margin-left: 0px;
+}
+
+
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 137px;
+  text-align: left;
+}
+
   
 }

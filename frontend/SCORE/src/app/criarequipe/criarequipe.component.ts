@@ -228,11 +228,11 @@ export class CriarequipeComponent {
   }
 
   get totalDePaginas() {
-    return Math.ceil(this.equipes.length / this.equipesPorPagina);
+    return this.equipes.length == 0 ? 1 : Math.ceil(this.equipes.length / this.equipesPorPagina);
   }
 
   get totalDePaginas2() {
-    return Math.ceil(this.equipes2.length / this.equipesPorPagina);
+    return this.equipes2.length == 0 ? 1 : Math.ceil(this.equipes2.length / this.equipesPorPagina);
   }
 
   fecharModal() {

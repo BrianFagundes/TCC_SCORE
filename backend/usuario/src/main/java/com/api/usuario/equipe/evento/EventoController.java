@@ -206,27 +206,36 @@ public class EventoController {
 									nota.setNotaparam19(6);
 									nota.setNotaparam20(6);
 									notaRepository.save(nota);
+									
+									
 								}
 							}
 						}
 					}
 				}
+				custorepository.updateCustoToFalseByEvento(Eventoalterar.getid());
+				eventoRepository.save(Eventoalterar);
 			}
 			else {
 				System.out.println(Evento.getStatus());
 				List<Participante> participantes = participanteRepository.findByEquipe(Eventoalterar.getEquipe());
 				for (int i = 0; i < participantes.size(); i++) {
-					boolean isValid = custorepository.existsByEventoAndUsuarioAndCusto(Eventoalterar.getid(),
-							participantes.get(i).getUsuario(), true);
-					if (isValid) {
-						System.out.println(participantes.get(i).getUsuario());
-						Usuario usuario = usuarioRepository.findById(participantes.get(i).getUsuario()).orElse(null);
-						emailController.enviarEmail2(usuario.getEmail(), "Dados do Evento: " + Eventoalterar.getNome(), "O Evento " + Eventoalterar.getNome() + " foi iniciado, favor consultar os dados do Evento em sua tela de acesso!");
+					if(custorepository.countByEventoAndCusto(Eventoalterar.getid(), true) > 1) {
+						boolean isValid = custorepository.existsByEventoAndUsuarioAndCusto(Eventoalterar.getid(),
+								participantes.get(i).getUsuario(), true);
+						if (isValid) {
+							System.out.println(participantes.get(i).getUsuario());
+							Usuario usuario = usuarioRepository.findById(participantes.get(i).getUsuario()).orElse(null);
+							emailController.enviarEmail2(usuario.getEmail(), "Dados do Evento: " + Eventoalterar.getNome(), "O Evento " + Eventoalterar.getNome() + " foi iniciado, favor consultar os dados do Evento em sua tela de acesso!");
+						}
 					}
 				}	
+				if(custorepository.countByEventoAndCusto(Eventoalterar.getid(), true) > 1)
+					eventoRepository.save(Eventoalterar);
 			}
 			
-			eventoRepository.save(Eventoalterar);
+			
+			
 			return 0;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

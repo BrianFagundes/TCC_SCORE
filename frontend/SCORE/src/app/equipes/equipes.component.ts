@@ -152,7 +152,7 @@ export class EquipesComponent {
   }
 
   logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
+    const confirmation = confirm('Deseja mesmo fazer o log-off?');
     if (confirmation) {
       localStorage.setItem('imagem', "");
       localStorage.setItem('Usuario', "");

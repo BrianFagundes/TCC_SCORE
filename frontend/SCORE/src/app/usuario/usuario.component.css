@@ -1,4 +1,51 @@
-@media (min-width: 1500px) {
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Times New Roman", sans-serif;
+  background-color: #201f26;
+  color: white;
+}
+
+.alturabotao {
+  margin-top: 4px;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  margin-top: 50px;
+  height: 80px;
+}
+
+.welcome-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-container,
+.user-details-and-logout {
+  display: flex;
+  flex-direction: column;
+  /* Organiza os itens internos verticalmente */
+  align-items: center;
+  /* Centraliza os itens internos verticalmente */
+
+}
+
+
+@media (min-width: 1600px) {
 .container {
   display: flex; /* Torna este um flex container */
   flex-direction: row; /* Organiza os itens horizontalmente */
@@ -86,13 +133,6 @@
   margin-top: 20px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Times New Roman", sans-serif;
-  background-color: #201f26;
-  color: white;
-}
 
 .welcome-container {
   position: absolute;
@@ -332,7 +372,219 @@ button {
 }
 }
 
-@media (min-width: 1000px) and (max-width: 1499px) {
+.overlay_alertBox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.alert {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the alert */
+  z-index: 1001; /* Sit on top of the overlay_alertBox */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.alert .message_customAlert {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the button */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.alert .okbtn {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.alert .okbtn:hover {
+  background-color: darkgray;
+}
+
+
+
+.overlay_customConfirm {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.confirm_customConfirm {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the confirm */
+  z-index: 1001; /* Sit on top of the overlay_customConfirm */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.confirm_customConfirm .message_customConfirm {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the buttons */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.confirm_customConfirm .button-container_customConfirm {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+}
+
+.confirm_customConfirm .okbtn_customConfirm, .confirm_customConfirm .cancelbtn_customConfirm {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  width: 100px; /* Ensure both buttons have the same width */
+}
+
+.confirm_customConfirm .okbtn_customConfirm:hover, .confirm_customConfirm .cancelbtn_customConfirm:hover {
+  background-color: darkgray;
+}
+
+
+
+
+.logo {
+  position: absolute;
+  left: 57px;
+  width: 276px;
+  height: 65px;
+  cursor: pointer;
+}
+
+
+
+.Botoes_usuario3 {
+  width: 70px;
+  height: 70px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 1040px;
+}
+
+.user-details-Ul {
+text-align: left;
+padding: 0;
+margin: 0;
+list-style-type: none;
+font-family: 'Times New Roman';
+font-size: 20px;
+width: 200px;
+list-style: none;
+}
+.user-details-Ul-li1 {
+font-size: 20px;
+margin-bottom: 10px;
+margin-top: 10px;
+}
+.user-details-Ul-li2 {
+font-size: 20px;
+margin-bottom: 10px;
+margin-top: -15px;
+}
+
+.user-details ul {
+text-align: left; /* Alinha o texto à direita */
+padding: 0; /* Remove o preenchimento */
+margin: 0; /* Remove a margem */
+list-style-type: none; /* Remove os marcadores de lista */
+font-family: "Times New Roman";
+font-size: 20px;
+}
+
+.Botoes_usuario {
+width: 70px;
+height: 70px;
+border: 2px solid gray;
+border-radius: 10px;
+cursor: pointer;
+}
+
+.Textocabecalho {
+  color: white;
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-top: -25px;
+}
+
+
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  width: 150px; /* Define a largura do contêiner para 150px */
+  text-align: left;
+}
+
+.user-details-label {
+  margin-bottom: 5px; /* Espaço entre o label e o conteúdo */
+  width: 50px; /* Garante que o label ocupe 100% da largura do contêiner */
+}
+
+.user-details-content.nome-usuario {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 100%; /* Garante que o conteúdo ocupe 100% da largura do contêiner */
+  word-wrap: break-word;
+}
+
+
+
+@media (min-width: 1000px) and (max-width: 1599px) {
   .container {
     display: flex; /* Torna este um flex container */
     flex-direction: row; /* Organiza os itens horizontalmente */
@@ -342,7 +594,6 @@ button {
     border: 2px solid gray; /* Adiciona uma borda cinza */
     border-radius: 10px; /* Adiciona cantos arredondados */
     margin-top: 10px;
-    width: 998px;
   }
   
   
@@ -367,26 +618,13 @@ button {
     margin-top: -15px;
   }
   
-  .Botoes_usuario {
-    width: 100px;
-    height: 100px;
-    border: 2px solid gray; /* Adiciona uma borda cinza */
-    border-radius: 10px; /* Adiciona cantos arredondados */    
-    cursor: pointer;
-  }
-  
   .logo {
     position: absolute;
     left: 57px;
     width: 276px;
     height: 65px;
   }
-  
-  .image-container, .user-details-and-logout {
-    display: flex;
-    flex-direction: column; /* Organiza os itens internos verticalmente */
-    align-items: center; /* Centraliza os itens internos verticalmente */
-  }
+
   
   .user-details ul {
     text-align: left; /* Alinha o texto à direita */
@@ -412,14 +650,6 @@ button {
     margin-top: 10px;
   }
   
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: "Times New Roman", sans-serif;
-    background-color: #201f26;
-    color: white;
-  }
-  
   .welcome-container {
     position: absolute;
     top: 50%;
@@ -435,17 +665,17 @@ button {
   
   /* Garante que top-row ocupe a posição superior dentro de .rectangle */
   .top-row {
-  
-    background-color: rgba(128, 128, 128, 0.2);
-    width: 980px;
-    height: 80px;
-  
-    text-align: center; /* Centraliza o texto */
-    margin-top: 10px; /* Espaço abaixo do top-row */
-    margin-bottom: 10px;
-    border-radius: 10px;
-  
-  }
+    display: block;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2);
+    position: fixed;
+    width: 1460px;
+    margin-left: -10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    height: 30px;
+    width: 940px;
+}
   
   /* Configura o estilo para middle-row */
   .middle-row {
@@ -668,24 +898,698 @@ button {
     cursor: pointer;
     margin-left: 547px;
   }
+
+  .container {
+    margin-top: 0px;
+  }
   
+  .Botoes_usuario3 {
+    margin-left: 583px;
+  }
+
+  
+  .rectangle {
+    width: 980px;
+    height: 600px;
+    margin-top: 0px;
+}
+
+
+.top-row{
+  display: block;
+  padding: 10px;
+  background-color: rgba(211, 211, 211, 0.2);
+  position: fixed;
+  width: 1460px;
+  margin-left: 0px;
+  margin-top: 10px;
+  border-radius: 8px;
+  height: 30px;
+  width: 940px;
+}
+
+.Textocabecalho {
+  color: white;
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-top: -50px;
+}
+
+
+.middle-row {
+  width: 960px;
+  height: 450px;
+  background-color: rgba(211, 211, 211, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-top: 70px;
+}
+
+
+.user-image-right {
+  width: 200px;
+  height: 200px;
+  margin-top: 100px;
+  margin-left: 70px;
+}
+
+
+.cadastro-label {
+  color: white;
+  font-family: "Times New Roman",
+    "Times New Roman",
+    "Times New Roman";
+  margin-top: 90px;
+  font-size: 18px;
+}
+
+
+.bottom-row {
+  width: 960px;
+  background-color: rgba(211, 211, 211, 0.2);
+  height: 60px;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+input[type=text], input[type=email], input[type=password] {
+  margin-top: 10px;
+  width: 352px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-right: 10px;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+
+button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  width: 365px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  margin-left: 10px;
+}
+
+
   }
 
 
-  @media (min-width: 0px) and (max-width: 999px) {
-    .container {
-      display: flex;
-      margin-left: 0px;
-      width: 300px;
-      height: 140px;
-      margin-top: 380px;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      border: 2px solid gray;
-      border-radius: 10px;
-    }
+  
+
+@media (min-width: 600px) and (max-width: 999px) {
+  .container {
+    display: flex; /* Torna este um flex container */
+    flex-direction: row; /* Organiza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    justify-content: center; /* Para centralização horizontal, se necessário */
+    gap: 20px; /* Espaçamento entre os itens */
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */
+    margin-top: 10px;
+  }
+  
+  
+  .user-details-Ul {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    font-family: 'Times New Roman';
+    font-size: 20px;
+    width: 200px;
+    list-style: none;
+  }
+  .user-details-Ul-li1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .user-details-Ul-li2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: -15px;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 57px;
+    width: 276px;
+    height: 65px;
+  }
+
+  .user-details ul {
+    text-align: left; /* Alinha o texto à direita */
+    padding: 0; /* Remove o preenchimento */
+    margin: 0; /* Remove a margem */
+    list-style-type: none; /* Remove os marcadores de lista */
+    font-family: "Times New Roman";
+    font-size: 20px;
+  }
+  
+  
+  
+  .rectangle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 998px;
+    height: 530px;
+    background-color: #201f26;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  
+  .welcome-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .welcome-message {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Garante que top-row ocupe a posição superior dentro de .rectangle */
+  .top-row {
+    display: block;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.2);
+    position: fixed;
+    width: 1460px;
+    margin-left: -10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    height: 30px;
+    width: 940px;
+}
+  
+  /* Configura o estilo para middle-row */
+  .middle-row {
+    width: 980px; /* Ocupa toda a largura do contêiner */
+    height: 350px;
+    background-color: rgba(128, 128, 128, 0.2);
+    display: flex; /* Utiliza flex para alinhar os filhos */
+    flex-direction: row; /* Organiza os filhos do contêiner horizontalmente */
+    justify-content: space-around; /* Espaçamento igual entre os elementos */
+    margin-bottom: 10px; /* Espaço abaixo do middle-row */
+    border-radius: 10px;
+  }
+  
+  /* Configura o estilo para bottom-row */
+  .bottom-row {
+    width: 980px;  /* Ocupa toda a largura do contêiner */
+    background-color: rgba(128, 128, 128, 0.2);
+    height: 60px;
+    text-align: center; /* Centraliza os botões */
+    border-radius: 10px;
+  }
+  
+  .user-image-right{
+    width: 200px;
+    height: 200px;
+    margin-top: 70px;
+    margin-left: 70px;
+  }
+  
+  input[type="text"],input[type="email"], input[type="password"]  {
+    margin-top: 10px;
+    width: 352px;
+    height: 30px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', 'Times New Roman';
+    margin-right: 10px;
+    padding: 5px;
+  }
+  
+  .mostrarsenha4{
+    width: 40px; 
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0);  
+  }
+  
+  
+  button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    width: 365px;
+    height:35px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    border: 2px solid #D9D9D9;
+    background-color: #D9D9D9;
+  }
+  
+  
+  .cadastro-label{
+    color: white;
+    font-family: 'Times New Roman', 'Times New Roman', 'Times New Roman';
+    margin-top: 40px;
+    font-size: 18px;
+  }
+  
+  .overlay{
+    color: white;
+    font-family: 'Times New Roman', 'Times New Roman', 'Times New Roman';
+    font-size: 18px;
+    margin-left: 70px;
+    cursor: pointer;
+  }
+  .image-container2{
+    cursor: pointer;
+  }
+
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o modal */
+  }
+  
+  .modal-content {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o conteúdo do modal */
+  }
+  
+  .cadastro-label2 {
+    padding-top: 5%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-left: 65px;
+    color: #ffffff;
+    font-family: 'Times New Roman';
+    /* Adicione aqui quaisquer estilos adicionais necessários para o segundo rótulo de cadastro */
+  }
+  
+  .line5 {
+    display: flex;
+    align-items: center;
+    width: 310px;
+    height: 1px;
+    background-color: #ffffff;
+    margin-bottom: 5px;
+    margin-left: -5px;
+    margin-top: 5px;
+    /* Adicione aqui quaisquer estilos adicionais necessários para a quinta linha */
+  }
+  
+  .input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o contêiner de entrada */
+  }
+  
+  .modal-input {
+    display: block;
+    width: 200px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times New Roman;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o input do modal */
+  }
+  
+  .toggle-senha {
+    margin-top: -30px;
+    width: 10px;
+    height: 5px;
+    border-radius: 8px;
+    border-color: rgba(240, 248, 255, 0);
+    background-color: rgba(240, 248, 255, 0);
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de alternância de senha do modal */
+  }
+  
+  .imagem3 {
+    width: 40px;
+    height: 20px;
+    margin-left: -70px;
+    /* Adicione aqui quaisquer estilos adicionais necessários para a imagem de mostrar/ocultar senha do modal */
+  }
+  
+  .modal-input2 {
+    display: block;
+    width: 200px;
+    height: 40px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    background-color: #201f26;
+    border-color: #201f26;
+    outline: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times New Roman;
+    /* Adicione aqui quaisquer estilos adicionais necessários para o segundo input do modal */
+  }
+  
+  .toggle-senha2 {
+    margin-top: -30px;
+    width: 10px;
+    height: 5px;
+    border-radius: 8px;
+    border-color: rgba(240, 248, 255, 0);
+    background-color: rgba(240, 248, 255, 0);
+    /* Adicione aqui quaisquer estilos adicionais necessários para o botão de alternância de senha do modal */
+  }
+  
+  .imagem4 {
+    width: 40px;
+    height: 20px;
+    margin-left: -70px;
+    /* Adicione aqui quaisquer estilos adicionais necessários para a imagem de mostrar/ocultar confirmação de senha do modal */
+  }
+
+  .Botoes_usuario2 {
+    width: 100px;
+    height: 100px;
+    border: 2px solid gray; /* Adiciona uma borda cinza */
+    border-radius: 10px; /* Adiciona cantos arredondados */    
+    cursor: pointer;
+    margin-left: 547px;
+  }
+
+  .container {
+    margin-top: 0px;
+  }
+  
+  .Botoes_usuario3 {
+    margin-left: 583px;
+  }
+
+  
+  .rectangle {
+    width: 980px;
+    height: 600px;
+    margin-top: 0px;
+}
+
+
+.top-row{
+  display: block;
+  padding: 10px;
+  background-color: rgba(211, 211, 211, 0.2);
+  position: fixed;
+  width: 1460px;
+  margin-left: 0px;
+  margin-top: 10px;
+  border-radius: 8px;
+  height: 30px;
+  width: 940px;
+}
+
+.Textocabecalho {
+  color: white;
+  font-size: 30px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-top: -50px;
+}
+
+
+.middle-row {
+  width: 960px;
+  height: 450px;
+  background-color: rgba(211, 211, 211, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-top: 70px;
+}
+
+
+.user-image-right {
+  width: 200px;
+  height: 200px;
+  margin-top: 100px;
+  margin-left: 70px;
+}
+
+
+.cadastro-label {
+  color: white;
+  font-family: "Times New Roman",
+    "Times New Roman",
+    "Times New Roman";
+  margin-top: 90px;
+  font-size: 18px;
+}
+
+
+.bottom-row {
+  width: 960px;
+  background-color: rgba(211, 211, 211, 0.2);
+  height: 60px;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+input[type=text], input[type=email], input[type=password] {
+  margin-top: 10px;
+  width: 352px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+  background-color: #201f26;
+  border-color: #201f26;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: "Times New Roman", "Times New Roman";
+  margin-right: 10px;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+
+button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  width: 365px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  background-color: #D9D9D9;
+  margin-left: 10px;
+}
+
+
+
+
+
+/* vale apartir daqui  */
+
+.rectangle {
+  width: 580px;
+  height: 400px;
+  margin-top: 0px;
+}
+
+.top-row {
+  display: block;
+  padding: 10px;
+  background-color: rgba(211, 211, 211, 0.2);
+  position: fixed;
+  width: 1460px;
+  margin-left: 0px;
+  margin-top: 10px;
+  border-radius: 8px;
+  height: 20px;
+  width: 540px;
+}
+
+.Textocabecalho {
+  color: white;
+  font-size: 20px;
+  font-family: 'Times New Roman', 'Times New Roman';
+  margin-top: -50px;
+}
+
+.cadastro-label {
+  color: white;
+  font-family: "Times New Roman",
+    "Times New Roman",
+    "Times New Roman";
+  margin-top: 15px;
+  font-size: 18px;
+}
+
+.user-image-right {
+  width: 100px;
+  height: 100px;
+  margin-top: 70px;
+  margin-left: 40px;
+}
+
+
+.middle-row {
+  width: 560px;
+  height: 260px;
+  background-color: rgba(211, 211, 211, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-top: 60px;
+}
+
+
+.bottom-row {
+  width: 560px;
+  background-color: rgba(211, 211, 211, 0.2);
+  height: 60px;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.container {
+  display: flex; /* Torna este um flex container */
+  flex-direction: row; /* Organiza os itens horizontalmente */
+  align-items: center; /* Centraliza os itens verticalmente */
+  justify-content: center; /* Para centralização horizontal, se necessário */
+  gap: 20px; /* Espaçamento entre os itens */
+  border: 2px solid gray; /* Adiciona uma borda cinza */
+  border-radius: 10px; /* Adiciona cantos arredondados */
+  margin-top: 2px;
+  height: 80px;
+}
+
+.logo {
+  position: absolute;
+  left: 10px;
+  width: 165px;
+  height: 40px;
+  top: 25px;
+}
+
+
+.Botoes_usuario3 {
+  margin-left: 340px;
+  width: 60px;
+  height: 60px;
+}
+
+
+.Botoes_usuario {
+  width: 60px;
+  height: 60px;
+}
+
+.user-details-Ul-li1 {
+  font-size: 13px;
+  width: 10px;
+}
+
+
+.user-details-Ul-li2 {
+  font-size: 13px;
+  width: 10px;
+}
+
+
+.user-details-Ul {
+  font-size: 13px;
+  width: 60px;
+}
+
+
+.user-details-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 60px;
+  text-align: left;
+}
+
+
+  }
+
+
+  @media (min-width: 0px) and (max-width: 599px) {
+  
   
     
     
@@ -718,7 +1622,7 @@ button {
       border: 2px solid gray;
       border-radius: 10px;
       cursor: pointer;
-      margin-bottom: -60px;
+      margin-bottom: 0px;
     }
 
     .Botoes_usuario2 {
@@ -742,14 +1646,6 @@ button {
       cursor: pointer; /* Adicionado para indicar que a imagem é clicável */
     }
 
-    
-    .image-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 70px;
-    }
-
 
     .user-details {
       display: flex;
@@ -757,17 +1653,6 @@ button {
       align-items: center;
       margin-left: -15px;
       margin-top: 70px;
-    }
-
-    
-    
-
-    .logout-button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      /* Adicione aqui quaisquer estilos adicionais necessários para o botão de logout */
-      cursor: pointer; /* Adicionado para indicar que o elemento é clicável */
     }
 
     
@@ -783,23 +1668,6 @@ button {
       border-radius: 10px;
       margin: 0 auto;
       margin-top: 10px;
-    }
-    
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Times New Roman", sans-serif;
-      background-color: #201f26;
-      color: white;
-    }
-    
-    .welcome-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      margin-top: 0px;
     }
     
     .welcome-message {
@@ -1042,10 +1910,185 @@ button {
       margin-left: -70px;
       /* Adicione aqui quaisquer estilos adicionais necessários para a imagem de mostrar/ocultar confirmação de senha do modal */
     }
+
+    
   
-    
-    
-    
+
+    .logo {
+      position: absolute;
+      left: 10px;
+      width: 165px;
+      height: 40px;
+      top: 25px
     }
 
+    .Botoes_usuario3 {
+      margin-left: 340px;
+      width: 60px;
+      height: 60px;
+    }
+
+    .user-details-Ul {
+      font-size: 13px;
+      width: 60px;
+    }
+  
+    .user-details-Ul-li1 {
+      font-size: 13px;    
+    }
+    
+    .user-details-Ul-li2 {
+      font-size: 13px;
+    }
+    
+    .Botoes_usuario {
+      width: 60px;
+      height: 60px;  
+    }
+
+
+    }
+
+    @media (min-width: 0px) and (max-width: 599px) {
+    
+
+     
+
+      .logo {
+        position: absolute;
+        margin-left: 0px;
+        margin-top: -90px;
+        width: 169px;
+        height: 40px;
+        cursor: pointer; /* Adicionado para indicar que a imagem é clicável */
+      }
+
+
+      .Botoes_usuario3 {
+        margin-left: 0px;
+        width: 60px;
+        height: 60px;
+      }
+
+      .user-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: -15px;
+        margin-top: 70px;
+      }
+
+      .user-details-Ul {
+        font-size: 13px;
+        width: 60px;
+      }
+    
+      .user-details-Ul-li1 {
+        font-size: 13px;    
+      }
+      
+      .user-details-Ul-li2 {
+        font-size: 13px;
+      }
+
+
+      .Botoes_usuario {
+        width: 60px;
+        height: 60px;  
+      }
+
+      
+
+      .logo {
+        position: absolute;
+        margin-left: 0px;
+        margin-top: -90px;
+        width: 169px;
+        height: 40px;
+        cursor: pointer;
+    }
+
+    .Botoes_usuario3 {
+      margin-left: 0px;
+      width: 60px;
+      height: 60px;
+  }
+
+  .Botoes_usuario {
+    width: 60px;
+    height: 60px;
+}
+
+.logo{
+  position: absolute;
+  margin-left: 47px;
+  margin-top: 332px;
+  width: 169px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+}
+
+
+.welcome-container {
+  top: 40%;
+  margin-top: 50px;
+}
+      
+.Botoes_usuario {
+  width: 60px;
+  height: 60px;
+  margin-left: 0px;
+}
+
+.rectangle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 300px;
+  height: 780px;
+  background-color: #201f26;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 0px;
+}
+
+.container {
+  margin-top: 350px;
+  height: 140px;
+}
+
+
+.alturabotao {
+  margin-top: 4px;
+}
+
+
+.logout-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 68px;
+  margin-left: 0px;
+}
+
+
+.user-details-container {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 137px;
+text-align: left;
+}
+
+
+    }
 

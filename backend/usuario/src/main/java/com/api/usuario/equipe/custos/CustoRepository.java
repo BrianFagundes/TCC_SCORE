@@ -18,6 +18,14 @@ public interface CustoRepository extends JpaRepository<Custo, CustoId>  {
 	void deleteByEvento(Long evento);
 	
 	boolean existsByEventoAndUsuarioAndCusto(Long evento, Long usuario, Boolean custo);
+	
+	@Modifying
+	@Transactional
+	@Query("UPDATE Custo c SET c.custo = false WHERE c.evento = ?1")
+	void updateCustoToFalseByEvento(Long evento);
+
+	
+	long countByEventoAndCusto(Long evento, Boolean custo);
 
 	
 }

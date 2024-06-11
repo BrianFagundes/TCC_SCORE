@@ -157,8 +157,16 @@ export class HomeComponent {
   
   async Login() {
     try {
+      
       const nome = this.usernameInput?.nativeElement.value;
-      const senha = this.passwordInput?.nativeElement.value;      
+      const senha = this.passwordInput?.nativeElement.value;     
+      
+      if(nome == "")
+        this.showAlert("O campo de usuário não pode estar vazio!");
+      else if (senha == "")
+        this.showAlert("O campo de senha não pode estar vazio!");
+      else{     
+
       await this.apiService.autenticarUsuario(nome, senha);
       const isValid = await this.apiService.validarUsuario(nome, senha);
 
@@ -182,6 +190,7 @@ export class HomeComponent {
         this.showAlert("Usuário ou senha inválido, tente novamente!")
         // Faça algo quando o usuário não estiver autenticado
       }
+    }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       // Faça algo em caso de erro

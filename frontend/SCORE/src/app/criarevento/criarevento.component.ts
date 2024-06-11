@@ -264,8 +264,8 @@ export class CriareventoComponent {
     this.router.navigate(['/usuario']);
   }
 
-  logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
+  async logout() {
+    const confirmation = await this.showConfirm('Deseja mesmo fazer o log-off?');
     if (confirmation) {
       localStorage.setItem('imagem', "");
       localStorage.setItem('Usuario', "");
@@ -288,14 +288,14 @@ export class CriareventoComponent {
 
   criarNovaEvento() {
     if (this.equipes.length == 0) {
-      alert("Para criar um evento é necessário o usuário ser moderador de ao menos uma equipe! Lembre-se a equipe deve possuir uma Sigla.")
+      this.showAlert("Para criar um evento, o usuário deve ser moderador de pelo menos uma equipe. Lembre-se de que a equipe deve possuir uma sigla.");
     }
     else {
       if (this.Eventos.length <= 99) {
         this.abrirModal()
       }
       else
-        alert("O usuário pode ter no máximo 100 Eventos!");
+      this.showAlert("O usuário pode ter no máximo 100 eventos!");
     }
   }
 
@@ -306,11 +306,11 @@ export class CriareventoComponent {
   }
 
   get totalDePaginas() {
-    return Math.ceil(this.Eventos.length / this.EventosPorPagina);
+    return this.Eventos.length == 0 ? 1 : Math.ceil(this.Eventos.length / this.EventosPorPagina);
   }
 
   get totalDePaginas2() {
-    return Math.ceil(this.Eventos2.length / this.EventosPorPagina);
+    return this.Eventos2.length == 0 ? 1 : Math.ceil(this.Eventos2.length / this.EventosPorPagina);
   }
 
   fecharModal() {
@@ -324,8 +324,8 @@ export class CriareventoComponent {
   }
 
 
-  confirmarCancelar() {
-    if (confirm('Gostaria de Cancelar a criação da Evento?')) {
+  async confirmarCancelar() {
+    if (await this.showConfirm('Gostaria de cancelar a criação do evento?')) {
       this.fecharModal();
       this.LimparEquipeSelecionada();
       this.LimpapesquisarlistaEquipes();
@@ -338,7 +338,7 @@ export class CriareventoComponent {
     if ((nome.length > 0) && (equipe.length > 0)) {
 
       const ID = localStorage.getItem('ID');
-      if (confirm(`Gostaria de Criar o novo Evento da equipe ${equipe} com o nome: ${nome}?`)) {
+      if (await this.showConfirm(`Gostaria de criar o novo evento da equipe ${equipe} com o nome: ${nome}?`)) {
         const dadosEmpresa = {
           equipe: this.idpesquisalistaequipeselecionado,
           nome: this.nomeEvento?.nativeElement.value,
@@ -353,13 +353,13 @@ export class CriareventoComponent {
 
         if (isValid !== 0) {
           if (isValid == 1)
-            alert("Erro ao realizar a inclusão!");
+            this.showAlert("Erro ao realizar a inclusão!");
           else if (isValid == -1) {
-            alert("Falha de conexão com a API!")
+            this.showAlert("Falha de conexão com a API!")
           }
         }
         else
-          alert("Inclusão da Evento realizada com sucesso!")
+        this.showAlert("Inclusão do evento realizada com sucesso!")
 
         this.fecharModal();
         this.nomeEvento!.nativeElement.value = ''; // Limpar o nome da Evento para futuras criações
@@ -370,16 +370,16 @@ export class CriareventoComponent {
       }
     }
     else {
-      alert("Para criar um novo evento, deve-se colocar um nome no mesmo assim como definir a equipe deste!");
+      this.showAlert("Para criar um novo evento, você deve inserir um nome para ele e definir a equipe que participará!");
     }
   }
 
-  excluirEvento(index: number, nome: string) {
+  async excluirEvento(index: number, nome: string) {
 
-    if (confirm('Tem certeza que deseja excluir a Evento ' + nome + '?')) {
+    if (await this.showConfirm(`Tem certeza que deseja excluir o evento ${nome}?`)) {
       this.apiService.deletarEvento(index.toString())
         .then(() => {
-          alert('Evento ' + nome + ' deletado com sucesso!');
+          this.showAlert('Evento ' + nome + ' deletado com sucesso!');
           this.Eventos = [];
 
           setTimeout(() => {
@@ -566,8 +566,29 @@ export class CriareventoComponent {
   }
 
   async IniciarEvento(id: number, i: number) {
+
+    const pagantes = await this.apiService.obterTodosPagantesporevento(id?.toString() ? id?.toString() : "0");
+    
+    let qtdpagantes = 0;
+    for(let j = 0; j < pagantes.length; j++)
+    {
+      if(pagantes[j].custo == true)
+        qtdpagantes++;
+    }
+
+    
+
+    for(let j = 0; j<this.Eventos.length;j++)
+      {
+        if(this.Eventos[j].id == id)
+        {
+          i=j;
+          break;
+        }        
+      }
+
     if (!this.Eventos[i].hora) {
-      alert("Evento não pode ser iniciado, Para que possa precisa ser configurado primeiro!")
+      this.showAlert("O evento não pode ser iniciado. Antes de iniciar, ele precisa ser configurado primeiro.")
     }
     else {
 
@@ -576,7 +597,7 @@ export class CriareventoComponent {
 
       if(evento.status == "I")
       {
-        alert("Evento ja iniciado! Não pode ser iniciado novamente.");
+        this.showAlert("O evento já foi iniciado e não pode ser iniciado novamente.");
         setTimeout(() => {
           this.Eventos = [];
           this.carregarEventos();
@@ -584,12 +605,18 @@ export class CriareventoComponent {
         return;
       }
 
-      const confirmation = confirm('Deseja de fato inicializar o evento? Uma vez iniciado não poderá alterar mais nenhum dado do mesmo!');
+      
+
+      const confirmation = await this.showConfirm('Deseja realmente inicializar o evento? Uma vez iniciado, não será possível alterar nenhum dado dele!');
       if (confirmation) {
+        
         const agora = new Date();
         var erro = 0;
         var dia = this.Eventos[i].dia;
 
+        if(qtdpagantes < 2)
+          erro = 5;
+        
 
         if (this.Eventos[i].peridiocidade == "Único") {
           if (this.Eventos[i].dataultimoevento == null && this.Eventos[i].dia && this.Eventos[i].hora) {
@@ -655,7 +682,7 @@ export class CriareventoComponent {
           if (modal) {
             modal.style.display = 'block';
           }
-
+          
           const isValid = await this.apiService.AlterarStatusEvento(dadosEvento);
 
           if (modal) {
@@ -664,11 +691,11 @@ export class CriareventoComponent {
 
           if (isValid !== 0) {
             if (isValid == 1) {
-              alert("Erro ao realizar a inclusão!");
+              this.showAlert("Erro ao realizar a inclusão!");
 
             }
             else if (isValid == -1) {
-              alert("Falha de conexão com a API!")
+              this.showAlert("Falha de conexão com a API!")
             }
           }
           else {
@@ -680,32 +707,44 @@ export class CriareventoComponent {
 
         }
         else if (erro == 1) {
-          alert("Evento é Unico e já foi finalizado!");
+          this.showAlert("O evento é único e já foi finalizado.");
         }
         else if (erro == 2) {
-          alert("Evento não pode ser iniciado, pois a data do evento é superior à data atual!");
+          this.showAlert("O evento não pode ser iniciado, pois a data do evento é posterior à data atual.");
         }
         else if (erro == 3) {
-          alert("Evento Periódico não pode ser iniciado, hoje não é um dia possível para evento!");
+          this.showAlert("Evento periódico não pode ser iniciado, pois hoje não é um dia possível para o evento.");
         }
         else if (erro == 4) {
-          alert("Evento Periódico Já foi inicializado na data atual!");
-        }
+          this.showAlert("O evento periódico já foi iniciado na data atual.");
+        }        
+        else if (erro == 5) {
+          this.showAlert("Para que um evento possa ser iniciado, é necessário ter no mínimo 2 pagantes!");
+        }        
         if (erro == 0) {
-          alert("Evento Iniciado com sucesso, divirtam-se!");
+          this.showAlert("Evento iniciado com sucesso! Divirtam-se!");
         } 
       }
     }
+  
   }
 
   async FinalizarEvento(id: number, i: number) {
 
-    const evento = await this.apiService.obterUmEvento(this.Eventos[i].id ? this.Eventos[i].id.toString() : "");
+    for(let j = 0; j<this.Eventos.length;j++)
+    {
+      if(this.Eventos[j].id == id)
+      {
+        i=j;
+        break;
+      }        
+    }
 
+    const evento = await this.apiService.obterUmEvento(this.Eventos[i].id ? this.Eventos[i].id.toString() : "");
 
       if(evento.status == "F")
       {
-        alert("Evento ja finalizado! Não pode ser finalizado novamente.");
+        this.showAlert("O evento já foi finalizado e não pode ser finalizado novamente.");
         setTimeout(() => {
           this.Eventos = [];
           this.carregarEventos();
@@ -713,7 +752,7 @@ export class CriareventoComponent {
         return;
       }
 
-    const confirmation = confirm('Deseja de fato finalizar o evento? Uma vez finalizado não poderá ser reiniciado novamente!');
+    const confirmation = await this.showConfirm('Deseja realmente finalizar o evento? Uma vez finalizado, não poderá ser reiniciado novamente!');
     const Dataatual = Date();
 
     if (confirmation) {
@@ -734,11 +773,11 @@ export class CriareventoComponent {
 
       if (isValid !== 0) {
         if (isValid == 1) {
-          alert("Erro ao realizar a inclusão!");
+          this.showAlert("Erro ao realizar a inclusão!");
 
         }
         else if (isValid == -1) {
-          alert("Falha de conexão com a API!")
+          this.showAlert("Falha de conexão com a API!")
         }
       }
       else {
@@ -749,5 +788,71 @@ export class CriareventoComponent {
       }
     }
   }
+
+  showAlert(message: string): Promise<boolean> {
+    const confirmBox = document.getElementById("customAlert") as HTMLDivElement;
+    const confirmMessage = document.getElementById("alertmessage_customAlert") as HTMLParagraphElement;
+    const overlay = document.getElementById("overlay_alertBox") as HTMLDivElement;
+    return new Promise((resolve) => {
+
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+
+      // Assign resolve function to the buttons
+      (document.getElementById("okbtn_customAlert") as HTMLButtonElement).onclick = () => {
+        resolve(true);
+        this.hideConfirm();
+      };
+    });
+    
+  }
+  
+  hideConfirm(): void {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+
+
+  
+
+  showConfirm(message: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      const confirmBox = document.getElementById("customConfirm");
+      const confirmMessage = document.getElementById("confirmmessage_customConfirm");
+      const overlay = document.getElementById("overlay_customConfirm");
+  
+      if(confirmMessage && overlay && confirmBox) {
+        confirmMessage.textContent = message;
+        overlay.style.display = "block"; // Show the overlay
+        confirmBox.style.display = "block"; // Show the confirm box
+      }
+  
+      // Store the resolve function to use it later
+      (confirmBox as any).resolvePromise = resolve;
+    });
+  }
+  
+  handleConfirm(result: boolean): void {
+    const confirmBox = document.getElementById("customConfirm");
+    const overlay = document.getElementById("overlay_customConfirm");
+  
+    if(overlay && confirmBox) {
+      confirmBox.style.display = "none"; // Hide the confirm box
+      overlay.style.display = "none"; // Hide the overlay
+    }
+  
+    // Call the resolve function with the result
+    if ((confirmBox as any).resolvePromise) {
+      (confirmBox as any).resolvePromise(result);
+    }
+  }
+
 
 }

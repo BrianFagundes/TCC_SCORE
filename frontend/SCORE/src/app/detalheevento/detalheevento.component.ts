@@ -12,6 +12,20 @@ interface Participante {
   Pagou: boolean;
 }
 
+interface DadosEvento {
+  id: number;
+  equipe: number;
+  nome: string;
+  local: string;
+  peridiocidade: string;
+  dia: string;
+  hora: string;
+  quantidade_time: number;
+  chavepix: string;
+  duracao: string;
+}
+
+
 interface Competidor {
   nome: string;
   email: string;
@@ -222,7 +236,7 @@ export class DetalheeventoComponent {
               position: location
             });
           } else {
-            alert("Não foi possível encontrar o local: " + endereco);
+            this.showAlert("Não foi possível encontrar o local: " + endereco);
           }
         });
       }
@@ -240,7 +254,7 @@ export class DetalheeventoComponent {
           const location = results[0].geometry.location;
           this.inicializarMapa(location.lat(), location.lng(), 16);
         } else {
-          alert('Geocode was not successful for the following reason: ' + status);
+          this.showAlert('Geocode was not successful for the following reason: ' + status);
           this.inicializarMapa(); // Carrega a Praça da Sé por padrão se a geocodificação falhar
         }
       });
@@ -269,13 +283,14 @@ export class DetalheeventoComponent {
   }
 
   logout() {
-    const confirmation = confirm('Deseja de fato fazer o log-off?');
-    if (confirmation) {
-      localStorage.setItem('imagem', "");
-      localStorage.setItem('Usuario', "");
-      localStorage.setItem('ID', "");
-      this.router.navigate(['/home']); // Redireciona para a tela de login
-    }
+    this.showConfirm('Deseja realmente fazer o log-off?', (confirmation: boolean) => {
+      if (confirmation) {
+        localStorage.setItem('imagem', "");
+        localStorage.setItem('Usuario', "");
+        localStorage.setItem('ID', "");
+        this.router.navigate(['/home']); // Redireciona para a tela de login
+      }
+    });
   }
 
   TelaInicial() {
@@ -295,20 +310,23 @@ export class DetalheeventoComponent {
 
   confirmaLocal() {
     if (this.localevento3?.nativeElement.value.length > 0) {
-      const confirmation = confirm("Tem certeza que gostaria de indicar o local selecionado como local do evento?")
-      if (confirmation) {
-        this.localevento!.nativeElement.value = "Local: " + this.localevento3?.nativeElement.value;
-        this.fecharmapa();
-      }
+      this.showConfirm('Tem certeza que gostaria de indicar o local selecionado como local do evento?', (confirmation: boolean) => {
+      	if (confirmation) {
+          this.localevento!.nativeElement.value = "Local: " + this.localevento3?.nativeElement.value;
+          this.fecharmapa();
+        }
+      });
     }
     else
-      alert("Para poder confirmar a nova localização, deve-se primeiro definir uma nova localização!")
+    this.showAlert("Para poder confirmar a nova localização, deve-se primeiro definir uma nova localização!")
   }
 
   cancelaLocal() {
-    const confirmation = confirm("Tem certeza que não gostaria de indicar o local do evento?")
-    if (confirmation)
-      this.fecharmapa();
+    this.showConfirm('Tem certeza que não gostaria de indicar o local do evento?', (confirmation: boolean) => {
+      if (confirmation) {
+        this.fecharmapa();
+      }
+    });  
   }
 
 
@@ -382,7 +400,7 @@ export class DetalheeventoComponent {
         })
         .catch(error => {
 
-          alert('Erro ao obter o usuário:' + error);
+          this.showAlert('Erro ao obter o usuário:' + error);
         });
     });
 
@@ -416,7 +434,7 @@ export class DetalheeventoComponent {
       }
 
     } catch (error) {
-      alert('Erro ao obter os times:' + error);
+      this.showAlert('Erro ao obter os times:' + error);
     }
 
   }
@@ -425,7 +443,7 @@ export class DetalheeventoComponent {
     const local = this.localevento?.nativeElement.value.substring(7);
     const hora = this.horaevento?.nativeElement.value;
     const duracao = this.duracaoevento?.nativeElement.value;
-    const IDEquipe = localStorage.getItem('idtelaEquipe');
+    const IDEquipe = parseInt(localStorage.getItem('idtelaEquipe') || '0', 10);
     const IdEvento = this.IdEvento?.nativeElement.value.substring(11);
     const nomeEvento = this.nomeevento?.nativeElement.value.substring(13);
     const peridiocidade = this.frequencia;
@@ -491,7 +509,7 @@ export class DetalheeventoComponent {
         !participantesQuePagaramEEstaoNosTimes.includes(part)
       );
       
-      if (pagaramMasNaoEstaoNosTimes.length > 0) {
+      if (pagaramMasNaoEstaoNosTimes.length > 1) {
         erro += "5;";
         pagaramMasNaoEstaoNosTimes.forEach(part => console.log(`${part.nome} (${part.email})`));
       }
@@ -515,6 +533,11 @@ export class DetalheeventoComponent {
         erro += "8;";
       }
 
+
+      if (duracao == "00:01"||duracao == "00:02"||duracao == "00:03"||duracao == "00:04"||duracao == "00:05"||duracao == "00:06"||duracao == "00:07"||duracao == "00:08"||duracao == "00:09") {
+        erro += "9;";
+      }
+
       
 
     if (erro.length > 0) {
@@ -533,6 +556,9 @@ export class DetalheeventoComponent {
       if (erro.toString().includes("8;")){
         mensagem += ` - Evento deve possuir a indicação de duração diferente de 00:00, para que o sistema possa iniciar e finalizar este corretamente! \n`
       }
+      if (erro.toString().includes("9;")){
+        mensagem += ` - Evento deve possuir a indicação de duração superior a 00:09, para que o sistema possa Funcionar corretamente \n`
+      }
       if (erro.toString().includes("5;")){
         mensagem += ` - Existem Participantes que pagaram mas não estão nos times existentes, sendo eles: \n`
         pagaramMasNaoEstaoNosTimes.forEach(part => mensagem +=`${part.nome} (${part.email}); \n`);
@@ -544,75 +570,91 @@ export class DetalheeventoComponent {
         mensagem +="Favor realizar novo sorteio! \n"
       }       
         
-      alert("Existem criticas que impedem a alteração do evento, sendo elas: \n" + mensagem)
+      this.showAlert("Existem criticas que impedem a alteração do evento, sendo elas: \n" + mensagem)
     }
     else {
-      const confirmation = confirm("Deseja realizar de fato a alteração no evento " + this.nomeevento?.nativeElement.value.substring(13) + "?")
-      
-      if (confirmation) {
-        const dadosEvento = {
-          id: IdEvento,
-          equipe: IDEquipe,
-          nome: nomeEvento,
-          local: local,
-          peridiocidade: peridiocidade ? "Único" : "Semanal",
-          dia: dia,
-          hora: hora,
-          quantidade_time: this.qtdTime,
-          chavepix: this.ChavePix,
-          duracao: duracao
-        };
 
-        const isValid = await this.apiService.AlterarEvento(dadosEvento);
-
-        if (isValid !== 0) {
-          if (isValid == 1) {
-            alert("Erro ao realizar a inclusão!");
-
-          }
-          else if (isValid == -1) {
-            alert("Falha de conexão com a API!")
-          }
+      this.showConfirm("Deseja realizar de fato a alteração no evento " + this.nomeevento?.nativeElement.value.substring(13) + "?", (confirmation: boolean) => {
+      	if (confirmation) {
+          const dadosEvento:DadosEvento = {
+            id: IdEvento,
+            equipe: IDEquipe,
+            nome: nomeEvento,
+            local: local,
+            peridiocidade: peridiocidade ? "Único" : "Semanal",
+            dia: dia,
+            hora: hora,
+            quantidade_time: this.qtdTime,
+            chavepix: this.ChavePix,
+            duracao: duracao
+          };
+          this.Gravadadosaux(dadosEvento);
         }
-        else {
-          setTimeout(() => {
-            this.ajusteparticipante();
-          }, 0);
-
-          setTimeout(() => {
-            this.ajusteTimes();
-          }, 0);
-
-          alert("Alteração realizada com sucesso!");
-
-          this.TelaCriacaoevento();
-        }
-      }
+      });
     }
   }
 
+  async Gravadadosaux(dadosEvento : DadosEvento){    
+    const modal = document.getElementById('myModal');
+    if (modal) {
+      modal.style.display = 'block';
+    }
+    const isValid = await this.apiService.AlterarEvento(dadosEvento);
+   
+
+    if (isValid !== 0) {
+      if (isValid == 1) {
+        this.showAlert("Erro ao realizar a inclusão!");
+
+      }
+      else if (isValid == -1) {
+        this.showAlert("Falha de conexão com a API!")
+      }
+    }
+    else {
+      setTimeout(() => {
+        this.ajusteparticipante();
+      }, 0);
+
+      setTimeout(() => {
+        this.ajusteTimes();
+      }, 0);
+
+      this.showAlert("Alteração realizada com sucesso!");
+
+      this.TelaCriacaoevento();
+    }
+
+    if (modal) {
+      modal.style.display = 'none';
+    }
+    
+  }
+
   BotaoGravarSorteio() {
-    alert("Dados de sorteio Guardados em memória, para guardar os dados em definitivo, favor pressionar Confirmar!");
+    this.showAlert("Dados de sorteio Guardados em memória, para guardar os dados em definitivo, favor pressionar Confirmar!");
     this.fecharsorteio();
   }
 
   BotaoCancelarSorteio(){
-    const confirmation = confirm("Deseja realizar de fato o cancelamento do sorteio?")
-    if (confirmation) {
-      this.TimesExistentes = this.TimesExistentes2;
-      this.fecharsorteio();
-    }
+    this.showConfirm('Deseja realizar de fato o cancelamento do sorteio?', (confirmation: boolean) => {
+      if (confirmation) {
+        this.TimesExistentes = this.TimesExistentes2;
+        this.fecharsorteio();
+      }
+    });
   }
 
   TelaCriarEvento() {
     this.router.navigate(['/criarevento']);
   }
 
-  Canceladados() {
-    const confirmation = confirm("Deseja realizar de fato o cancelamento da alteração no evento " + this.nomeevento?.nativeElement.value.substring(13) + "?")
-    if (confirmation) {
-      this.TelaCriacaoevento();
-    }
+  Canceladados() {    
+    this.showConfirm("Deseja realizar de fato o cancelamento da alteração no evento " + this.nomeevento?.nativeElement.value.substring(13) + "?", (confirmation: boolean) => {
+      if (confirmation) {
+        this.TelaCriacaoevento();
+      }
+    });
   }
 
   fecharcustos() {
@@ -632,7 +674,7 @@ export class DetalheeventoComponent {
   }
 
   async BotaoGravarParticipantesCusto() {
-    alert("Ajuste de Participantes realizada com sucesso! Para confirmar a alteração pressione confirmar na tela");
+    this.showAlert("Ajuste de Participantes realizada com sucesso! Para confirmar a alteração pressione confirmar na tela");
     this.ChavePix = this.chavepix?.nativeElement.value;
     this.carregarParticipantes()
     this.fecharcustos();
@@ -654,20 +696,22 @@ export class DetalheeventoComponent {
   }
 
   BotaoCancelarparticipantesCusto() {
-    if (confirm('Tem certeza que deseja cancelar a gestão de Custos? Todas as alterações serão perdidas')) {
-      this.participantesSelecionados = [];
-      for (const participante of this.participantesSelecionados2) {
-        this.participantesSelecionados.push({
-          id: participante.id,
-          imagem: participante.imagem,
-          nome: participante.nome,
-          email: participante.email,
-          moderador: participante.moderador,
-          Pagou: participante.Pagou
-        });
+    this.showConfirm('Tem certeza que deseja cancelar a gestão de Custos? Todas as alterações serão perdidas', (confirmation: boolean) => {
+      if (confirmation) {
+        this.participantesSelecionados = [];
+        for (const participante of this.participantesSelecionados2) {
+          this.participantesSelecionados.push({
+            id: participante.id,
+            imagem: participante.imagem,
+            nome: participante.nome,
+            email: participante.email,
+            moderador: participante.moderador,
+            Pagou: participante.Pagou
+          });
+        }
+        this.fecharcustos();
       }
-      this.fecharcustos();
-    }
+    });    
   }
 
   setarpagador(i: number) {
@@ -730,7 +774,16 @@ export class DetalheeventoComponent {
     if (this.qtdTime > 0) {
       // Filtrar participantes que pagaram
       const participantesPagos = this.participantesSelecionados.filter(participante => participante.Pagou);
-
+      if(participantesPagos.length < 2)
+      {
+        this.showAlert("Deve haver pelo menos dois participantes para que seja possível realizar o sorteio!");
+        if(this.TimesExistentes.length > 0 )
+        {
+          this.showAlert("Vamos limpar a listagem de equipes, pois não há participantes suficientes para a realização do evento!"); 
+        }
+        this.TimesExistentes = [];
+      }
+      else{
       // Embaralhar os participantes pagos
       const participantesEmbaralhados = this.embaralharParticipantes(participantesPagos);
 
@@ -755,8 +808,9 @@ export class DetalheeventoComponent {
 
       this.TimesExistentes = times;
     }
+    }
     else {
-      alert("O valor mínimo para cada time deve ser 1!")
+      this.showAlert("O valor mínimo para cada time deve ser 1!")
     }
   }
 
@@ -791,11 +845,11 @@ export class DetalheeventoComponent {
 
         if (isValid !== 0) {
           if (isValid == 1) {
-            alert("Erro ao realizar a inclusão!");
+            this.showAlert("Erro ao realizar a inclusão!");
             break;
           }
           else if (isValid == -1) {
-            alert("Falha de conexão com a API!")
+            this.showAlert("Falha de conexão com a API!")
             break;
           }
         }
@@ -815,24 +869,27 @@ export class DetalheeventoComponent {
     var i = 1;
     if (IDTELA) {
       dadosTime.evento = IDTELA;
+      if(this.TimesExistentes.length == 0)
+        await this.apiService.CriarTime(dadosTime, j);
+      else{
       for (const Time of this.TimesExistentes) {
         dadosTime.numerotime = i;
         for (const Competidor of Time.competidores) {
-          dadosTime.usuario = Competidor.id;
-
+          dadosTime.usuario = Competidor.id;          
           const isValid = await this.apiService.CriarTime(dadosTime, j);
           j++;
           if (isValid !== 0) {
             if (isValid == 1)
-              alert("Erro ao realizar a inclusão!");
+              this.showAlert("Erro ao realizar a inclusão!");
             else if (isValid == -1) {
-              alert("Falha de conexão com a API!")
+              this.showAlert("Falha de conexão com a API!")
             }
           }
 
         }
         i++;
       }
+    }
     }
 
   }
@@ -845,6 +902,70 @@ export class DetalheeventoComponent {
     const minutos = data.getMinutes().toString().padStart(2, '0');
     return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
   }
+
+  showAlert(message: string): Promise<boolean> {
+    const confirmBox = document.getElementById("customAlert") as HTMLDivElement;
+    const confirmMessage = document.getElementById("alertmessage_customAlert") as HTMLParagraphElement;
+    const overlay = document.getElementById("overlay_alertBox") as HTMLDivElement;
+    return new Promise((resolve) => {
+
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+
+      // Assign resolve function to the buttons
+      (document.getElementById("okbtn_customAlert") as HTMLButtonElement).onclick = () => {
+        resolve(true);
+        this.hideConfirm();
+      };
+    });
+    
+  }
+  
+  hideConfirm(): void {
+    var alertBox = document.getElementById("customAlert");
+    var overlay_alertBox = document.getElementById("overlay_alertBox");
+  
+    if(alertBox && overlay_alertBox)
+    {
+      alertBox.style.display = "none"; // Hide the alert
+      overlay_alertBox.style.display = "none"; // Hide the overlay_alertBox
+    }
+  }
+
+
+  
+  showConfirm(message: string, callback: (result: boolean) => void): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var confirmMessage = document.getElementById("confirmmessage_customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+    
+    if(confirmMessage && overlay && confirmBox)
+    {
+      confirmMessage.textContent = message;
+      overlay.style.display = "block"; // Show the overlay
+      confirmBox.style.display = "block"; // Show the confirm box
+    }   
+
+    // Store the callback to use it later
+    (confirmBox as any).callback = callback;
+  }
+
+  handleConfirm(result: boolean): void {
+    var confirmBox = document.getElementById("customConfirm");
+    var overlay = document.getElementById("overlay_customConfirm");
+
+    if(overlay && confirmBox)
+    {
+      confirmBox.style.display = "none"; // Hide the confirm box
+      overlay.style.display = "none"; // Hide the overlay
+    }
+    // Call the callback with the result
+    if ((confirmBox as any).callback) {
+      (confirmBox as any).callback(result);
+    }
+  }
+
 
   
 }

@@ -1,3 +1,22 @@
+.modal2 {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.modal-content2{
+  background-color: #fefefe00;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);    
+}
 
 .container {
   display: flex;
@@ -144,7 +163,12 @@
   font-family: 'Times New Roman', 'Times New Roman';
   margin-top: 0px;
   margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 450px; /* Defina a largura conforme necessário */
 }
+
 
 
   input[type="number"] {
@@ -425,6 +449,7 @@ input[type="date"] {
     left: 57px;
     width: 276px;
     height: 65px;
+    cursor: pointer;
   }
   
   .image-container, .user-details-and-logout {
@@ -784,6 +809,155 @@ input[type="date"] {
   width: 50px;
   height: 50px;
 }
+
+
+
+body {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.overlay_alertBox {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.alert {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the alert */
+  z-index: 1001; /* Sit on top of the overlay_alertBox */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.alert .message_customAlert {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the button */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.alert .okbtn {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.alert .okbtn:hover {
+  background-color: darkgray;
+}
+
+
+.overlay_customConfirm {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Sit on top */
+}
+
+.confirm_customConfirm {
+  max-width: 280px;
+  width: 100%; /* Ensure the width is constrained */
+  background-color: black; /* Black background */
+  color: white;
+  padding: 20px;
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the confirm */
+  z-index: 1001; /* Sit on top of the overlay_customConfirm */
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+  box-sizing: border-box; /* Include padding in the width */
+}
+
+.confirm_customConfirm .message_customConfirm {
+  margin: 0 0 40px 0; /* Add bottom margin to ensure space for the buttons */
+  font-family: 'Times New Roman', Times, serif;
+  word-wrap: break-word; /* Ensure long words break */
+}
+
+.confirm_customConfirm .button-container_customConfirm {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+}
+
+.confirm_customConfirm .okbtn_customConfirm, .confirm_customConfirm .cancelbtn_customConfirm {
+  background-color: #d9d9d9; /* Gray background */
+  color: black; /* Black text */
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: 'Times New Roman', Times, serif;
+  width: 100px; /* Ensure both buttons have the same width */
+}
+
+.confirm_customConfirm .okbtn_customConfirm:hover, .confirm_customConfirm .cancelbtn_customConfirm:hover {
+  background-color: darkgray;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  width: 150px; /* Define a largura do contêiner para 150px */
+  text-align: left;
+}
+
+.user-details-label {
+  margin-bottom: 5px; /* Espaço entre o label e o conteúdo */
+  width: 50px; /* Garante que o label ocupe 100% da largura do contêiner */
+}
+
+.user-details-content.nome-usuario {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  width: 100%; /* Garante que o conteúdo ocupe 100% da largura do contêiner */
+  word-wrap: break-word;
+}
+
+
+
 
   @media screen and (min-width: 1000px) and (max-width: 1599px) {
 
@@ -1538,12 +1712,16 @@ input[type=number] {
   display: flex;
 }
 
-.nome_inline{
+.nome_inline {
   color: white;
   font-size: 14px;
   font-family: "Times New Roman", "Times New Roman";
   margin-top: 0px;
   margin-bottom: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 245px; /* Defina a largura conforme necessário */
 }
 
 
@@ -1630,6 +1808,13 @@ input[type=number] {
   margin: 10px;
 }
 
+.user-details-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 60px;
+  text-align: left;
+}
 
 }
   
@@ -1637,10 +1822,10 @@ input[type=number] {
 
 @media screen and (min-width: 0px) and (max-width: 599px) {
   
-  .welcome-container {
-    top: 50%;
-    margin-top: 50px;
-  }
+    .welcome-container {
+      top: 40%;
+      margin-top: 50px;
+    }
 
   .logo {
     position: absolute;
@@ -1906,7 +2091,7 @@ font-family: "Times New Roman", "Times New Roman";
 
 .cadastro-label3 {
   margin-top: 12px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   margin-bottom: 20px;
   margin-left: 0px;
@@ -1965,7 +2150,7 @@ input[type="time"] {
 .fieldset_inline1 {
   display: flex;
   width: 713px;
-  margin-left: -61px;
+  margin-left: -67px;
   margin-top: -13px;
   border-width: 0px;
 }
@@ -2035,7 +2220,7 @@ input[type="date"] {
   background-color: #000;
   padding: 20px;
   border-radius: 5px;
-  width: 290px;
+  width: 295px;
 }
 
 .map-container {
@@ -2166,13 +2351,17 @@ input[type="number"] {
   font-family: "Times New Roman";
 }
 
-.nome_inline {
+.nome_inline{
   color: white;
   font-size: 12px;
   font-family: "Times New Roman", "Times New Roman";
   margin-top: 0px;
   margin-bottom: 10px;
   margin-left: -11px;
+  width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .fieldset_inline4 {
   width: 188px;
@@ -2257,7 +2446,7 @@ input[type="number"] {
 
 .input_inline8 {
   margin-top: 10px;
-  width: 271px;
+  width: 276px;
   height: 14px;
   border: none;
   border-radius: 8px;
@@ -2287,6 +2476,25 @@ input[type="number"] {
   font-family: "Times New Roman";
   margin: 10px;
 }
+
+.logout-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 68px;
+  margin-left: 0px;
+}
+
+
+.user-details-container {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+width: 137px;
+text-align: left;
+}
+
 
 }
 

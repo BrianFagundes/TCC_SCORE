@@ -45,6 +45,11 @@ export class EsqueciSenhaComponent {
           this.showAlert('E-mail indicado não está cadastrado.');
           this.emailInput.nativeElement.value = '';         
         }
+        else if (isValid === 2)
+        {
+          this.showAlert('E-mail indicado foi cadastrado pelo sistema do Google.');
+          this.emailInput.nativeElement.value = '';         
+        }
         else
         {
           this.showAlert('Falha ao enviar e-mail de recuperação. Por favor, tente novamente mais tarde.');

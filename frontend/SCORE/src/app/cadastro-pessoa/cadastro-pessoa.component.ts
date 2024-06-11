@@ -73,7 +73,7 @@ export class CadastroPessoaComponent {
 
     if (!isEmailValido(email))
     {
-      this.showAlert('E-mail em formato inválido!');
+      this.showAlert('O e-mail está em um formato inválido.');
       return;
     }
     // Verifique se as senhas coincidem
@@ -83,7 +83,7 @@ export class CadastroPessoaComponent {
     }
 
     if (senha.length < 8) {
-      this.showAlert('A senha possui menos de 8 caracteres.');
+      this.showAlert('A senha deve ter pelo menos 8 caracteres.');
       return;
     }
 
@@ -99,7 +99,7 @@ export class CadastroPessoaComponent {
 
     if(!this.Aceito)
     {
-      this.showAlert("O usuário deve concordar com as Políticas de Privacidade e os Termos de Serviço para conseguir cadastrar-se no sistema.");
+      this.showAlert("Para se cadastrar no sistema, o usuário deve concordar com as Políticas de Privacidade e os Termos de Serviço.");
       return;
     }
     this.confirmaremail = true;
@@ -129,7 +129,8 @@ export class CadastroPessoaComponent {
         this.nomeInput.nativeElement.value = ''; 
         this.emailInput.nativeElement.value = '';
         this.senhaInput.nativeElement.value = '';
-        this.senha2Input.nativeElement.value = '';        
+        this.senha2Input.nativeElement.value = '';   
+        this.navigateToHome();     
       }
       else if (isValid === 1)
       {
